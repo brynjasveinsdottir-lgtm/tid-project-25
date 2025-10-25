@@ -3,6 +3,7 @@ textarea {
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
+    font-family: 'Manrope';
     width: 450px;
     min-height: 32px;
     resize: none;
@@ -30,4 +31,14 @@ textarea.naked:focus {
     border-radius: 4px;
     font-size: 16px;
     margin: 8px 0; /* remove this later, just while texting out of layout*/
+}
+.comment-box:has(textarea.naked:focus) {
+   background-color: #F1F8F9; /*this is to make the comment box (including the icons) show the focus state, althoug it is technically the text area that has focus*/
+}
+
+.icon-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
 }

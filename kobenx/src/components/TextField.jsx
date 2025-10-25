@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./TextField.css"
-import {AddPhotoAlternateIcon} from '@mui/icons-material/AddPhotoAlternate';
-
+import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
+import EmojiEmotionsOutlinedIcon from '@mui/icons-material/EmojiEmotionsOutlined';
+import LinkOutlinedIcon from '@mui/icons-material/LinkOutlined';
 
 
 export default function TextField({}) {
@@ -15,7 +16,11 @@ export default function TextField({}) {
         <>
         <div className="comment-box">
         <textarea type="text" className="naked" placeholder= {placeholderText} />
-        <AddPhotoAlternateIcon/>
+        <div className="icon-container"> 
+            <AddPhotoAlternateOutlinedIcon/> 
+            <EmojiEmotionsOutlinedIcon/>
+            <LinkOutlinedIcon/>
+        </div> 
 
         </div>
         </>
