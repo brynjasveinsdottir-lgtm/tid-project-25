@@ -1,0 +1,33 @@
+textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    width: 450px;
+    min-height: 32px;
+    resize: none;
+    field-sizing: content;
+}
+
+textarea.naked {
+    padding: 0px;
+    border: 0px;
+    border-radius: 0px;
+    font-size: 16px;
+    background-color: rgba(255, 255, 255, 0);
+    text-wrap: wrap;
+}
+
+textarea.naked:focus {
+    outline: none;
+}
+
+.comment-box {
+    width: 450px;
+    height: inherit;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    margin: 8px 0; /* remove this later, just while texting out of layout*/
+}
