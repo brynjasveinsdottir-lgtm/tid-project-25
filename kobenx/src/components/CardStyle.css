@@ -1,6 +1,4 @@
-.event_card{
-    width: 20rem;
-    height: 20rem;
+.card{
     background-color: #fff;
     border-radius: 16px;
     padding: 16px;
@@ -9,8 +7,13 @@
     transition: all 0.2s;
 }
 
-.event_card:hover {
+.card:hover {
     transform: scale(1.02);
+}
+
+.event_card {
+    width: 20rem;
+    height: 20rem;
 }
 
 .header {
@@ -32,13 +35,14 @@
     margin-left: 5%;
     margin-right: 0rem;
     float: left;
+    color: black;
 }
 
-.music_title {
+.music {
     color: #D0480E;
 }
 
-.food_title {
+.food {
     color: #28818F;
 }
 
