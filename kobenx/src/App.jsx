@@ -2,14 +2,41 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import EventCard from './EventCard.jsx'
+import EventCard from './components/EventCard.jsx'
 import './assets/Manrope.ttf'
+import MusicEventIcon from "/src/assets/MusicEventIcon.png"
+import FoodEventIcon from '/src/assets/FoodIcon.png'
+import EventCardImage from "/src/assets/EventCardImage.png"
 
 //imports from text field
 import TextField from './components/TextField.jsx'
 
+
 function App() {
   const [count, setCount] = useState(0)
+  const events = [{
+      category: "music",
+      name: "The Bird",
+      date: "Thu, 9th Oct",
+      time: "21:00",
+      location: "Refshalevej 173, København K",
+      user: "username",
+      timeUploaded: "30m",
+      icon: MusicEventIcon,
+      image: EventCardImage,
+    },
+    {
+      category: "food",
+      name: "Street Food",
+      date: "Thu, 9th Oct",
+      time: "21:00",
+      location: "Refshalevej 173, København K",
+      user: "username",
+      timeUploaded: "30m",
+      icon: FoodEventIcon,
+      image: EventCardImage,
+    },
+  ];
 
   return (
     <>
@@ -33,9 +60,13 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
-      <EventCard />
+      <div className='row'>
+        {events.map((event, index) => (
+          <EventCard key = {index} event = {event} />
+        ))}
+      </div>
       <p> </p>
-      <EventCard />
+
 
       <TextField />
     </>
