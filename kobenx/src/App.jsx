@@ -5,6 +5,9 @@ import './App.css'
 import EventCard from './EventCard.jsx'
 import './assets/Manrope.ttf'
 
+//imports from text field
+import TextField from './components/TextField.jsx'
+
 function App() {
   const [count, setCount] = useState(0)
 
@@ -33,6 +36,8 @@ function App() {
       <EventCard />
       <p> </p>
       <EventCard />
+
+      <TextField />
     </>
   )
 }
