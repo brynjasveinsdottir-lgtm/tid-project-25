@@ -1,0 +1,52 @@
+.sidebar {
+    background-color: #ffffff;
+    height: 100vh;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.sidebar-logo {
+    margin-left: 0px;
+}
+
+.logo {
+    font-family: 'Manrope';
+    font-weight: 900;
+    font-size: 2rem;
+    color: black;
+}
+
+.sidebar-title-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    list-style: none;
+    align-items: flex-start;
+}
+
+.sidebar-links {
+    color: black;
+}
+
+.sidebar-icons {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: black;
+}
+
+.sidebar-item-text {
+    font-family: 'Manrope';
+    font-weight: 400;
+    color: #323232;
+}
+
+.sidebar-profile {
+    font-family: 'Manrope';
+    font-weight: 400;
+    color: #323232;
+}
+
+span {
+    margin-left: 16px;
+}
