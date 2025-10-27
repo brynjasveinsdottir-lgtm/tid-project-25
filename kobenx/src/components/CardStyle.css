@@ -11,6 +11,16 @@
     transform: scale(1.02);
 }
 
+/* Threads styling */
+
+.thread_text {
+    font-size: 1rem;
+    text-align: left;
+
+}
+
+/* Events styling */
+
 .event_card {
     width: 20rem;
     height: 20rem;
@@ -27,7 +37,6 @@
 
 .title {
     font-size: 1.5rem;
-    font-family: 'Manrope';
     font-weight: 400;
     padding: 0px;
     margin-top: 0em;
@@ -35,7 +44,6 @@
     margin-left: 5%;
     margin-right: 0rem;
     float: left;
-    color: black;
 }
 
 .music {
@@ -53,7 +61,6 @@
 .date_time {
     align-items: flex-start;
     font-size: 1rem;
-    font-family: 'Manrope';
     font-weight: 800;
     margin-top: 1rem;
     margin-bottom: 0.25rem;
@@ -66,7 +73,6 @@
 .location {
     align-items: flex-start;
     font-size: 1rem;
-    font-family: 'Manrope';
     color: #5D5D5D;
     margin-top: 0rem;
     margin-bottom: 0.5rem;
@@ -85,16 +91,6 @@
 }
 
 .post_info {
-    font-family: Manrope;
     font-size: 0.75rem;
-    color: #323232;
-    opacity: .5;
-}
-
-.ellipse {
-    width: 0.25rem;
-    height: 0.25rem;
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
-    opacity: .5;
+    opacity: .75;
 }
