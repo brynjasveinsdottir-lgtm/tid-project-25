@@ -8,15 +8,31 @@ import MusicEventIcon from "/src/assets/MusicEventIcon.png"
 import FoodEventIcon from '/src/assets/FoodIcon.png'
 import EventCardImage from "/src/assets/EventCardImage.png"
 
+
 //imports from text field
 import TextField from './components/TextField.jsx'
 
 //user display
 import UserDisplay from './components/UserDisplay.jsx'
+import SaraDP from "/src/assets/profilePic.png"
 
 
 function App() {
   const [count, setCount] = useState(0)
+
+  //data for user display
+  const userA = {
+    name:"Sara Jónsdóttir",
+    country: "Iceland",
+    yr: "2 years",
+    bio: "Studying Computer Science at ITU",
+    handle: "@sarajons",
+    timeUploaded: "30m",
+    image: SaraDP,
+  };
+
+
+  //data for event cards
   const events = [{
       category: "music",
       name: "The Bird",
@@ -72,7 +88,7 @@ function App() {
 
 
       <TextField />
-      <UserDisplay />
+      <UserDisplay userInfo={userA} />
     </>
   )
 }

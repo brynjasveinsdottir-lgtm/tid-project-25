@@ -42,4 +42,5 @@
     font-weight: 500;
     color: #5D5D5D;
     margin: 0px;
+    align-self: flex-start;
 }
