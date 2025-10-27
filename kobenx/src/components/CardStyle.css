@@ -7,6 +7,68 @@
     transition: all 0.2s;
 }
 
+.usercontainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+.userIcon {
+    margin-right: 12px;
+}
+
+.userInfo {
+    flex-grow: 1;
+}
+
+.usernameRow {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+  }
+
+.username {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Manrope';
+    color:#5D5D5D;
+    font-weight: bold;
+    margin: 0;
+}
+
+.usercontainer {
+    text-align: left;
+}
+
+.bio {
+    font-family: 'Manrope';
+    font-size: 0.8em;
+    color:#5D5D5D;
+    margin-top: 0.1em;
+
+}
+
+.timestampContainer {
+    display: left;
+    align-items: center;
+    gap: 6px;
+  }
+
+.timestamp {
+    font-family: 'Manrope';
+    font-size: 0.8em;
+    color:#5D5D5D;
+
+}
+.thread_text {
+    color:#5D5D5D;
+    font-size: 0.8em;
+    font-family: 'Manrope';
+    text-align: left;
+
+}
+
 .card:hover {
     transform: scale(1.02);
 }
@@ -99,3 +161,4 @@
     margin-right: 0.5rem;
     opacity: .5;
 }
+
