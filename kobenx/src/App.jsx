@@ -11,6 +11,9 @@ import EventCardImage from "/src/assets/EventCardImage.png"
 //imports from text field
 import TextField from './components/TextField.jsx'
 
+//user display
+import UserDisplay from './components/UserDisplay.jsx'
+
 
 function App() {
   const [count, setCount] = useState(0)
@@ -69,6 +72,7 @@ function App() {
 
 
       <TextField />
+      <UserDisplay />
     </>
   )
 }
