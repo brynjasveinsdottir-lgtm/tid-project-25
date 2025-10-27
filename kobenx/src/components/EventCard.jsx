@@ -2,7 +2,7 @@ import React, {useState, usestate} from 'react'
 import "./CardStyle.css"
 import Ellipse from "/src/assets/Ellipse.png"
 
-function EventCard({event}) {
+export default function EventCard({event}) {
 
 
         return (
@@ -32,5 +32,3 @@ function EventCard({event}) {
             </article>
         )
 }
-
-export default EventCard;
