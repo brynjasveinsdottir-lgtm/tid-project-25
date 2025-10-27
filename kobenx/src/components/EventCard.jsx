@@ -25,9 +25,7 @@ export default function EventCard({event}) {
                 </div>
 
                 <footer className="footer">
-                    <p className="post_info"> Posted by @{event.user} </p>
-                    <img src={Ellipse} className="ellipse" />
-                    <p className="post_info"> {event.timeUploaded} </p>
+                    <p className="post_info"> Posted by @{event.user} • {event.timeUploaded} </p>
                 </footer>
             </article>
         )
