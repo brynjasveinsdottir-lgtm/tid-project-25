@@ -22,7 +22,7 @@ function App() {
 
   //data for user display
   const userA = {
-    name:"Sara Jónsdóttir",
+    name:"Sara Jónsdottir",
     country: "Iceland",
     yr: "2 years",
     bio: "Studying Computer Science at ITU",
@@ -79,6 +79,10 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+
+      {/* Our examples start here below */}
+
+      {/* EVENT CARDS */}
       <div className='row'>
         {events.map((event, index) => (
           <EventCard key = {index} event = {event} />
@@ -86,9 +90,12 @@ function App() {
       </div>
       <p> </p>
 
-
-      <TextField />
+      {/* USER DISPLAY */}
       <UserDisplay userInfo={userA} />
+
+      {/* TEXT FIELD / COMMENT */}
+      <TextField />
+      
     </>
   )
 }

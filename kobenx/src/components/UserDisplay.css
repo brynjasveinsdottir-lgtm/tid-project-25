@@ -9,6 +9,12 @@
     border-radius: 999px;
 }
 
+.tag:hover {
+    background-color: #9d3f0c;
+    border-color: #A03E0B;
+    cursor: pointer;
+}
+
 .username {
     font-size: 16px;
     font-family: 'Manrope';
@@ -44,3 +50,4 @@
     margin: 0px;
     align-self: flex-start;
 }
+
