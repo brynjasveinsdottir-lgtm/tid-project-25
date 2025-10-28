@@ -13,11 +13,31 @@
 
 /* Threads styling */
 
-.thread_text {
+.threadText {
     font-size: 1rem;
     text-align: left;
-
+    margin-left: 0.5em;
 }
+
+.threadActions {
+    display: flex;
+    margin-top: 8px;
+    gap: 6px;
+  }
+
+.likeButton, .bookmarkButton, .repostButton {
+   background: none;
+   border: none;
+   cursor: pointer;
+   display: flex;
+   align-items: center;
+   color: #323232;
+   font-size: 5px;
+  }
+  
+  .likeButton:hover, .bookmarkButton:hover,.repostButton:hover {
+    color: #e53935;
+  }
 
 /* Events styling */
 
