@@ -5,6 +5,7 @@
     border: 1.5px solid #C6C6C6;
     cursor: pointer;
     transition: all 0.2s;
+    margin-bottom: 16px;
 }
 
 .card:hover {
@@ -17,9 +18,16 @@
     font-size: 0.8rem;
     text-align: left;
     margin-left: 0.5em;
-    width: 100%;        /* fill container width */
-    max-width: 700px;   /* limit to a max size */
+    width: 100%;        
+    max-width: 700px;  
     margin: 16px auto;  
+}
+
+.threadImage {
+    width: 100%;
+    border-radius: 12px;
+    margin-top: 8px;
+    object-fit: cover; /* keep proportions */
 }
 
 .threadActions {
@@ -42,7 +50,15 @@
     color: #e53935;
   }
 
-
+  .comments {
+  font-size: 0.8rem;
+    text-align: left;
+    margin-left: 0.5em;
+    width: 100%;        
+    max-width: 700px;  
+    margin: 16px auto;
+  }
+  
 /* Events styling */
 
 .event_card {

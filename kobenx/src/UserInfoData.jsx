@@ -10,3 +10,13 @@ export const userA = {
     timeUploaded: "30m",
     image: SaraDP,
   };
+
+  export const userB = {
+    name:"Sara Jónsdottir",
+    country: "Iceland",
+    yr: "2 years",
+    bio: "Studying Computer Science at ITU",
+    handle: "@sarajons",
+    timeUploaded: "30m",
+    image: SaraDP,
+  };
