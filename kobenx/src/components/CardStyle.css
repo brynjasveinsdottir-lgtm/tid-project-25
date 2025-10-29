@@ -14,30 +14,34 @@
 /* Threads styling */
 
 .threadText {
-    font-size: 1rem;
+    font-size: 0.8rem;
     text-align: left;
     margin-left: 0.5em;
+    width: 100%;        /* fill container width */
+    max-width: 700px;   /* limit to a max size */
+    margin: 16px auto;  
 }
 
 .threadActions {
     display: flex;
     margin-top: 8px;
-    gap: 6px;
+    gap: 4px;
   }
 
-.likeButton, .bookmarkButton, .repostButton {
+.likeButton, .commentButton, .bookmarkButton, .repostButton {
    background: none;
    border: none;
    cursor: pointer;
    display: flex;
    align-items: center;
    color: #323232;
-   font-size: 5px;
+   font-size: 2px;
   }
   
-  .likeButton:hover, .bookmarkButton:hover,.repostButton:hover {
+  .likeButton:hover, .commentButton:hover, .bookmarkButton:hover, .repostButton:hover {
     color: #e53935;
   }
+
 
 /* Events styling */
 

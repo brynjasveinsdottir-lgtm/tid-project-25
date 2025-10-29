@@ -5,16 +5,20 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import BookmarkOutlinedIcon from "@mui/icons-material/BookmarkOutlined";
 import LoopOutlinedIcon from '@mui/icons-material/LoopOutlined';
+import ModeCommentOutlinedIcon from '@mui/icons-material/ModeCommentOutlined';
 import UserDisplay from "./UserDisplay";
+import TextField from "./TextField";
 
 
 function ThreadCard({ thread }) {
 
 const [liked, setLiked] = useState(false);
+const [showCommentBox, setShowCommentBox] = useState(false);
 const [bookmarked, setBookmarked] = useState(false);
 const [repostet, setRepostet] = useState(false);
 
 const handleLike = () => setLiked(!liked);
+const handleComment = () => setShowCommentBox(!showCommentBox);
 const handleBookmark = () => setBookmarked(!bookmarked);
 const handleRepost = () => setRepostet(!repostet);
 
@@ -27,25 +31,33 @@ const handleRepost = () => setRepostet(!repostet);
         <p className="threadText">{thread.text}</p>
         </div>
       
-      {/* Like Button */}
+     
       <div className="threadActions">
+
+      {/* Like Button */}
       <button onClick={handleLike} className="likeButton">
-      {liked? <FavoriteIcon color="error" /> : <FavoriteBorderIcon/>}
+      {liked? <FavoriteIcon /> : <FavoriteBorderIcon/>}
       </button>
       
+      {/* Comment Button */}
+      <button onClick={handleComment} className="commentButton">
+      { <ModeCommentOutlinedIcon />}
+      </button>
+
       {/* Bookmark Button */}
       <button onClick={handleBookmark} className="bookmarkButton">
-      {bookmarked? <BookmarkOutlinedIcon color="error" /> : <BookmarkBorderOutlinedIcon/>}
+      {bookmarked? <BookmarkOutlinedIcon /> : <BookmarkBorderOutlinedIcon/>}
       </button>
 
       {/* Repost Button */}
       <button onClick={handleRepost} className="repostButton">
-     {repostet ? <LoopOutlinedIcon sx={{ color: "#444" }} /> : <LoopOutlinedIcon sx={{ color: "#e53935" }} />}
+      {<LoopOutlinedIcon />}
       </button>
-
 
       </div>
 
+      {showCommentBox ? <TextField /> : null}
+      
     </article>
   );
 }
