@@ -9,7 +9,12 @@ import Home from './Pages/HomePage.jsx'
 import Threads from './Pages/Threads.jsx'
 import Events from './Pages/Events.jsx'
 import Places from './Pages/Places.jsx'
+import Profile from './Pages/Profile.jsx'
 import './App.css'
+import Parse from "parse"
+
+Parse.initialize("DKH1rOD6FmtmZmgqFQwHoieKgDsjOnK1sDovWeww", "Cuvv9sxa8jxeEAsvfDJqU5my0cscE6r0MagpyrHu");
+Parse.serverURL = 'https://parseapi.back4app.com'
 
 // This defines the skeleton of the site, the things that don't change. The Outlet in this is each page's content.
 function AppLayout() {
@@ -32,6 +37,7 @@ const router = createBrowserRouter([
       { path: "/threads", element: <Threads /> },
       { path: "/events", element: <Events /> },
       { path: "/places", element: <Places /> },
+      { path: "/profile", element: <Profile /> },
     ],
   },
 ]);
@@ -39,5 +45,3 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")).render(
   <RouterProvider router={router} />
 );
-
-// For tomorrow make the SideBarStyle.css, and try filling out a page.

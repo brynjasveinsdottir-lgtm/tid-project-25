@@ -10,8 +10,8 @@ export default function Threads() {
   }
 
   return (
-    <div className="threads">
-      <h2 className="page-titles">Threads</h2>
+    <div className="page-structure">
+      <h1 className="page-titles">Threads</h1>
       <ThreadCard thread={threadTest}/>
     </div>
   );

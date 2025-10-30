@@ -1,9 +1,12 @@
 import React from "react";
+import ProfileInfo from "/src/components/ProfileInfo/ProfileInfo";
+import { userA } from "/src/UserInfoData";
 
 export default function Places() {
   return (
-    <div className="places">
-      <h2 className="page-titles">Places</h2>
+    <div className="page-structure">
+      <h1 className="page-titles">Places</h1>
+      <ProfileInfo userInfo={userA}/>
     </div>
   );
 }
