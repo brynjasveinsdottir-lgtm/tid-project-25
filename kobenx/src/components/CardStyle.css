@@ -1,10 +1,11 @@
-.card {
-  background-color: #fff;
-  border-radius: 16px;
-  padding: 16px;
-  border: 1.5px solid #c6c6c6;
-  cursor: pointer;
-  transition: all 0.2s;
+.card{
+    background-color: #fff;
+    border-radius: 16px;
+    padding: 16px;
+    border: 1.5px solid #C6C6C6;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 16px;
 }
 
 .card:hover {
@@ -13,11 +14,51 @@
 
 /* Threads styling */
 
-.thread_text {
-  font-size: 1rem;
-  text-align: left;
+.threadText {
+    font-size: 0.8rem;
+    text-align: left;
+    margin-left: 0.5em;
+    width: 100%;        
+    max-width: 700px;  
+    margin: 16px auto;  
 }
 
+.threadImage {
+    width: 100%;
+    border-radius: 12px;
+    margin-top: 8px;
+    object-fit: cover; /* keep proportions */
+}
+
+.threadActions {
+    display: flex;
+    margin-top: 8px;
+    gap: 4px;
+  }
+
+.likeButton, .commentButton, .bookmarkButton, .repostButton {
+   background: none;
+   border: none;
+   cursor: pointer;
+   display: flex;
+   align-items: center;
+   color: #323232;
+   font-size: 2px;
+  }
+  
+  .likeButton:hover, .commentButton:hover, .bookmarkButton:hover, .repostButton:hover {
+    color: #e53935;
+  }
+
+  .comments {
+  font-size: 0.8rem;
+    text-align: left;
+    margin-left: 0.5em;
+    width: 100%;        
+    max-width: 700px;  
+    margin: 16px auto;
+  }
+  
 /* Events styling */
 
 .event_card {
