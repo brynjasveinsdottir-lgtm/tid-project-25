@@ -1,31 +1,27 @@
-import HomeIcon from '/src/assets/HomeIcon.png'
-import ThreadsIcon from '/src/assets/ThreadsIcon.png'
-import EventsIcon from '/src/assets/EventsIcon.png'
-import PlacesIcon from '/src/assets/PlacesIcon.png'
+import HomeIcon from '@mui/icons-material/HomeFilled'
+import ThreadIcon from '@mui/icons-material/QuestionAnswer'
+import EventIcon from '@mui/icons-material/Event'
+import PlaceIcon from '@mui/icons-material/FmdGood'
 
 export const SideBarData = [
     {
         title: 'Home',
         path: '/',
-        icon: HomeIcon,
-        className: 'NavTitles'
+        icon: HomeIcon
     },
     {
         title: 'Threads',
         path: '/threads',
-        icon: ThreadsIcon,
-        className: 'NavTitles'
+        icon: ThreadIcon
     },
     {
         title: 'Events',
         path: '/events',
-        icon: EventsIcon,
-        className: 'NavTitles'
+        icon: EventIcon
     },
     {
         title: 'Places',
         path: '/places',
-        icon: PlacesIcon,
-        className: 'NavTitles'
+        icon: PlaceIcon
     }
 ]

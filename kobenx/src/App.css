@@ -37,8 +37,4 @@
   color: #888;
 }
 
-.row {
-  display: flex;
-  flex-direction: row;
-  gap: 24px;
-}
+

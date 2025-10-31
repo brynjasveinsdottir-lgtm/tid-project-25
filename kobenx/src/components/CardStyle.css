@@ -9,7 +9,7 @@
 }
 
 .card:hover {
-    transform: scale(1.02);
+  transform: scale(1.02);
 }
 
 /* Threads styling */
@@ -62,75 +62,77 @@
 /* Events styling */
 
 .event_card {
-    width: 20rem;
-    height: 20rem;
+  width: 20rem;
+  height: 20rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
-.header {
+.event_card_header {
     display: flex;
-}
-
-.event_icon{
-    height: 1.5rem;
-    float: left;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    margin-bottom: auto;
 }
 
 .title {
-    font-size: 1.5rem;
-    font-weight: 400;
-    padding: 0px;
-    margin-top: 0em;
-    margin-bottom: 0em;
-    margin-left: 5%;
-    margin-right: 0rem;
-    float: left;
+  font-size: 1.5rem;
+  font-weight: 400;
+  padding: 0px;
+  margin-top: 0em;
+  margin-bottom: 0em;
+  margin-left: 1vh;
+  margin-right: 0rem;
 }
 
-.music {
-    color: #D0480E;
+.event_icon {
+  padding: 0;
+  margin: 0;
 }
 
-.food {
-    color: #28818F;
+.Music {
+  color: #d0480e;
 }
 
-.date_time_div {
-    display: flex;
+.Food {
+  color: #28818f;
 }
 
 .date_time {
-    align-items: flex-start;
-    font-size: 1rem;
-    font-weight: 800;
-    margin-top: 1rem;
-    margin-bottom: 0.25rem;
-}
-
-.location_div {
-    display: flex;
+  font-size: 1rem;
+  font-weight: 800;
+  margin: 0;
+  padding: 0;
+  margin-top: auto;
 }
 
 .location {
-    align-items: flex-start;
-    font-size: 1rem;
-    color: #5D5D5D;
-    margin-top: 0rem;
-    margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: #5d5d5d;
+  margin: 0;
+  padding: 0;
+  margin-bottom: auto;
 }
 
 .card_image {
-    width: 20rem;
-    border-radius: 16px;
-    margin-top: 0.75rem;
-    margin-bottom: 0.25rem;
-}
-
-.footer {
-    display: flex;
-    align-items: center;
+  width: 20rem;
+  height: 11rem;
+  border-radius: 16px;
+  margin: 0;
+  padding: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  object-fit: cover;
 }
 
 .post_info {
-    font-size: 0.75rem;
-    opacity: .75;
+  font-size: 0.75rem;
+  opacity: 0.5;
+  padding: 0;
+  margin: 0;
+  margin-top: auto;
 }

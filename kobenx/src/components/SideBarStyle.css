@@ -1,9 +1,12 @@
 .sidebar {
     background-color: #ffffff;
-    height: 100vh;
+    min-height: 100%;
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
+    min-width: 20vh;
+    border-right: 1px solid #C6C6C6;
+    padding: 16px;
 }
 
 .sidebar-logo {
@@ -11,40 +14,93 @@
 }
 
 .logo {
-    font-family: 'Manrope';
-    font-weight: 900;
+    font-family: 'Bricolage Grotesque';
     font-size: 2rem;
     color: black;
+    float: left;
+    margin: 0px;
+    margin-bottom: 5vh;
+    padding: 0px;
+    height: auto;
 }
 
 .sidebar-title-list {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
     list-style: none;
     align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0;
+    margin: 0;
+    gap: 0.5vh;
 }
 
 .sidebar-links {
-    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0;
+    margin: 0;
+    width: 100%;
 }
 
 .sidebar-icons {
     width: 1.5rem;
     height: 1.5rem;
-    color: black;
+    padding-right: 0.8rem;
+    align-self: center;
 }
 
 .sidebar-item-text {
-    font-family: 'Manrope';
-    font-weight: 400;
-    color: #323232;
+    font-size: 1.1rem;
+    padding: 0;
+    margin: 0;
+    align-self: flex-start;
+}
+
+.sidebar-title-list a {
+    width: 100%;
+    padding: 1.5vh;
+}
+
+.sidebar-title-list a:hover {
+    background-color: #f6fbfb;
+    border-radius: 1rem;
+    transition: 0.2s;
+}
+
+.sidebar-links a.active {
+    transition: 0s;
+    color: #28808F;
+    font-weight: 600;
+    background-color: #F1F8F9;
+    border-radius: 1rem;
 }
 
 .sidebar-profile {
-    font-family: 'Manrope';
-    font-weight: 400;
-    color: #323232;
+    margin-top: auto;
+}
+
+.sidebar-profile:hover {
+    margin-top: auto;
+    background-color: #f6fbfb;
+    border-radius: 1rem;
+    transition: 0.2s;
+}
+
+.sidebar-profile a.active {
+    background-color: #F1F8F9;
+    border-radius: 1rem;
+}
+
+.sidebar-profile a.active .profile-name {
+    font-weight: 800;
+    color: #28808F;
+}
+
+.sidebar-profile a.active .profile-username {
+    font-weight: 600;
+    color: #28808F;
 }
 
 span {

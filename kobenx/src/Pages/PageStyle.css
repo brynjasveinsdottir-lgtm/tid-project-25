@@ -1,0 +1,50 @@
+
+.page-structure {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.page-titles {
+    font-size: 2rem;
+    font-weight: 500;
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 4vh;
+    padding-left: 0.5vh;
+    padding-right: 0.5vh;
+}
+
+.category-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    padding-top: 1vh;
+    padding-left: 0.5vh;
+    padding-bottom: 5vh;
+    padding-right: 0.5vh;
+    overflow-x: scroll;
+    scrollbar-width: none;
+}
+
+.category-header {
+    font-size: 1.5rem;
+    font-weight: 500;
+    padding-left: 0.5vh;
+    padding-right: 0.5vh;
+}
+
+.event-row {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+}
+
+
+.category-row::-webkit-scrollbar {
+  display: none;
+}
