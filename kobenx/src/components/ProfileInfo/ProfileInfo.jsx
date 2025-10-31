@@ -2,16 +2,14 @@ import React from "react";
 import Avatar from "@mui/material/Avatar";
 import "./ProfileInfo.css";
 
-const ProfileInfo = ({ name, username, avatar }) => {
-  return (
-    <div className="profile-info">
-      <Avatar alt={name} src={avatar} />
-      <div className="profile-text">
-        <p className="profile-name">{name}</p>
-        <p className="profile-username">@{username}</p>
+export default function ProfileInfo({userInfo}) {
+    return (
+      <div className="profile-info">
+        <Avatar alt={userInfo.name} src={userInfo.image} />
+        <div className="profile-text">
+          <p className="profile-name">{userInfo.name}</p>
+          <p className="profile-username">{userInfo.handle}</p>
+        </div>
       </div>
-    </div>
-  );
-};
-
-export default ProfileInfo;
+    );
+}

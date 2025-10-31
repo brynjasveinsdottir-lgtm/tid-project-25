@@ -1,10 +1,10 @@
 import React from "react";
 import TextField from "../components/TextField";
 
-export default function Home() {
+export default function Profile() {
   return (
     <div className="page-structure">
-      <h1 className="page-titles">Home</h1>
+      <h1 className="page-titles">Profile</h1>
       <TextField />
     </div>
   );
