@@ -8,7 +8,7 @@
     padding: 0;
 }
 
-.page-titles {
+.page-title {
     font-size: 2rem;
     font-weight: 500;
     margin: 0;
@@ -16,6 +16,13 @@
     padding-bottom: 4vh;
     padding-left: 0.5vh;
     padding-right: 0.5vh;
+}
+
+.centered {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-self: center;
 }
 
 .category-row {

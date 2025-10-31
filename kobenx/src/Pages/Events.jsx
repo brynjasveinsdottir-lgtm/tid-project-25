@@ -37,7 +37,7 @@ export default function Events() {
     // Structuring the events page
     return (
         <div className="page-structure">
-            <h1 className="page-titles">Events</h1>
+            <h1 className="page-title">Events</h1>
             <h2 className="category-header">
                 Music
             </h2>

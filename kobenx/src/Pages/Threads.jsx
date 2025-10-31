@@ -20,11 +20,13 @@ export default function Threads() {
   const threads = [threadTestA, threadTestB];
 
   return (
-    <div className="threads">
-      <h2 className="page-titles">Threads</h2>
-      {threads.map((thread, index) => (
-        <ThreadCard key={index} thread={thread} />
-      ))}
+    <div className="page-structure">
+      <h1 className="page-title">Threads</h1>
+        <div className="centered">
+          {threads.map((thread, index) => (
+            <ThreadCard key={index} thread={thread} />
+          ))}
+      </div>
     </div>
   );
 }
