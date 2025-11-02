@@ -12,6 +12,8 @@ import Places from './Pages/Places.jsx'
 import Profile from './Pages/Profile.jsx'
 import './App.css'
 import Parse from "parse"
+import RequireAuth from './loginauth'
+import LogIn from './Pages/LogIn'
 
 Parse.initialize("DKH1rOD6FmtmZmgqFQwHoieKgDsjOnK1sDovWeww", "Cuvv9sxa8jxeEAsvfDJqU5my0cscE6r0MagpyrHu");
 Parse.serverURL = 'https://parseapi.back4app.com'
@@ -19,12 +21,14 @@ Parse.serverURL = 'https://parseapi.back4app.com'
 // This defines the skeleton of the site, the things that don't change. The Outlet in this is each page's content.
 function AppLayout() {
   return (
-    <div className="app-shell">
-      <SideBarNav />
-      <main className="main-content-area">
-        <Outlet />
-      </main>
-    </div>
+    <RequireAuth>
+      <div className="app-shell">
+        <SideBarNav />
+        <main className="main-content-area">
+          <Outlet />
+        </main>
+      </div>
+    </RequireAuth>
   );
 }
 
@@ -38,6 +42,7 @@ const router = createBrowserRouter([
       { path: "/events", element: <Events /> },
       { path: "/places", element: <Places /> },
       { path: "/profile", element: <Profile /> },
+      { path: "/login", element: <LogIn /> },
     ],
   },
 ]);

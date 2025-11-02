@@ -4,8 +4,16 @@ import './SideBarStyle.css'
 import './ProfileInfo/ProfileInfo.css'
 import ProfileInfo from './ProfileInfo/ProfileInfo'
 import { userA } from "/src/UserInfoData"
+import Parse from 'parse'
 
 export default function SideBarNav() {
+
+    async function logOutUser() {
+        Parse.User.logOut().then(() => {
+            const currentUser = Parse.User.current();
+        });
+        window.location.reload();
+    }
     
     return (
         <aside className='sidebar'>
@@ -35,6 +43,10 @@ export default function SideBarNav() {
                 <NavLink to='/profile'>
                     <ProfileInfo userInfo={userA}/>
                 </NavLink>
+            </div>
+
+            <div>
+                <button className='logout' onClick={logOutUser}>Log out</button>
             </div>
         </aside>
     )
