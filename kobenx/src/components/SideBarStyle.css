@@ -106,3 +106,7 @@
 span {
     margin-left: 16px;
 }
+
+.logout {
+    color: red;
+}

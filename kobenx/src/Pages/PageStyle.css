@@ -55,3 +55,15 @@
 .category-row::-webkit-scrollbar {
   display: none;
 }
+
+.input-fields {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+.login-button {
+    margin: 16px;
+}
