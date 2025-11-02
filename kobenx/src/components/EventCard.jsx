@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import "./CardStyle.css"
-import Ellipse from "/src/assets/Ellipse.png"
 import MusicIcon from '@mui/icons-material/MusicNote'
 import FoodIcon from '@mui/icons-material/Restaurant'
 
