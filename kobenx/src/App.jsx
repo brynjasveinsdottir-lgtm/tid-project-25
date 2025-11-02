@@ -4,9 +4,6 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import EventCard from './components/EventCard.jsx'
 import './assets/Manrope.ttf'
-import MusicEventIcon from "/src/assets/MusicEventIcon.png"
-import FoodEventIcon from '/src/assets/FoodIcon.png'
-import EventCardImage from "/src/assets/EventCardImage.png"
 
 
 //imports from text field
@@ -16,6 +13,7 @@ import TextField from './components/TextField.jsx'
 
 
 function App() {
+  /*
   const [count, setCount] = useState(0)
 
 
@@ -47,6 +45,7 @@ function App() {
   ];
 
   return (
+    /*
     <>
       <div>
         <a href="https://vite.dev" target="_blank">
@@ -69,9 +68,9 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
 
-      {/* Our examples start here below */}
+      /* Our examples start here below */
 
-      {/* EVENT CARDS */}
+      /* EVENT CARDS
       <div className='row'>
         {events.map((event, index) => (
           <EventCard key = {index} event = {event} />
@@ -79,14 +78,15 @@ function App() {
       </div>
       <p> </p>
 
-      {/* USER DISPLAY */}
+      /* USER DISPLAY
       <UserDisplay userInfo={userA} />
 
-      {/* TEXT FIELD / COMMENT */}
+      /* TEXT FIELD / COMMENT
       <TextField />
       
     </>
   )
+  */
 }
 
 export default App
