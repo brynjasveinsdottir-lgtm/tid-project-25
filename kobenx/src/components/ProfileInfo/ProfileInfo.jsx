@@ -1,14 +1,16 @@
 import React from "react";
-import Avatar from "@mui/material/Avatar";
+//import Avatar from "@mui/material/Avatar";
 import "./ProfileInfo.css";
+import Avatar from '/src/components/Avatar';
+
 
 export default function ProfileInfo({userInfo}) {
     return (
       <div className="profile-info">
-        <Avatar alt={userInfo.name} src={userInfo.image} />
+        <Avatar alt={userInfo? userInfo.get("firstName"): "placeholder"} src={userInfo? userInfo.get("image") :"placholder"} />
         <div className="profile-text">
-          <p className="profile-name">{userInfo.name}</p>
-          <p className="profile-username">{userInfo.handle}</p>
+          <p className="profile-name">{userInfo? userInfo.get("firstName"): "FirstName"} {userInfo? userInfo.get("lastName"): "LastName"}</p>
+          <p className="profile-username">{userInfo? "@" + userInfo.get("username"): "@username"}</p>
         </div>
       </div>
     );
