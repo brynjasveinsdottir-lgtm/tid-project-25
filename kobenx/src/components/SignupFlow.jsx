@@ -3,9 +3,27 @@ import Parse from "parse"
 export default function Signup() {
 
     async function signup(formData) {
-        const username1 = formData.get('username')
-        const password1 = formData.get('password')
-        await Parse.User.signUp(`${username1}`, `${password1}`)
+        const username = formData.get('username')
+        const password = formData.get('password')
+        const user = new Parse.User();
+        user.set("username", username);
+        user.set("password", password);
+
+        //ACL
+        const acl = new Parse.ACL();
+        acl.setPublicReadAccess(true);
+        acl.setPublicWriteAccess(true);
+
+
+        user.setACL(acl);
+
+        try {
+            await user.signUp();
+            console.log("User signed up successfully!");
+          } catch (error) {
+            console.error("Error signing up user:", error);
+          }
+        
         await createUser(formData)
     }
 

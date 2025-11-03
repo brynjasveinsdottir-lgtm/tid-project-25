@@ -11,7 +11,7 @@ export default function Authentication() {
 
     const handleHasAccount = () => setHasAccount(!hasAccount)
 
-
+    
     return (
         <div>
             <div>
