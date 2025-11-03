@@ -7,23 +7,23 @@ export default function Signup() {
         const password1 = formData.get('password')
         await Parse.User.signUp(`${username1}`, `${password1}`)
         await createUser(formData)
-        console.log('User created')
     }
 
     async function createUser(formData) {
-        alert('Create user started')
         const UserPublic = Parse.Object.extend('UserPublic')
         const newUser = new UserPublic()
-        console.log('After creating new object')
+        const rawDate = formData.get('dateMovedToCph')
+        const dateObj = new Date(rawDate)
         newUser.set('firstName', formData.get('firstName'))
         newUser.set('lastName', formData.get('lastName'))
         newUser.set('homeCountry', formData.get('homeCountry'))
         newUser.set('occupation', formData.get('occupation'))
-        newUser.set('dateMovedToCph', formData.get('dateMovedToCph'))
-        console.log('After adding basic info')
-        newUser.set('userIdPrivate', Parse.User.current().id)
-        console.log('After adding id')
-        alert('Create user finished')
+        newUser.set('dateMovedToCph', dateObj)
+        newUser.set('username', formData.get('username'))
+        newUser.set('userIdPrivate', Parse.User.current())
+        newUser.save()
+        alert ('User successfully created!')
+        window.location.reload()
     }
 
     return (
