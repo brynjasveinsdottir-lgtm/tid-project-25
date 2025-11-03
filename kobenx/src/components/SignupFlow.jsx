@@ -3,17 +3,44 @@ import Parse from "parse"
 export default function Signup() {
 
     async function signup(formData) {
-        const username1 = formData.get('username')
-        const password1 = formData.get('password')
-        await Parse.User.signUp(`${username1}`, `${password1}`)
+        const username = formData.get('username')
+        const password = formData.get('password')
+        const user = new Parse.User();
+        user.set("username", username);
+        user.set("password", password);
+
+        //ACL
+        const acl = new Parse.ACL();
+        acl.setPublicReadAccess(true);
+        acl.setPublicWriteAccess(true);
+
+
+        user.setACL(acl);
+
+        try {
+            await user.signUp();
+            console.log("User signed up successfully!");
+          } catch (error) {
+            console.error("Error signing up user:", error);
+          }
+        
         await createUser(formData)
         console.log('User created')
     }
 
     async function createUser(formData) {
+
         alert('Create user started')
         const UserPublic = Parse.Object.extend('UserPublic')
         const newUser = new UserPublic()
+        
+        const acl = new Parse.ACL();
+        acl.setPublicReadAccess(true);
+        acl.setPublicWriteAccess(true);
+
+
+        newUser.setACL(acl);
+
         console.log('After creating new object')
         newUser.set('firstName', formData.get('firstName'))
         newUser.set('lastName', formData.get('lastName'))
@@ -22,6 +49,12 @@ export default function Signup() {
         newUser.set('dateMovedToCph', formData.get('dateMovedToCph'))
         console.log('After adding basic info')
         newUser.set('userIdPrivate', Parse.User.current().id)
+        newUser.set('username', Parse.User.current().get('username'))
+        
+        newUser.save().then((newObj) => {alert('User public info saved'+ newObj.id)},
+            (error) => {alert('Failed to create new object, with error code: ')
+        })
+
         console.log('After adding id')
         alert('Create user finished')
     }
