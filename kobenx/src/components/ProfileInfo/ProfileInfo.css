@@ -3,6 +3,7 @@
   align-items: center;
   gap: 10px;
   padding: 8px;
+  
 }
 
 .profile-name {
@@ -10,11 +11,22 @@
   color: #222;
   font-weight: 600;
   margin: 0;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+  max-width: 135px;
+  overflow-inline: hidden;
+
+
 }
 
 .profile-username {
   font-size: 12px;
-  color: #666;
+  color: #323232;
   margin: 0;
   float: left;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+  max-width: 135px;
+  overflow-inline: hidden;
+
 }
