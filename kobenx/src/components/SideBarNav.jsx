@@ -3,7 +3,6 @@ import { SideBarData } from './SideBarData'
 import './SideBarStyle.css'
 import './ProfileInfo/ProfileInfo.css'
 import ProfileInfo from './ProfileInfo/ProfileInfo'
-
 import Parse from 'parse'
 import {useEffect, useState} from 'react'
 

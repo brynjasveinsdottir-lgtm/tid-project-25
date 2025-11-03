@@ -5,7 +5,7 @@ export default function RequireAuth({children}) {
     const currentUser = Parse.User.current();  
     
     if (!currentUser) {  
-        return <LogIn />;  
+        return <LogIn />;
     }  
   
     return children;  
