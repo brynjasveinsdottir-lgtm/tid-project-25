@@ -44,7 +44,7 @@ export default function Signup() {
                 <div className="input-row">
                     <div className="input-column">
                         <label htmlFor='firstName'> First name </label>
-                        <input type='text' placeholder="Johann Friedrich" name='firstName' className="inputfield"/>
+                        <input type='text' placeholder="Johann Friedrich" name='firstName' className="inputfield" autoFocus/>
                     </div>
                     <div className="input-column">
                         <label htmlFor='lastName'> Last name </label>
@@ -65,13 +65,13 @@ export default function Signup() {
                 </div>
                 <div className="input-column">
                     <label htmlFor='username'> Username </label>
-                    <input type='username' placeholder="Username" name='username' className="inputfield"/>
+                    <input type='username' placeholder="johann.struensee" name='username' className="inputfield"/>
                 </div>
                 <div className="input-column">
                     <label htmlFor='password'> Password </label>
-                    <input type='password' placeholder="Password" name='password' className="inputfield"/>
+                    <input type='password' placeholder="password" name='password' className="inputfield" autoComplete="new-password"/>
                 </div>
-                <button type="submit" value='submit'>Sign-up</button>
+                <button type="submit" value='submit' className="authButton">Sign up</button>
             </form>
         </div>
     );

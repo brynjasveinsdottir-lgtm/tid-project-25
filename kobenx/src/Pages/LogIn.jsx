@@ -8,9 +8,11 @@ import './PageStyle.css'
 
 export default function Authentication() {
 
-    const [hasAccount, setHasAccount] = useState(true)
+    const [loggingIn, setLoggingIn] = useState(true)
 
-    const handleHasAccount = () => setHasAccount(!hasAccount)
+    const handleLogIn = () => setLoggingIn(true)
+
+    const handleSignUp = () => setLoggingIn(false)
 
     
     return (
@@ -20,11 +22,17 @@ export default function Authentication() {
                     købenx
                 </h1>
             </div>
-            <div>
-                <button onClick={handleHasAccount}>
-                    {hasAccount? 'Log in': 'Sign up'}
+            <div className="selectButtonBox">
+                <div className={`backgroundBox ${loggingIn ? 'loginSelected' : 'signupSelected'}`} />
+                <button onClick={handleLogIn} className='selectButton'>
+                    Log in
                 </button>
-                {hasAccount? <LogIn /> : <Signup />}
+                <button onClick={handleSignUp} className='selectButton'>
+                    Sign up
+                </button>
+            </div>
+            <div>
+                {loggingIn? <LogIn /> : <Signup />}
             </div>
         </div>
     );

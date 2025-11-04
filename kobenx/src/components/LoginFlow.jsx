@@ -1,4 +1,5 @@
 import Parse from "parse"
+import './AuthFlow.css'
 
 export default function LogIn() {
 
@@ -14,13 +15,13 @@ export default function LogIn() {
             <form className="form-box" action={login}>
                 <div className="input-column login">
                     <label htmlFor='username'> Username </label>
-                    <input type='username' placeholder="Username" name='username' />
+                    <input type='username' placeholder="Username" name='username' className="inputfield"/>
                 </div>
                 <div className="input-column login">
                     <label htmlFor='password'> Password </label>
-                    <input type='password' placeholder="Password" name='password' />
+                    <input type='password' placeholder="Password" name='password' className="inputfield"/>
                 </div>
-                <button type="submit" value='submit'>Log-In</button>
+                <button type="submit" value='submit' className="authButton">Log-In</button>
             </form>
         </div>
     );
