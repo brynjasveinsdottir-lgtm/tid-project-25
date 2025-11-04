@@ -1,11 +1,16 @@
 import Parse from "parse"
+import { useNavigate } from "react-router"
+import './AuthFlow.css'
 
 export default function Signup() {
 
     async function signup(formData) {
-        const username1 = formData.get('username')
-        const password1 = formData.get('password')
-        await Parse.User.signUp(`${username1}`, `${password1}`)
+        const username = formData.get('username')
+        const password = formData.get('password')
+        const user = new Parse.User()
+        user.set("username", username)
+        user.set("password", password)
+        await user.signUp()
         await createUser(formData)
     }
 
@@ -21,26 +26,51 @@ export default function Signup() {
         newUser.set('dateMovedToCph', dateObj)
         newUser.set('username', formData.get('username'))
         newUser.set('userIdPrivate', Parse.User.current())
-        newUser.save()
-        alert ('User successfully created!')
-        window.location.reload()
+        await newUser.save().then(
+            (newObj) => {
+                alert('User successfully created!' + newObj.id);
+                window.location.reload()
+            },
+            (error) => {
+                alert(error.message);
+            }
+        )
+        
     }
 
     return (
         <div>
-            <form className="input-fields" action={signup}>
-                <label htmlFor='firstName'> First name </label>
-                <input type='text' placeholder="First Name" name='firstName' />
-                <label htmlFor='lastName'> Last name </label>
-                <input type='text' placeholder="Last Name" name='lastName' />
-                <label htmlFor='homeCountry'> What is your home country? </label>
-                <input type='text' placeholder="Home Country" name='homeCountry' />
-                <label htmlFor='occupation'> What do you do? </label>
-                <input type='text' placeholder="Occupation" name='occupation' />
-                <label htmlFor='dateMoved'> When did you move to Copenhagen? </label>
-                <input type='date' placeholder="When did you move to " name='dateMovedToCph' />
-                <input type='username' placeholder="Username" name='username' />
-                <input type='password' placeholder="Password" name='password' />
+            <form className="form-box" action={signup}>
+                <div className="input-row">
+                    <div className="input-column">
+                        <label htmlFor='firstName'> First name </label>
+                        <input type='text' placeholder="Johann Friedrich" name='firstName' className="inputfield"/>
+                    </div>
+                    <div className="input-column">
+                        <label htmlFor='lastName'> Last name </label>
+                        <input type='text' placeholder="Struensee" name='lastName' className="inputfield"/>
+                    </div>
+                </div>
+                <div className="input-column">
+                    <label htmlFor='homeCountry'> What is your home country? </label>
+                    <input type='text' placeholder="Germany" name='homeCountry' className="inputfield"/>
+                </div>
+                <div className="input-column">
+                    <label htmlFor='occupation'> What do you do? </label>
+                    <input type='text' placeholder="Student at ITU" name='occupation' className="inputfield"/>
+                </div>
+                <div className="input-column">
+                    <label htmlFor='dateMoved'> When did you move to Copenhagen? </label>
+                    <input type='date' placeholder="When did you move to Copenhagen?" name='dateMovedToCph' className="inputfield"/>
+                </div>
+                <div className="input-column">
+                    <label htmlFor='username'> Username </label>
+                    <input type='username' placeholder="Username" name='username' className="inputfield"/>
+                </div>
+                <div className="input-column">
+                    <label htmlFor='password'> Password </label>
+                    <input type='password' placeholder="Password" name='password' className="inputfield"/>
+                </div>
                 <button type="submit" value='submit'>Sign-up</button>
             </form>
         </div>

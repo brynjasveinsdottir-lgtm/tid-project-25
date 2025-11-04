@@ -4,6 +4,7 @@ import Parse from "parse"
 import { NavLink } from "react-router";
 import LogIn from '/src/components/LoginFlow'
 import Signup from '/src/components/SignupFlow'
+import './PageStyle.css'
 
 export default function Authentication() {
 
@@ -13,16 +14,18 @@ export default function Authentication() {
 
     
     return (
-        <div>
+        <div className="welcome-page">
             <div>
-                <h1>
+                <h1 className="logo-welcome-page">
                     købenx
                 </h1>
             </div>
-            <button onClick={handleHasAccount}>
-                {hasAccount? 'Log-In': 'Sign-Up'}
-            </button>
-            {hasAccount? <LogIn /> : <Signup />}
+            <div>
+                <button onClick={handleHasAccount}>
+                    {hasAccount? 'Log in': 'Sign up'}
+                </button>
+                {hasAccount? <LogIn /> : <Signup />}
+            </div>
         </div>
     );
 }

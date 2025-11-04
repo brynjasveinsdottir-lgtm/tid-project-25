@@ -18,6 +18,20 @@
     padding-right: 0.5vh;
 }
 
+.logo-welcome-page {
+    font-family: 'Bricolage Grotesque';
+    font-size: 5rem;
+    color: black;
+    height: auto;
+}
+
+.welcome-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .centered {
     display: flex;
     flex-direction: column;
@@ -54,14 +68,6 @@
 
 .category-row::-webkit-scrollbar {
   display: none;
-}
-
-.input-fields {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
 }
 
 .login-button {
