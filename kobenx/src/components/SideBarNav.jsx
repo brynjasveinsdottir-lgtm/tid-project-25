@@ -5,6 +5,8 @@ import './ProfileInfo/ProfileInfo.css'
 import ProfileInfo from './ProfileInfo/ProfileInfo'
 import Parse from 'parse'
 import {useEffect, useState} from 'react'
+import Button from './Button'
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 
 export default function SideBarNav() {
 
@@ -80,7 +82,7 @@ export default function SideBarNav() {
             </div>
 
             <div>
-                <button className='logout' onClick={logOutUser}>Log out</button>
+                <Button variant='destructive' onClick={logOutUser}> <LogoutOutlinedIcon fontSize='20'/>Log out</Button>
             </div>
         </aside>
     )

@@ -1,0 +1,104 @@
+/* Styling the base button: all buttons will have this  */
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-items: center;
+    gap: 6px;
+
+    font-family: inherit;
+    font-size: 1rem;
+
+    border-radius: 16px;
+    border: 1px;
+    padding: 0.6em 1.2em;
+
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    cursor: pointer;
+
+  }
+  /* hide focus when clicked */
+  .button:focus {
+    outline: none;
+  }
+
+  /* focus visible = keyboard navigation only */
+.button:focus-visible {
+    outline: 3px solid #0056b3;
+    outline-offset: 3px;
+  }
+  
+
+  
+  /* VARIANTS: primary, secondary   */
+  
+  /* Primary */
+  .button--primary {
+    background-color: #28808F;
+    color: white;
+  }
+  
+  .button--primary:hover {
+    background-color: #246f7c;
+  }
+  
+  .button--primary:active {
+    background-color: #1c5863;
+    transform: scale(0.98);
+  }
+  
+  .button--primary-selected {
+    background-color: #28808F;
+    border-color:#1c5863
+  }
+  
+  /* Secondary */
+  .button--secondary {
+    background-color:white;
+    color: #323232;
+    border-color: #C6C6C6;
+  }
+  
+  .button--secondary:hover {
+    background-color: #d5d5d5;
+  }
+  
+  .button--secondary:active {
+    background-color: #c0c0c0;
+    transform: scale(0.98);
+  }
+  
+  .button--secondary-selected {
+    background-color: #28808F;  /* same as primary (idea is to use for filters) */
+    color: white;
+
+  }
+  
+  /* Destructive */
+  .button--destructive {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .button--destructive:hover {
+    background-color: #b43441;
+  }
+  
+  .button--destructive:active {
+    background-color: #a71d2a;
+    transform: scale(0.98);
+  }
+  
+  /* Selected (Destructive) */
+  .button--destructive-selected {
+    background-color: #dc3545;
+    color: white;
+  }
+
+  /* Shape FOR FILTERS */
+
+  .button--rounded {
+    border-radius: 9999px;
+    padding: 0.4em 1em;
+
+  }
