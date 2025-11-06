@@ -3,7 +3,7 @@ import Button from "./Button";
 
 import { useState } from "react";
 
-export default function FilterChip({ }) {
+export default function FilterChip({children}) {
 
     const [applied, setApplied] = useState(false); // whether filter is applied
 
@@ -12,7 +12,7 @@ export default function FilterChip({ }) {
 
     return (
         <Button variant="secondary" onClick={handleApplied} isSelected={applied}  isRounded={true} >
-            Filter
+            {children}
         </Button>
         
     );

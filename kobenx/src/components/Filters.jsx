@@ -4,15 +4,18 @@ import "./Filters.css";
 
 import { useState } from "react";
 
-export default function Filters({ }) {
+export default function Filters({ filterList}) {
 
 
     return (   
         <div className="filters">
-            <FilterChip  />
-            <FilterChip  />
-            <FilterChip  />
-            <FilterChip  />
+
+            {filterList.map((filter, index) => (
+                <FilterChip key={index}>
+                    {filter}
+                </FilterChip>
+            ))}
+
         </div>
 
     );
