@@ -33,30 +33,27 @@ export default function Home() {
     getPosts();
   }, []);
 
+  // Handle filter chip toggles
+  const handleFilterChange = (filterName, isApplied) => {
+    if (isApplied) {
+      setSelectedFilter(filterName);
+    } else {
+      setSelectedFilter(null); // if unselected, clear filter
+    }
+  };
 
+  const filteredPosts = selectedFilter
+    ? posts.filter((post) => post.get("category") === selectedFilter)
+    : posts;
 
-// Handle filter chip toggles
-const handleFilterChange = (filterName, isApplied) => {
-  if (isApplied) {
-    setSelectedFilter(filterName);
-  } else {
-    setSelectedFilter(null); // if unselected, clear filter
-  }
-};
-
-
-const filteredPosts = selectedFilter
-? posts.filter((post) => post.get("category") === selectedFilter)
-: posts;
-
-const showPosts = filteredPosts.sort((b,a) => a.get("createdAt") - b.get("createdAt"))
-
+  const showPosts = filteredPosts.sort(
+    (b, a) => a.get("createdAt") - b.get("createdAt")
+  );
 
   return (
     <div className="page-structure">
       <h1 className="page-title">Home</h1>
       <TextField />
-
 
       <Filters filterList={filters} onFilterChange={handleFilterChange} />
 

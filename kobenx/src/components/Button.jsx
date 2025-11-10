@@ -13,7 +13,7 @@ export default function Button({
   const classes = [
     "button",
     `button--${variant}`,
-    isRounded? "button--rounded" : "",
+    isRounded ? "button--rounded" : "",
     isSelected ? `button--${variant}-selected` : "",
   ].join(" ");
 
