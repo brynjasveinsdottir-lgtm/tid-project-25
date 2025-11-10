@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { NavLink } from 'react-router-dom'
 import "./CardStyle.css";
 import UserDisplay from "./UserDisplay";
 import TextField from "./TextField";
+import './ProfileInfo/ProfileInfo.css'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
@@ -25,16 +27,20 @@ const handleRepost = () => setRepostet(!repostet);
 
 
   return (
-    <article className="card" onClick={() => setShowComment(!showComment)}>
+
+    <article className="card">
+
         <UserDisplay userInfo={thread.author}/>
+        
+       <NavLink to="/profile" > 
       <div className="threadContent">
         <p className="threadText">{thread.text}</p>
         {thread.image && (
         <img src={thread.image} alt="Thread content" className="threadImage" />
-        
+
 )}
         </div>
-      
+        </NavLink>
      
       <div className="threadActions">
 
@@ -71,11 +77,8 @@ const handleRepost = () => setRepostet(!repostet);
   </div>
 )}
   
-  
-
-
-
     </article>
+  
   );
 }
 
