@@ -8,26 +8,24 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import BookmarkOutlinedIcon from "@mui/icons-material/BookmarkOutlined";
-import LoopOutlinedIcon from '@mui/icons-material/LoopOutlined';
-import ModeCommentOutlinedIcon from '@mui/icons-material/ModeCommentOutlined';
-
+import LoopOutlinedIcon from "@mui/icons-material/LoopOutlined";
+import ModeCommentOutlinedIcon from "@mui/icons-material/ModeCommentOutlined";
 
 function ThreadCard({ thread }) {
+  const [liked, setLiked] = useState(false);
+  const [showComment, setShowComment] = useState(false);
+  const [bookmarked, setBookmarked] = useState(false);
+  const [repostet, setRepostet] = useState(false);
 
-const [liked, setLiked] = useState(false);
-const [showComment, setShowComment] = useState(false);
-const [bookmarked, setBookmarked] = useState(false);
-const [repostet, setRepostet] = useState(false);
+  const handleLike = () => setLiked(!liked);
+  const handleComment = () => setShowComment(!showComment);
+  const handleBookmark = () => setBookmarked(!bookmarked);
+  const handleRepost = () => setRepostet(!repostet);
 
-const handleLike = () => setLiked(!liked);
-const handleComment = () => setShowComment(!showComment);
-const handleBookmark = () => setBookmarked(!bookmarked);
-const handleRepost = () => setRepostet(!repostet);
-
-const navigate = useNavigate();
-const clickHandler = () => {
-  navigate("/threadOpen");
-};
+  const navigate = useNavigate();
+  const clickHandler = () => {
+    navigate("/threadOpen");
+  };
 
 
 

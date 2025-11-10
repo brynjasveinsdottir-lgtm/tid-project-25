@@ -11,10 +11,11 @@ import ThreadOpen from "./Pages/ThreadOpen.jsx"
 import Events from './Pages/Events.jsx'
 import Places from './Pages/Places.jsx'
 import Profile from './Pages/Profile.jsx'
+import LogIn from './Pages/LogIn'
 import './App.css'
 import Parse from "parse"
 import RequireAuth from './loginauth'
-import LogIn from './Pages/LogIn'
+
 
 Parse.initialize("DKH1rOD6FmtmZmgqFQwHoieKgDsjOnK1sDovWeww", "Cuvv9sxa8jxeEAsvfDJqU5my0cscE6r0MagpyrHu");
 Parse.serverURL = 'https://parseapi.back4app.com'
