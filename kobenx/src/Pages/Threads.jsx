@@ -1,23 +1,30 @@
-import React from "react";
+import React from "react"
+import { useEffect, useState } from "react";
+import Parse from "parse"
 import ThreadCard from '/src/components/ThreadCard.jsx';
-import bike from '/src/assets/bike.jpg';
-import { userA, userB } from "/src/UserInfoData";
+
+
 
 export default function Threads() {
-  
-  const threadTestA = {
-    author: userA,
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  };
 
-  const threadTestB = {
-    author: userB,
-    image: bike,
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
-  };
+    const [threads, setThreads] = useState([])
+
+    // Get all posts that have category '' from class 'Posts' in database using Parse
+    useEffect(() => {
+        async function getPosts() {
+            const Posts = Parse.Object.extend("Posts");
+            const query = new Parse.Query(Posts);
+            query.equalTo("category", "Threads");
+            /* query.greaterThanOrEqualTo('eventTime', 0) */
+            query.include("author");
+            query.ascending('eventTime')
+            const results = await query.find();
+            listEvents(results)
+        }
+        getPosts()
+    }, [])
 
 
-  const threads = [threadTestA, threadTestB];
 
   return (
     <div className="page-structure">
