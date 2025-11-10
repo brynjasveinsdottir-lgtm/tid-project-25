@@ -11,8 +11,9 @@ const eventIcons = {
 export default function EventCard({ event }) {
 
     // Get the url for the image
-    const eventImage = event.get("image")
-    const eventImageUrl = eventImage?.url?.()
+    // Make a placeholder image
+    const eventImage = event.get("image") ? event.get('image') : null
+    const eventImageUrl = eventImage ? eventImage.url() : null
 
     // Get the event icon based on which category it is
     const EventIcon = eventIcons[event.get('eventCategory')]

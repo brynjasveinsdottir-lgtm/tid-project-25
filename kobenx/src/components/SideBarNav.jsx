@@ -42,7 +42,7 @@ export default function SideBarNav() {
         }
 
         getUser()
-    }, [])
+    }, [user])
 
     //end of added code for profile information
 
@@ -60,12 +60,12 @@ export default function SideBarNav() {
             </div>
 
             <ul className='sidebar-title-list'>
-                {SideBarData.map((item, index) => {
+                {SideBarData.map((item, id) => {
                     
                     const IconComponent = item.icon;
 
                     return (
-                        <li key={index} className='sidebar-links'>
+                        <li key={id} className='sidebar-links'>
                             <NavLink to={item.path}>
                                 <IconComponent className='sidebar-icons' />
                                 <span className='sidebar-item-text'> {item.title} </span>

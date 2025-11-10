@@ -1,13 +1,11 @@
 import React from "react";
 import TextField from "../components/TextField";
 
-import FilterChip from "../components/FilterChip";
 
 import Filters from "../components/Filters";
 
 import { useState, useEffect } from "react";
 import Parse from "parse";
-import EventCard from "../components/EventCard";
 import Post from "../components/PostTemplate";
 
 import "/src/assets/Manrope.ttf";
@@ -27,6 +25,7 @@ export default function Home() {
       const query = new Parse.Query(Posts);
       /* query.greaterThanOrEqualTo('eventTime', 0) */
       query.include("author");
+      query.descending('createdAt')
       const results = await query.find();
       setPosts(results);
     }
@@ -46,19 +45,16 @@ export default function Home() {
     ? posts.filter((post) => post.get("category") === selectedFilter)
     : posts;
 
-  const showPosts = filteredPosts.sort(
-    (b, a) => a.get("createdAt") - b.get("createdAt")
-  );
-
   return (
     <div className="page-structure">
       <h1 className="page-title">Home</h1>
       <TextField />
+    
 
       <Filters filterList={filters} onFilterChange={handleFilterChange} />
 
       <div className="postContainer">
-        {showPosts.map((post) => (
+        {filteredPosts.map((post) => (
           <Post key={post.id} post={post} />
         ))}
       </div>

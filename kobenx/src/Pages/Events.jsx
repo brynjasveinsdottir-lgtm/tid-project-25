@@ -18,24 +18,23 @@ export default function Events() {
             query.equalTo("category", "Event");
             /* query.greaterThanOrEqualTo('eventTime', 0) */
             query.include("author");
+            query.ascending('eventTime')
             const results = await query.find();
             listEvents(results)
         }
         getPosts()
     }, [])
-
-    // Sort posts based on 'eventTime'
-    const sortedEvents = events.sort((a,b) => a.get("eventTime") - b.get("eventTime"))
     
     // Filter based on 'Music' and 'Food'. Will update to add more for more event categories.
-    const music = sortedEvents.filter(event =>
+    const music = events.filter(event =>
         event.get("eventCategory") === 'Music'
     );
-    const food = sortedEvents.filter(event =>
+    const food = events.filter(event =>
         event.get("eventCategory") === 'Food'
     );
 
     // Structuring the events page
+    // Remove individual categories
     return (
         <div className="page-structure">
             <h1 className="page-title">Events</h1>

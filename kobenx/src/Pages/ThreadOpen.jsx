@@ -18,8 +18,8 @@ export default function Threads() {
     <div className="page-structure">
       <h1 className="page-title">Threads</h1>
         <div className="centered">
-          {threads.map((thread, index) => (
-            <ThreadCard key={index} thread={thread} />
+          {threads.map((thread, id) => (
+            <ThreadCard key={id} thread={thread} />
           ))}
       </div>
     </div>

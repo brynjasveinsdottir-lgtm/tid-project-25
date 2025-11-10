@@ -1,7 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.jsx'
 import React from 'react'
 import {createBrowserRouter, RouterProvider, Outlet} from 'react-router-dom'
 import SideBarNav from './components/SideBarNav.jsx'
@@ -12,7 +11,6 @@ import Events from './Pages/Events.jsx'
 import Places from './Pages/Places.jsx'
 import Profile from './Pages/Profile.jsx'
 import LogIn from './Pages/LogIn'
-import './App.css'
 import Parse from "parse"
 import RequireAuth from './loginauth'
 
