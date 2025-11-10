@@ -111,3 +111,8 @@
 .signupSelected {
     left: 49%;
 }
+
+.postContainer {
+    margin-top: 16px;
+    width: 50%;
+}

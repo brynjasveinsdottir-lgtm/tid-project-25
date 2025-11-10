@@ -73,6 +73,10 @@
     color: white;
 
   }
+
+  .button--secondary-selected:hover {
+    background-color: #1d5d69;
+  }
   
   /* Destructive */
   .button--destructive {

@@ -15,10 +15,10 @@ import "/src/index.css";
 import "./PageStyle.css";
 
 export default function Home() {
-  const filters = ["Social", "Food", "Housing", "Language", "Transport"];
+  const filters = ["Event", "Thread", "Place", "Popular", "New"];
   const [posts, setPosts] = useState([]);
 
-  const [selectedFilter, setSelectedFilter] = useState(!null);
+  const [selectedFilter, setSelectedFilter] = useState(null);
 
   // Get all posts that have category 'Event' from class 'Posts' in database using Parse
   useEffect(() => {
@@ -33,21 +33,35 @@ export default function Home() {
     getPosts();
   }, []);
 
-  const filteredPosts = posts.filter(post =>
-    post.get("category") === selectedFilter
-);
+
+
+// Handle filter chip toggles
+const handleFilterChange = (filterName, isApplied) => {
+  if (isApplied) {
+    setSelectedFilter(filterName);
+  } else {
+    setSelectedFilter(null); // if unselected, clear filter
+  }
+};
+
+
+const filteredPosts = selectedFilter
+? posts.filter((post) => post.get("category") === selectedFilter)
+: posts;
+
+const showPosts = filteredPosts.sort((b,a) => a.get("createdAt") - b.get("createdAt"))
+
 
   return (
     <div className="page-structure">
       <h1 className="page-title">Home</h1>
       <TextField />
 
-      <FilterChip> Testing single chip </FilterChip>
 
-      <Filters filterList={filters} />
+      <Filters filterList={filters} onFilterChange={handleFilterChange} />
 
-      <div>
-        {filteredPosts.map((post) => (
+      <div className="postContainer">
+        {showPosts.map((post) => (
           <Post key={post.id} post={post} />
         ))}
       </div>

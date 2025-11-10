@@ -1,19 +1,27 @@
-import React, { Children } from "react";
+import React, { useState } from "react";
 import Button from "./Button";
 
-import { useState } from "react";
+export default function FilterChip({ children, onToggle }) {
+  const [applied, setApplied] = useState(false);
 
-export default function FilterChip({children}) {
+  const handleApplied = () => {
+    const newState = !applied;
+    setApplied(newState);
 
-    const [applied, setApplied] = useState(false); // whether filter is applied
+    // Notify parent
+    if (onToggle) {
+      onToggle(children, newState);
+    }
+  };
 
-    const handleApplied = () => setApplied(!applied); // toggle filter applied state (creating a toggle button for the filter chið)
-
-
-    return (
-        <Button variant="secondary" onClick={handleApplied} isSelected={applied}  isRounded={true} >
-            {children}
-        </Button>
-        
-    );
+  return (
+    <Button
+      variant="secondary"
+      onClick={handleApplied}
+      isSelected={applied}
+      isRounded={true}
+    >
+      {children}
+    </Button>
+  );
 }

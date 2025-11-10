@@ -87,8 +87,8 @@ export default function Post({ post }) {
     return (
         <article className="card">
             <UserDisplay userInfoParse={post.get('author')} time={timeSincePost()}/>
+            <p className="threadText">{text}</p>
             
-            {text}
         </article>
 
     );
