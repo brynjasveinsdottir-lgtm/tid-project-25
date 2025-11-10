@@ -7,6 +7,7 @@ import {createBrowserRouter, RouterProvider, Outlet} from 'react-router-dom'
 import SideBarNav from './components/SideBarNav.jsx'
 import Home from './Pages/HomePage.jsx'
 import Threads from './Pages/Threads.jsx'
+import ThreadOpen from "./Pages/ThreadOpen.jsx"
 import Events from './Pages/Events.jsx'
 import Places from './Pages/Places.jsx'
 import Profile from './Pages/Profile.jsx'
@@ -40,6 +41,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "/threads", element: <Threads /> },
+      { path: "/threadOpen", element: <ThreadOpen /> },
       { path: "/events", element: <Events /> },
       { path: "/places", element: <Places /> },
       { path: "/profile", element: <Profile /> },
