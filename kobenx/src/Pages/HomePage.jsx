@@ -18,6 +18,8 @@ export default function Home() {
   const filters = ["Social", "Food", "Housing", "Language", "Transport"];
   const [posts, setPosts] = useState([]);
 
+  const [selectedFilter, setSelectedFilter] = useState(!null);
+
   // Get all posts that have category 'Event' from class 'Posts' in database using Parse
   useEffect(() => {
     async function getPosts() {
@@ -31,6 +33,10 @@ export default function Home() {
     getPosts();
   }, []);
 
+  const filteredPosts = posts.filter(post =>
+    post.get("category") === selectedFilter
+);
+
   return (
     <div className="page-structure">
       <h1 className="page-title">Home</h1>
@@ -39,8 +45,9 @@ export default function Home() {
       <FilterChip> Testing single chip </FilterChip>
 
       <Filters filterList={filters} />
+
       <div>
-        {posts.map((post) => (
+        {filteredPosts.map((post) => (
           <Post key={post.id} post={post} />
         ))}
       </div>
