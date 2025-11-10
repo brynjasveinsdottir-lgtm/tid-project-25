@@ -1,28 +1,39 @@
 import React from "react";
 import {useEffect, useState} from 'react'
 import Parse from "parse"
+import { NavLink } from "react-router";
+import LogIn from '/src/components/LoginFlow'
+import Signup from '/src/components/SignupFlow'
+import './PageStyle.css'
 
-export default function LogIn() {
+export default function Authentication() {
 
-    async function publish(formData) {
-        const username1 = formData.get('username')
-        const password1 = formData.get('password')
-        const user = await Parse.User.logIn(`${username1}`, `${password1}`)
-        window.location.reload()
-    }
+    const [loggingIn, setLoggingIn] = useState(true)
 
+    const handleLogIn = () => setLoggingIn(true)
+
+    const handleSignUp = () => setLoggingIn(false)
+
+    
     return (
-        <div>
+        <div className="welcome-page">
             <div>
-                <h1>
-                    Log-in Page
+                <h1 className="logo-welcome-page">
+                    købenx
                 </h1>
             </div>
-            <form className="input-fields" action={publish}>
-                <input type='username' placeholder="Username" name='username' />
-                <input type='password' placeholder="Password" name='password' />
-                <button type="submit" value='submit'>Log-In</button>
-            </form>
+            <div className="selectButtonBox">
+                <div className={`backgroundBox ${loggingIn ? 'loginSelected' : 'signupSelected'}`} />
+                <button onClick={handleLogIn} className='selectButton'>
+                    Log in
+                </button>
+                <button onClick={handleSignUp} className='selectButton'>
+                    Sign up
+                </button>
+            </div>
+            <div>
+                {loggingIn? <LogIn /> : <Signup />}
+            </div>
         </div>
     );
 }

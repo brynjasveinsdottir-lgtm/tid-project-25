@@ -18,6 +18,20 @@
     padding-right: 0.5vh;
 }
 
+.logo-welcome-page {
+    font-family: 'Bricolage Grotesque';
+    font-size: 5rem;
+    color: black;
+    height: auto;
+}
+
+.welcome-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .centered {
     display: flex;
     flex-direction: column;
@@ -56,14 +70,49 @@
   display: none;
 }
 
-.input-fields {
+.selectButtonBox {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 16px;
+    position: relative;
+    background-color: rgba(198,198,198,0.5);
+    margin: 16px;
+    border-radius: 16px;
+    border: rgba(198,198,198,1) solid 1.5px;
 }
 
-.login-button {
-    margin: 16px;
+.backgroundBox {
+    background-color: rgba(198,198,198,1);
+    width: 50%;
+    height: 3rem;
+    position: absolute;
+    margin: 0;
+    border-radius: 16px;
+    left: 49%;
+    border: rgba(198,198,198,1) solid 1.5px;
+    transition: 0.5s;
+}
+
+.selectButton {
+    margin-left: auto;
+    margin-right: auto;
+    height: 3rem;
+    width: 7rem;
+    transition: 0.2s;
+    background-color: rgba(0,0,0,0);
+    z-index: 0;
+}
+
+.loginSelected {
+    left: 0;
+}
+
+.signupSelected {
+    left: 49%;
+}
+
+.postContainer {
+    margin-top: 16px;
+    width: 50%;
 }
