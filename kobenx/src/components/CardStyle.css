@@ -14,13 +14,20 @@
 
 /* Threads styling */
 
+.threadContent {
+    margin-left: 0.5em;
+    width: 100%;          
+    margin: 16px auto;  
+
+}
+
 .threadText {
     font-size: 0.8rem;
     text-align: left;
     margin-left: 0.5em;
     width: 100%;        
-    max-width: 700px;  
-    margin: 16px auto;  
+   
+    margin: 16px
 }
 
 .threadImage {
