@@ -20,17 +20,7 @@ export default function Post({ post }) {
   const postImageUrl = postImage ? postImage.url() : null;
 
   const EventIcon = eventIcons[post.get("eventCategory")];
-  const eventTime = `${post
-    .get("eventTime")
-    .toLocaleString("en-Gb", { weekday: "short" })}, ${post
-    .get("eventTime")
-    .toLocaleString("en-Gb", { day: "numeric", month: "short" })} at ${post
-    .get("eventTime")
-    .toLocaleString("en-US", {
-      hour: "numeric",
-      minute: "numeric",
-      hour12: false,
-    })}`;
+  
 
   const text = post.get("postText") ? post.get("postText") : "sorry no text";
 
@@ -64,6 +54,20 @@ export default function Post({ post }) {
   //return statements 
   //for event posts
   if (post.get("category") === "Event") {
+
+    // Structuring the eventTime for the event card
+    const eventTime = `${post
+    .get("eventTime")
+    .toLocaleString("en-Gb", { weekday: "short" })}, ${post
+    .get("eventTime")
+    .toLocaleString("en-Gb", { day: "numeric", month: "short" })} at ${post
+    .get("eventTime")
+    .toLocaleString("en-US", {
+      hour: "numeric",
+      minute: "numeric",
+      hour12: false,
+    })}`;
+
     return (
       <article className="card event_card2">
         <header className="event_card_header">
