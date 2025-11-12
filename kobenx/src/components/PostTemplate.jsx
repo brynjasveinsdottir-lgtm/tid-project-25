@@ -20,7 +20,7 @@ export default function Post({ post }) {
   const postImageUrl = postImage ? postImage.url() : null;
 
   const EventIcon = eventIcons[post.get("eventCategory")];
-  const eventTime = `${post
+  const eventTime = EventIcon? `${post
     .get("eventTime")
     .toLocaleString("en-Gb", { weekday: "short" })}, ${post
     .get("eventTime")
@@ -30,7 +30,7 @@ export default function Post({ post }) {
       hour: "numeric",
       minute: "numeric",
       hour12: false,
-    })}`;
+    })}`: null;
 
   const text = post.get("postText") ? post.get("postText") : "sorry no text";
 

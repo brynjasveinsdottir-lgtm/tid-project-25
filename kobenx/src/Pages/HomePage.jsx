@@ -1,5 +1,6 @@
 import React from "react";
 import TextField from "../components/TextField";
+import CreatePost from "../components/CreatePost";
 
 
 import Filters from "../components/Filters";
@@ -8,15 +9,22 @@ import { useState, useEffect } from "react";
 import Parse from "parse";
 import Post from "../components/PostTemplate";
 
+
+
 import "/src/assets/Manrope.ttf";
 import "/src/index.css";
 import "./PageStyle.css";
+import Button from "../components/Button";
 
 export default function Home() {
+
+
   const filters = ["Event", "Thread", "Place", "Popular", "New"];
   const [posts, setPosts] = useState([]);
 
   const [selectedFilter, setSelectedFilter] = useState(null);
+
+  const [openCreatePost, setOpenCreatePost] = useState(false);
 
   // Get all posts that have category 'Event' from class 'Posts' in database using Parse
   useEffect(() => {
@@ -49,7 +57,12 @@ export default function Home() {
     <div className="page-structure">
       <h1 className="page-title">Home</h1>
       <TextField />
-    
+      <Button onClick={() => setOpenCreatePost(true)}>Create Post</Button>
+      
+      <CreatePost 
+      isOpen={openCreatePost}
+      onClose={() => setOpenCreatePost(false)}
+      />
 
       <Filters filterList={filters} onFilterChange={handleFilterChange} />
 
