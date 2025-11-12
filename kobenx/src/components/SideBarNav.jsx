@@ -42,7 +42,7 @@ export default function SideBarNav() {
         }
 
         getUser()
-    }, [user])
+    }, [])
 
     //end of added code for profile information
 
