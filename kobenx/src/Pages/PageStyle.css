@@ -1,0 +1,118 @@
+
+.page-structure {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.page-title {
+    font-size: 2rem;
+    font-weight: 500;
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 4vh;
+    padding-left: 0.5vh;
+    padding-right: 0.5vh;
+}
+
+.logo-welcome-page {
+    font-family: 'Bricolage Grotesque';
+    font-size: 5rem;
+    color: black;
+    height: auto;
+}
+
+.welcome-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.centered {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-self: center;
+}
+
+.category-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    padding-top: 1vh;
+    padding-left: 0.5vh;
+    padding-bottom: 5vh;
+    padding-right: 0.5vh;
+    overflow-x: scroll;
+    scrollbar-width: none;
+}
+
+.category-header {
+    font-size: 1.5rem;
+    font-weight: 500;
+    padding-left: 0.5vh;
+    padding-right: 0.5vh;
+}
+
+.event-row {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+}
+
+
+.category-row::-webkit-scrollbar {
+  display: none;
+}
+
+.selectButtonBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-color: rgba(198,198,198,0.5);
+    margin: 16px;
+    border-radius: 16px;
+    border: rgba(198,198,198,1) solid 1.5px;
+}
+
+.backgroundBox {
+    background-color: rgba(198,198,198,1);
+    width: 50%;
+    height: 3rem;
+    position: absolute;
+    margin: 0;
+    border-radius: 16px;
+    left: 49%;
+    border: rgba(198,198,198,1) solid 1.5px;
+    transition: 0.5s;
+}
+
+.selectButton {
+    margin-left: auto;
+    margin-right: auto;
+    height: 3rem;
+    width: 7rem;
+    transition: 0.2s;
+    background-color: rgba(0,0,0,0);
+    z-index: 0;
+}
+
+.loginSelected {
+    left: 0;
+}
+
+.signupSelected {
+    left: 49%;
+}
+
+.postContainer {
+    margin-top: 16px;
+    width: 50%;
+}
