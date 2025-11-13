@@ -4,7 +4,7 @@ textarea {
     border-radius: 4px;
     font-size: 16px;
     font-family: 'Manrope';
-    width: 450px;
+    width: 100%;
     min-height: 32px;
     resize: none;
     field-sizing: content;
@@ -24,16 +24,18 @@ textarea.naked:focus {
 }
 
 .comment-box {
-    width: 450px;
+    width: stretch;
+    max-width: 40vw;
     height: inherit;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
-    margin: 8px 0; /* remove this later, just while texting out of layout*/
 }
 .comment-box:has(textarea.naked:focus) {
-   background-color: #F1F8F9; /*this is to make the comment box (including the icons) show the focus state, althoug it is technically the text area that has focus*/
+
+    border-color: #28808f;
+    background-color: #F1F8F9; /*this is to make the comment box (including the icons) show the focus state, althoug it is technically the text area that has focus*/
 }
 
 .icon-container {
@@ -41,4 +43,10 @@ textarea.naked:focus {
     display: flex;
     flex-direction: row;
     gap: 8px;
+}
+
+.photo{
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
 }

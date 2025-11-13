@@ -5,6 +5,8 @@ export default function Button({
   variant = "primary", //default is primary, maybe it should be secondary?
   isSelected = false,
   isRounded = false,
+  isBlock = false,
+  disabled = false,
   onClick,
   children,
   ...props
@@ -14,11 +16,12 @@ export default function Button({
     "button",
     `button--${variant}`,
     isRounded ? "button--rounded" : "",
+    isBlock ? "button--isBlock" : "",
     isSelected ? `button--${variant}-selected` : "",
   ].join(" ");
 
   return (
-    <button className={classes} onClick={onClick} {...props}>
+    <button className={classes} onClick={onClick} {...props} disabled={disabled}>
       {children}
     </button>
   );

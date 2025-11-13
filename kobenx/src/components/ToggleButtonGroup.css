@@ -1,0 +1,7 @@
+.toggle-button-group {
+    display:flex;
+    flex-direction: row;
+    gap: 12px;
+  
+  } 
+  /*This is the same as filters, need to find a better way to organise this*/

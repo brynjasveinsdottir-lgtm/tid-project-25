@@ -3,6 +3,8 @@
   display: inline-flex;
   align-items: center;
   justify-items: center;
+  justify-content: center;
+
   gap: 6px;
 
   font-family: inherit;
@@ -16,6 +18,17 @@
 
   cursor: pointer;
 }
+/* Block button (fill entire parent width) */
+.button--isBlock {
+  width: 100%;
+
+}
+/* ROUNDED (for pill shaped buttons */
+.button--rounded {
+  border-radius: 999px;
+  padding: 0.4em 1em;
+}
+
 /* hide focus when clicked */
 .button:focus {
   outline: none;
@@ -27,6 +40,15 @@
   outline-offset: 3px;
 }
 
+/* Disabled (override hover and active) */
+.button:disabled,
+.button:disabled:hover,
+.button:disabled:active {
+  background-color: #e0e0e0;
+  color: #817f7f;
+  cursor: not-allowed;
+  box-shadow: none;
+}
 /* VARIANTS: primary, secondary   */
 
 /* Primary */
@@ -95,9 +117,4 @@
   color: white;
 }
 
-/* Shape FOR FILTERS */
 
-.button--rounded {
-  border-radius: 9999px;
-  padding: 0.4em 1em;
-}
