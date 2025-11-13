@@ -116,3 +116,9 @@
     margin-top: 16px;
     width: 50%;
 }
+
+.dev-description {
+    font: 16px sans-serif;
+    color: gray;
+
+}
