@@ -39,12 +39,16 @@ export default function CreatePost({ isOpen, onClose }) {
     newPost.set("category", selectedToggle);
     newPost.set("postText", postContent);
     newPost.set("author", userPublic);
-    
-// TEMP: Convert imported .jpg to File for testing (The fetch and blob part is not needed when we implement file upload properly)
-    const response = await fetch(postPhoto);
-    const blob = await response.blob();
-    const parseFile = new Parse.File("bike.jpg", blob);
-    newPost.set("image", parseFile);
+
+    //only set the image if there is one
+    // TEMP: Convert imported .jpg to File for testing (The fetch and blob part is not needed when we implement file upload properly)
+    if (postPhoto) {
+        const response = await fetch(postPhoto);
+        const blob = await response.blob();
+        const parseFile = new Parse.File("bike.jpg", blob);
+        newPost.set("image", parseFile);
+    }
+
 
     //newPost.set("image", postPhoto); // if there is a photo it will be added here (need to fix the object type when I implement with the file upload, code above is temporary for the sample photo...)
 
@@ -99,7 +103,7 @@ export default function CreatePost({ isOpen, onClose }) {
 
         <div className="button-dock">
           <Button
-            disabled={!postContent.trim() || selectedToggle !== "Thread" } //disable for events for now (since we dont have the required input and it will crash if we try to render events without it)
+            disabled={!postContent.trim() || selectedToggle !== "Thread"} //disable for events for now (since we dont have the required input and it will crash if we try to render events without it)
             variant="primary"
             onClick={() => handlePostSubmit(postContent)}
             isBlock={true}
