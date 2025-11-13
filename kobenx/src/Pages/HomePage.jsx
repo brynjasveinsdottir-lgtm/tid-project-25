@@ -1,20 +1,18 @@
 import React from "react";
-import TextField from "../components/TextField";
-import CreatePost from "../components/CreatePost";
-
-
-import Filters from "../components/Filters";
-
 import { useState, useEffect } from "react";
 import Parse from "parse";
+
+import CreatePost from "../components/CreatePost";
+import Filters from "../components/Filters";
 import Post from "../components/PostTemplate";
+import Button from "../components/Button";
 
 
 
 import "/src/assets/Manrope.ttf";
 import "/src/index.css";
 import "./PageStyle.css";
-import Button from "../components/Button";
+
 
 export default function Home() {
 
@@ -25,6 +23,8 @@ export default function Home() {
   const [selectedFilter, setSelectedFilter] = useState(null);
 
   const [openCreatePost, setOpenCreatePost] = useState(false);
+
+  const [reloadPosts, setReloadPosts] = useState(false);
 
   // Get all posts that have category 'Event' from class 'Posts' in database using Parse
   useEffect(() => {
@@ -38,7 +38,8 @@ export default function Home() {
       setPosts(results);
     }
     getPosts();
-  }, []);
+    setReloadPosts(false);
+  }, [reloadPosts]);
 
   // Handle filter chip toggles
   const handleFilterChange = (filterName, isApplied) => {
@@ -56,14 +57,16 @@ export default function Home() {
   return (
     <div className="page-structure">
       <h1 className="page-title">Home</h1>
-      <TextField />
+      <p className="dev-description">-- Click this button to open a dialog to create a new post (this will be replaced by a simple textField later to match design)--- </p>
+
       <Button onClick={() => setOpenCreatePost(true)}>Create Post</Button>
       
       <CreatePost 
       isOpen={openCreatePost}
-      onClose={() => setOpenCreatePost(false)}
+      onClose={() => setOpenCreatePost(false) + setReloadPosts(true)} /* TEST: reload posts when closing the create post dialog (instead of reloading window)*/
       />
 
+      <p className="dev-description">-- The part below this is primarly for testing new posts appearing in feed and a filter function --- </p>
       <Filters filterList={filters} onFilterChange={handleFilterChange} />
 
       <div className="postContainer">
