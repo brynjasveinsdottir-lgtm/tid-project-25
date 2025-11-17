@@ -123,6 +123,7 @@ export default function Post({ post }) {
         repostet={repostet}
         onLike={handleLike}
         onComment={() => navigate(`/threadOpen/${post.id}`)}
+
         onBookmark={handleBookmark}
         onRepost={handleRepost}
       />
