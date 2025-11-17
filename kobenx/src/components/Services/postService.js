@@ -1,7 +1,15 @@
 import Parse from "parse";
 import { getUserPublic } from "./userService";
 
-export async function createPost({ selectedToggle, postContent, postPhoto, postTitle, category,eventLocation,eventTime }) {
+export async function createPost({
+  selectedToggle,
+  postContent,
+  postPhoto,
+  postTitle,
+  category,
+  location,
+  eventTime,
+}) {
   // Get the UserPublic (via the new user service)
   const userPublic = await getUserPublic();
 
@@ -23,9 +31,10 @@ export async function createPost({ selectedToggle, postContent, postPhoto, postT
 
   //if the post is an event
   if (selectedToggle === "Event") {
-    newPost.set("eventCategory", category? category : "Other"); 
-    newPost.set("eventTime", eventTime? eventTime: new Date("2026-01-20T15:30:00Z")); 
-    newPost.set("eventPlace", eventLocation? eventLocation : "TBD");
+    const eventDate = eventTime? new Date(eventTime):new Date("2026-01-20T15:30:00Z") ; // convert the datetime-local string to Date or uses hard coded date if none provided (But lets change this and have a fallback in the UI, but for now it will crash if we dont provide a date)
+    newPost.set("eventTime", eventDate);
+    newPost.set("eventCategory", category ? category : "Other");
+    newPost.set("eventPlace", location ? location : "TBD");
   }
   // Save the post
   return await newPost.save();
