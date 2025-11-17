@@ -6,6 +6,7 @@ import CreatePost from "../components/CreatePost";
 import Filters from "../components/Filters";
 import Post from "../components/PostTemplate";
 import Button from "../components/Button";
+import TrendingEvents from "../components/TrendingEvents";
 
 
 
@@ -54,26 +55,45 @@ export default function Home() {
     ? posts.filter((post) => post.get("category") === selectedFilter)
     : posts;
 
-  return (
-    <div className="page-structure">
-      <h1 className="page-title">Home</h1>
-      <p className="dev-description">-- Click this button to open a dialog to create a new post (this will be replaced by a simple textField later to match design)--- </p>
-
-      <Button onClick={() => setOpenCreatePost(true)}>Create Post</Button>
-      
-      <CreatePost 
-      isOpen={openCreatePost}
-      onClose={() => setOpenCreatePost(false) + setReloadPosts(true)} /* TEST: reload posts when closing the create post dialog (instead of reloading window)*/
-      />
-
-      <p className="dev-description">-- The part below this is primarly for testing new posts appearing in feed and a filter function --- </p>
-      <Filters filterList={filters} onFilterChange={handleFilterChange} />
-
-      <div className="postContainer">
-        {filteredPosts.map((post) => (
-          <Post key={post.id} post={post} />
-        ))}
+    return (
+      <div className="home-layout">
+        {/* LEFT COLUMN: feed */}
+        <div className="home-left">
+          <h1 className="page-title">Home</h1>
+          <p className="dev-description">
+            -- Click this button to open a dialog to create a new post (this will be
+            replaced by a simple textField later to match design)---
+          </p>
+    
+          <Button onClick={() => setOpenCreatePost(true)}>Create Post</Button>
+    
+          <CreatePost
+            isOpen={openCreatePost}
+            onClose={() => setOpenCreatePost(false) + setReloadPosts(true)}
+          />
+    
+          <p className="dev-description">
+            -- The part below this is primarly for testing new posts appearing in
+            feed and a filter function ---
+          </p>
+    
+          <Filters filterList={filters} onFilterChange={handleFilterChange} />
+    
+          <div className="postContainer">
+            {filteredPosts.map((post) => (
+              <Post key={post.id} post={post} />
+            ))}
+          </div>
+        </div>
+    
+        {/* RIGHT COLUMN: trending events */}
+        <aside className="home-right">
+          <TrendingEvents />
+          {/* here we will add Trending Topics eventually /> */}
+        </aside>
       </div>
-    </div>
-  );
+    );
 }
+
+
+
