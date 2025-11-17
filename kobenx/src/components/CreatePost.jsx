@@ -8,6 +8,9 @@ import TextField from "./TextField";
 import Button from "./Button";
 import CloseIcon from "@mui/icons-material/Close";
 
+//import services
+import { createPost } from "./Services/postService";
+
 // The CreatePost component (dialog with the inputs for creating a post)
 export default function CreatePost({ isOpen, onClose }) {
   const toggleOptions = ["Thread", "Event", "Place"]; //options for the toggle button group (post types or "category" in the database)
@@ -15,61 +18,16 @@ export default function CreatePost({ isOpen, onClose }) {
   const placeholder = `Create a new ${selectedToggle} post...`; //Add later a function that changes the placeholder based on the selected toggle OR at least make the toggle label lowercase to fit in the sentence better
   const [postContent, setPostContent] = useState("");
   const [postPhoto, setPostPhoto] = useState(null);
+  const [postTitle, setPostTitle] = useState("");
 
-  async function handlePosting() {
-    //getting the user info (lets try to see if we can do this only once when the app loads instead of every time we post to save calls to the database)
-    const currentUser = Parse.User.current();
-    if (!currentUser) {
-      alert("No user logged in!"); // should not happen (I think our login/signup flow handles this, but maybe good to have a fallback)
-      return;
-    }
-
-    const UserPublic = Parse.Object.extend("UserPublic");
-    const userQuery = new Parse.Query(UserPublic);
-    userQuery.equalTo("userIdPrivate", currentUser); // match pointer to _User (currently logged in user)
-    const userPublic = await userQuery.first(); // should only be one matching UserPublic
-
-    if (!userPublic) {
-      alert("No matching UserPublic found for this user."); // also should not happen
-      return;
-    }
-    // Creating the post
-    const Posts = Parse.Object.extend("Posts");
-    const newPost = new Posts();
-    newPost.set("category", selectedToggle);
-    newPost.set("postText", postContent);
-    newPost.set("author", userPublic);
-
-    //only set the image if there is one
-    // TEMP: Convert imported .jpg to File for testing (The fetch and blob part is not needed when we implement file upload properly)
-    if (postPhoto) {
-      const response = await fetch(postPhoto);
-      const blob = await response.blob();
-      const parseFile = new Parse.File("bike.jpg", blob);
-      newPost.set("image", parseFile);
-    }
-
-    //newPost.set("image", postPhoto); // if there is a photo it will be added here (need to fix the object type when I implement with the file upload, code above is temporary for the sample photo...)
-
-    //saving the post (also having an alert for both success and error, maybe remove or design better later)
-    await newPost.save().then(
-      (newObj) => {
-        //alert("Post created!" + newObj.id); //removed the alert for better UX
-        // window.location.reload(); //reload to show the new post in the feed (is there a better way to make the new post appear without reloading the whole page?)
-      },
-      (error) => {
-        alert(error.message);
-      }
-    );
-  }
+  
   async function handlePostSubmit() {
-    await handlePosting(); //
-
-    //write in console (for testing purposes)
-    console.log("Post submitted:", {
-      type: selectedToggle,
-      content: postContent,
-    });
+    await createPost({
+        selectedToggle,
+        postContent,
+        postPhoto,
+        postTitle
+      });
 
     // clear the content and close the dialog after submitting
     setPostContent("");
@@ -94,20 +52,31 @@ export default function CreatePost({ isOpen, onClose }) {
           onToggleChange={setSelectedToggle}
           firstSelected={toggleOptions[0]}
         />
+        {/* rendering different inputs based on selected toggle button*/}
         {selectedToggle == "Event" ? (
-          <input type="text" placeholder="Event Title" />
+          <input type="text" placeholder="Event Title" onChange={(e) => setPostTitle(e.target.value)} />
         ) : null}
+
         {selectedToggle == "Thread" ? (
           <TextField
-            placeholderText={placeholder}
+            placeholderText="What's on your mind?"
             onChange={(text) => setPostContent(text)}
             onPhotoChange={(photo) => setPostPhoto(photo)}
           />
         ) : null}
 
+        {selectedToggle == "Place" ? (
+          <div className="input-container">
+            <input type="text" placeholder="Place Name" />
+            <p className="dev-description">
+              -- Sorry we do not support this yet...---{" "}
+            </p>
+          </div>
+        ) : null}
+
         <div className="button-dock">
           <Button
-            disabled={!postContent.trim() || selectedToggle !== "Thread"} //disable for events for now (since we dont have the required input and it will crash if we try to render events without it)
+            disabled={(!postContent.trim() && selectedToggle==="Thread") || (postTitle==="" && selectedToggle==="Event") || selectedToggle==="Place"} //disable for events for now (since we dont have the required input and it will crash if we try to render events without it)
             variant="primary"
             onClick={() => handlePostSubmit()}
             isBlock={true}
