@@ -114,6 +114,23 @@ export default function Post({ post }) {
       <UserDisplay userInfoParse={post.get("author")} time={timeSincePost()} />
       <p className="threadText">{text}</p>
       {postImageUrl && <img src={postImageUrl} className="card_image"></img>}
+
+      <div className="PostInteractions">
+
+
+      <PostInteractions
+        liked={liked}
+        bookmarked={bookmarked}
+        repostet={repostet}
+        onLike={handleLike}
+        onComment={() => navigate(`/threadOpen/${post.id}`)}
+
+        onBookmark={handleBookmark}
+        onRepost={handleRepost}
+      />
+
+      </div>
+
     </article>
 
     
