@@ -27,13 +27,41 @@ function ThreadCard({ thread }) {
     navigate("/threadOpen");
   };
 
+  const timeSincePost = () => {
+    const timeDiff = (Date.now() - thread.createdAt) / 1000;
+    let value, unit;
+
+    if (timeDiff < 60) {
+      value = Math.round((Date.now() - thread.createdAt) / 1000);
+      unit = "second";
+    } else if (timeDiff < 3600) {
+      value = Math.round((Date.now() - thread.createdAt) / (1000 * 60));
+      unit = "minute";
+    } else if (timeDiff < 86400) {
+      value = Math.round((Date.now() - thread.createdAt) / (1000 * 60 * 60));
+      unit = "hour";
+    } else if (timeDiff < 2629743) {
+      value = Math.round((Date.now() - thread.createdAt) / (1000 * 60 * 60 * 24));
+      unit = "day";
+    } else {
+      value = Math.round(
+        (Date.now() - thread.createdAt) / (1000 * 60 * 60 * 24 * 30)
+      );
+      unit = "month";
+    }
+    const multiple = value > 1 ? "s" : "";
+    return `${value} ${unit}${multiple} ago`;
+  };
+
+
 
 
   return (
 
     
     <article className="card">
-    <UserDisplay userInfo={thread.author} />
+    <UserDisplay userInfoParse={thread.get("author")} time={timeSincePost()} />
+    
 
     <NavLink to="/threadOpen">
       <p className="threadText">{thread.text}</p> </NavLink>
