@@ -56,8 +56,8 @@ function ThreadCard({ thread }) {
     
     <article className="card">
     <UserDisplay userInfoParse={thread.get("author")} time={timeSincePost()} />
-    
 
+  
     <NavLink to="/threadOpen">
       <p className="threadText">{thread.text}</p> </NavLink>
 

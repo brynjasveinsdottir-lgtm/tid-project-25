@@ -1,26 +1,40 @@
 import React from "react";
-import ThreadCard from '/src/components/ThreadCard.jsx';
-import { userA } from "/src/UserInfoData";
+import { useState, useEffect } from "react";
+import Parse from "parse";
+import PostTemplate from "../components/PostTemplate";
+import { useParams } from "react-router-dom";
 
-export default function Threads() {
 
+
+export default function ThreadOpen() {
+
+  const { id } = useParams();
+  const [post, setPost] = useState(null);
+
+  useEffect(() => {
+      async function getPost() {
+        const Posts = Parse.Object.extend("Posts");
+        const query = new Parse.Query(Posts);
+        query.equalTo("objectId",id);
+        query.include("author");
+        query.descending('createdAt')
+
+        const results = await query.first();
+        setPost(results);
+      }
+
+      getPost();
+    }, [id]);
     
-  
-  const threadTestA = {
-    author: userA,
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  };
+    if (!post) return <p>Loading</p>; // Wait for the fetch
 
-
-  const threads = [threadTestA];
+//Gets only a single post
 
   return (
     <div className="page-structure">
-      <h1 className="page-title">Threads</h1>
+      <h1 className="page-title">Thread</h1>
         <div className="centered">
-          {threads.map((thread, id) => (
-            <ThreadCard key={id} thread={thread} />
-          ))}
+        <PostTemplate post={post} />
       </div>
     </div>
   );
