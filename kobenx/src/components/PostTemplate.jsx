@@ -7,7 +7,6 @@ import "./CardStyle.css";
 
 import MusicIcon from "@mui/icons-material/MusicNote";
 import FoodIcon from "@mui/icons-material/Restaurant";
-import EventIcon from "@mui/icons-material/Event";
 import UserDisplay from "./UserDisplay";
 import PostInteractions from "./PostInteractions";
 
@@ -16,7 +15,6 @@ import PostInteractions from "./PostInteractions";
 const eventIcons = {
   Music: MusicIcon,
   Food: FoodIcon,
-  Other: EventIcon,
 };
 
 export default function Post({ post }) {
@@ -71,21 +69,22 @@ export default function Post({ post }) {
     return `${value} ${unit}${multiple} ago`;
   };
 
-  //return statements
+  //return statements 
   //for event posts
   if (post.get("category") === "Event") {
+
     // Structuring the eventTime for the event card
     const eventTime = `${post
-      .get("eventTime")
-      .toLocaleString("en-Gb", { weekday: "short" })}, ${post
-      .get("eventTime")
-      .toLocaleString("en-Gb", { day: "numeric", month: "short" })} at ${post
-      .get("eventTime")
-      .toLocaleString("en-US", {
-        hour: "numeric",
-        minute: "numeric",
-        hour12: false,
-      })}`;
+    .get("eventTime")
+    .toLocaleString("en-Gb", { weekday: "short" })}, ${post
+    .get("eventTime")
+    .toLocaleString("en-Gb", { day: "numeric", month: "short" })} at ${post
+    .get("eventTime")
+    .toLocaleString("en-US", {
+      hour: "numeric",
+      minute: "numeric",
+      hour12: false,
+    })}`;
 
     return (
       <article className="card event_card2">
@@ -114,6 +113,23 @@ export default function Post({ post }) {
       <UserDisplay userInfoParse={post.get("author")} time={timeSincePost()} />
       <p className="threadText">{text}</p>
       {postImageUrl && <img src={postImageUrl} className="card_image"></img>}
+
+      <div className="PostInteractions">
+
+
+      <PostInteractions
+        liked={liked}
+        bookmarked={bookmarked}
+        repostet={repostet}
+        onLike={handleLike}
+        onComment={() => navigate(`/threadOpen/${post.id}`)}
+
+        onBookmark={handleBookmark}
+        onRepost={handleRepost}
+      />
+
+      </div>
+      
     </article>
 
     
