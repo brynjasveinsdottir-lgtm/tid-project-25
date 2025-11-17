@@ -16,7 +16,7 @@ export default function CreatePost({ isOpen, onClose }) {
   const [postContent, setPostContent] = useState("");
   const [postPhoto, setPostPhoto] = useState(null);
 
-  async function handlePosting(e) {
+  async function handlePosting() {
     //getting the user info (lets try to see if we can do this only once when the app loads instead of every time we post to save calls to the database)
     const currentUser = Parse.User.current();
     if (!currentUser) {
@@ -43,12 +43,11 @@ export default function CreatePost({ isOpen, onClose }) {
     //only set the image if there is one
     // TEMP: Convert imported .jpg to File for testing (The fetch and blob part is not needed when we implement file upload properly)
     if (postPhoto) {
-        const response = await fetch(postPhoto);
-        const blob = await response.blob();
-        const parseFile = new Parse.File("bike.jpg", blob);
-        newPost.set("image", parseFile);
+      const response = await fetch(postPhoto);
+      const blob = await response.blob();
+      const parseFile = new Parse.File("bike.jpg", blob);
+      newPost.set("image", parseFile);
     }
-
 
     //newPost.set("image", postPhoto); // if there is a photo it will be added here (need to fix the object type when I implement with the file upload, code above is temporary for the sample photo...)
 
@@ -63,8 +62,8 @@ export default function CreatePost({ isOpen, onClose }) {
       }
     );
   }
-  async function handlePostSubmit(e) {
-    await handlePosting(e); //
+  async function handlePostSubmit() {
+    await handlePosting(); //
 
     //write in console (for testing purposes)
     console.log("Post submitted:", {
@@ -95,17 +94,22 @@ export default function CreatePost({ isOpen, onClose }) {
           onToggleChange={setSelectedToggle}
           firstSelected={toggleOptions[0]}
         />
-        <TextField
-          placeholderText={placeholder}
-          onChange={(text) => setPostContent(text)}
-          onPhotoChange={(photo) => setPostPhoto(photo)}
-        />
+        {selectedToggle == "Event" ? (
+          <input type="text" placeholder="Event Title" />
+        ) : null}
+        {selectedToggle == "Thread" ? (
+          <TextField
+            placeholderText={placeholder}
+            onChange={(text) => setPostContent(text)}
+            onPhotoChange={(photo) => setPostPhoto(photo)}
+          />
+        ) : null}
 
         <div className="button-dock">
           <Button
             disabled={!postContent.trim() || selectedToggle !== "Thread"} //disable for events for now (since we dont have the required input and it will crash if we try to render events without it)
             variant="primary"
-            onClick={() => handlePostSubmit(postContent)}
+            onClick={() => handlePostSubmit()}
             isBlock={true}
           >
             Post

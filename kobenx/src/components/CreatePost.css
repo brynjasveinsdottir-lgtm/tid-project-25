@@ -68,3 +68,19 @@
 .close-button:hover {
   color: #888;
 }
+
+input{
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    font-family: 'Manrope';
+
+}
+input:focus {
+    outline: none;
+    border-color: #28808f;
+    background-color: #F1F8F9; 
+
+}
+
