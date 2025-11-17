@@ -6,7 +6,7 @@ import "/src/assets/Manrope.ttf";
 import "/src/index.css";
 import "./PageStyle.css";
 
-import ThreadCard from "../components/ThreadCard";
+import PostTemplate from "../components/PostTemplate";
 
 export default function Threads () {
 
@@ -17,7 +17,6 @@ export default function Threads () {
       const Posts = Parse.Object.extend("Posts");
       const query = new Parse.Query(Posts);
       query.equalTo("category", "Thread");
-      /* query.greaterThanOrEqualTo('eventTime', 0) */
       query.include("author");
       query.descending('createdAt')
       const results = await query.find();
@@ -32,8 +31,9 @@ export default function Threads () {
       <h1 className="page-title">Threads</h1>
         <div className="centered">
           {posts.map((post) => (
-            <ThreadCard key={post.id} thread={post} />
+            <PostTemplate key={post.id} post={post} />
           ))}
+          
       </div>
     </div>
   );
