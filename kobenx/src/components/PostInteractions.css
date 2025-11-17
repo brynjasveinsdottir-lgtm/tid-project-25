@@ -5,7 +5,6 @@
     margin-top: 8px;
     gap: 4px;
   }
-  
 
   .likeButton,
   .commentButton,
@@ -16,7 +15,7 @@
     cursor: pointer;
     display: flex;
     align-items: center;
-    color: #0c1ff0;
+    color: rgb(36, 111, 124);
     font-size: 2px;
   }
   
@@ -24,6 +23,6 @@
   .commentButton:hover,
   .bookmarkButton:hover,
   .repostButton:hover {
-    color: #490bc5;
+    color: rgb(208, 72, 14);
   }
   
