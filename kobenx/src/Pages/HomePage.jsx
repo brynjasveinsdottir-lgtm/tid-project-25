@@ -69,7 +69,7 @@ export default function Home() {
     
           <CreatePost
             isOpen={openCreatePost}
-            onClose={() => setOpenCreatePost(false) + setReloadPosts(true)}
+            onClose={() => { setOpenCreatePost(false); setReloadPosts(true); }}
           />
     
           <p className="dev-description">
