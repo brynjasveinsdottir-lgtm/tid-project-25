@@ -10,6 +10,7 @@ import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlin
 import BookmarkOutlinedIcon from "@mui/icons-material/BookmarkOutlined";
 import LoopOutlinedIcon from "@mui/icons-material/LoopOutlined";
 import ModeCommentOutlinedIcon from "@mui/icons-material/ModeCommentOutlined";
+import PostInteractions from "./PostInteractions.jsx";
 
 function ThreadCard({ thread }) {
   const [liked, setLiked] = useState(false);
@@ -75,29 +76,18 @@ function ThreadCard({ thread }) {
      
       <div className="threadActions">
 
-      {/* Like Button */}
-      <button onClick={handleLike} className="likeButton">
-      {liked? <FavoriteIcon /> : <FavoriteBorderIcon/>}
-      </button>
-
-       {/* Comment Button */}
-       <button onClick={() => {handleComment (); 
-      navigate("/threadOpen");}}
-     
-      className="commentButton">
-      { <ModeCommentOutlinedIcon />}
-      
-      </button>
-
-      {/* Bookmark Button */}
-      <button onClick={handleBookmark} className="bookmarkButton">
-      {bookmarked? <BookmarkOutlinedIcon /> : <BookmarkBorderOutlinedIcon/>}
-      </button>
-
-      {/* Repost Button */}
-      <button onClick={handleRepost} className="repostButton">
-      {<LoopOutlinedIcon />}
-      </button>
+      <PostInteractions
+        liked={liked}
+        bookmarked={bookmarked}
+        repostet={repostet}
+        onLike={handleLike}
+        onComment={() => {
+          handleComment();
+          navigate("/threadOpen");
+        }}
+        onBookmark={handleBookmark}
+        onRepost={handleRepost}
+      />
 
       </div>
   
