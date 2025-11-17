@@ -2,12 +2,16 @@
 // also testing out props for threads
 
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./CardStyle.css";
 
 import MusicIcon from "@mui/icons-material/MusicNote";
 import FoodIcon from "@mui/icons-material/Restaurant";
 import EventIcon from "@mui/icons-material/Event";
 import UserDisplay from "./UserDisplay";
+import PostInteractions from "./PostInteractions";
+
+
 
 const eventIcons = {
   Music: MusicIcon,
@@ -24,6 +28,21 @@ export default function Post({ post }) {
   const EventIcon = eventIcons[post.get("eventCategory")];
 
   const text = post.get("postText") ? post.get("postText") : "sorry no text";
+
+
+  const [liked, setLiked] = useState(false);
+  const [showComment, setShowComment] = useState(false);
+  const [bookmarked, setBookmarked] = useState(false);
+  const [repostet, setRepostet] = useState(false);
+
+  const handleLike = () => setLiked(!liked);
+  const handleComment = () => setShowComment(!showComment);
+  const handleBookmark = () => setBookmarked(!bookmarked);
+  const handleRepost = () => setRepostet(!repostet);
+
+  const navigate = useNavigate();
+
+
 
   //functions
   const timeSincePost = () => {
@@ -91,10 +110,12 @@ export default function Post({ post }) {
   }
 
   return (
-    <article className="card">
+    <article className="card"onClick={() => navigate(`/threadOpen/${post.id}`)}>
       <UserDisplay userInfoParse={post.get("author")} time={timeSincePost()} />
       <p className="threadText">{text}</p>
       {postImageUrl && <img src={postImageUrl} className="card_image"></img>}
     </article>
+
+    
   );
 }
