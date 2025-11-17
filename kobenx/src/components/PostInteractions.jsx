@@ -4,6 +4,7 @@ import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlin
 import BookmarkOutlinedIcon from "@mui/icons-material/BookmarkOutlined";
 import LoopOutlinedIcon from "@mui/icons-material/LoopOutlined";
 import ModeCommentOutlinedIcon from "@mui/icons-material/ModeCommentOutlined";
+import './PostInteractions.css';
 
 export default function PostInteractions ({
 
@@ -17,7 +18,7 @@ onRepost
 
 }) {
     return (
-      <div className="threadActions">
+      <div className="PostInteractions">
   
         <button onClick={onLike} className="likeButton">
           {liked ? <FavoriteIcon /> : <FavoriteBorderIcon />}

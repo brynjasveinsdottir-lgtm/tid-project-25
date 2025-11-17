@@ -4,12 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import "./CardStyle.css";
 import UserDisplay from "./UserDisplay";
 import './ProfileInfo/ProfileInfo.css'
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
-import BookmarkOutlinedIcon from "@mui/icons-material/BookmarkOutlined";
-import LoopOutlinedIcon from "@mui/icons-material/LoopOutlined";
-import ModeCommentOutlinedIcon from "@mui/icons-material/ModeCommentOutlined";
 import PostInteractions from "./PostInteractions.jsx";
 
 function ThreadCard({ thread }) {
@@ -74,7 +68,7 @@ function ThreadCard({ thread }) {
       </NavLink>
 
      
-      <div className="threadActions">
+      <div className="PostInteractions">
 
       <PostInteractions
         liked={liked}
