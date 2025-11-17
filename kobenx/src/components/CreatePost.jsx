@@ -7,77 +7,51 @@ import ToggleButtonGroup from "../components/ToggleButtonGroup";
 import TextField from "./TextField";
 import Button from "./Button";
 import CloseIcon from "@mui/icons-material/Close";
+import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import AddLinkIcon from "@mui/icons-material/AddLink";
+
+//import services
+import { createPost } from "./Services/postService";
 
 // The CreatePost component (dialog with the inputs for creating a post)
 export default function CreatePost({ isOpen, onClose }) {
   const toggleOptions = ["Thread", "Event", "Place"]; //options for the toggle button group (post types or "category" in the database)
   const [selectedToggle, setSelectedToggle] = useState(toggleOptions[0]); //default to first option "Thread" (maybe this could be different if you post from the events page - if we want to support that)
   const placeholder = `Create a new ${selectedToggle} post...`; //Add later a function that changes the placeholder based on the selected toggle OR at least make the toggle label lowercase to fit in the sentence better
+  //content for threads
   const [postContent, setPostContent] = useState("");
   const [postPhoto, setPostPhoto] = useState(null);
 
-  async function handlePosting(e) {
-    //getting the user info (lets try to see if we can do this only once when the app loads instead of every time we post to save calls to the database)
-    const currentUser = Parse.User.current();
-    if (!currentUser) {
-      alert("No user logged in!"); // should not happen (I think our login/signup flow handles this, but maybe good to have a fallback)
-      return;
-    }
+  //content for events
+  const [postTitle, setPostTitle] = useState("");
+  const [category, setCategory] = useState("");
+  const [location, setLocation] = useState("");
+  const [eventTime, setEventTime] = useState(null);
 
-    const UserPublic = Parse.Object.extend("UserPublic");
-    const userQuery = new Parse.Query(UserPublic);
-    userQuery.equalTo("userIdPrivate", currentUser); // match pointer to _User (currently logged in user)
-    const userPublic = await userQuery.first(); // should only be one matching UserPublic
-
-    if (!userPublic) {
-      alert("No matching UserPublic found for this user."); // also should not happen
-      return;
-    }
-    // Creating the post
-    const Posts = Parse.Object.extend("Posts");
-    const newPost = new Posts();
-    newPost.set("category", selectedToggle);
-    newPost.set("postText", postContent);
-    newPost.set("author", userPublic);
-
-    //only set the image if there is one
-    // TEMP: Convert imported .jpg to File for testing (The fetch and blob part is not needed when we implement file upload properly)
-    if (postPhoto) {
-        const response = await fetch(postPhoto);
-        const blob = await response.blob();
-        const parseFile = new Parse.File("bike.jpg", blob);
-        newPost.set("image", parseFile);
-    }
-
-
-    //newPost.set("image", postPhoto); // if there is a photo it will be added here (need to fix the object type when I implement with the file upload, code above is temporary for the sample photo...)
-
-    //saving the post (also having an alert for both success and error, maybe remove or design better later)
-    await newPost.save().then(
-      (newObj) => {
-        //alert("Post created!" + newObj.id); //removed the alert for better UX
-        // window.location.reload(); //reload to show the new post in the feed (is there a better way to make the new post appear without reloading the whole page?)
-      },
-      (error) => {
-        alert(error.message);
-      }
-    );
-  }
-  async function handlePostSubmit(e) {
-    await handlePosting(e); //
-
-    //write in console (for testing purposes)
-    console.log("Post submitted:", {
-      type: selectedToggle,
-      content: postContent,
+  async function handlePostSubmit() {
+    await createPost({
+      selectedToggle,
+      postContent,
+      postPhoto,
+      postTitle,
+      category,
+      location,
+      eventTime,
     });
 
     // clear the content and close the dialog after submitting
     setPostContent("");
+    setCategory("");
+    setLocation("");
+    setEventTime(null);
+    setPostPhoto(null);
+    setSelectedToggle(toggleOptions[0]); //reset to default toggle option (or do we want to keep the last selected one?)
     onClose();
   }
+
+  //Return statements
   if (!isOpen) {
-    return null; // Do not render anything if the dialog is not open
+    return null; // Do not render anything if the dialog should not be open
   }
 
   return (
@@ -93,19 +67,90 @@ export default function CreatePost({ isOpen, onClose }) {
         <ToggleButtonGroup
           buttonList={toggleOptions}
           onToggleChange={setSelectedToggle}
-          firstSelected={toggleOptions[0]}
+          firstSelected={selectedToggle}
         />
-        <TextField
-          placeholderText={placeholder}
-          onChange={(text) => setPostContent(text)}
-          onPhotoChange={(photo) => setPostPhoto(photo)}
-        />
+        {/* rendering different inputs based on selected toggle button*/}
+        {selectedToggle == "Event" ? (
+          <div className="input-container">
+            <input
+              type="text"
+              placeholder="Event Title"
+              onChange={(e) => setPostTitle(e.target.value)}
+              required
+            />
+            <select onChange={(e) => setCategory(e.target.value)} required>
+              <option value="">Select category</option>
+              <option value="Music">Music</option>
+              <option value="Food">Food</option>
+              <option disabled={true} value="Other">
+                Other
+              </option>
+            </select>
+
+            <select onChange={(e) => setLocation(e.target.value)} required>
+              <option value="">Select location</option>
+              <option value="Tivoli">Tivoli Gardens</option>
+              <option value="Nyhavn">Nyhavn</option>
+              <option value="Refshaleøen">Refshaleøen</option>
+              <option value="Nørrebrogade">Nørrebrogade</option>
+              <option value="Nørrebro market">Nørrebro market</option>
+              <option value="Other">Other</option>
+            </select>
+
+            <input
+              type="datetime-local"
+              value={eventTime}
+              onChange={(e) => setEventTime(e.target.value)}
+              required
+            />
+            <div className="button-dock">
+              {" "}
+              <Button variant="secondary">
+                <AddPhotoAlternateIcon /> Add Photo
+              </Button>
+              <Button variant="secondary">
+                <AddLinkIcon /> Add Signup Link
+              </Button>
+            </div>
+
+            <div className="dev-description">
+              {" "}
+              Do we want just buttons or also have a textfield like in figma??{" "}
+            </div>
+            <TextField
+              placeholderText="What's on your mind?"
+              onChange={(text) => setPostContent(text)}
+              onPhotoChange={(photo) => setPostPhoto(photo)}
+            />
+          </div>
+        ) : null}
+
+        {selectedToggle == "Thread" ? (
+          <TextField
+            placeholderText="What's on your mind?"
+            onChange={(text) => setPostContent(text)}
+            onPhotoChange={(photo) => setPostPhoto(photo)}
+          />
+        ) : null}
+
+        {selectedToggle == "Place" ? (
+          <div className="input-container">
+            <input type="text" placeholder="Place Name" />
+            <p className="dev-description">
+              -- Sorry we do not support this yet...---{" "}
+            </p>
+          </div>
+        ) : null}
 
         <div className="button-dock">
           <Button
-            disabled={!postContent.trim() || selectedToggle !== "Thread"} //disable for events for now (since we dont have the required input and it will crash if we try to render events without it)
+            disabled={
+              (!postContent.trim() && selectedToggle === "Thread") ||
+              (postTitle === "" && selectedToggle === "Event") ||
+              selectedToggle === "Place"
+            } //disable for empty content or title, IMPORTANT: need to fix that when you change the toggle then the input is cleared but the variables are not!!
             variant="primary"
-            onClick={() => handlePostSubmit(postContent)}
+            onClick={() => handlePostSubmit()}
             isBlock={true}
           >
             Post
