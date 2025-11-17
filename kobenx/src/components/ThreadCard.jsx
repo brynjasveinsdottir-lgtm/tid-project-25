@@ -1,40 +1,49 @@
 import { useState } from "react";
+import { NavLink } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 import "./CardStyle.css";
 import UserDisplay from "./UserDisplay";
-import TextField from "./TextField";
+import './ProfileInfo/ProfileInfo.css'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import BookmarkOutlinedIcon from "@mui/icons-material/BookmarkOutlined";
-import LoopOutlinedIcon from '@mui/icons-material/LoopOutlined';
-import ModeCommentOutlinedIcon from '@mui/icons-material/ModeCommentOutlined';
-
+import LoopOutlinedIcon from "@mui/icons-material/LoopOutlined";
+import ModeCommentOutlinedIcon from "@mui/icons-material/ModeCommentOutlined";
 
 function ThreadCard({ thread }) {
+  const [liked, setLiked] = useState(false);
+  const [showComment, setShowComment] = useState(false);
+  const [bookmarked, setBookmarked] = useState(false);
+  const [repostet, setRepostet] = useState(false);
 
-const [liked, setLiked] = useState(false);
-const [showComment, setShowComment] = useState(false);
-const [bookmarked, setBookmarked] = useState(false);
-const [repostet, setRepostet] = useState(false);
+  const handleLike = () => setLiked(!liked);
+  const handleComment = () => setShowComment(!showComment);
+  const handleBookmark = () => setBookmarked(!bookmarked);
+  const handleRepost = () => setRepostet(!repostet);
 
-const handleLike = () => setLiked(!liked);
-const handleComment = () => setShowComment(!showComment);
-const handleBookmark = () => setBookmarked(!bookmarked);
-const handleRepost = () => setRepostet(!repostet);
+  const navigate = useNavigate();
+  const clickHandler = () => {
+    navigate("/threadOpen");
+  };
 
 
 
   return (
-    <article className="card" onClick={() => setShowComment(!showComment)}>
-        <UserDisplay userInfo={thread.author}/>
-      <div className="threadContent">
-        <p className="threadText">{thread.text}</p>
-        {thread.image && (
-        <img src={thread.image} alt="Thread content" className="threadImage" />
-        
-)}
-        </div>
-      
+
+    
+    <article className="card">
+    <UserDisplay userInfo={thread.author} />
+
+    <NavLink to="/threadOpen">
+      <p className="threadText">{thread.text}</p> </NavLink>
+
+      <NavLink to="/threadOpen">
+      {thread.image && (
+        <img src={thread.image} alt="Thread content" className="threadImage"/>
+      )}
+      </NavLink>
+
      
       <div className="threadActions">
 
@@ -42,10 +51,14 @@ const handleRepost = () => setRepostet(!repostet);
       <button onClick={handleLike} className="likeButton">
       {liked? <FavoriteIcon /> : <FavoriteBorderIcon/>}
       </button>
-      
-      {/* Comment Button */}
-      <button onClick={handleComment} className="commentButton">
+
+       {/* Comment Button */}
+       <button onClick={() => {handleComment (); 
+      navigate("/threadOpen");}}
+     
+      className="commentButton">
       { <ModeCommentOutlinedIcon />}
+      
       </button>
 
       {/* Bookmark Button */}
@@ -59,23 +72,9 @@ const handleRepost = () => setRepostet(!repostet);
       </button>
 
       </div>
-
-
-      {showComment && (
-  <div className="comments">
-    <p className="comment">User: Looks great</p>
-    <p className="comment">User: I was there too</p>
-
-    {/* Comment input box */}
-    <TextField /> 
-  </div>
-)}
   
-  
-
-
-
     </article>
+  
   );
 }
 

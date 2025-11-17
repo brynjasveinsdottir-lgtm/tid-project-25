@@ -3,10 +3,14 @@ import { SideBarData } from './SideBarData'
 import './SideBarStyle.css'
 import './ProfileInfo/ProfileInfo.css'
 import ProfileInfo from './ProfileInfo/ProfileInfo'
-import { userA } from "/src/UserInfoData"
 import Parse from 'parse'
+import {useEffect, useState} from 'react'
+import Button from './Button'
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 
 export default function SideBarNav() {
+
+   
 
     async function logOutUser() {
         Parse.User.logOut().then(() => {
@@ -14,6 +18,38 @@ export default function SideBarNav() {
         });
         window.location.reload();
     }
+
+
+    //Adding code to get profile information
+    const currentUser = Parse.User.current();
+    const [user, setUser] = useState(null); ;
+
+
+
+    useEffect(() => {
+        async function getUser() {
+            const UserInfo = Parse.Object.extend("UserPublic");
+            const query = new Parse.Query(UserInfo);
+            query.equalTo("userIdPrivate", currentUser);
+            const object = await query.first();
+            console.log("object:",object)
+            console.log("id",object.id)
+            console.log("username", object.get("username"))
+            console.log("private id", object.get("userIdPrivate").id)
+            console.log("full name", object.get("firstName"))
+            setUser(object);
+
+        }
+
+        getUser()
+    }, [])
+
+    //end of added code for profile information
+
+
+
+
+
     
     return (
         <aside className='sidebar'>
@@ -24,12 +60,12 @@ export default function SideBarNav() {
             </div>
 
             <ul className='sidebar-title-list'>
-                {SideBarData.map((item, index) => {
+                {SideBarData.map((item, id) => {
                     
                     const IconComponent = item.icon;
 
                     return (
-                        <li key={index} className='sidebar-links'>
+                        <li key={id} className='sidebar-links'>
                             <NavLink to={item.path}>
                                 <IconComponent className='sidebar-icons' />
                                 <span className='sidebar-item-text'> {item.title} </span>
@@ -41,12 +77,12 @@ export default function SideBarNav() {
 
             <div className='sidebar-profile'>
                 <NavLink to='/profile'>
-                    <ProfileInfo userInfo={userA}/>
+                    <ProfileInfo userInfo={user}/>
                 </NavLink>
             </div>
 
             <div>
-                <button className='logout' onClick={logOutUser}>Log out</button>
+                <Button variant='destructive' onClick={logOutUser}> <LogoutOutlinedIcon fontSize='20'/>Log out</Button>
             </div>
         </aside>
     )

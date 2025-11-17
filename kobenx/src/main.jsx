@@ -1,21 +1,21 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.jsx'
 import React from 'react'
 import {createBrowserRouter, RouterProvider, Outlet} from 'react-router-dom'
 import SideBarNav from './components/SideBarNav.jsx'
 import Home from './Pages/HomePage.jsx'
 import Threads from './Pages/Threads.jsx'
+import ThreadOpen from "./Pages/ThreadOpen.jsx"
 import Events from './Pages/Events.jsx'
 import Places from './Pages/Places.jsx'
 import Profile from './Pages/Profile.jsx'
-import './App.css'
+import LogIn from './Pages/LogIn'
 import Parse from "parse"
 import RequireAuth from './loginauth'
-import LogIn from './Pages/LogIn'
 
-Parse.initialize("DKH1rOD6FmtmZmgqFQwHoieKgDsjOnK1sDovWeww", "Cuvv9sxa8jxeEAsvfDJqU5my0cscE6r0MagpyrHu");
+
+Parse.initialize("NJWaTl5KAfW9YpXza0hBThItPeTOoUzjxXvmusKC", "5P6trcxyUbGHTeIpG6wvEC26LjG8eClqrh95PBmL");
 Parse.serverURL = 'https://parseapi.back4app.com'
 
 // This defines the skeleton of the site, the things that don't change. The Outlet in this is each page's content.
@@ -39,6 +39,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "/threads", element: <Threads /> },
+      { path: "/threadOpen", element: <ThreadOpen /> },
       { path: "/events", element: <Events /> },
       { path: "/places", element: <Places /> },
       { path: "/profile", element: <Profile /> },
