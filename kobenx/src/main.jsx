@@ -39,7 +39,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "/threads", element: <Threads /> },
-      { path: "/threadOpen", element: <ThreadOpen /> },
+      { path: "/threadOpen/:id", element: <ThreadOpen /> },
       { path: "/events", element: <Events /> },
       { path: "/places", element: <Places /> },
       { path: "/profile", element: <Profile /> },

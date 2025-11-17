@@ -2,12 +2,15 @@
 // also testing out props for threads
 
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./CardStyle.css";
 
 import MusicIcon from "@mui/icons-material/MusicNote";
 import FoodIcon from "@mui/icons-material/Restaurant";
 import UserDisplay from "./UserDisplay";
 import PostInteractions from "./PostInteractions";
+
+
 
 const eventIcons = {
   Music: MusicIcon,
@@ -34,6 +37,9 @@ export default function Post({ post }) {
   const handleComment = () => setShowComment(!showComment);
   const handleBookmark = () => setBookmarked(!bookmarked);
   const handleRepost = () => setRepostet(!repostet);
+
+  const navigate = useNavigate();
+
 
 
   //functions
@@ -103,22 +109,20 @@ export default function Post({ post }) {
   }
 
   return (
-    <article className="card">
+    <article className="card"onClick={() => navigate(`/threadOpen/${post.id}`)}>
       <UserDisplay userInfoParse={post.get("author")} time={timeSincePost()} />
       <p className="threadText">{text}</p>
       {postImageUrl && <img src={postImageUrl} className="card_image"></img>}
 
       <div className="PostInteractions">
 
+
       <PostInteractions
         liked={liked}
         bookmarked={bookmarked}
         repostet={repostet}
         onLike={handleLike}
-        onComment={() => {
-          handleComment();
-          navigate("/threadOpen");
-        }}
+        onComment={() => navigate(`/threadOpen/${post.id}`)}
         onBookmark={handleBookmark}
         onRepost={handleRepost}
       />
