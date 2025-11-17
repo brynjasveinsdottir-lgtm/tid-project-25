@@ -1,30 +1,38 @@
 import React from "react";
-import ThreadCard from '/src/components/ThreadCard.jsx';
-import bike from '/src/assets/bike.jpg';
-import { userA, userB } from "/src/UserInfoData";
+import { useState, useEffect } from "react";
+import Parse from "parse";
 
-export default function Threads() {
-  
-  const threadTestA = {
-    author: userA,
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  };
+import "/src/assets/Manrope.ttf";
+import "/src/index.css";
+import "./PageStyle.css";
 
-  const threadTestB = {
-    author: userB,
-    image: bike,
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
-  };
+import ThreadCard from "../components/ThreadCard";
 
+export default function Threads () {
 
-  const threads = [threadTestA, threadTestB];
+  const [posts, setPosts] = useState([]);
+ // Get all posts that have category 'Event' from class 'Posts' in database using Parse
+  useEffect(() => {
+    async function getPosts() {
+      const Posts = Parse.Object.extend("Posts");
+      const query = new Parse.Query(Posts);
+      query.equalTo("category", "Thread");
+      /* query.greaterThanOrEqualTo('eventTime', 0) */
+      query.include("author");
+      query.descending('createdAt')
+      const results = await query.find();
+      setPosts(results);
+    }
+    getPosts();
+  }, []);
+
 
   return (
     <div className="page-structure">
       <h1 className="page-title">Threads</h1>
         <div className="centered">
-          {threads.map((thread, id) => (
-            <ThreadCard key={id} thread={thread} />
+          {posts.map((post) => (
+            <ThreadCard key={post.id} thread={post} />
           ))}
       </div>
     </div>

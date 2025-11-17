@@ -1,0 +1,28 @@
+ .PostInteractions{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-top: 8px;
+    gap: 4px;
+  }
+
+  .likeButton,
+  .commentButton,
+  .bookmarkButton,
+  .repostButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: rgb(36, 111, 124);
+    font-size: 2px;
+  }
+  
+  .likeButton:hover,
+  .commentButton:hover,
+  .bookmarkButton:hover,
+  .repostButton:hover {
+    color: rgb(208, 72, 14);
+  }
+  
