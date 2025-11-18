@@ -54,12 +54,18 @@
   color: #323232;
 }
 
-.authButton {
+.enabledButton {
     height: 3rem;
     width: 7rem;
 }
 
-.authButton:hover {
+.enabledButton:hover {
     background-color: #C6C6C6;
     transition: 0.2s;
+}
+
+.disabledButton {
+    height: 3rem;
+    width: 7rem;
+    cursor: default;
 }
