@@ -16,7 +16,7 @@ export default function Events() {
             const Posts = Parse.Object.extend("Posts");
             const query = new Parse.Query(Posts);
             query.equalTo("category", "Event");
-            /* query.greaterThanOrEqualTo('eventTime', 0) */
+            query.greaterThanOrEqualTo('eventTime', new Date())
             query.include("author");
             query.ascending('eventTime')
             const results = await query.find();
