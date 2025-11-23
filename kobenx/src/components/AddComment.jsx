@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Parse from "parse";
 import TextField from "./TextField";
+import { getUserPublic } from "./Services/userService.js";
 
 
 export default function AddComment({ post, onCommentAdded }) {
@@ -9,21 +10,25 @@ export default function AddComment({ post, onCommentAdded }) {
     async function handleSubmit() {
       if (!text.trim()) return;
 
-      const user = Parse.User.current();
-      if (!user) return alert("You must be logged in to comment.");
+      try {
+        const userPublic = await getUserPublic();
   
       const Comment = Parse.Object.extend("Comments");
       const comment = new Comment();
   
       comment.set("text", text);
       comment.set("post", post);
-      comment.set("authorUser", Parse.User.current());
+      comment.set("author", userPublic);
   
       await comment.save();
-  
       setText("");
       onCommentAdded?.();
+    } catch (error) {
+      console.error("Failed to save comment:", error);
+      alert(error.message);
     }
+  }
+
   
     return (
       <div className="add-comment">
