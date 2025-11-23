@@ -50,3 +50,12 @@ textarea.naked:focus {
     height: auto;
     border-radius: 8px;
 }
+.icon{
+    width: 24px;
+    height: 24px;
+    cursor:pointer;
+}
+.icon--disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}

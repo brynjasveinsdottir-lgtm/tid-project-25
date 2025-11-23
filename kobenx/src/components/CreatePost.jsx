@@ -23,11 +23,8 @@ export default function CreatePost({ isOpen, onClose }) {
   const [postContent, setPostContent] = useState("");
   const [postPhoto, setPostPhoto] = useState(null);
 
-  const [data, setData] = React.useState(1);
-
-  const updateData = (prevState) => {
-    setData(() => prevState + 1);
-  };
+  //For file upload
+  const fileUploadRef = React.useRef(null);
 
   //content for events
   const [postTitle, setPostTitle] = useState("");
@@ -111,21 +108,25 @@ export default function CreatePost({ isOpen, onClose }) {
             />
             <div className="button-dock">
               {" "}
-              <Button variant="secondary">
-                <AddPhotoAlternateIcon /> <FileUpload onSelect={setPostPhoto} />
+              <Button
+                variant="secondary"
+                onClick={() => fileUploadRef.current?.triggerSelect()}
+              >
+                <AddPhotoAlternateIcon /> Add Photo
               </Button>
-              {/*PREVIEW OF THE SELECTED PHOTO (before upload)*/}
-              {postPhoto && (
-                <img
-                  src={URL.createObjectURL(postPhoto)}
-                  alt="preview"
-                  style={{ width: 200, marginTop: 10 }}
-                />
-              )}
+              <FileUpload ref={fileUploadRef} onSelect={setPostPhoto} />
               <Button variant="secondary">
                 <AddLinkIcon /> Add Signup Link
               </Button>
             </div>
+
+            {postPhoto && (
+              <img
+                src={URL.createObjectURL(postPhoto)}
+                alt="preview"
+                style={{ width: 200, marginTop: 10 }}
+              />
+            )}
 
             <div className="dev-description">
               {" "}
@@ -133,8 +134,9 @@ export default function CreatePost({ isOpen, onClose }) {
             </div>
             <TextField
               placeholderText="What's on your mind?"
-              onChange={(text) => setPostContent(text)}
-              onPhotoChange={(photo) => setPostPhoto(photo)}
+              value={postContent} // <-- pass the parent state
+              onChange={setPostContent} // <-- update parent state
+              onPhotoChange={setPostPhoto}
             />
           </div>
         ) : null}
@@ -143,7 +145,7 @@ export default function CreatePost({ isOpen, onClose }) {
           <TextField
             placeholderText="What's on your mind?"
             onChange={(text) => setPostContent(text)}
-            onPhotoChange={(photo) => setPostPhoto(photo)}
+            onPhotoChange={setPostPhoto}
           />
         ) : null}
 
