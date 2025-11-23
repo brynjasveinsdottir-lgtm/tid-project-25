@@ -4,6 +4,8 @@ import Parse from "parse";
 import PostTemplate from "../components/PostTemplate";
 import { useParams } from "react-router-dom";
 
+import AddComment from "../components/AddComment";
+
 
 
 export default function ThreadOpen() {
@@ -16,7 +18,7 @@ export default function ThreadOpen() {
         const Posts = Parse.Object.extend("Posts");
         const query = new Parse.Query(Posts);
         query.equalTo("objectId",id);
-        query.include("author");
+        query.include("authorUser");
         query.descending('createdAt')
 
         const results = await query.first();
@@ -26,7 +28,7 @@ export default function ThreadOpen() {
       getPost();
     }, [id]);
     
-    if (!post) return <p>Loading</p>; // Wait for the fetch
+    if (!post) return
 
 //Gets only a single post
 
@@ -35,6 +37,9 @@ export default function ThreadOpen() {
       <h1 className="page-title">Thread</h1>
         <div className="centered">
         <PostTemplate post={post} />
+        <AddComment post={post}
+        onCommentAdded={() => fetchComments(post)} // refresh comments after submit
+/>
       </div>
     </div>
   );

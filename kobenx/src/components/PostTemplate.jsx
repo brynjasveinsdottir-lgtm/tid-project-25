@@ -122,11 +122,21 @@ export default function Post({ post }) {
         liked={liked}
         bookmarked={bookmarked}
         repostet={repostet}
-        onLike={handleLike}
+        onLike={(e) => {
+          e.stopPropagation();
+          handleLike();
+        }}
+        onBookmark={(e) => {
+          e.stopPropagation();
+          handleBookmark();
+        }}
+        onRepost={(e) => {
+          e.stopPropagation();
+          handleRepost();
+        }}
+
         onComment={() => navigate(`/threadOpen/${post.id}`)}
 
-        onBookmark={handleBookmark}
-        onRepost={handleRepost}
       />
 
       </div>
