@@ -12,6 +12,7 @@ import AddLinkIcon from "@mui/icons-material/AddLink";
 
 //import services
 import { createPost } from "./Services/postService";
+import FileUpload from "./Services/uploadService";
 
 // The CreatePost component (dialog with the inputs for creating a post)
 export default function CreatePost({ isOpen, onClose }) {
@@ -22,11 +23,17 @@ export default function CreatePost({ isOpen, onClose }) {
   const [postContent, setPostContent] = useState("");
   const [postPhoto, setPostPhoto] = useState(null);
 
+  const [data, setData] = React.useState(1);
+
+  const updateData = (prevState) => {
+    setData(() => prevState + 1);
+  };
+
   //content for events
   const [postTitle, setPostTitle] = useState("");
   const [category, setCategory] = useState("");
   const [location, setLocation] = useState("");
-  const [eventTime, setEventTime] = useState(null);
+  const [eventTime, setEventTime] = useState(undefined);
 
   async function handlePostSubmit() {
     await createPost({
@@ -101,13 +108,20 @@ export default function CreatePost({ isOpen, onClose }) {
               type="datetime-local"
               value={eventTime}
               onChange={(e) => setEventTime(e.target.value)}
-              required
             />
             <div className="button-dock">
               {" "}
               <Button variant="secondary">
-                <AddPhotoAlternateIcon /> Add Photo
+                <AddPhotoAlternateIcon /> <FileUpload onSelect={setPostPhoto} />
               </Button>
+              {/*PREVIEW OF THE SELECTED PHOTO (before upload)*/}
+              {postPhoto && (
+                <img
+                  src={URL.createObjectURL(postPhoto)}
+                  alt="preview"
+                  style={{ width: 200, marginTop: 10 }}
+                />
+              )}
               <Button variant="secondary">
                 <AddLinkIcon /> Add Signup Link
               </Button>

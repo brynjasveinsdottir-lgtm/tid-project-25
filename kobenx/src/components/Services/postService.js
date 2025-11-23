@@ -21,11 +21,9 @@ export async function createPost({
   newPost.set("author", userPublic);
   newPost.set("postTitle", postTitle);
 
-  // Attach image if provided
+  // Attach image if provided (now it should be a File object)
   if (postPhoto) {
-    const response = await fetch(postPhoto);
-    const blob = await response.blob();
-    const parseFile = new Parse.File("upload.jpg", blob);
+    const parseFile = new Parse.File(postPhoto.name, postPhoto);
     newPost.set("image", parseFile);
   }
 
