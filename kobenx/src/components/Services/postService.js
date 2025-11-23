@@ -34,6 +34,15 @@ export async function createPost({
     newPost.set("eventCategory", category ? category : "Other");
     newPost.set("eventPlace", location ? location : "TBD");
   }
+  //Cloud function before saving (validating input)
+  
+  
+
   // Save the post
-  return await newPost.save();
+  try {
+    return await newPost.save();
+  } catch (error) {
+    console.error("Error saving post:", error);
+    throw error; // important! re-throw so frontend can catch
+  }
 }

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./UserDisplay.css";
 import Avatar from "./Avatar";
 
-export default function UserDisplay({ userInfo, userInfoParse, time }) {
+export default function UserDisplay({ userInfoParse, time }) {
   if (userInfoParse) {
     const profilePic = userInfoParse ? userInfoParse.get("profilePicture") : null;
     const profilePicUrl = profilePic ? profilePic?.url?.() : null;
@@ -54,7 +54,7 @@ export default function UserDisplay({ userInfo, userInfoParse, time }) {
             </p>
             <div className="tag"> {timeSinceMoved()} </div>{" "}
             {/* How long the user has lived in CPH */}
-            <p className="subtle">• {time}</p> {/* Timestamp */}
+            {time && (<p className="subtle">• {time}</p>)} {/* Timestamp */}
           </div>
 
           <p className="subtle">
@@ -65,22 +65,5 @@ export default function UserDisplay({ userInfo, userInfoParse, time }) {
         </div>
       </div>
     );
-  } else {
-    return (
-      <div className="user_display">
-        <Avatar src={userInfo.image} alt={userInfo.name} />
-        <div className="column">
-          <div className="row">
-            <p className="username"> {userInfo.name}</p> {/* User name */}
-            <div className="tag"> {userInfo.yr}</div>{" "}
-            {/* How long the user has lived in CPH */}
-            <p className="subtle">• {userInfo.timeUploaded}</p>{" "}
-            {/* Timestamp */}
-          </div>
-
-          <p className="subtle">{userInfo.bio}</p>
-        </div>
-      </div>
-    );
-  }
+  } 
 }

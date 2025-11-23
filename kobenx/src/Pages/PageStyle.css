@@ -273,3 +273,37 @@
     padding: 0;
     cursor: pointer;
 }
+
+.profile-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.error-message {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: 0px;
+    margin-bottom: 2px;
+}
+.success-message {
+    color: rgb(1, 158, 56);
+    font-size: 0.875rem;
+    margin-top: 0px;
+    margin-bottom: 2px;
+}
+
+.column-layout {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 32px;
+    justify-content: flex-start;
+}
+.row-layout {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 16px;
+    justify-content: flex-start;
+}

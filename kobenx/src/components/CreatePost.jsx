@@ -32,25 +32,39 @@ export default function CreatePost({ isOpen, onClose }) {
   const [location, setLocation] = useState("");
   const [eventTime, setEventTime] = useState(undefined);
 
-  async function handlePostSubmit() {
-    await createPost({
-      selectedToggle,
-      postContent,
-      postPhoto,
-      postTitle,
-      category,
-      location,
-      eventTime,
-    });
+  //Ading UI for cloud function validation errors
+  const [errorMessage, setErrorMessage] = useState("");
 
-    // clear the content and close the dialog after submitting
+  //closing the dialog and resetting state
+  function handleClose() {
+    // reset state
     setPostContent("");
     setCategory("");
     setLocation("");
     setEventTime(null);
     setPostPhoto(null);
-    setSelectedToggle(toggleOptions[0]); //reset to default toggle option (or do we want to keep the last selected one?)
+    setSelectedToggle(toggleOptions[0]);
+    setErrorMessage("");
+  
+    // then call the parent onClose
     onClose();
+  }
+
+  async function handlePostSubmit() {
+    try {
+      await createPost({
+        selectedToggle,
+        postContent,
+        postPhoto,
+        postTitle,
+        category,
+        location,
+        eventTime,
+      });
+      handleClose();
+    } catch (error) {
+      setErrorMessage(error.message); // get Cloud Code error
+    }
   }
 
   //Return statements
@@ -59,13 +73,13 @@ export default function CreatePost({ isOpen, onClose }) {
   }
 
   return (
-    <div className="dialog" onClick={onClose}>
+    <div className="dialog" onClick={handleClose}>
       {/* Also closing if you click outside */}
       <div className="dialog-content" onClick={(e) => e.stopPropagation()}>
         {/* Prevent closing when clicking inside the dialog content area */}
         <div className="dialog-header">
           <h2 className="dialog-title">Create Post</h2>
-          <CloseIcon className="close-button" onClick={onClose}></CloseIcon>
+          <CloseIcon className="close-button" onClick={handleClose}></CloseIcon>
         </div>
 
         <ToggleButtonGroup
@@ -73,6 +87,7 @@ export default function CreatePost({ isOpen, onClose }) {
           onToggleChange={setSelectedToggle}
           firstSelected={selectedToggle}
         />
+        {errorMessage && <div className="error-message">{errorMessage}</div>}
         {/* rendering different inputs based on selected toggle button*/}
         {selectedToggle == "Event" ? (
           <div className="input-container">
@@ -127,17 +142,6 @@ export default function CreatePost({ isOpen, onClose }) {
                 style={{ width: 200, marginTop: 10 }}
               />
             )}
-
-            <div className="dev-description">
-              {" "}
-              Do we want just buttons or also have a textfield like in figma??{" "}
-            </div>
-            <TextField
-              placeholderText="What's on your mind?"
-              value={postContent} // <-- pass the parent state
-              onChange={setPostContent} // <-- update parent state
-              onPhotoChange={setPostPhoto}
-            />
           </div>
         ) : null}
 
