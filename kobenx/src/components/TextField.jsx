@@ -1,54 +1,60 @@
 import React, { useState } from "react";
-import "./TextField.css"
-import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
-import EmojiEmotionsOutlinedIcon from '@mui/icons-material/EmojiEmotionsOutlined';
-import LinkOutlinedIcon from '@mui/icons-material/LinkOutlined';
+import "./TextField.css";
+import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternateOutlined";
+import EmojiEmotionsOutlinedIcon from "@mui/icons-material/EmojiEmotionsOutlined";
+import LinkOutlinedIcon from "@mui/icons-material/LinkOutlined";
+import FileUpload from "./Services/uploadService";
 
-//Temporary image upload functionality until implemented with file upload
-import sampleImage from "../assets/bike.jpg";
-
-
-export default function TextField({placeholderText, onChange, onPhotoChange}) {
-    const [userInput, setUserInput] = useState("");
-    const [inputPhoto, setInputPhoto] = useState(null); // not yet implemented
-    const [externalLink, setExternalLink] = useState(null); // not yet implemented
-
-   
-
+//Updated to make the parent fully control the component, (fixing bug with input and post content not syncing properly)
+export default function TextField({
+    placeholderText,
+    value,        
+    onChange,
+    onPhotoChange,
+  }) {
+    const [inputPhoto, setInputPhoto] = useState(null);
+    const fileUploadRef = React.useRef(null);
+  
     const handleChange = (e) => {
-        const value = e.target.value;
-        onChange?.(value); // let parent know of change (if provided)
-      };
-
+      const val = e.target.value;
+      onChange?.(val);
+    };
+  
     const handleAddPhoto = () => {
-        setInputPhoto(sampleImage);
-        onPhotoChange?.(sampleImage); 
-     };
-
-     const handleRemovePhoto = () => {
-        setInputPhoto(null);
-        onPhotoChange?.(sampleImage); 
-     };
-
-
-    
-    return(
-        <>
-        <div className="comment-box">
-        <textarea type="text" className="naked" placeholder= {placeholderText} onChange={handleChange}/>
-        {inputPhoto && <img src={inputPhoto} className="photo" onClick={handleRemovePhoto}></img>}  {/*TEMPORARY: removing the image when you click on it, add later a delete button or something*/}
-        <div className="icon-container">  {/* Actions not ready yet */}
-            <AddPhotoAlternateOutlinedIcon onClick={handleAddPhoto}/> 
-            <EmojiEmotionsOutlinedIcon/>
-            <LinkOutlinedIcon/>
-        </div> 
-
-        
-
-
-
+      fileUploadRef.current?.triggerSelect();
+    };
+  
+    return (
+      <div className="comment-box">
+        <textarea
+          className="naked"
+          placeholder={placeholderText}
+          value={value}   // controlled by parent
+          onChange={handleChange}
+        />
+  
+        {inputPhoto && (
+          <img
+            src={URL.createObjectURL(inputPhoto)}
+            className="photo"
+            onClick={() => setInputPhoto(null)}
+          />
+        )}
+  
+        <div className="icon-container">
+          <AddPhotoAlternateOutlinedIcon className="icon" onClick={handleAddPhoto} />
+          <EmojiEmotionsOutlinedIcon className="icon--disabled" />
+          <LinkOutlinedIcon className="icon--disabled"/>
         </div>
-        </>
-
-    )
-}
+  
+        <FileUpload
+          ref={fileUploadRef}
+          onSelect={(file) => {
+            setInputPhoto(file);
+            onPhotoChange?.(file);
+          }}
+        />
+      </div>
+    );
+  }
+  

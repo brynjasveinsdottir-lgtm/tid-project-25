@@ -66,6 +66,7 @@ export default function Home() {
           </p>
     
           <Button onClick={() => setOpenCreatePost(true)}>Create Post</Button>
+        
     
           <CreatePost
             isOpen={openCreatePost}

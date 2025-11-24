@@ -12,6 +12,7 @@ import AddLinkIcon from "@mui/icons-material/AddLink";
 
 //import services
 import { createPost } from "./Services/postService";
+import FileUpload from "./Services/uploadService";
 
 // The CreatePost component (dialog with the inputs for creating a post)
 export default function CreatePost({ isOpen, onClose }) {
@@ -22,31 +23,48 @@ export default function CreatePost({ isOpen, onClose }) {
   const [postContent, setPostContent] = useState("");
   const [postPhoto, setPostPhoto] = useState(null);
 
+  //For file upload
+  const fileUploadRef = React.useRef(null);
+
   //content for events
   const [postTitle, setPostTitle] = useState("");
   const [category, setCategory] = useState("");
   const [location, setLocation] = useState("");
-  const [eventTime, setEventTime] = useState(null);
+  const [eventTime, setEventTime] = useState(undefined);
 
-  async function handlePostSubmit() {
-    await createPost({
-      selectedToggle,
-      postContent,
-      postPhoto,
-      postTitle,
-      category,
-      location,
-      eventTime,
-    });
+  //Ading UI for cloud function validation errors
+  const [errorMessage, setErrorMessage] = useState("");
 
-    // clear the content and close the dialog after submitting
+  //closing the dialog and resetting state
+  function handleClose() {
+    // reset state
     setPostContent("");
     setCategory("");
     setLocation("");
     setEventTime(null);
     setPostPhoto(null);
-    setSelectedToggle(toggleOptions[0]); //reset to default toggle option (or do we want to keep the last selected one?)
+    setSelectedToggle(toggleOptions[0]);
+    setErrorMessage("");
+  
+    // then call the parent onClose
     onClose();
+  }
+
+  async function handlePostSubmit() {
+    try {
+      await createPost({
+        selectedToggle,
+        postContent,
+        postPhoto,
+        postTitle,
+        category,
+        location,
+        eventTime,
+      });
+      handleClose();
+    } catch (error) {
+      setErrorMessage(error.message); // get Cloud Code error
+    }
   }
 
   //Return statements
@@ -55,13 +73,13 @@ export default function CreatePost({ isOpen, onClose }) {
   }
 
   return (
-    <div className="dialog" onClick={onClose}>
+    <div className="dialog" onClick={handleClose}>
       {/* Also closing if you click outside */}
       <div className="dialog-content" onClick={(e) => e.stopPropagation()}>
         {/* Prevent closing when clicking inside the dialog content area */}
         <div className="dialog-header">
           <h2 className="dialog-title">Create Post</h2>
-          <CloseIcon className="close-button" onClick={onClose}></CloseIcon>
+          <CloseIcon className="close-button" onClick={handleClose}></CloseIcon>
         </div>
 
         <ToggleButtonGroup
@@ -69,6 +87,7 @@ export default function CreatePost({ isOpen, onClose }) {
           onToggleChange={setSelectedToggle}
           firstSelected={selectedToggle}
         />
+        {errorMessage && <div className="error-message">{errorMessage}</div>}
         {/* rendering different inputs based on selected toggle button*/}
         {selectedToggle == "Event" ? (
           <div className="input-container">
@@ -101,27 +120,28 @@ export default function CreatePost({ isOpen, onClose }) {
               type="datetime-local"
               value={eventTime}
               onChange={(e) => setEventTime(e.target.value)}
-              required
             />
             <div className="button-dock">
               {" "}
-              <Button variant="secondary">
+              <Button
+                variant="secondary"
+                onClick={() => fileUploadRef.current?.triggerSelect()}
+              >
                 <AddPhotoAlternateIcon /> Add Photo
               </Button>
+              <FileUpload ref={fileUploadRef} onSelect={setPostPhoto} />
               <Button variant="secondary">
                 <AddLinkIcon /> Add Signup Link
               </Button>
             </div>
 
-            <div className="dev-description">
-              {" "}
-              Do we want just buttons or also have a textfield like in figma??{" "}
-            </div>
-            <TextField
-              placeholderText="What's on your mind?"
-              onChange={(text) => setPostContent(text)}
-              onPhotoChange={(photo) => setPostPhoto(photo)}
-            />
+            {postPhoto && (
+              <img
+                src={URL.createObjectURL(postPhoto)}
+                alt="preview"
+                style={{ width: 200, marginTop: 10 }}
+              />
+            )}
           </div>
         ) : null}
 
@@ -129,7 +149,7 @@ export default function CreatePost({ isOpen, onClose }) {
           <TextField
             placeholderText="What's on your mind?"
             onChange={(text) => setPostContent(text)}
-            onPhotoChange={(photo) => setPostPhoto(photo)}
+            onPhotoChange={setPostPhoto}
           />
         ) : null}
 

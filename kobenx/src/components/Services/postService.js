@@ -21,11 +21,9 @@ export async function createPost({
   newPost.set("author", userPublic);
   newPost.set("postTitle", postTitle);
 
-  // Attach image if provided
+  // Attach image if provided (now it should be a File object)
   if (postPhoto) {
-    const response = await fetch(postPhoto);
-    const blob = await response.blob();
-    const parseFile = new Parse.File("upload.jpg", blob);
+    const parseFile = new Parse.File(postPhoto.name, postPhoto);
     newPost.set("image", parseFile);
   }
 
@@ -36,6 +34,15 @@ export async function createPost({
     newPost.set("eventCategory", category ? category : "Other");
     newPost.set("eventPlace", location ? location : "TBD");
   }
+  //Cloud function before saving (validating input)
+  
+  
+
   // Save the post
-  return await newPost.save();
+  try {
+    return await newPost.save();
+  } catch (error) {
+    console.error("Error saving post:", error);
+    throw error; // important! re-throw so frontend can catch
+  }
 }
