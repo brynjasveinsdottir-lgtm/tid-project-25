@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import Parse from "parse";
 import TextField from "./TextField";
+import Button from "./Button";
 import { getUserPublic } from "./Services/userService.js";
+
+import "./AddComment.css";
+
 
 
 export default function AddComment({ post, onCommentAdded }) {
@@ -30,16 +34,23 @@ export default function AddComment({ post, onCommentAdded }) {
   }
 
   
-    return (
-      <div className="add-comment">
-        <TextField
-          placeholderText="Write a comment..."
-          onChange={setText}
-        />
-  
-        <button className="comment-btn" onClick={handleSubmit}>
-          Add comment
-        </button>
-      </div>
-    );
-  }
+  return (
+    <div className="add-comment">
+      <TextField
+        placeholderText="Write a comment..."
+        onChange={setText}  
+        value={text} 
+      />
+
+      <Button
+        type="button"
+        variant="primary"
+        isRounded
+        isBlock
+        onClick={handleSubmit}
+      >
+        Add comment
+      </Button>
+    </div>
+  );
+}
