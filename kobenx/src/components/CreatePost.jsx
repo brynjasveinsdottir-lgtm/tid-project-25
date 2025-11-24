@@ -150,6 +150,7 @@ export default function CreatePost({ isOpen, onClose }) {
             placeholderText="What's on your mind?"
             onChange={(text) => setPostContent(text)}
             onPhotoChange={setPostPhoto}
+            value={postContent}
           />
         ) : null}
 
@@ -166,7 +167,10 @@ export default function CreatePost({ isOpen, onClose }) {
           <Button
             disabled={
               (!postContent.trim() && selectedToggle === "Thread") ||
-              (postTitle === "" && selectedToggle === "Event") ||
+              (!postTitle.trim() && selectedToggle === "Event") ||
+              (!location.trim() && selectedToggle === "Event") ||
+              (!category.trim() && selectedToggle === "Event") ||
+              (!eventTime && selectedToggle === "Event") ||
               selectedToggle === "Place"
             } //disable for empty content or title, IMPORTANT: need to fix that when you change the toggle then the input is cleared but the variables are not!!
             variant="primary"
