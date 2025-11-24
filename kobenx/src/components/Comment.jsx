@@ -1,20 +1,18 @@
 import React from "react";
 import UserDisplay from "./UserDisplay";
-
+import { timeSincePost } from "./Services/timeService";
 import "./Comment.css";
 
 export default function Comment({ comment }) {
     const author = comment.get("author");
-
-  // For timestamp of the comment
-  const timeUploaded = new Date(comment.createdAt).toLocaleString();
+    const timeComment = timeSincePost({post: comment})
 
 
     return (
         <div className="comment">
           <UserDisplay
           userInfoParse={author}
-          time={timeUploaded}
+          time={timeComment}
            />
         
         <p className="comment-text">{comment.get("text")}</p>

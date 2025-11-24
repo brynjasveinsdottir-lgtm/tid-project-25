@@ -15,6 +15,7 @@ import "/src/assets/Manrope.ttf";
 import "/src/index.css";
 import "./PageStyle.css";
 import { getUserPublic } from "../components/Services/userService";
+import { getPosts } from "../components/Services/getService";
 
 
 export default function Home() {
@@ -47,16 +48,8 @@ export default function Home() {
 
   // Get all posts that have category 'Event' from class 'Posts' in database using Parse
   useEffect(() => {
-    async function getPosts() {
-      const Posts = Parse.Object.extend("Posts");
-      const query = new Parse.Query(Posts);
-      /* query.greaterThanOrEqualTo('eventTime', 0) */
-      query.include("author");
-      query.descending('createdAt')
-      const results = await query.find();
-      setPosts(results);
-    }
-    getPosts();
+    getPosts()
+   
     setReloadPosts(false);
   }, [reloadPosts]);
 

@@ -10,8 +10,7 @@ import FoodIcon from "@mui/icons-material/Restaurant";
 import EventIcon from "@mui/icons-material/Event";
 import UserDisplay from "./UserDisplay";
 import PostInteractions from "./PostInteractions";
-
-
+import { timeSincePost } from "./Services/timeService";
 
 const eventIcons = {
   Music: MusicIcon,
@@ -28,7 +27,8 @@ export default function Post({ post }) {
   const EventIcon = eventIcons[post.get("eventCategory")];
 
   const text = post.get("postText") ? post.get("postText") : "sorry no text";
-
+  
+  const timePost = timeSincePost({post: post})
 
   const [liked, setLiked] = useState(false);
   const [showComment, setShowComment] = useState(false);
@@ -42,35 +42,6 @@ export default function Post({ post }) {
 
   const navigate = useNavigate();
 
-
-
-  //functions
-  const timeSincePost = () => {
-    const timeDiff = (Date.now() - post.createdAt) / 1000;
-    let value, unit;
-
-    if (timeDiff < 60) {
-      value = Math.round((Date.now() - post.createdAt) / 1000);
-      unit = "second";
-    } else if (timeDiff < 3600) {
-      value = Math.round((Date.now() - post.createdAt) / (1000 * 60));
-      unit = "minute";
-    } else if (timeDiff < 86400) {
-      value = Math.round((Date.now() - post.createdAt) / (1000 * 60 * 60));
-      unit = "hour";
-    } else if (timeDiff < 2629743) {
-      value = Math.round((Date.now() - post.createdAt) / (1000 * 60 * 60 * 24));
-      unit = "day";
-    } else {
-      value = Math.round(
-        (Date.now() - post.createdAt) / (1000 * 60 * 60 * 24 * 30)
-      );
-      unit = "month";
-    }
-    const multiple = value > 1 ? "s" : "";
-    return `${value} ${unit}${multiple} ago`;
-  };
-
   //return statements
   //for event posts
   if (post.get("category") === "Event") {
@@ -81,10 +52,9 @@ export default function Post({ post }) {
       .get("eventTime")
       .toLocaleString("en-Gb", { day: "numeric", month: "short" })} at ${post
       .get("eventTime")
-      .toLocaleString("en-US", {
+      .toLocaleString("en-Gb", {
         hour: "numeric",
-        minute: "numeric",
-        hour12: false,
+        minute: "numeric"
       })}`;
 
     return (
@@ -103,7 +73,7 @@ export default function Post({ post }) {
         {postImageUrl && <img src={postImageUrl} className="card_image"></img>}
         <p className="post_info">
           {" "}
-          Posted by @{post.get("author").get("username")} • {timeSincePost()}{" "}
+          Posted by @{post.get("author").get("username")} • {timePost}{" "}
         </p>
       </article>
     );
@@ -111,7 +81,7 @@ export default function Post({ post }) {
 
   return (
     <article className="card"onClick={() => navigate(`/threadOpen/${post.id}`)}>
-      <UserDisplay userInfoParse={post.get("author")} time={timeSincePost()} />
+      <UserDisplay userInfoParse={post.get("author")} time={timePost} />
       <p className="threadText">{text}</p>
       {postImageUrl && <img src={postImageUrl} className="card_image"></img>}
 

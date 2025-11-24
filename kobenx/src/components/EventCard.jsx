@@ -12,6 +12,7 @@ import Music0 from '/src/assets/Music0.png'
 import Music1 from '/src/assets/Music1.png'
 import Music2 from '/src/assets/Music2.png'
 import EventSignupButton from "./EventSignupButton"
+import { timeSincePost } from "./Services/timeService"
 
 
 const eventIcons = {
@@ -30,6 +31,8 @@ const plImages ={
 
 export default function EventCard({ event }) {
     
+    const timePost = timeSincePost({post: event})
+
   const [signups, listSignups] = useState([]);
 
   useEffect(() => {
@@ -71,27 +74,6 @@ export default function EventCard({ event }) {
       minute: "numeric",
     })}`;
 
-    const timeSincePost = () => {
-        const timeDiff = (Date.now() - event.createdAt) / 1000;
-        let value, unit;
-
-        if (timeDiff < 60) {
-        value = Math.round((Date.now() - event.createdAt) / 1000);
-        unit = "s";
-        } else if (timeDiff < 3600) {
-        value = Math.round((Date.now() - event.createdAt) / (1000 * 60));
-        unit = "m";
-        } else if (timeDiff < 86400) {
-        value = Math.round((Date.now() - event.createdAt) / (1000 * 60 * 60));
-        unit = "h";
-        } else {
-        value = event.get('eventTime').toLocaleString("en-Gb", { day: "numeric", month: "short" })
-        unit = ''
-        }
-
-        return `${value}${unit}`;
-    };
-
     const signupCount = () => {
         const count = signups.length
 
@@ -125,7 +107,7 @@ export default function EventCard({ event }) {
         <div className="footer-container">
             <p className="post_info">
                 {" "}
-                Posted by @{event.get("author").get("username")} • {timeSincePost()}{" "}
+                Posted by @{event.get("author").get("username")} • {timePost}{" "}
             </p>
             <div className="going-container">
                 <div className="picture-container">

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import Parse from "parse"
 import './CardStyle.css'
+import { getUserPublic } from "./Services/userService"
 
 
 export default function EventSignupButton({ event }) {
@@ -12,9 +13,7 @@ export default function EventSignupButton({ event }) {
         const Signups = Parse.Object.extend('Signups')
         const UserPublic = Parse.Object.extend('UserPublic')
 
-        const userQuery = new Parse.Query(UserPublic)
-        userQuery.equalTo('userIdPrivate', Parse.User.current())
-        const publicUser = await userQuery.first()
+        const publicUser = await getUserPublic()
 
         alert(event)
         
