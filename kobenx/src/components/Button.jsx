@@ -9,6 +9,7 @@ export default function Button({
   disabled = false,
   onClick,
   children,
+  className = '',
   ...props
 }) {
   // Define button classes based on variant and selection state e.g. [button, button--primary, button--primary--selected]
@@ -18,6 +19,7 @@ export default function Button({
     isRounded ? "button--rounded" : "",
     isBlock ? "button--isBlock" : "",
     isSelected ? `button--${variant}-selected` : "",
+    className,
   ].join(" ");
 
   return (
