@@ -4,15 +4,13 @@ import './CardStyle.css'
 import { getUserPublic } from "./Services/userService"
 
 
-export default function EventSignupButton({ event }) {
+export default function EventSignupButton({ event, refreshSignups }) {
 
     const [isSignedUp, setIsSignedUp] = useState(false)
 
     async function eventSignup() {
         
         const Signups = Parse.Object.extend('Signups')
-        const UserPublic = Parse.Object.extend('UserPublic')
-
         const publicUser = await getUserPublic()
 
         alert(event)
@@ -30,6 +28,7 @@ export default function EventSignupButton({ event }) {
                     alert(error.message)
                 }
             )
+            refreshSignups()
             setIsSignedUp(true)
         } else {
             const query = new Parse.Query(Signups)
@@ -44,6 +43,7 @@ export default function EventSignupButton({ event }) {
                     alert(error.message)
                 }
             )
+            refreshSignups()
             setIsSignedUp(false)
         }
     }

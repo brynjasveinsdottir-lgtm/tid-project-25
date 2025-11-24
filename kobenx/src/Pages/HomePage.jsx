@@ -43,7 +43,7 @@ export default function Home() {
   // Get all posts that have category 'Event' from class 'Posts' in database using Parse
   useEffect(() => {
     async function fetchPosts() {
-      const results = await getPosts({type:"All"});
+      const results = await getPosts({type:'test'});
       setPosts(results);
       setReloadPosts(false); // reset reloadPosts
     }

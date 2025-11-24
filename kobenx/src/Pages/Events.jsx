@@ -5,31 +5,25 @@ import EventCard from '/src/components/EventCard.jsx'
 import '/src/assets/Manrope.ttf'
 import '/src/index.css'
 import './PageStyle.css'
+import { getPosts } from "../components/Services/getService"
 
 export default function Events() {
 
-    const [events, listEvents] = useState([])
-
+    const [posts, setPosts] = useState([]);
     // Get all posts that have category 'Event' from class 'Posts' in database using Parse
     useEffect(() => {
-        async function getPosts() {
-            const Posts = Parse.Object.extend("Posts");
-            const query = new Parse.Query(Posts);
-            query.equalTo("category", "Event");
-            query.greaterThanOrEqualTo('eventTime', new Date())
-            query.include("author");
-            query.ascending('eventTime')
-            const results = await query.find();
-            listEvents(results)
+        async function fetchPosts() {
+        const results = await getPosts({type:'Events'});
+        setPosts(results);
         }
-        getPosts()
-    }, [])
+        fetchPosts();
+    }, []);
     
     // Filter based on 'Music' and 'Food'. Will update to add more for more event categories.
-    const music = events.filter(event =>
+    const music = posts.filter(event =>
         event.get("eventCategory") === 'Music'
     );
-    const food = events.filter(event =>
+    const food = posts.filter(event =>
         event.get("eventCategory") === 'Food'
     );
 

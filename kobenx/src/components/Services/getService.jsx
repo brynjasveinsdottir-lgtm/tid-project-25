@@ -8,12 +8,28 @@ export async function getPosts({type}) {
     const query = new Parse.Query(Posts);
     query.include("author");
     query.descending('createdAt')
-    
-    const results = await query.find();   
-    if (type === 'Event') {
-        const filteredResults = results.filter(post => post.get("category") === "Event");
-        return filteredResults;
+
+    if (type === 'Events' || type === 'UpcomingEvents') {
+        query.equalTo("category", "Event");
+        query.greaterThanOrEqualTo('eventTime', new Date())
+        query.ascending('eventTime')
+    } else if (type === 'Threads'){
+        query.equalTo("category", "Thread");
     }
-    else {
-    return results};
+    
+    if (type === 'UpcomingEvents'){
+        query.limit(4);
+    }
+
+    const results = await query.find()
+    return results
+}
+
+export async function getSignups({post}) {
+    const Signups = Parse.Object.extend("Signups");
+    const query = new Parse.Query(Signups);
+    query.equalTo("post", post);
+    query.include("user");
+    const results = await query.find()
+    return results
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import Parse from "parse";
+import { getPosts } from "../components/Services/getService";
 
 import "/src/assets/Manrope.ttf";
 import "/src/index.css";
@@ -13,16 +13,11 @@ export default function Threads () {
   const [posts, setPosts] = useState([]);
  // Get all posts that have category 'Event' from class 'Posts' in database using Parse
   useEffect(() => {
-    async function getPosts() {
-      const Posts = Parse.Object.extend("Posts");
-      const query = new Parse.Query(Posts);
-      query.equalTo("category", "Thread");
-      query.include("author");
-      query.descending('createdAt')
-      const results = await query.find();
+    async function fetchPosts() {
+      const results = await getPosts({type:'Threads'});
       setPosts(results);
     }
-    getPosts();
+    fetchPosts();
   }, []);
 
 
