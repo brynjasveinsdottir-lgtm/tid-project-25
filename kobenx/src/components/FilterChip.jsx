@@ -1,27 +1,23 @@
 import React, { useState } from "react";
 import Button from "./Button";
 
-export default function FilterChip({ children, onToggle }) {
-  const [applied, setApplied] = useState(false);
+export default function FilterChip({ label, onToggle }) {
+  const [active, setActive] = useState(false);
 
-  const handleApplied = () => {
-    const newState = !applied;
-    setApplied(newState);
-
-    // Notify parent
-    if (onToggle) {
-      onToggle(children, newState);
-    }
+  const handleClick = () => {
+    const next = !active;
+    setActive(next);
+    onToggle(next); // sender kun aktiv-boolean tilbage
   };
 
   return (
     <Button
       variant="secondary"
-      onClick={handleApplied}
-      isSelected={applied}
       isRounded={true}
+      isSelected={active}
+      onClick={handleClick}
     >
-      {children}
+      {label}
     </Button>
   );
 }
