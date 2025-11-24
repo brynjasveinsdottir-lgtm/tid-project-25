@@ -1,12 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import Parse from "parse";
-import PostTemplate from "../components/PostTemplate";
 import { useParams } from "react-router-dom";
 
+import PostTemplate from "../components/PostTemplate";
 import AddComment from "../components/AddComment";
-
-
+import Comment from "../components/Comment";
 
 export default function ThreadOpen() {
 
@@ -36,8 +35,8 @@ export default function ThreadOpen() {
     const Comment = Parse.Object.extend("Comments");
     const query = new Parse.Query(Comment);
     query.equalTo("post", post);
-    query.include("author"); // include UserPublic object
-    query.ascending("createdAt"); // oldest first
+    query.include("author"); 
+    query.descending("createdAt"); // descending: newest comments appear first
     const results = await query.find();
     setComments(results);
   }
@@ -49,6 +48,7 @@ export default function ThreadOpen() {
     
 
     if (!post) return
+    
 
 
     return (
@@ -58,29 +58,19 @@ export default function ThreadOpen() {
           {/* Display the post */}
           <PostTemplate post={post} />
   
-          {/* Add comment input */}
+          {/* Comment input */}
           <AddComment post={post} onCommentAdded={() => fetchComments()} />
   
           {/* Comments list */}
           <div className="comments-section">
-            <h3>Comments</h3>
-            {comments.length === 0 ? (
-              <p>No comments yet. Be the first to comment!</p>
-            ) : (
-              comments.map((comment) => (
-                <div key={comment.id} className="comment">
-                  <p>
-                    <strong>@{comment.get("author").get("username")}</strong>:{" "}
-                    {comment.get("text")}
-                  </p>
-                  <p className="comment-time">
-                    {new Date(comment.createdAt).toLocaleString()}
-                  </p>
-                </div>
-              ))
-            )}
-          </div>
+          <h3>Comments</h3>
+          {comments.length === 0 ? (
+            <p>No comments yet. Be the first to comment!</p>
+          ) : (
+            comments.map((c) => <Comment key={c.id} comment={c} />)
+          )}
         </div>
       </div>
+    </div>
     );
   }
