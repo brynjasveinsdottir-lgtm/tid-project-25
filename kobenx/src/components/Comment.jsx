@@ -12,14 +12,13 @@ export default function Comment({ comment }) {
 
     return (
         <div className="comment">
-          <div className="comment-header">
           <UserDisplay
           userInfoParse={author}
           time={timeUploaded}
            />
-        </div>
-          <p className="comment-text">{comment.get("text")}</p>
-
-        </div>
+        
+        <p className="comment-text">{comment.get("text")}</p>
+        
+    </div>
       );
     }

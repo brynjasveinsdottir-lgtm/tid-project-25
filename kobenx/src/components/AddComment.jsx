@@ -38,7 +38,7 @@ export default function AddComment({ post, onCommentAdded }) {
         />
   
         <button className="comment-btn" onClick={handleSubmit}>
-          Comment
+          Add comment
         </button>
       </div>
     );

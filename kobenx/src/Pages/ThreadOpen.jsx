@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import PostTemplate from "../components/PostTemplate";
 import AddComment from "../components/AddComment";
 import Comment from "../components/Comment";
+import "./PageStyle.css";
 
 export default function ThreadOpen() {
 
@@ -63,7 +64,6 @@ export default function ThreadOpen() {
   
           {/* Comments list */}
           <div className="comments-section">
-          <h3>Comments</h3>
           {comments.length === 0 ? (
             <p>No comments yet. Be the first to comment!</p>
           ) : (
