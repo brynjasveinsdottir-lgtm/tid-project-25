@@ -7,12 +7,14 @@ import Filters from "../components/Filters";
 import Post from "../components/PostTemplate";
 import Button from "../components/Button";
 import TrendingEvents from "../components/TrendingEvents";
+import parse from "parse";
 
 
 
 import "/src/assets/Manrope.ttf";
 import "/src/index.css";
 import "./PageStyle.css";
+import { getUserPublic } from "../components/Services/userService";
 
 
 export default function Home() {
@@ -23,8 +25,24 @@ export default function Home() {
 
   const [selectedFilters, setSelectedFilters] = useState([]);
 
-  const [openCreatePost, setOpenCreatePost] = useState(false);
+  //FILTER LOGIC
+  const filterLogic = {
+    category: (post, value) => post.get("category") === value,
 
+    new: (post) => {
+      const created = post.get("createdAt");
+      const now = new Date();
+      return (now - created) / (1000 * 60 * 60 * 24) <= 7;
+    },
+
+    popular: (post) => {
+      const likes = post.get("likes") || 0;
+      return likes >= 20;
+    }
+
+ };
+
+  const [openCreatePost, setOpenCreatePost] = useState(false);
   const [reloadPosts, setReloadPosts] = useState(false);
 
   // Get all posts that have category 'Event' from class 'Posts' in database using Parse
@@ -43,17 +61,28 @@ export default function Home() {
   }, [reloadPosts]);
 
   // Handle filter chip toggles
-  const handleFilterChange = (filterName, isApplied) => {
-    if (isApplied) {
-      setSelectedFilters([...selectedFilters, filterName]);
-    } else {
-      setSelectedFilters(selectedFilters => selectedFilters.filter((id)=> id !== filterName)); // if unselected, clear filter
-    }
-  };
+  function handleFilterChange(filterObj, isActive) {
+    setSelectedFilters((prev) => {
+      if (isActive) {
+        return [...prev, filterObj];
+      } else {
+        return prev.filter(
+          (f) =>
+            !(f.type === filterObj.type && f.value === filterObj.value)
+        );
+      }
+    });
+  }
 
-  const filteredPosts = selectedFilters.length > 0
-    ? posts.filter((post) => selectedFilters.includes(post.get("category")))
-    : posts;
+ const filteredPosts =
+    selectedFilters.length > 0
+      ? posts.filter((post) =>
+          selectedFilters.every((filter) => {
+            const fn = filterLogic[filter.type];
+            return fn ? fn(post, filter.value) : false;
+          })
+        )
+      : posts;
 
     return (
       <div className="home-layout">
@@ -75,7 +104,7 @@ export default function Home() {
     
           <p className="dev-description">
             -- The part below this is primarly for testing new posts appearing in
-            feed and a filter function ---
+            feed and a filter function --- 
           </p>
     
           <Filters filterList={filters} onFilterChange={handleFilterChange} />

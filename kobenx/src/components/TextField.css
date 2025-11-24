@@ -8,6 +8,8 @@ textarea {
     min-height: 32px;
     resize: none;
     field-sizing: content;
+    box-sizing: border-box;
+
 }
 
 textarea.naked {
@@ -24,13 +26,12 @@ textarea.naked:focus {
 }
 
 .comment-box {
-    width: stretch;
-    max-width: 40vw;
-    height: inherit;
+    width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
+    box-sizing: border-box;
 }
 .comment-box:has(textarea.naked:focus) {
 
