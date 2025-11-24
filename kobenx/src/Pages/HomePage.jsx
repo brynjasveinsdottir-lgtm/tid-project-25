@@ -21,7 +21,7 @@ export default function Home() {
   const filters = ["Event", "Thread", "Place", "Popular", "New"];
   const [posts, setPosts] = useState([]);
 
-  const [selectedFilter, setSelectedFilter] = useState(null);
+  const [selectedFilters, setSelectedFilters] = useState([]);
 
   const [openCreatePost, setOpenCreatePost] = useState(false);
 
@@ -45,14 +45,14 @@ export default function Home() {
   // Handle filter chip toggles
   const handleFilterChange = (filterName, isApplied) => {
     if (isApplied) {
-      setSelectedFilter(filterName);
+      setSelectedFilters([...selectedFilters, filterName]);
     } else {
-      setSelectedFilter(null); // if unselected, clear filter
+      setSelectedFilters(selectedFilters => selectedFilters.filter((id)=> id !== filterName)); // if unselected, clear filter
     }
   };
 
-  const filteredPosts = selectedFilter
-    ? posts.filter((post) => post.get("category") === selectedFilter)
+  const filteredPosts = selectedFilters.length > 0
+    ? posts.filter((post) => selectedFilters.includes(post.get("category")))
     : posts;
 
     return (
