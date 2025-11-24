@@ -9,18 +9,13 @@ import Button from "../components/Button";
 import TrendingEvents from "../components/TrendingEvents";
 import parse from "parse";
 
-
-
 import "/src/assets/Manrope.ttf";
 import "/src/index.css";
 import "./PageStyle.css";
 import { getUserPublic } from "../components/Services/userService";
 import { getPosts } from "../components/Services/getService";
 
-
 export default function Home() {
-
-
   const filters = ["Event", "Thread", "Place", "Popular", "New"];
   const [posts, setPosts] = useState([]);
 
@@ -39,18 +34,20 @@ export default function Home() {
     popular: (post) => {
       const likes = post.get("likes") || 0;
       return likes >= 20;
-    }
-
- };
+    },
+  };
 
   const [openCreatePost, setOpenCreatePost] = useState(false);
-  const [reloadPosts, setReloadPosts] = useState(false);
+  const [reloadPosts, setReloadPosts] = useState(true);
 
   // Get all posts that have category 'Event' from class 'Posts' in database using Parse
   useEffect(() => {
-    getPosts()
-   
-    setReloadPosts(false);
+    async function fetchPosts() {
+      const results = await getPosts();
+      setPosts(results);
+      setReloadPosts(false); // reset reloadPosts
+    }
+    fetchPosts();
   }, [reloadPosts]);
 
   // Handle filter chip toggles
@@ -60,14 +57,13 @@ export default function Home() {
         return [...prev, filterObj];
       } else {
         return prev.filter(
-          (f) =>
-            !(f.type === filterObj.type && f.value === filterObj.value)
+          (f) => !(f.type === filterObj.type && f.value === filterObj.value)
         );
       }
     });
   }
 
- const filteredPosts =
+  const filteredPosts =
     selectedFilters.length > 0
       ? posts.filter((post) =>
           selectedFilters.every((filter) => {
@@ -77,46 +73,45 @@ export default function Home() {
         )
       : posts;
 
-    return (
-      <div className="home-layout">
-        {/* LEFT COLUMN: feed */}
-        <div className="home-left">
-          <h1 className="page-title">Home</h1>
-          <p className="dev-description">
-            -- Click this button to open a dialog to create a new post (this will be
-            replaced by a simple textField later to match design)---
-          </p>
-    
-          <Button onClick={() => setOpenCreatePost(true)}>Create Post</Button>
-        
-    
-          <CreatePost
-            isOpen={openCreatePost}
-            onClose={() => { setOpenCreatePost(false); setReloadPosts(true); }}
-          />
-    
-          <p className="dev-description">
-            -- The part below this is primarly for testing new posts appearing in
-            feed and a filter function --- 
-          </p>
-    
-          <Filters filterList={filters} onFilterChange={handleFilterChange} />
-    
-          <div className="postContainer">
-            {filteredPosts.map((post) => (
-              <Post key={post.id} post={post} />
-            ))}
-          </div>
+  return (
+    <div className="home-layout">
+      {/* LEFT COLUMN: feed */}
+      <div className="home-left">
+        <h1 className="page-title">Home</h1>
+        <p className="dev-description">
+          -- Click this button to open a dialog to create a new post (this will
+          be replaced by a simple textField later to match design)---
+        </p>
+
+        <Button onClick={() => setOpenCreatePost(true)}>Create Post</Button>
+
+        <CreatePost
+          isOpen={openCreatePost}
+          onClose={() => {
+            setOpenCreatePost(false);
+            setReloadPosts(true);
+          }}
+        />
+
+        <p className="dev-description">
+          -- The part below this is primarly for testing new posts appearing in
+          feed and a filter function ---
+        </p>
+
+        <Filters filterList={filters} onFilterChange={handleFilterChange} />
+
+        <div className="postContainer">
+          {filteredPosts.map((post) => (
+            <Post key={post.id} post={post} />
+          ))}
         </div>
-    
-        {/* RIGHT COLUMN: trending events */}
-        <aside className="home-right">
-          <TrendingEvents />
-          {/* here we will add Trending Topics eventually /> */}
-        </aside>
       </div>
-    );
+
+      {/* RIGHT COLUMN: trending events */}
+      <aside className="home-right">
+        <TrendingEvents />
+        {/* here we will add Trending Topics eventually /> */}
+      </aside>
+    </div>
+  );
 }
-
-
-
