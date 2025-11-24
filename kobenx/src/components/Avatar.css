@@ -3,7 +3,9 @@
     height: 50px;
     border-radius: 999px;
     object-fit: cover;
+    overflow: hidden;
 }
+
 .fallback {
     background-color: rgb(226, 226, 226);
     align-content: center;
