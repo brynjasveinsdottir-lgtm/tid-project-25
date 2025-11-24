@@ -135,3 +135,35 @@
   align-items: center;
   width: 100%;
 }
+
+.date-signup {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+
+.event-signup-button {
+  display: flex;
+  height: 100%;
+  width: 5rem;
+  font-size: 1rem;
+  padding: 0;
+  margin: 0;
+  margin-left: auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.event-signup-button:hover {
+  opacity: .75;
+}
+
+.not-signed-up {
+  background: #C6C6C6;
+}
+
+.signed-up {
+  background: red;
+}

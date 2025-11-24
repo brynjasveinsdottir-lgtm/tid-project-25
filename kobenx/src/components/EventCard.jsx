@@ -11,6 +11,7 @@ import Food2 from '/src/assets/Food2.png'
 import Music0 from '/src/assets/Music0.png'
 import Music1 from '/src/assets/Music1.png'
 import Music2 from '/src/assets/Music2.png'
+import EventSignupButton from "./EventSignupButton"
 
 
 const eventIcons = {
@@ -70,37 +71,6 @@ export default function EventCard({ event }) {
       minute: "numeric",
     })}`;
 
-  // Calculating timeSincePosted for the event card and gives it a proper unit
-  /*
-    const timeSincePost = () => {
-        const timeDiff = (Date.now() - event.createdAt) / 1000;
-        let value, unit;
-
-        if (timeDiff < 60) {
-        value = Math.round((Date.now() - event.createdAt) / 1000);
-        unit = "second";
-        } else if (timeDiff < 3600) {
-        value = Math.round((Date.now() - event.createdAt) / (1000 * 60));
-        unit = "minute";
-        } else if (timeDiff < 86400) {
-        value = Math.round((Date.now() - event.createdAt) / (1000 * 60 * 60));
-        unit = "hour";
-        } else if (timeDiff < 2629743) {
-        value = Math.round(
-            (Date.now() - event.createdAt) / (1000 * 60 * 60 * 24)
-        );
-        unit = "day";
-        } else {
-        value = Math.round(
-            (Date.now() - event.createdAt) / (1000 * 60 * 60 * 24 * 30)
-        );
-        unit = "month";
-        }
-        const multiple = value > 1 ? "s" : "";
-        return `${value} ${unit}${multiple} ago`;
-    };
-    */
-
     const timeSincePost = () => {
         const timeDiff = (Date.now() - event.createdAt) / 1000;
         let value, unit;
@@ -146,7 +116,10 @@ export default function EventCard({ event }) {
             {event.get("postTitle")}
         </h1>
         </header>
-        <p className="date_time"> {eventTime} </p>
+        <div className='date-signup'>
+            <p className="date_time"> {eventTime} </p>
+            <EventSignupButton />
+        </div>
         <p className="location"> {event.get("eventPlace")} </p>
         <img src={eventImageUrl} className="card_image"></img>
         <div className="footer-container">
