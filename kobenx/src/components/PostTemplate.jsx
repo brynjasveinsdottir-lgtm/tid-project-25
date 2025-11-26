@@ -24,7 +24,7 @@ export default function Post({ post }) {
   const postImage = post.get("image") ? post.get("image") : null;
   const postImageUrl = postImage ? postImage.url() : null;
 
-  const EventIcon = eventIcons[post.get("eventCategory")];
+  const EventIcon = eventIcons[post.get("eventCategory")?post.get("eventCategory"):"Other"];
 
   const text = post.get("postText") ? post.get("postText") : "sorry no text";
   
