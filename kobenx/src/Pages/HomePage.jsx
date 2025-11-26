@@ -15,6 +15,9 @@ import "./PageStyle.css";
 import { getUserPublic } from "../components/Services/userService";
 import { getPosts } from "../components/Services/getService";
 
+//new dialog test
+import Dialog from "../components/Dialog";
+
 export default function Home() {
   const filters = ["Event", "Thread", "Place", "Popular", "New"];
   const [posts, setPosts] = useState([]);
@@ -38,12 +41,13 @@ export default function Home() {
   };
 
   const [openCreatePost, setOpenCreatePost] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
   const [reloadPosts, setReloadPosts] = useState(true);
 
   // Get all posts that have category 'Event' from class 'Posts' in database using Parse
   useEffect(() => {
     async function fetchPosts() {
-      const results = await getPosts({type:"All"});
+      const results = await getPosts({ type: "All" });
       setPosts(results);
       setReloadPosts(false); // reset reloadPosts
     }
@@ -83,15 +87,24 @@ export default function Home() {
           be replaced by a simple textField later to match design)---
         </p>
 
-        <Button onClick={() => setOpenCreatePost(true)}>Create Post</Button>
+  
+        <Button onClick={() => setOpenDialog(true)}>Create new post</Button>
 
-        <CreatePost
-          isOpen={openCreatePost}
+        <Dialog
+          isOpen={openDialog}
+          isDismissible
+          title="Create post"
           onClose={() => {
-            setOpenCreatePost(false);
-            setReloadPosts(true);
+            setOpenDialog(false);
           }}
-        />
+        >
+          <CreatePost
+            onClose={() => {
+              setOpenDialog(false);
+              setReloadPosts(true);
+            }}
+          ></CreatePost>
+        </Dialog>
 
         <p className="dev-description">
           -- The part below this is primarly for testing new posts appearing in
