@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 
 import PostTemplate from "../components/PostTemplate";
 import AddComment from "../components/AddComment";
-import Comment from "../components/Comment";
+import CommentList from "../components/CommentList";
 import "./PageStyle.css";
 
 export default function ThreadOpen() {
@@ -48,7 +48,7 @@ export default function ThreadOpen() {
   }, [post]);
     
 
-    if (!post) return
+    if (!post) return null
     
 
 
@@ -60,16 +60,10 @@ export default function ThreadOpen() {
           <PostTemplate post={post} />
   
           {/* Comment input */}
-          <AddComment post={post} onCommentAdded={() => fetchComments()} />
+        
+          <AddComment post={post} onCommentAdded={fetchComments} />
+          <CommentList comments={comments} />
   
-          {/* Comments list */}
-          <div className="comments-section">
-          {comments.length === 0 ? (
-            <p>No comments yet. Be the first to comment!</p>
-          ) : (
-            comments.map((c) => <Comment key={c.id} comment={c} />)
-          )}
-        </div>
       </div>
     </div>
     );

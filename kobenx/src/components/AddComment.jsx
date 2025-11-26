@@ -35,7 +35,7 @@ export default function AddComment({ post, onCommentAdded }) {
 
   
   return (
-    <div className="add-comment">
+    <div>
       <TextField
         placeholderText="Write a comment..."
         onChange={setText}  
