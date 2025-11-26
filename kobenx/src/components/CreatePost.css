@@ -9,7 +9,6 @@
 
 }
 
-
 input{
     padding: 10px;
     border: 1px solid #ccc;
@@ -34,6 +33,12 @@ input:focus {
     align-items: start;
     position: relative;
     overflow: visible;
+}
+.form-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 select {
     padding: 10px;

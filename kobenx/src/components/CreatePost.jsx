@@ -1,49 +1,53 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./CreatePost.css";
 
-//importing components
+// Components
 import ToggleButtonGroup from "../components/ToggleButtonGroup";
 import TextField from "./TextField";
 import Button from "./Button";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import AddLinkIcon from "@mui/icons-material/AddLink";
 
-//import services
+// Services
 import { createPost } from "./Services/postService";
 import FileUpload from "./Services/uploadService";
 
-// The CreatePost component (dialog with the inputs for creating a post)
-export default function CreatePost({onClose }) {
-  const toggleOptions = ["Thread", "Event", "Place"]; //options for the toggle button group (post types or "category" in the database)
-  const [selectedToggle, setSelectedToggle] = useState(toggleOptions[0]); //default to first option "Thread" (maybe this could be different if you post from the events page - if we want to support that)
-  //content for threads
+export default function CreatePost({ onClose }) {
+  const toggleOptions = ["Thread", "Event", "Place"];
+  const [selectedToggle, setSelectedToggle] = useState(toggleOptions[0]);
+
+  // Thread state
   const [postContent, setPostContent] = useState("");
   const [postPhoto, setPostPhoto] = useState(null);
 
-  //For file upload
-  const fileUploadRef = React.useRef(null);
-
-  //content for events
+  // Event state
   const [postTitle, setPostTitle] = useState("");
   const [category, setCategory] = useState("");
   const [location, setLocation] = useState("");
-  const [eventTime, setEventTime] = useState(undefined);
+  const [eventTime, setEventTime] = useState("");
 
-  //Ading UI for cloud function validation errors
+  // UI state
   const [errorMessage, setErrorMessage] = useState("");
+  const fileUploadRef = useRef(null);
 
-  //closing the dialog and resetting state
+  const validators = {
+    Thread: () => !!postContent.trim(),
+    Event: () =>
+      !!postTitle.trim() &&
+      !!location.trim() &&
+      !!category.trim() &&
+      !!eventTime,
+    Place: () => false,
+  };
+
   function handleClose() {
-    // reset state
     setPostContent("");
     setCategory("");
     setLocation("");
-    setEventTime(null);
+    setEventTime("");
     setPostPhoto(null);
     setSelectedToggle(toggleOptions[0]);
     setErrorMessage("");
-
-    // then call the parent onClose
     onClose();
   }
 
@@ -60,110 +64,130 @@ export default function CreatePost({onClose }) {
       });
       handleClose();
     } catch (error) {
-      setErrorMessage(error.message); // get Cloud Code error
+      setErrorMessage(error.message);
     }
   }
 
+  // Helper to render forms based on selectedToggle
+  const renderForm = () => {
+    switch (selectedToggle) {
+      case "Thread":
+        return (
+          <TextField
+            placeholderText="What's on your mind?"
+            onChange={setPostContent}
+            onPhotoChange={setPostPhoto}
+            value={postContent}
+          />
+        );
+
+      case "Event":
+        return (
+          <div className="input-container">
+            <input
+              type="text"
+              placeholder="Event Title"
+              onChange={(e) => setPostTitle(e.target.value)}
+              value={postTitle}
+              required
+            />
+            <select
+              onChange={(e) => setCategory(e.target.value)}
+              value={category}
+              required
+            >
+              <option value="">Select category</option>
+              <option value="Music">Music</option>
+              <option value="Food">Food</option>
+              <option disabled value="Other">
+                Other
+              </option>
+            </select>
+            <select
+              onChange={(e) => setLocation(e.target.value)}
+              value={location}
+              required
+            >
+              <option value="">Select location</option>
+              <option value="Tivoli">Tivoli Gardens</option>
+              <option value="Nyhavn">Nyhavn</option>
+              <option value="Refshaleøen">Refshaleøen</option>
+              <option value="Nørrebrogade">Nørrebrogade</option>
+              <option value="Nørrebro market">Nørrebro market</option>
+              <option value="Other">Other</option>
+            </select>
+            <input
+              type="datetime-local"
+              value={eventTime}
+              onChange={(e) => setEventTime(e.target.value)}
+            />
+
+            <div className="button-dock">
+              <Button
+                variant="secondary"
+                onClick={() => fileUploadRef.current?.triggerSelect()}
+              >
+                <AddPhotoAlternateIcon /> Add Photo
+              </Button>
+              <FileUpload ref={fileUploadRef} onSelect={setPostPhoto} />
+              <Button variant="secondary">
+                <AddLinkIcon /> Add Signup Link
+              </Button>
+            </div>
+
+            {postPhoto && (
+              <img
+                src={URL.createObjectURL(postPhoto)}
+                alt="preview"
+                style={{ width: 200, marginTop: 10 }}
+              />
+            )}
+          </div>
+        );
+
+      case "Place":
+        return (
+          <div className="input-container">
+            <input type="text" placeholder="Place Name" />
+            <p className="dev-description">
+              -- Sorry we do not support this yet --
+            </p>
+          </div>
+        );
+
+      default:
+        return null;
+    }
+  };
+
   return (
-    <div className= "dialog-content">
+    <div className="dialog-content">
       <ToggleButtonGroup
         buttonList={toggleOptions}
         onToggleChange={setSelectedToggle}
         firstSelected={selectedToggle}
       />
       {errorMessage && <div className="error-message">{errorMessage}</div>}
-      {/* rendering different inputs based on selected toggle button*/}
-      {selectedToggle == "Event" ? (
-        <div className="input-container">
-          <input
-            type="text"
-            placeholder="Event Title"
-            onChange={(e) => setPostTitle(e.target.value)}
-            required
-          />
-          <select onChange={(e) => setCategory(e.target.value)} required>
-            <option value="">Select category</option>
-            <option value="Music">Music</option>
-            <option value="Food">Food</option>
-            <option disabled={true} value="Other">
-              Other
-            </option>
-          </select>
+      <form
+        className="form-container"
+        onSubmit={(e) => {
+          e.preventDefault(); // prevent default page reload
+          handlePostSubmit();
+        }}
+      >
+        {renderForm()}
 
-          <select onChange={(e) => setLocation(e.target.value)} required>
-            <option value="">Select location</option>
-            <option value="Tivoli">Tivoli Gardens</option>
-            <option value="Nyhavn">Nyhavn</option>
-            <option value="Refshaleøen">Refshaleøen</option>
-            <option value="Nørrebrogade">Nørrebrogade</option>
-            <option value="Nørrebro market">Nørrebro market</option>
-            <option value="Other">Other</option>
-          </select>
-
-          <input
-            type="datetime-local"
-            value={eventTime}
-            onChange={(e) => setEventTime(e.target.value)}
-          />
-          <div className="button-dock">
-            {" "}
-            <Button
-              variant="secondary"
-              onClick={() => fileUploadRef.current?.triggerSelect()}
-            >
-              <AddPhotoAlternateIcon /> Add Photo
-            </Button>
-            <FileUpload ref={fileUploadRef} onSelect={setPostPhoto} />
-            <Button variant="secondary">
-              <AddLinkIcon /> Add Signup Link
-            </Button>
-          </div>
-
-          {postPhoto && (
-            <img
-              src={URL.createObjectURL(postPhoto)}
-              alt="preview"
-              style={{ width: 200, marginTop: 10 }}
-            />
-          )}
+        <div className="button-dock">
+          <Button
+            disabled={!validators[selectedToggle]()}
+            variant="primary"
+            type="submit" // ensures Enter key submits the form
+            isBlock
+          >
+            Post
+          </Button>
         </div>
-      ) : null}
-
-      {selectedToggle == "Thread" ? (
-        <TextField
-          placeholderText="What's on your mind?"
-          onChange={(text) => setPostContent(text)}
-          onPhotoChange={setPostPhoto}
-          value={postContent}
-        />
-      ) : null}
-
-      {selectedToggle == "Place" ? (
-        <div className="input-container">
-          <input type="text" placeholder="Place Name" />
-          <p className="dev-description">
-            -- Sorry we do not support this yet...---{" "}
-          </p>
-        </div>
-      ) : null}
-
-      <div className="button-dock">
-        <Button
-          disabled={
-            (!postContent.trim() && selectedToggle === "Thread") ||
-            (!postTitle.trim() && selectedToggle === "Event") ||
-            (!location.trim() && selectedToggle === "Event") ||
-            (!category.trim() && selectedToggle === "Event") ||
-            (!eventTime && selectedToggle === "Event") ||
-            selectedToggle === "Place"
-          } //disable for empty content or title, IMPORTANT: need to fix that when you change the toggle then the input is cleared but the variables are not!!
-          variant="primary"
-          onClick={() => handlePostSubmit()}
-          isBlock={true}
-        >
-          Post
-        </Button>
-      </div>
+      </form>
     </div>
   );
 }
