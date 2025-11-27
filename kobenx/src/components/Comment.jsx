@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Parse from "parse";
 import UserDisplay from "./UserDisplay";
 import { getUserPublic } from "./Services/userService";
+import { timeSincePost } from "./Services/timeService"
 import "./CommentStyle.css";
 
 
@@ -11,6 +12,8 @@ export default function Comment({ comment, onCommentsUpdated }) {
   const authorId = author?.id || author?.objectId;
   const currentUserId = getUserPublic().id;
   const [isMine, setIsMine] = useState(false) 
+
+  const timeComment = timeSincePost({post: comment})
  
   
   const canDelete = currentUserId && authorId && currentUserId === authorId;
@@ -46,13 +49,12 @@ export default function Comment({ comment, onCommentsUpdated }) {
     }
   };
 
-  const timeUploaded = new Date(comment.createdAt).toLocaleString();
 
   console.log("Current user id:", currentUserId, "Author id:", authorId, "Can delete?", isMine);
 
   return (
     <div className="comment">
-      <UserDisplay userInfoParse={author} time={timeUploaded} />
+      <UserDisplay userInfoParse={author} time={timeComment} />
 
       <p className="comment-text">{comment.get("text")}</p>
 
