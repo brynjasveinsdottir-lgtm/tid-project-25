@@ -3,10 +3,12 @@ import { useState, useEffect } from "react";
 import Parse from "parse";
 import { useParams } from "react-router-dom";
 
+
 import PostTemplate from "../components/PostTemplate";
 import AddComment from "../components/AddComment";
-import Comment from "../components/Comment";
+import CommentList from "../components/CommentList";
 import "./PageStyle.css";
+import "/src/assets/Manrope.ttf";
 
 export default function ThreadOpen() {
 
@@ -48,29 +50,21 @@ export default function ThreadOpen() {
   }, [post]);
     
 
-    if (!post) return
+    if (!post) return null
     
 
 
     return (
       <div className="page-structure">
-        <h1 className="page-title">Thread</h1>
-        <div className="centered">
-          {/* Display the post */}
-          <PostTemplate post={post} />
-  
-          {/* Comment input */}
-          <AddComment post={post} onCommentAdded={() => fetchComments()} />
-  
-          {/* Comments list */}
-          <div className="comments-section">
-          {comments.length === 0 ? (
-            <p>No comments yet. Be the first to comment!</p>
-          ) : (
-            comments.map((c) => <Comment key={c.id} comment={c} />)
-          )}
-        </div>
+      <h1 className="page-title">Thread</h1>
+      
+      <div className="thread-open-container">
+        <PostTemplate post={post} />
+        <AddComment post={post} onCommentAdded={fetchComments} />
+        <CommentList comments={comments} />
       </div>
     </div>
+    
+  
     );
   }
