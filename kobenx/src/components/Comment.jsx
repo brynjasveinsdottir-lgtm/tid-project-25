@@ -4,6 +4,7 @@ import UserDisplay from "./UserDisplay";
 import { getUserPublic } from "./Services/userService";
 import { timeSincePost } from "./Services/timeService"
 import "./CommentStyle.css";
+import Button from "./Button";
 
 
 export default function Comment({ comment, onCommentsUpdated }) {
@@ -48,7 +49,17 @@ export default function Comment({ comment, onCommentsUpdated }) {
 
       <p className="comment-text">{comment.get("text")}</p>
 
-      {isMine && <button onClick={handleDelete}>Delete</button>}
+      {isMine &&  (
+        <Button
+          className="delete-button"
+          type="button"
+          variant="secondary"  
+          isRounded
+          onClick={handleDelete}
+        >
+          Delete comment
+        </Button>
+      )}
     </div>
 
     
