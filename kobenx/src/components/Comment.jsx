@@ -57,7 +57,7 @@ export default function Comment({ comment, onCommentsUpdated }) {
           isRounded
           onClick={handleDelete}
         >
-          Delete comment
+          Delete
         </Button>
       )}
     </div>
