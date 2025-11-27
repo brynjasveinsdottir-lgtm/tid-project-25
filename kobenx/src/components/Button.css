@@ -23,6 +23,8 @@
 .button--isBlock {
   width: 100%;
 }
+/* add a size prop here!!*/
+
 /* ROUNDED (for pill shaped buttons */
 .button--rounded {
   border-radius: 999px;
@@ -118,3 +120,4 @@
 }
 
 
+/* add a ghost variant here and include selected state (use for toggle button instead)*/
