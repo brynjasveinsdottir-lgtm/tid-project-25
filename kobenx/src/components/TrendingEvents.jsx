@@ -1,47 +1,29 @@
 import React, { useEffect, useState } from "react";
 import Parse from "parse";
 import { Link } from "react-router-dom";
+import { getPosts } from "./Services/getService";
 
 export default function TrendingEvents() {
-  const [events, setEvents] = useState([]);
+  const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [reloadPosts, setReloadPosts] = useState(true);
+  
 
   useEffect(() => {
-    async function fetchEvents() {
-      setLoading(true);
-      try {
-        const Posts = Parse.Object.extend("Posts");
-        const query = new Parse.Query(Posts);
-
-        // get only posts with category = 'Event'
-        query.equalTo("category", "Event");
-
-        // important: get only future events
-        query.greaterThan("eventTime", new Date());
-
-        // sort by event time ascending
-        query.ascending("eventTime"); 
-
-        // limit to only 4 events to show in the box
-        query.limit(4);
-
-        const results = await query.find();
-        setEvents(results);
-      } catch (err) {
-        console.error("Error loading events:", err);
-      } finally {
-        setLoading(false);
-      }
+    async function fetchPosts() {
+      const results = await getPosts({type:'UpcomingEvents'});
+      setPosts(results);
+      setReloadPosts(false); // reset reloadPosts
+      setLoading(false);
     }
-
-    fetchEvents();
-  }, []);
+    fetchPosts();
+  }, [reloadPosts]);
 
   if (loading) {
     return <div className="trending-box">Loading events…</div>;
   }
 
-  if (!events.length) {
+  if (!posts.length) {
     return <div className="trending-box">No upcoming events yet.</div>;
   }
 
@@ -51,7 +33,7 @@ export default function TrendingEvents() {
   
       <div className="trending-box">
         <ul className="trending-events-list">
-          {events.map((event) => {
+          {posts.map((event) => {
             const title = event.get("postTitle");
             const place = event.get("eventPlace");
             const time = event.get("eventTime");
