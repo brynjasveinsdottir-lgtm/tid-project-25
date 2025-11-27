@@ -27,21 +27,29 @@ export default function ThreadOpen() {
 
         const results = await query.first();
         setPost(results);
+        
       }
 
       getPost();
     }, [id]);
 
+
      // Fetch comments for the current post
   async function fetchComments() {
     if (!post) return;
+
     const Comment = Parse.Object.extend("Comments");
     const query = new Parse.Query(Comment);
+    
     query.equalTo("post", post);
+
     query.include("author"); 
     query.descending("createdAt"); // descending: newest comments appear first
+    
+    
     const results = await query.find();
     setComments(results);
+  
   }
 
    // Fetch comments whenever the post is loaded
@@ -61,7 +69,8 @@ export default function ThreadOpen() {
       <div className="thread-open-container">
         <PostTemplate post={post} />
         <AddComment post={post} onCommentAdded={fetchComments} />
-        <CommentList comments={comments} />
+        <CommentList comments={comments}
+        onCommentsUpdated={fetchComments} />
       </div>
     </div>
     

@@ -19,38 +19,41 @@ export default function Comment({ comment, onCommentsUpdated }) {
   const canDelete = currentUserId && authorId && currentUserId === authorId;
 
   useEffect (() => {
-  async function getUserItem () {
+  async function checkIfMine () {
   
-    const Comments = Parse.Object.extend ('Comments')
-    const publicUser = await getUserPublic();
-    const query = new Parse.Query(Comments)
-    query.equalTo ('author', publicUser)
+    const user = await getUserPublic();
+    const Comments = Parse.Object.extend ('Comments');
+    const query = new Parse.Query(Comments);
+
+    query.equalTo ('author', user)
     query.equalTo ('objectId', comment.id)
-    const canBeDeleted = await query.find()
-    setIsMine(canBeDeleted.length > 0) 
+
+    const result = await query.find();
+    setIsMine(result.length > 0);
   
   }
-  
 
-  getUserItem();
-  }, [])
+  checkIfMine();
+  }, [comment.id]);
 
   const handleDelete = async () => {
     try {
-      const commentObj = new Parse.Object("Comments");
-      commentObj.set("objectId", object.id); // use object.id
-      await commentObj.destroy();
-
-      if (onCommentsUpdated) onCommentsUpdated(); // refresh list
+      await comment.destroy();
+      onCommentsUpdated?.(comment.id); 
       alert("Comment deleted!");
     } catch (error) {
       console.error("Error deleting comment:", error);
-      alert(`Error deleting comment: ${error.message}`);
+      
     }
   };
 
 
   console.log("Current user id:", currentUserId, "Author id:", authorId, "Can delete?", isMine);
+
+  console.log("DELETE USING ID:", comment.id,)
+  console.log("REFETCHING COMMENTS...");
+
+  
 
   return (
     <div className="comment">
@@ -60,5 +63,7 @@ export default function Comment({ comment, onCommentsUpdated }) {
 
       {isMine && <button onClick={handleDelete}>Delete</button>}
     </div>
+
+    
   );
 }
