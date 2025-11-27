@@ -82,11 +82,8 @@ export default function Home() {
       {/* LEFT COLUMN: feed */}
       <div className="home-left">
         <h1 className="page-title">Home</h1>
-        <p className="dev-description">
-          -- Click this button to open a dialog to create a new post (this will
-          be replaced by a simple textField later to match design)---
-        </p>
-
+       
+        <input placeholder="Create new post" onClick={() => setOpenDialog(true)}></input>
   
         <Button onClick={() => setOpenDialog(true)}>Create new post</Button>
 
@@ -105,12 +102,6 @@ export default function Home() {
             }}
           ></CreatePost>
         </Dialog>
-
-        <p className="dev-description">
-          -- The part below this is primarly for testing new posts appearing in
-          feed and a filter function ---
-        </p>
-
         <Filters filterList={filters} onFilterChange={handleFilterChange} />
 
         <div className="postContainer">
