@@ -15,32 +15,19 @@ export default function Comment({ comment, onCommentsUpdated }) {
 
   const timeComment = timeSincePost({post: comment})
  
+  useEffect(() => {
+    async function checkOwnership() {
+      const user = await getUserPublic();
+      setIsMine(user.id === comment.get("author")?.id); 
+    } //compare ID without sending a parse query
+    checkOwnership(); 
+  }, [comment]);
   
-  const canDelete = currentUserId && authorId && currentUserId === authorId;
-
-  useEffect (() => {
-  async function checkIfMine () {
-  
-    const user = await getUserPublic();
-    const Comments = Parse.Object.extend ('Comments');
-    const query = new Parse.Query(Comments);
-
-    query.equalTo ('author', user)
-    query.equalTo ('objectId', comment.id)
-
-    const result = await query.find();
-    setIsMine(result.length > 0);
-  
-  }
-
-  checkIfMine();
-  }, [comment.id]);
 
   const handleDelete = async () => {
     try {
       await comment.destroy();
       onCommentsUpdated?.(comment.id); 
-      alert("Comment deleted!");
     } catch (error) {
       console.error("Error deleting comment:", error);
       
