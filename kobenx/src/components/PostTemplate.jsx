@@ -119,6 +119,7 @@ export default function Post({ post }) {
 
 
       <PostInteractions
+        postId={post.id}
         liked={liked}
         bookmarked={bookmarked}
         repostet={repostet}

@@ -71,10 +71,10 @@ function ThreadCard({ thread }) {
       <div className="PostInteractions">
 
       <PostInteractions
+        postId={thread.id}
         liked={liked}
         bookmarked={bookmarked}
         repostet={repostet}
-        onLike={handleLike}
         onComment={() => {
           handleComment();
           navigate("/threadOpen");

@@ -1,9 +1,9 @@
  .PostInteractions{
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    align-items: center;
     margin-top: 8px;
-    gap: 4px;
+    gap: 16px;
   }
 
   .likeButton,
@@ -13,6 +13,7 @@
     background: none;
     border: none;
     cursor: pointer;
+    padding: 0;
     display: flex;
     align-items: center;
     color: rgb(36, 111, 124);
@@ -25,4 +26,20 @@
   .repostButton:hover {
     color: rgb(208, 72, 14);
   }
-  
+
+  .likeButton:focus,
+.commentButton:focus,
+.bookmarkButton:focus,
+.repostButton:focus {
+  outline: none;
+}
+
+  .likesCount {
+    font-size: 15px;      
+    font-weight: 600;
+    color: rgb(36, 111, 124);
+    margin-left: -6px;     
+    margin-right: 4px;    
+    display: flex;
+    align-items: center;  
+  }
