@@ -58,7 +58,7 @@ export default function Post({ post }) {
       })}`;
 
     return (
-      <article className="card event_card2">
+      <article className="card">
         <header className="event_card_header">
           <EventIcon
             fontSize="large"

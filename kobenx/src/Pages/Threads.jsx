@@ -24,10 +24,15 @@ export default function Threads () {
   return (
     <div className="page-structure">
       <h1 className="page-title">Threads</h1>
-        <div className="centered">
-          {posts.map((post) => (
-            <PostTemplate key={post.id} post={post} />
-          ))}
+        <div className="thread-card-container">
+        {posts.map((post) => (
+  
+  <div key={post.id}>
+    <PostTemplate post={post} />
+  
+  </div>
+))}
+
           
       </div>
     </div>
