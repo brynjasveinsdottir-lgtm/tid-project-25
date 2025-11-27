@@ -101,7 +101,7 @@ export default function CreatePost({ isOpen, onClose }) {
               <option value="">Select category</option>
               <option value="Music">Music</option>
               <option value="Food">Food</option>
-              <option disabled={true} value="Other">
+              <option value="Other">
                 Other
               </option>
             </select>
