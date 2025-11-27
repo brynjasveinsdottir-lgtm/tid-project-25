@@ -102,3 +102,10 @@ input:invalid {
   width: 18px;
   height: 18px;
 }
+
+.icon-only {
+  padding: 0.2em;
+}
+.icon-only svg {
+  width: 36px;
+}

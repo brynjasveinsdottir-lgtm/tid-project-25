@@ -15,7 +15,7 @@ import { timeSincePost } from "./Services/timeService";
 import Button from "./Button";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import { getUserPublic } from "./Services/userService";
-import Parse from "parse";
+import Parse, { setLocalDatastoreController } from "parse";
 import Dialog from "./Dialog";
 import EditPost from "./EditPost";
 
@@ -151,6 +151,7 @@ export default function Post({ post }) {
           onComment={() => navigate(`/threadOpen/${post.id}`)}
         />
       </div>
+
       {/*EDIT DIALOG (should open over whole page*/}
       <Dialog
         isOpen={openDialogEdit}

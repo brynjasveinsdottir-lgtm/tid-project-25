@@ -8,6 +8,7 @@ export default function ThreadForm({ data, setData }) {
         onChange={(text) => setData((prev) => ({ ...prev, content: text }))}
         onPhotoChange={(photo) => setData((prev) => ({ ...prev, photo }))}
         value={data.content}
+        photo={data.photo}
       />
     );
   }
