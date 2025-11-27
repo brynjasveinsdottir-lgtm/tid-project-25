@@ -22,7 +22,6 @@
 /* Block button (fill entire parent width) */
 .button--isBlock {
   width: 100%;
-
 }
 /* ROUNDED (for pill shaped buttons */
 .button--rounded {

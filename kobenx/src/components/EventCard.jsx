@@ -12,6 +12,8 @@ import Music0 from '/src/assets/Music0.png'
 import Music1 from '/src/assets/Music1.png'
 import Music2 from '/src/assets/Music2.png'
 import EventSignupButton from "./EventSignupButton"
+import { timeSincePost } from "./Services/timeService"
+import { getPosts, getSignups} from "./Services/getService"
 
 
 const eventIcons = {
@@ -30,20 +32,20 @@ const plImages ={
 
 export default function EventCard({ event }) {
     
-  const [signups, listSignups] = useState([]);
+  const timePost = timeSincePost({post: event})
 
-  useEffect(() => {
-    async function getSignups() {
-      const Signups = Parse.Object.extend("Signups");
-      const query = new Parse.Query(Signups);
-      query.equalTo("post", event);
-      query.include("user");
-      const results = await query.find();
-      const count = await query.count()
-      listSignups(results);
+    const [signups, listSignups] = useState([]);
+    const [reloadPosts, setReloadPosts] = useState(true);
+  
+
+    async function fetchSignups() {
+        const results = await getSignups({ post: event });
+        listSignups(results);
     }
-    getSignups();
-  }, []);
+
+    useEffect(() => {
+        fetchSignups();
+    }, [event]);
 
   const eventImagePl = `${event.get('eventCategory')}${Math.floor(Math.random()*3)}`
   const plEventImg = plImages[eventImagePl]
@@ -71,27 +73,6 @@ export default function EventCard({ event }) {
       minute: "numeric",
     })}`;
 
-    const timeSincePost = () => {
-        const timeDiff = (Date.now() - event.createdAt) / 1000;
-        let value, unit;
-
-        if (timeDiff < 60) {
-        value = Math.round((Date.now() - event.createdAt) / 1000);
-        unit = "s";
-        } else if (timeDiff < 3600) {
-        value = Math.round((Date.now() - event.createdAt) / (1000 * 60));
-        unit = "m";
-        } else if (timeDiff < 86400) {
-        value = Math.round((Date.now() - event.createdAt) / (1000 * 60 * 60));
-        unit = "h";
-        } else {
-        value = event.get('eventTime').toLocaleString("en-Gb", { day: "numeric", month: "short" })
-        unit = ''
-        }
-
-        return `${value}${unit}`;
-    };
-
     const signupCount = () => {
         const count = signups.length
 
@@ -118,14 +99,14 @@ export default function EventCard({ event }) {
         </header>
         <div className='date-signup'>
             <p className="date_time"> {eventTime} </p>
-            <EventSignupButton />
+            <EventSignupButton event={event} refreshSignups={fetchSignups}/>
         </div>
         <p className="location"> {event.get("eventPlace")} </p>
         <img src={eventImageUrl} className="card_image"></img>
         <div className="footer-container">
             <p className="post_info">
                 {" "}
-                Posted by @{event.get("author").get("username")} • {timeSincePost()}{" "}
+                Posted by @{event.get("author").get("username")} • {timePost}{" "}
             </p>
             <div className="going-container">
                 <div className="picture-container">
