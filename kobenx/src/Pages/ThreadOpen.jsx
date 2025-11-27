@@ -69,6 +69,7 @@ export default function ThreadOpen() {
       <div className="thread-open-container">
         <PostTemplate post={post} />
         <AddComment post={post} onCommentAdded={fetchComments} />
+        <h2 className="section-title">Comments</h2>
         <CommentList comments={comments}
         onCommentsUpdated={fetchComments} />
       </div>
