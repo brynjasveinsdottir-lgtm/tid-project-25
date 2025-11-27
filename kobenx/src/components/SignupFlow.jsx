@@ -116,11 +116,11 @@ export default function Signup() {
           />
         </div>
         <div className="input-column">
-          <label htmlFor="dateMoved"> When did you move to Copenhagen? </label>
+          <label htmlFor="dateMovedToCph"> When did you move to Copenhagen? </label>
           <input
             type="date"
             placeholder="When did you move to Copenhagen?"
-            name="dateMoved"
+            name="dateMovedToCph"
             className="inputfield"
             onInput={handleFilled}
           />
