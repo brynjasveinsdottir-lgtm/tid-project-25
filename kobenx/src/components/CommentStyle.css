@@ -1,0 +1,54 @@
+.comment-list {
+  display: flex;
+  flex-direction: column;
+  gap: px;          /* space between comments */
+  width: 100%;
+  max-width: 720px;   /* match posts */
+  margin: 0 auto;     /* center in ThreadOpen container if needed */
+  box-sizing: border-box;
+}
+
+.comment {
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 16px;
+  margin: 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  border: 1.5px solid #c6c6c6;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 100%;        /* fill the container */
+  box-sizing: border-box;
+  margin-top: 8px;
+}
+
+.comment-text {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: #333;
+  text-align: left;
+  margin: 0;
+  margin-top: 8px;
+}
+
+.comment-placeholder-text {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: #333;
+  text-align: center;
+  margin: 0;
+  margin-top: 12px;
+}
+
+.comment-time {
+  font-size: 0.75rem;
+  color: #777;
+}
+
+.comment-action-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}

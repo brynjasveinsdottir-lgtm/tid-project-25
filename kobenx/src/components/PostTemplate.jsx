@@ -88,7 +88,7 @@ export default function Post({ post }) {
       })}`;
 
     return (
-      <article className="card event_card2">
+      <article className="card">
         <header className="event_card_header">
           <EventIcon
             fontSize="large"
@@ -112,7 +112,7 @@ export default function Post({ post }) {
   return (
     <article className="card"onClick={() => navigate(`/threadOpen/${post.id}`)}>
       <UserDisplay userInfoParse={post.get("author")} time={timeSincePost()} />
-      <p className="threadText">{text}</p>
+      <p className="thread-text">{text}</p>
       {postImageUrl && <img src={postImageUrl} className="card_image"></img>}
 
       <div className="PostInteractions">
