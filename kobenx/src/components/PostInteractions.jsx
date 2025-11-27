@@ -56,22 +56,26 @@ async function handleLike() {
 return (
   <div className="PostInteractions">
 
+    {/* wrapper icon + number */}
+    <span className="likeWrapper">
+      <button
+        onClick={(e) => {
+          e.stopPropagation(); // prevents redirect to ThreadsOpen page
+          handleLike();
+        }}
+        className="likeButton"
+      >
+        {liked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+      </button>
+
+      {likesCount > 0 && (
+        <span className="likesCount">{likesCount}</span>
+      )}
+    </span>
+
     <button
       onClick={(e) => {
-        e.stopPropagation();    // prevents redirect to ThreadsOpen
-        handleLike();
-      }}
-      className="likeButton"
-    >
-      {liked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-    </button>
-
-    {/* LIKE COUNTER */}
-    <span className="likesCount">{likesCount}</span>
-
-    <button
-      onClick={(e) => {
-        e.stopPropagation();    
+        e.stopPropagation();
         onComment();
       }}
       className="commentButton"
@@ -81,7 +85,7 @@ return (
 
     <button
       onClick={(e) => {
-        e.stopPropagation();    
+        e.stopPropagation();
         onBookmark();
       }}
       className="bookmarkButton"
@@ -91,14 +95,13 @@ return (
 
     <button
       onClick={(e) => {
-        e.stopPropagation();    
+        e.stopPropagation();
         onRepost();
       }}
       className="repostButton"
     >
       <LoopOutlinedIcon />
     </button>
-
   </div>
 );
 
