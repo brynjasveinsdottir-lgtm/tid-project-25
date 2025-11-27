@@ -31,12 +31,12 @@ export default function Home() {
     new: (post) => {
       const created = post.get("createdAt");
       const now = new Date();
-      return (now - created) / (1000 * 60 * 60 * 24) <= 7;
+      return (now - created) / (1000 * 60 * 60 * 24) <= 3;
     },
 
     popular: (post) => {
       const likes = post.get("likes") || 0;
-      return likes >= 20;
+      return likes >=  2;
     },
   };
 

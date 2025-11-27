@@ -36,7 +36,10 @@ export default function EventForm({ data, setData, fileUploadRef }) {
         <option value="">Select category</option>
         <option value="Music">Music</option>
         <option value="Food">Food</option>
-        <option disabled value="Other">
+        <option value="Social">Social</option>
+        <option value="Culture">Culture</option>
+        <option value="Sport">Sport</option>
+        <option value="Other">
           Other
         </option>
       </select>
