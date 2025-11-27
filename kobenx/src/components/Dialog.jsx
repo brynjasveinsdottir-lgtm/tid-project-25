@@ -1,5 +1,6 @@
 import React from "react";
 import "./Dialog.css";
+import ReactDOM from "react-dom";
 
 //importing icons
 import CloseIcon from "@mui/icons-material/Close";
@@ -29,7 +30,7 @@ export default function Dialog({
     return null; // Do not render anything if the dialog should not be open
   }
 
-  return (
+  return ReactDOM.createPortal(
     <div className="blanket" onClick={closeOnOutsideClick ? onClose : null}>
       <div className="dialog" onClick={(e) => e.stopPropagation()}>
         <DialogHeader
@@ -40,6 +41,8 @@ export default function Dialog({
         />
         {children}
       </div>
-    </div>
+    </div>,
+    document.body
+
   );
 }

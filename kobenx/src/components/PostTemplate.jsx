@@ -1,7 +1,7 @@
 // using ThreadCard (and events) code as reference but creating a more generic post type that can support all types of posts
 // also testing out props for threads
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CardStyle.css";
 
@@ -11,6 +11,13 @@ import EventIcon from "@mui/icons-material/Event";
 import UserDisplay from "./UserDisplay";
 import PostInteractions from "./PostInteractions";
 import { timeSincePost } from "./Services/timeService";
+
+import Button from "./Button";
+import EditNoteIcon from "@mui/icons-material/EditNote";
+import { getUserPublic } from "./Services/userService";
+import Parse from "parse";
+import Dialog from "./Dialog";
+import EditPost from "./EditPost";
 
 const eventIcons = {
   Music: MusicIcon,
@@ -24,11 +31,13 @@ export default function Post({ post }) {
   const postImage = post.get("image") ? post.get("image") : null;
   const postImageUrl = postImage ? postImage.url() : null;
 
-  const EventIcon = eventIcons[post.get("eventCategory")]? eventIcons[post.get("eventCategory")] :eventIcons["Other"];
+  const EventIcon = eventIcons[post.get("eventCategory")]
+    ? eventIcons[post.get("eventCategory")]
+    : eventIcons["Other"];
 
   const text = post.get("postText") ? post.get("postText") : "sorry no text";
-  
-  const timePost = timeSincePost({post: post})
+
+  const timePost = timeSincePost({ post: post });
 
   const [liked, setLiked] = useState(false);
   const [showComment, setShowComment] = useState(false);
@@ -42,6 +51,25 @@ export default function Post({ post }) {
 
   const navigate = useNavigate();
 
+  //Get user item (reusing same code as in comment so lets move to service maybe)
+  const [isMine, setIsMine] = useState(false);
+  const [openDialogEdit, setOpenDialogEdit] = useState(false); // for testing edit dialog
+
+  useEffect(() => {
+    async function getUserItem() {
+      const Post = Parse.Object.extend("Posts");
+      const publicUser = await getUserPublic();
+      const query = new Parse.Query(Post);
+      query.equalTo("author", publicUser);
+      query.equalTo("objectId", post.id);
+      const isAuthor = await query.find();
+      setIsMine(isAuthor.length > 0);
+      console.log("isMine:", isMine);
+    }
+
+    getUserItem();
+  }, []);
+
   //return statements
   //for event posts
   if (post.get("category") === "Event") {
@@ -54,7 +82,7 @@ export default function Post({ post }) {
       .get("eventTime")
       .toLocaleString("en-Gb", {
         hour: "numeric",
-        minute: "numeric"
+        minute: "numeric",
       })}`;
 
     return (
@@ -80,40 +108,66 @@ export default function Post({ post }) {
   }
 
   return (
-    <article className="card"onClick={() => navigate(`/threadOpen/${post.id}`)}>
-      <UserDisplay userInfoParse={post.get("author")} time={timePost} />
+    <article
+      className="card"
+      onClick={() => navigate(`/threadOpen/${post.id}`)}
+    >
+      <div className="thread-header">
+        <UserDisplay userInfoParse={post.get("author")} time={timePost} />
+        {isMine && (
+          <Button
+            onClick={(e) => {
+              e.stopPropagation();
+              setOpenDialogEdit(true);
+            }}
+            variant="secondary"
+          >
+            {" "}
+            <EditNoteIcon /> Edit post
+          </Button>
+        )}
+      </div>
       <p className="thread-text">{text}</p>
       {postImageUrl && <img src={postImageUrl} className="card_image"></img>}
 
       <div className="PostInteractions">
-
-
-      <PostInteractions
-        postId={post.id}
-        liked={liked}
-        bookmarked={bookmarked}
-        repostet={repostet}
-        onLike={(e) => {
-          e.stopPropagation();
-          handleLike();
-        }}
-        onBookmark={(e) => {
-          e.stopPropagation();
-          handleBookmark();
-        }}
-        onRepost={(e) => {
-          e.stopPropagation();
-          handleRepost();
-        }}
-
-        onComment={() => navigate(`/threadOpen/${post.id}`)}
-
-      />
-
+        <PostInteractions
+          postId={post.id}
+          liked={liked}
+          bookmarked={bookmarked}
+          repostet={repostet}
+          onLike={(e) => {
+            e.stopPropagation();
+            handleLike();
+          }}
+          onBookmark={(e) => {
+            e.stopPropagation();
+            handleBookmark();
+          }}
+          onRepost={(e) => {
+            e.stopPropagation();
+            handleRepost();
+          }}
+          onComment={() => navigate(`/threadOpen/${post.id}`)}
+        />
       </div>
-
+      {/*EDIT DIALOG (should open over whole page*/}
+      <Dialog
+        isOpen={openDialogEdit}
+        isDismissible
+        title="Edit post"
+        onClose={() => {
+          setOpenDialogEdit(false);
+        }}
+      >
+        <EditPost
+          post={post} //pass a post to edit
+          onClose={() => {
+            setOpenDialogEdit(false);
+            setReloadPosts(true);
+          }}
+        ></EditPost>
+      </Dialog>
     </article>
-
-    
   );
 }
