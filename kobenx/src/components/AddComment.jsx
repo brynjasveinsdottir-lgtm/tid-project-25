@@ -46,6 +46,7 @@ export default function AddComment({ post, onCommentAdded }) {
       variant="primary"
       isRounded
       onClick={handleSubmit}
+      disabled={!text.trim()} 
     >
       Submit
     </Button>
