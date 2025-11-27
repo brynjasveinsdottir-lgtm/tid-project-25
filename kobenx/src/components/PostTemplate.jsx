@@ -82,7 +82,7 @@ export default function Post({ post }) {
   return (
     <article className="card"onClick={() => navigate(`/threadOpen/${post.id}`)}>
       <UserDisplay userInfoParse={post.get("author")} time={timePost} />
-      <p className="threadText">{text}</p>
+      <p className="thread-text">{text}</p>
       {postImageUrl && <img src={postImageUrl} className="card_image"></img>}
 
       <div className="PostInteractions">
