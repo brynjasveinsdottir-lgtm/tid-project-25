@@ -6,7 +6,6 @@ import '/src/assets/Manrope.ttf'
 import '/src/index.css'
 import './PageStyle.css'
 import { getPosts } from "../components/Services/getService"
-import EventSection from "../components/EventSections";
 
 export default function Events() {
 
@@ -19,40 +18,39 @@ export default function Events() {
         }
         fetchPosts();
     }, []);
-
-    const eventCategories = posts.map(item => item.get('eventCategory'))
-    const uniqueCategories = [...new Set(eventCategories)]
-
-    let orderedCategories = [...uniqueCategories]
-
-    const hasOther = orderedCategories.includes('Other')
-    orderedCategories = orderedCategories.filter(removeOther =>
-        removeOther !== 'Other'
-    )
-
-    if (hasOther) {
-        orderedCategories.push('Other')
-    }
+    
+    // Filter based on 'Music' and 'Food'. Will update to add more for more event categories.
+    const music = posts.filter(event =>
+        event.get("eventCategory") === 'Music'
+    );
+    const food = posts.filter(event =>
+        event.get("eventCategory") === 'Food'
+    );
 
     // Structuring the events page
     // Remove individual categories
     return (
         <div className="page-structure">
             <h1 className="page-title">Events</h1>
-            <div className='event-section-column'>
-                {orderedCategories.map((category) => {
-                    const categoryEvents = posts.filter((post) =>
-                        post.get("eventCategory") === category
-                    )
-
-                    return (
-                        <EventSection
-                        key={category}
-                        category={category}
-                        events={categoryEvents}
-                        />
-                    )
-                })}
+            <h2 className="category-header">
+                Music
+            </h2>
+            <div className='category-row'>
+                <div className='event-row'>
+                    {music.map((post) => (
+                        <EventCard key = {post.id} event = {post} />
+                    ))}
+                </div>
+            </div>
+           <h2 className="category-header">
+                Food
+            </h2>
+            <div className='category-row'>
+                <div className='event-row'>
+                    {food.map((post) => (
+                        <EventCard key = {post.id} event = {post} />
+                    ))}
+                </div>
             </div>
         </div>
     );

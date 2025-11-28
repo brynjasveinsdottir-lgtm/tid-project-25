@@ -2,18 +2,15 @@ import React, { useState, useEffect } from "react"
 import "./CardStyle.css"
 import MusicIcon from '@mui/icons-material/MusicNote'
 import FoodIcon from '@mui/icons-material/Restaurant'
-import SocialIcon from '@mui/icons-material/PeopleAlt'
-import SportIcon from '@mui/icons-material/DirectionsRun';
-import OtherIcon from "@mui/icons-material/Event"
 import GoingElement from "./GoingElement"
 import '../components/GoingElement.css'
+import Parse from "parse";
 import Food0 from '/src/assets/Food0.png'
 import Food1 from '/src/assets/Food1.png'
 import Food2 from '/src/assets/Food2.png'
 import Music0 from '/src/assets/Music0.png'
 import Music1 from '/src/assets/Music1.png'
 import Music2 from '/src/assets/Music2.png'
-import EventPl from '/src/assets/EventPl.png'
 import EventSignupButton from "./EventSignupButton"
 import { timeSincePost } from "./Services/timeService"
 import { getPosts, getSignups} from "./Services/getService"
@@ -22,9 +19,6 @@ import { getPosts, getSignups} from "./Services/getService"
 const eventIcons = {
   Music: MusicIcon,
   Food: FoodIcon,
-  Other: OtherIcon,
-  Social: SocialIcon,
-  Sport: SportIcon,
 };
 
 const plImages ={
@@ -41,6 +35,7 @@ export default function EventCard({ event }) {
   const timePost = timeSincePost({post: event})
 
     const [signups, listSignups] = useState([]);
+    const [reloadPosts, setReloadPosts] = useState(true);
   
 
     async function fetchSignups() {
@@ -64,7 +59,7 @@ export default function EventCard({ event }) {
   const eventImageUrl = eventImage ? eventImage.url() : plEventImg;
 
   // Get the event icon based on which category it is
-  const EventIcon = eventIcons[event.get("eventCategory")] || OtherIcon
+  const EventIcon = eventIcons[event.get("eventCategory")];
 
   // Structuring the eventTime for the event card
   const eventTime = `${event
@@ -107,7 +102,7 @@ export default function EventCard({ event }) {
             <EventSignupButton event={event} refreshSignups={fetchSignups}/>
         </div>
         <p className="location"> {event.get("eventPlace")} </p>
-        <img src={eventImageUrl ? eventImageUrl : EventPl } className="card_image"></img>
+        <img src={eventImageUrl} className="card_image"></img>
         <div className="footer-container">
             <p className="post_info">
                 {" "}
