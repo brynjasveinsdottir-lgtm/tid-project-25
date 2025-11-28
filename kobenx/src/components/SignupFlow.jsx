@@ -11,7 +11,7 @@ export default function Signup() {
     lastName: false,
     homeCountry: false,
     occupation: false,
-    dateMoved: false,
+    dateMovedToCph: false,
     username: false,
     password: false
   });
@@ -26,7 +26,7 @@ export default function Signup() {
         [fieldName]: newValue.length > 0,
       };
 
-      if (updated.firstName && updated.lastName && updated.homeCountry && updated.occupation && updated.dateMoved && updated.username && updated.password) {
+      if (updated.firstName && updated.lastName && updated.homeCountry && updated.occupation && updated.dateMovedToCph && updated.username && updated.password) {
         setIsButtonDisabled(false);
       } else {
         setIsButtonDisabled(true);
