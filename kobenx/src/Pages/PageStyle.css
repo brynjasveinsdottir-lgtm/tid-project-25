@@ -19,6 +19,17 @@
     text-align: left;
 }
 
+.section-title {
+    font-family: 'Manrope', sans-serif;
+    font-size: 1rem; 
+    font-weight: 800;
+    margin: 24px 0 12px 0;
+    border-bottom: 1.5px solid #d0480e;
+    padding-bottom: 3px;
+    color: #d0480e;  
+    text-align: left;
+}
+
 .logo-welcome-page {
     font-family: 'Bricolage Grotesque';
     font-size: 5rem;

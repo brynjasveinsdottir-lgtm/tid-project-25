@@ -34,52 +34,24 @@ export default function AddComment({ post, onCommentAdded }) {
   }
 
   return (
-    <>
-      {!showInput && (
-        <Button
-          type="button"
-          variant="primary"
-          isRounded
-          isBlock
-          onClick={() => setShowInput(true)}
-        >
-          Add Comment
-        </Button>
-      )}
-
-      {showInput && (
-        <>
-          <TextField
-            placeholderText="Write a comment..."
-            onChange={setText}
-            value={text}
-          
-          />
-
-          <div className="comment-action-buttons">
-            <Button
-              type="button"
-              variant="primary"
-              isRounded
-              onClick={handleSubmit}
-            >
-              Submit
-            </Button>
-
-            <Button
-              type="button"
-              variant="secondary"
-              isRounded
-              onClick={() => {
-                setShowInput(false);
-                setText("");
-              }}
-            >
-              Cancel
-            </Button>
-          </div>
-        </>
-      )}
-    </>
+    <div className="comment-input-wrapper">
+    <TextField
+      placeholderText="Write a comment..."
+      onChange={setText}
+      value={text}
+    />
+    <Button
+      className="submit-button"
+      type="button"
+      variant="primary"
+      isRounded
+      onClick={handleSubmit}
+      disabled={!text.trim()} 
+    >
+      Submit
+    </Button>
+  </div>
+    
+      
   );
 }
