@@ -4,6 +4,7 @@ import MusicIcon from '@mui/icons-material/MusicNote'
 import FoodIcon from '@mui/icons-material/Restaurant'
 import SocialIcon from '@mui/icons-material/PeopleAlt'
 import SportIcon from '@mui/icons-material/DirectionsRun';
+import CultureIcon from '@mui/icons-material/TheaterComedy';
 import OtherIcon from "@mui/icons-material/Event"
 import GoingElement from "./GoingElement"
 import '../components/GoingElement.css'
@@ -25,6 +26,7 @@ const eventIcons = {
   Other: OtherIcon,
   Social: SocialIcon,
   Sport: SportIcon,
+  Culture: CultureIcon,
 };
 
 const plImages ={
@@ -51,9 +53,11 @@ export default function EventCard({ event }) {
     useEffect(() => {
         fetchSignups();
     }, [event]);
-
+    
+ /*
   const eventImagePl = `${event.get('eventCategory')}${Math.floor(Math.random()*3)}`
   const plEventImg = plImages[eventImagePl]
+  */
 
   //Gets the three newest sign ups for the avatars
   const threeNewest = signups.slice(-3)
@@ -61,7 +65,7 @@ export default function EventCard({ event }) {
   // Get the url for the image
   // Make a placeholder image
   const eventImage = event.get("image") ? event.get("image") : null;
-  const eventImageUrl = eventImage ? eventImage.url() : plEventImg;
+  const eventImageUrl = eventImage ? eventImage.url() : EventPl;
 
   // Get the event icon based on which category it is
   const EventIcon = eventIcons[event.get("eventCategory")] || OtherIcon

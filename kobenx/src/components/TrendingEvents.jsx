@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Parse from "parse";
 import { Link } from "react-router-dom";
 import { getPosts } from "./Services/getService";
+import EventPl from '/src/assets/EventPl.png'
 
 export default function TrendingEvents() {
   const [posts, setPosts] = useState([]);
@@ -38,7 +39,7 @@ export default function TrendingEvents() {
             const place = event.get("eventPlace");
             const time = event.get("eventTime");
             const imageFile = event.get("image");   // campo File su Back4App
-            const imageUrl = imageFile ? imageFile.url() : null;
+            const imageUrl = imageFile ? imageFile.url() : EventPl;
   
             let dateLabel = "";
             if (time) {
