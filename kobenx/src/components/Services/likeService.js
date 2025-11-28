@@ -1,7 +1,7 @@
 import Parse from "parse";
 import { getUserPublic } from "./userService.js";
 
-// Creates a pointer to Posts
+// Pointer to Posts
 function getPostPointer(postId) {
   const Posts = Parse.Object.extend("Posts");
   const post = new Posts();
@@ -9,7 +9,7 @@ function getPostPointer(postId) {
   return post;
 }
 
-// Creates a pointer to UserPublic
+// Pointer to UserPublic
 function getUserPublicPointer(id) {
   const UserPublic = Parse.Object.extend("UserPublic");
   const user = new UserPublic();
@@ -36,6 +36,7 @@ export async function toggleLike(postId) {
 
   if (existing) {
     await existing.destroy();
+    await updatePostLikesCount(postId);
     return { liked: false };
   }
 
@@ -43,6 +44,7 @@ export async function toggleLike(postId) {
   newLike.set("user", userPointer);   
   newLike.set("post", postPointer);   
   await newLike.save();
+  await updatePostLikesCount(postId);
 
   return { liked: true };
 }
@@ -51,11 +53,22 @@ export async function toggleLike(postId) {
 export async function getLikesCount(postId) {
   const postPointer = getPostPointer(postId);
   const Likes = Parse.Object.extend("Likes");
-
+  
   const query = new Parse.Query(Likes);
   query.equalTo("post", postPointer);
 
   return await query.count();
+}
+
+// Update 'likes' column in Posts class
+export async function updatePostLikesCount(postId) {
+  const postPointer = getPostPointer(postId);
+  
+  const newCount = await getLikesCount(postId);
+  postPointer.set("likes", newCount);
+  await postPointer.save();
+
+  return newCount;
 }
 
 // Check if current user liked the post
