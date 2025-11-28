@@ -15,8 +15,6 @@
   width: auto;
   max-width: 100%;
   position: relative;
-  box-sizing: border-box;
-  
 }
 
 .card:hover {
