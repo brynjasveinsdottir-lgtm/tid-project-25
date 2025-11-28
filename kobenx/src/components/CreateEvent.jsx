@@ -3,10 +3,9 @@ import Button from "./Button";
 
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import AddLinkIcon from "@mui/icons-material/AddLink";
-import CancelIcon from "@mui/icons-material/Cancel";
-import EditSquareIcon from "@mui/icons-material/EditSquare";
 
 import FileUpload from "./Services/uploadService";
+import PhotoPreview from "./photoPreview";
 
 export default function EventForm({ data, setData, fileUploadRef }) {
   const handleDelete = () => {
@@ -39,9 +38,7 @@ export default function EventForm({ data, setData, fileUploadRef }) {
         <option value="Social">Social</option>
         <option value="Culture">Culture</option>
         <option value="Sport">Sport</option>
-        <option value="Other">
-          Other
-        </option>
+        <option value="Other">Other</option>
       </select>
       <select
         value={data.location}
@@ -83,21 +80,11 @@ export default function EventForm({ data, setData, fileUploadRef }) {
       </div>
 
       {data.photo && (
-        <div className="photo-preview-container">
-          <img
-            className="photo-preview"
-            src={URL.createObjectURL(data.photo)}
-            alt="preview"
-          />
-          <div className="icon-overlay">
-            <Button type="Button" variant="secondary small"  onClick={handleEdit}>
-              <EditSquareIcon/>Edit
-            </Button>
-            <Button type="Button"  variant="secondary small"  onClick={handleDelete}>
-              <CancelIcon /> 
-            </Button>
-          </div>
-        </div>
+        <PhotoPreview
+          photo={data.photo}
+          handleDelete={handleDelete}
+          handleEdit={handleEdit}
+        ></PhotoPreview>
       )}
     </div>
   );

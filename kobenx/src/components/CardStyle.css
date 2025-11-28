@@ -14,6 +14,8 @@
   align-items: flex-start;
   width: auto;
   max-width: 100%;
+  position: relative;
+  box-sizing: border-box;
   
 }
 
@@ -48,6 +50,15 @@
 
 .thread-open-container .card:hover {
   transform: none; 
+}
+
+.thread-header {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: start;
+  gap: 8px;
 }
 
 

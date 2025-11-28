@@ -33,3 +33,12 @@ export async function getSignups({post}) {
     const results = await query.find()
     return results
 }
+
+export async function getSinglePost({postId}) {
+    const Posts = Parse.Object.extend("Posts");
+    const query = new Parse.Query(Posts);
+    query.include("author");
+    query.equalTo("objectId", postId);
+    const result = await query.first()
+    return result
+}

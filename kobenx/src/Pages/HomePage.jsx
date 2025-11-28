@@ -17,6 +17,7 @@ import { getPosts } from "../components/Services/getService";
 
 //new dialog test
 import Dialog from "../components/Dialog";
+import EditPost from "../components/EditPost";
 
 export default function Home() {
   const filters = ["Event", "Thread", "Place", "Popular", "New"];
@@ -36,7 +37,7 @@ export default function Home() {
 
     popular: (post) => {
       const likes = post.get("likes") || 0;
-      return likes >=  2;
+      return likes >= 2;
     },
   };
 
@@ -82,9 +83,12 @@ export default function Home() {
       {/* LEFT COLUMN: feed */}
       <div className="home-left">
         <h1 className="page-title">Home</h1>
-       
-        <input placeholder="Create new post" onClick={() => setOpenDialog(true)}></input>
-  
+
+        <input
+          placeholder="Create new post"
+          onClick={() => setOpenDialog(true)}
+        ></input>
+
         <Button onClick={() => setOpenDialog(true)}>Create new post</Button>
 
         <Dialog
@@ -102,6 +106,7 @@ export default function Home() {
             }}
           ></CreatePost>
         </Dialog>
+
         <Filters filterList={filters} onFilterChange={handleFilterChange} />
 
         <div className="postContainer">
