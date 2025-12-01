@@ -166,7 +166,10 @@
     width: 380px;       
     position: sticky;
     top: 20px;
-    text-align: left; 
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;  
 }
 
 /* Wrapper (title + box) */
