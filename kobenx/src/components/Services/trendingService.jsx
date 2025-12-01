@@ -13,7 +13,7 @@ export async function getTrendingThreads() {
   query.greaterThan("createdAt", fiveDaysAgo);
 
   // at least 1 like
-  query.greaterThanOrEqualTo("likes", 1);
+  query.greaterThanOrEqualTo("likes", 2);
 
   query.descending("likes");
   query.limit(5);
