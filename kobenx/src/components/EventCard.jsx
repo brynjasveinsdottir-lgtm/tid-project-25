@@ -86,11 +86,11 @@ export default function EventCard({ event }) {
         const count = signups.length
 
         if (count === 0) {
-            return <p className="others-container"> 0 going </p>
+            return <p> 0 going </p>
         } else if (count < 4) {
-            return <p className="others-container under3"> {`${count} going`} </p>
+            return <p className="under3"> {`${count} going`} </p>
         } else {
-            return <p className="others-container over3"> {`+${count - 3} going`} </p>
+            return <p className="over3"> {`+${count - 3} going`} </p>
         }
     }
 
