@@ -1,7 +1,4 @@
 import Avatar from "./Avatar";
-import React from "react";
-import { useState } from "react";
-import Parse from "parse";
 import './GoingElement.css'
 
 export default function GoingElement({ going }) {
