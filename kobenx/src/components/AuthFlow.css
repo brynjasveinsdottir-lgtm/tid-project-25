@@ -55,6 +55,20 @@
   color: #323232;
 }
 
+.inputfield::placeholder {
+    color: gray;
+    opacity: 1;
+}
+
+.failed {
+    color: red;
+    border-color: red;
+}
+
+.inputfield.failed::placeholder {
+    color: red;
+}
+
 .enabledButton {
     height: 3rem;
     width: 7rem;
