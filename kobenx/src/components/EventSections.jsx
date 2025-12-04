@@ -1,6 +1,3 @@
-import React from "react";
-import {useEffect, useState} from 'react'
-import Parse from "parse"
 import EventCard from '/src/components/EventCard.jsx'
 import '/src/assets/Manrope.ttf'
 import '/src/index.css'

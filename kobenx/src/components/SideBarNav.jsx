@@ -8,7 +8,9 @@ import { useEffect, useState } from "react";
 import Button from "./Button";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import { getUserPublic } from "./Services/userService";
+
 export default function SideBarNav() {
+  
   async function logOutUser() {
     Parse.User.logOut().then(() => {
       const currentUser = Parse.User.current();

@@ -8,16 +8,10 @@ import CultureIcon from '@mui/icons-material/TheaterComedy';
 import OtherIcon from "@mui/icons-material/Event"
 import GoingElement from "./GoingElement"
 import '../components/GoingElement.css'
-import Food0 from '/src/assets/Food0.png'
-import Food1 from '/src/assets/Food1.png'
-import Food2 from '/src/assets/Food2.png'
-import Music0 from '/src/assets/Music0.png'
-import Music1 from '/src/assets/Music1.png'
-import Music2 from '/src/assets/Music2.png'
 import EventPl from '/src/assets/EventPl.png'
 import EventSignupButton from "./EventSignupButton"
 import { timeSincePost } from "./Services/timeService"
-import { getPosts, getSignups} from "./Services/getService"
+import { getSignups} from "./Services/getService"
 
 
 const eventIcons = {
@@ -29,21 +23,11 @@ const eventIcons = {
   Culture: CultureIcon,
 };
 
-const plImages ={
-    Food0,
-    Food1,
-    Food2,
-    Music0,
-    Music1,
-    Music2
-}
-
 export default function EventCard({ event }) {
     
   const timePost = timeSincePost({post: event})
 
     const [signups, listSignups] = useState([]);
-  
 
     async function fetchSignups() {
         const results = await getSignups({ post: event });
@@ -54,16 +38,10 @@ export default function EventCard({ event }) {
         fetchSignups();
     }, [event]);
     
- /*
-  const eventImagePl = `${event.get('eventCategory')}${Math.floor(Math.random()*3)}`
-  const plEventImg = plImages[eventImagePl]
-  */
-
   //Gets the three newest sign ups for the avatars
   const threeNewest = signups.slice(-3)
 
   // Get the url for the image
-  // Make a placeholder image
   const eventImage = event.get("image") ? event.get("image") : null;
   const eventImageUrl = eventImage ? eventImage.url() : EventPl;
 
@@ -86,7 +64,7 @@ export default function EventCard({ event }) {
         const count = signups.length
 
         if (count === 0) {
-            return '0 going'
+            return <p> 0 going </p>
         } else if (count < 4) {
             return <p className="under3"> {`${count} going`} </p>
         } else {
