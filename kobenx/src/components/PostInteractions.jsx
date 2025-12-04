@@ -40,7 +40,6 @@ useEffect(() => {
   loadLikes();
 }, [postId]);
 
-
 async function handleLike() {
   
   // UI update without waiting DB
@@ -50,8 +49,6 @@ async function handleLike() {
 
   await toggleLike(postId);
 }
-
-
 
 return (
   <div className="PostInteractions">

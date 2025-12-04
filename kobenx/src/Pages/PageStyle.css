@@ -179,7 +179,7 @@
     width: 379px;
 }
 
-/* Title "Upcoming events" */
+
 .trending-title {
     font-size: 28px; 
     font-weight: 500;
@@ -197,7 +197,7 @@
     box-sizing: border-box;
 }
   
-/* Event list */
+
 .trending-events-list {
     list-style: none;
     margin: 0;
@@ -216,12 +216,12 @@
     border-bottom: 1px solid rgba(198, 198, 198, 1);
 }
   
-/* remove separation line from last event */
+
 .trending-event-item:last-child {
     border-bottom: none;
 }
   
-/* square thumb */
+
 .trending-event-thumb {
     width: 64px;
     height: 64px;

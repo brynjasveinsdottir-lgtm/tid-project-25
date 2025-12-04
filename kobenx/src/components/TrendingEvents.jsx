@@ -38,7 +38,7 @@ export default function TrendingEvents() {
             const title = event.get("postTitle");
             const place = event.get("eventPlace");
             const time = event.get("eventTime");
-            const imageFile = event.get("image");   // campo File su Back4App
+            const imageFile = event.get("image");
             const imageUrl = imageFile ? imageFile.url() : EventPl;
   
             let dateLabel = "";

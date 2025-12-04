@@ -54,7 +54,6 @@ export default function TrendingThreads() {
           ))}
         </ul>
 
-        {/* QUI fuori dalla UL */}
         <Link to="/threads" className="trending-show-more">
           Show more
         </Link>
