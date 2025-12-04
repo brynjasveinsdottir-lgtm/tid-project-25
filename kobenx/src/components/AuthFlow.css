@@ -61,12 +61,12 @@
 }
 
 .failed {
-    color: red;
-    border-color: red;
+    border-bottom: red solid 2px;
 }
 
 .inputfield.failed::placeholder {
     color: red;
+    font-weight: 600;
 }
 
 .enabledButton {
@@ -83,4 +83,18 @@
     height: 3rem;
     width: 7rem;
     cursor: default;
+}
+
+.error-message {
+    align-self: flex-start;
+    height: 0.5rem;
+}
+
+.validation-message {
+    align-self: flex-start;
+    height: 0.2rem;
+    color: red;
+    font-size: 0.8rem;
+    padding: 0;
+    margin: 0;
 }

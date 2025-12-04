@@ -7,6 +7,7 @@ export default function LogIn() {
     const [isButtonDisabled, setIsButtonDisabled] = useState(true)
     const [failedUsername, setFailedUsername] = useState(false)
     const [failedPassword, setFailedPassword] = useState(false)
+    const [errorMessage, setErrorMessage] = useState('')
     const [isFilled, setIsFilled] = useState({
         username: false,
         password: false
@@ -46,7 +47,7 @@ export default function LogIn() {
                 window.location.reload()
             },
             (error) => {
-                alert(error.message)
+                setErrorMessage(error.message)
                 setFailedUsername(true)
                 setFailedPassword(true)
             }
@@ -60,10 +61,12 @@ export default function LogIn() {
                 <div className="input-column login">
                     <label htmlFor='username'> Username </label>
                     <input type='username' placeholder="Username" name='username' className={`inputfield ${failedUsername ? 'failed' : ''}`} onInput={handleFilled}/>
+                    <p className="error-message"></p>
                 </div>
                 <div className="input-column login">
                     <label htmlFor='password'> Password </label>
                     <input type='password' placeholder="Password" name='password' className={`inputfield ${failedPassword ? 'failed' : ''}`} onInput={handleFilled}/>
+                    <p className="error-message">{failedUsername ? errorMessage : ' '}</p>
                 </div>
                 <button
                     title={isButtonDisabled ? 'Enter Username & Password first' : 'Click me to log in!'}

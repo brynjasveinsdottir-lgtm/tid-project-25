@@ -60,7 +60,7 @@ export default function Signup() {
     newUser.set("userIdPrivate", Parse.User.current());
     await newUser.save().then(
       (newObj) => {
-        alert("User successfully created!" + newObj.id);
+        alert("Successfully created user " + newObj.get('username'));
         window.location.reload();
       },
       (error) => {
@@ -83,6 +83,7 @@ export default function Signup() {
               onInput={handleFilled}
               autoFocus
             />
+            <p className="validation-message">test</p>
           </div>
           <div className="input-column">
             <label htmlFor="lastName"> Last name </label>
@@ -93,6 +94,7 @@ export default function Signup() {
               className="inputfield"
               onInput={handleFilled}
             />
+            <p className="validation-message">test</p>
           </div>
         </div>
         <div className="input-column">
@@ -104,6 +106,7 @@ export default function Signup() {
             className="inputfield"
             onInput={handleFilled}
           />
+          <p className="validation-message">test</p>
         </div>
         <div className="input-column">
           <label htmlFor="occupation"> What do you do? </label>
@@ -114,6 +117,7 @@ export default function Signup() {
             className="inputfield"
             onInput={handleFilled}
           />
+          <p className="validation-message">test</p>
         </div>
         <div className="input-column">
           <label htmlFor="dateMovedToCph"> When did you move to Copenhagen? </label>
@@ -124,6 +128,7 @@ export default function Signup() {
             className="inputfield"
             onInput={handleFilled}
           />
+          <p className="validation-message">test</p>
         </div>
         <div className="input-column">
           <label htmlFor="username"> Username </label>
@@ -134,6 +139,7 @@ export default function Signup() {
             className="inputfield"
             onInput={handleFilled}
           />
+          <p className="validation-message">test</p>
         </div>
         <div className="input-column">
           <label htmlFor="password"> Password </label>
@@ -145,6 +151,7 @@ export default function Signup() {
             autoComplete="new-password"
             onInput={handleFilled}
           />
+          <p className="validation-message">test</p>
         </div>
         <button title={isButtonDisabled ? 'Enter info first' : 'Click me to sign up!'} type="submit" value='submit' className={isButtonDisabled ? 'disabledButton' : 'enabledButton'} disabled={isButtonDisabled}>Sign up</button>
       </form>
