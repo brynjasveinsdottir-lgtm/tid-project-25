@@ -2,9 +2,6 @@ import { useState, useEffect } from "react";
 
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
-import BookmarkOutlinedIcon from "@mui/icons-material/BookmarkOutlined";
-import LoopOutlinedIcon from "@mui/icons-material/LoopOutlined";
 import ModeCommentOutlinedIcon from "@mui/icons-material/ModeCommentOutlined";
 
 import './PostInteractions.css';
@@ -15,11 +12,7 @@ import { toggleLike, getLikesCount, userHasLiked }
 export default function PostInteractions ({
 
 postId,
-bookmarked,
-reposted,
 onComment,
-onBookmark,
-onRepost 
 
 }) {
 
@@ -79,26 +72,7 @@ return (
     >
       <ModeCommentOutlinedIcon />
     </button>
-
-    <button
-      onClick={(e) => {
-        e.stopPropagation();
-        onBookmark();
-      }}
-      className="bookmarkButton"
-    >
-      {bookmarked ? <BookmarkOutlinedIcon /> : <BookmarkBorderOutlinedIcon />}
-    </button>
-
-    <button
-      onClick={(e) => {
-        e.stopPropagation();
-        onRepost();
-      }}
-      className="repostButton"
-    >
-      <LoopOutlinedIcon />
-    </button>
+ 
   </div>
 );
 
