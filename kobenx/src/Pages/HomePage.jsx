@@ -7,6 +7,7 @@ import Filters from "../components/Filters";
 import Post from "../components/PostTemplate";
 import Button from "../components/Button";
 import TrendingEvents from "../components/TrendingEvents";
+import TrendingThreads from "../components/TrendingThreads";
 import parse from "parse";
 
 import "/src/assets/Manrope.ttf";
@@ -119,7 +120,8 @@ export default function Home() {
       {/* RIGHT COLUMN: trending events */}
       <aside className="home-right">
         <TrendingEvents />
-        {/* here we will add Trending Topics eventually /> */}
+        <div className="trending-threads-spacer"></div>
+        <TrendingThreads />
       </aside>
     </div>
   );
