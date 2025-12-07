@@ -50,7 +50,8 @@ export default function EventSignupButton({ event, refreshSignups }) {
 
     return (
         <Button
-            variant={isSignedUp ? 'destructive' : 'primary'}
+            variant={'primary'}
+            isSelected={isSignedUp}
             isRounded={true}
             className='event-signup-button'
             onClick={eventSignup}
