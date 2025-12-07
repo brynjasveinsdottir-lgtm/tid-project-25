@@ -4,7 +4,6 @@ import './CardStyle.css'
 import { getUserPublic } from "./Services/userService"
 import Button from "./Button"
 
-
 export default function EventSignupButton({ event, refreshSignups }) {
 
     const [isSignedUp, setIsSignedUp] = useState(false)
