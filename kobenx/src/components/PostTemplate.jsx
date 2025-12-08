@@ -5,9 +5,12 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CardStyle.css";
 
-import MusicIcon from "@mui/icons-material/MusicNote";
-import FoodIcon from "@mui/icons-material/Restaurant";
-import EventIcon from "@mui/icons-material/Event";
+import MusicIcon from '@mui/icons-material/MusicNote'
+import FoodIcon from '@mui/icons-material/Restaurant'
+import SocialIcon from '@mui/icons-material/PeopleAlt'
+import SportIcon from '@mui/icons-material/DirectionsRun';
+import CultureIcon from '@mui/icons-material/TheaterComedy';
+import OtherIcon from "@mui/icons-material/Event"
 import UserDisplay from "./UserDisplay";
 import PostInteractions from "./PostInteractions";
 import { timeSincePost } from "./Services/timeService";
@@ -22,7 +25,10 @@ import EditPost from "./EditPost";
 const eventIcons = {
   Music: MusicIcon,
   Food: FoodIcon,
-  Other: EventIcon,
+  Social: SocialIcon,
+  Sport: SportIcon,
+  Culture: CultureIcon,
+  Other: OtherIcon,
 };
 
 export default function Post({ post }) {

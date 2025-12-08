@@ -70,8 +70,15 @@
 }
 
 .button--primary-selected {
-  background-color: #28808f;
-  border-color: #1c5863;
+  background-color: #D0480E;
+}
+
+.button--primary-selected:hover {
+  background-color: #b44a1b;
+}
+
+.button--primary-selected:active {
+  background-color: #b44a1b;
 }
 
 /* Secondary */

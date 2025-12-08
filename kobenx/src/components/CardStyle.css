@@ -185,15 +185,3 @@
   align-items: center;
   justify-content: center;
 }
-
-.event-signup-button:hover {
-  opacity: .75;
-}
-
-.not-signed-up {
-  background: #C6C6C6;
-}
-
-.signed-up {
-  background: red;
-}

@@ -58,7 +58,7 @@ export default function SideBarNav() {
       </div>
 
       <div>
-        <Button variant="destructive" onClick={logOutUser}>
+        <Button variant="secondary" onClick={logOutUser}>
           {" "}
           <LogoutOutlinedIcon fontSize="20" />
           Log out
