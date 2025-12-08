@@ -54,7 +54,7 @@ export default function EventSignupButton({ event, refreshSignups }) {
             className='event-signup-button'
             onClick={eventSignup}
         >
-            {isSignedUp ? 'Signed up' : 'Sign up'}
+            {isSignedUp ? 'Signed up' : 'Sign ups'}
         </Button>
     )
 }
