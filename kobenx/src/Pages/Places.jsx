@@ -1,6 +1,5 @@
 import React from "react";
-import ProfileInfo from "/src/components/ProfileInfo/ProfileInfo";
-import { userA } from "/src/UserInfoData";
+
 
 export default function Places() {
   return (

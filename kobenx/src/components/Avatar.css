@@ -3,10 +3,14 @@
     height: 50px;
     border-radius: 999px;
     object-fit: cover;
+    overflow: hidden;
 }
+
 .fallback {
     background-color: rgb(226, 226, 226);
     align-content: center;
+    align-items: center;
+    text-align: center;
     font-family: 'Manrope';
     font-weight: 600;
     font-size: 18px;

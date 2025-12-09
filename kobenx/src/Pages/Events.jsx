@@ -5,58 +5,54 @@ import EventCard from '/src/components/EventCard.jsx'
 import '/src/assets/Manrope.ttf'
 import '/src/index.css'
 import './PageStyle.css'
+import { getPosts } from "../components/Services/getService"
+import EventSection from "../components/EventSections";
 
 export default function Events() {
 
-    const [events, listEvents] = useState([])
-
+    const [posts, setPosts] = useState([]);
     // Get all posts that have category 'Event' from class 'Posts' in database using Parse
     useEffect(() => {
-        async function getPosts() {
-            const Posts = Parse.Object.extend("Posts");
-            const query = new Parse.Query(Posts);
-            query.equalTo("category", "Event");
-            /* query.greaterThanOrEqualTo('eventTime', 0) */
-            query.include("author");
-            query.ascending('eventTime')
-            const results = await query.find();
-            listEvents(results)
+        async function fetchPosts() {
+        const results = await getPosts({type:'Events'});
+        setPosts(results);
         }
-        getPosts()
-    }, [])
-    
-    // Filter based on 'Music' and 'Food'. Will update to add more for more event categories.
-    const music = events.filter(event =>
-        event.get("eventCategory") === 'Music'
-    );
-    const food = events.filter(event =>
-        event.get("eventCategory") === 'Food'
-    );
+        fetchPosts();
+    }, []);
+
+    const eventCategories = posts.map(item => item.get('eventCategory'))
+    const uniqueCategories = [...new Set(eventCategories)]
+
+    let orderedCategories = [...uniqueCategories]
+
+    const hasOther = orderedCategories.includes('Other')
+    orderedCategories = orderedCategories.filter(removeOther =>
+        removeOther !== 'Other'
+    )
+
+    if (hasOther) {
+        orderedCategories.push('Other')
+    }
 
     // Structuring the events page
     // Remove individual categories
     return (
         <div className="page-structure">
             <h1 className="page-title">Events</h1>
-            <h2 className="category-header">
-                Music
-            </h2>
-            <div className='category-row'>
-                <div className='event-row'>
-                    {music.map((post) => (
-                        <EventCard key = {post.id} event = {post} />
-                    ))}
-                </div>
-            </div>
-           <h2 className="category-header">
-                Food
-            </h2>
-            <div className='category-row'>
-                <div className='event-row'>
-                    {food.map((post) => (
-                        <EventCard key = {post.id} event = {post} />
-                    ))}
-                </div>
+            <div className='event-section-column'>
+                {orderedCategories.map((category) => {
+                    const categoryEvents = posts.filter((post) =>
+                        post.get("eventCategory") === category
+                    )
+
+                    return (
+                        <EventSection
+                        key={category}
+                        category={category}
+                        events={categoryEvents}
+                        />
+                    )
+                })}
             </div>
         </div>
     );

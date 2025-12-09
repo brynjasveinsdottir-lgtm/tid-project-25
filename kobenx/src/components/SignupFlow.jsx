@@ -1,8 +1,41 @@
 import Parse from "parse";
 import { useNavigate } from "react-router";
 import "./AuthFlow.css";
+import { useState } from "react";
 
 export default function Signup() {
+  
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true)
+  const [isFilled, setIsFilled] = useState({
+    firstName: false,
+    lastName: false,
+    homeCountry: false,
+    occupation: false,
+    dateMovedToCph: false,
+    username: false,
+    password: false
+  });
+
+  function handleFilled(e) {
+    const newValue = e.target.value;
+    const fieldName = e.target.name;
+
+    setIsFilled((prev) => {
+      const updated = {
+        ...prev,
+        [fieldName]: newValue.length > 0,
+      };
+
+      if (updated.firstName && updated.lastName && updated.homeCountry && updated.occupation && updated.dateMovedToCph && updated.username && updated.password) {
+        setIsButtonDisabled(false);
+      } else {
+        setIsButtonDisabled(true);
+      }
+
+      return updated;
+    });
+  }
+  
   async function signup(formData) {
     const username = formData.get("username");
     const password = formData.get("password");
@@ -47,6 +80,7 @@ export default function Signup() {
               placeholder="Johann Friedrich"
               name="firstName"
               className="inputfield"
+              onInput={handleFilled}
               autoFocus
             />
           </div>
@@ -57,6 +91,7 @@ export default function Signup() {
               placeholder="Struensee"
               name="lastName"
               className="inputfield"
+              onInput={handleFilled}
             />
           </div>
         </div>
@@ -67,6 +102,7 @@ export default function Signup() {
             placeholder="Germany"
             name="homeCountry"
             className="inputfield"
+            onInput={handleFilled}
           />
         </div>
         <div className="input-column">
@@ -76,15 +112,17 @@ export default function Signup() {
             placeholder="Student at ITU"
             name="occupation"
             className="inputfield"
+            onInput={handleFilled}
           />
         </div>
         <div className="input-column">
-          <label htmlFor="dateMoved"> When did you move to Copenhagen? </label>
+          <label htmlFor="dateMovedToCph"> When did you move to Copenhagen? </label>
           <input
             type="date"
             placeholder="When did you move to Copenhagen?"
             name="dateMovedToCph"
             className="inputfield"
+            onInput={handleFilled}
           />
         </div>
         <div className="input-column">
@@ -94,6 +132,7 @@ export default function Signup() {
             placeholder="johann.struensee"
             name="username"
             className="inputfield"
+            onInput={handleFilled}
           />
         </div>
         <div className="input-column">
@@ -104,11 +143,10 @@ export default function Signup() {
             name="password"
             className="inputfield"
             autoComplete="new-password"
+            onInput={handleFilled}
           />
         </div>
-        <button type="submit" value="submit" className="authButton">
-          Sign up
-        </button>
+        <button title={isButtonDisabled ? 'Enter info first' : 'Click me to sign up!'} type="submit" value='submit' className={isButtonDisabled ? 'disabledButton' : 'enabledButton'} disabled={isButtonDisabled}>Sign up</button>
       </form>
     </div>
   );
