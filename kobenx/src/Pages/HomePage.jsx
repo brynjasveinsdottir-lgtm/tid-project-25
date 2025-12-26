@@ -90,7 +90,7 @@ export default function Home() {
           onClick={() => setOpenDialog(true)}
         ></input>
 
-        <Button onClick={() => setOpenDialog(true)}>Create new post</Button>
+        
 
         <Dialog
           isOpen={openDialog}
