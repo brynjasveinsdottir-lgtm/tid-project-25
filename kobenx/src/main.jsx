@@ -15,7 +15,7 @@ import Parse from "parse"
 import RequireAuth from './loginauth'
 
 
-Parse.initialize("sAL4bgxHoAu6OlT2RVJjFAMDDTd6fPdo96VOqreq", "7Zw3fNZGvEcUaxfkkTPN1WxcAPEXZDWWYHfJaR7M");
+Parse.initialize("QVyxkDZrYW9DlqPstNhA7WWGTirCEruGGW15E0Q4", "VAVuK8i6la493GatcTcwWwico4tDfM9d66FsdCDb");
 Parse.serverURL = 'https://parseapi.back4app.com'
 
 // This defines the skeleton of the site, the things that don't change. The Outlet in this is each page's content.

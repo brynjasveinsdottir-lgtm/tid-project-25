@@ -189,7 +189,8 @@
 
 /* Event box */
 .trending-box {
-    background: #ffffff;
+    background: #fff;
+    font-size: large;
     border: 1.5px solid rgba(198, 198, 198, 1);
     border-radius: 16px;
     padding: 16px;
