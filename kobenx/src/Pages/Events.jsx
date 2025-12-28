@@ -30,6 +30,8 @@ export default function Events() {
         removeOther !== 'Other'
     )
 
+    orderedCategories.sort((a, b) => a.localeCompare(b));
+
     if (hasOther) {
         orderedCategories.push('Other')
     }
