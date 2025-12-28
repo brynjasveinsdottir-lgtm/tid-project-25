@@ -13,10 +13,10 @@
     font-weight: 500;
     margin: 0;
     padding-top: 0;
-    padding-bottom: 4vh;
     padding-left: 0.5vh;
     padding-right: 0.5vh;
     text-align: left;
+    height: 7vh;
 }
 
 .section-title {
@@ -58,6 +58,7 @@
     width: 100%;
     margin: 0;
     padding: 0;
+    border-top: 1.5px solid #c6c6c6;
 }
 
 .category-row {
@@ -74,7 +75,7 @@
 }
 
 .category-header {
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     font-weight: 500;
     padding-left: 0.5vh;
     padding-right: 0.5vh;

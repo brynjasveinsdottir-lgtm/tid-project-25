@@ -11,6 +11,7 @@ import Events from './Pages/Events.jsx'
 import Places from './Pages/Places.jsx'
 import Profile from './Pages/Profile.jsx'
 import LogIn from './Pages/LogIn'
+import Search from './Pages/Search.jsx'
 import Parse from "parse"
 import RequireAuth from './loginauth'
 
@@ -44,6 +45,7 @@ const router = createBrowserRouter([
       { path: "/places", element: <Places /> },
       { path: "/profile", element: <Profile /> },
       { path: "/login", element: <LogIn /> },
+      { path: "/search", element: <Search /> },
     ],
   },
 ]);

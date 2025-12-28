@@ -25,7 +25,7 @@
 
 .thread-open-container, 
 .thread-card-container {
-    background: #ffff;
+    background: #fff;
     padding: 12px 16px;
     border-radius: 10px;
     margin-bottom: 12px;
@@ -89,7 +89,7 @@
 }
 
 .title {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 400;
   padding: 0px;
   margin-top: 0em;
