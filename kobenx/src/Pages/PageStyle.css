@@ -13,10 +13,10 @@
     font-weight: 500;
     margin: 0;
     padding-top: 0;
-    padding-bottom: 4vh;
     padding-left: 0.5vh;
     padding-right: 0.5vh;
     text-align: left;
+    height: 7vh;
 }
 
 .section-title {

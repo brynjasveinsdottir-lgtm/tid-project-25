@@ -1,15 +1,28 @@
-.search {
-    width: 100vh;
-    margin-left: auto;
-    margin-right: auto;
+.search-section {
+    width: 100%;
+    max-width: 100vh;
+    margin-inline: auto;
+    height: 79.5vh;
 }
 
-.bar {
+.search-bar {
     border-radius: 16px;
-    font-size: 1rem;
+    font-size: 1vh;
     box-sizing: border-box;
+    padding: 1vh;
 }
 
 .search bar:has(input.naked:focus) {
     background-color: #F1F8F9;
+}
+
+.post-container {
+    height: 100%;
+}
+
+.posts {
+    height: 100%;
+    padding: 1vh;
+    overflow-y: scroll;
+    scrollbar-width: none;
 }
