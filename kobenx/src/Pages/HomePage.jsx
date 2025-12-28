@@ -90,8 +90,6 @@ export default function Home() {
           onClick={() => setOpenDialog(true)}
         ></input>
 
-        
-
         <Dialog
           isOpen={openDialog}
           isDismissible

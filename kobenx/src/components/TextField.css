@@ -30,11 +30,11 @@ textarea.naked:focus {
     padding: 10px;
     border: 1.5px solid #c6c6c6;
     border-radius: 16px;
-    font-size: 16px;
+    font-size: 1rem;
     box-sizing: border-box;
 }
-.comment-box:has(textarea.naked:focus) {
 
+.comment-box:has(textarea.naked:focus) {
     border-color: #28808f;
     background-color: #F1F8F9; /*this is to make the comment box (including the icons) show the focus state, althoug it is technically the text area that has focus*/
 }

@@ -1,0 +1,15 @@
+.search {
+    width: 100vh;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.bar {
+    border-radius: 16px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.search bar:has(input.naked:focus) {
+    background-color: #F1F8F9;
+}
