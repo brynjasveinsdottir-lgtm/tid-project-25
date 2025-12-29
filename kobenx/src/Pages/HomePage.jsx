@@ -1,24 +1,20 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import Parse from "parse";
 
 import CreatePost from "../components/CreatePost";
 import Filters from "../components/Filters";
 import Post from "../components/PostTemplate";
-import Button from "../components/Button";
 import TrendingEvents from "../components/TrendingEvents";
 import TrendingThreads from "../components/TrendingThreads";
-import parse from "parse";
 
 import "/src/assets/Manrope.ttf";
 import "/src/index.css";
 import "./PageStyle.css";
-import { getUserPublic } from "../components/Services/userService";
 import { getPosts } from "../components/Services/getService";
 
 //new dialog test
 import Dialog from "../components/Dialog";
-import EditPost from "../components/EditPost";
+import ConfirmDialog from "../components/ConfirmDialog";
 
 export default function Home() {
   const filters = ["Event", "Thread", "Place", "Popular", "New"];
@@ -42,9 +38,45 @@ export default function Home() {
     },
   };
 
-  const [openCreatePost, setOpenCreatePost] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
   const [reloadPosts, setReloadPosts] = useState(true);
+
+  //new (confirm dialog to save draft)
+  const [draftText, setDraftText] = useState(""); //(unsaved)
+  const [savedDraft, setSavedDraft] = useState(
+    localStorage.getItem("postDraft") || ""
+  );
+
+  const [saveDraftOpen, setSaveDraftOpen] = useState(false);
+  const [deleteDraftOpen, setDeleteDraftOpen] = useState(false);
+
+  function requestCloseCreatePost() {
+    if (draftText.trim().length > 0) setSaveDraftOpen(true);
+    else if (savedDraft) setDeleteDraftOpen(true);
+    else setOpenDialog(false);
+  }
+
+  function openCreatePost() {
+    setDraftText(localStorage.getItem("postDraft") || "");
+    setOpenDialog(true);
+  }
+
+  function handleSaveDraft() {
+    localStorage.setItem("postDraft", draftText);
+    setSavedDraft(draftText);
+    setSaveDraftOpen(false);
+    setOpenDialog(false);
+  }
+
+  function handleDiscardDraft() {
+    localStorage.removeItem("postDraft");
+    setSavedDraft("");
+    setDraftText("");
+    setSaveDraftOpen(false);
+    setDeleteDraftOpen(false); 
+    setOpenDialog(false);
+  }
+  //end of new
 
   // Get all posts that have category 'Event' from class 'Posts' in database using Parse
   useEffect(() => {
@@ -85,26 +117,56 @@ export default function Home() {
       <div className="home-left">
         <h1 className="page-title">Home</h1>
 
-        <input
-          placeholder="Create new post"
-          onClick={() => setOpenDialog(true)}
-        ></input>
+        <button
+          className={`input-trigger ${savedDraft ? "draft" : "placeholder"}`}
+          onClick={openCreatePost}
+        >
+          <span className="input-trigger-text">
+            {savedDraft ? savedDraft : "Create new post"}
+          </span>
+          {savedDraft && <span className="chip">Draft</span>}
+        </button>
 
         <Dialog
           isOpen={openDialog}
           isDismissible
           title="Create post"
-          onClose={() => {
-            setOpenDialog(false);
-          }}
+          onClose={requestCloseCreatePost}
         >
           <CreatePost
+            draft={draftText}
+            setDraft={setDraftText}
             onClose={() => {
               setOpenDialog(false);
               setReloadPosts(true);
             }}
           ></CreatePost>
         </Dialog>
+
+        <ConfirmDialog
+          isOpen={saveDraftOpen}
+          onClose={() => setSaveDraftOpen(false)}
+          onPrimary={handleSaveDraft}
+          onSecondary={handleDiscardDraft}
+          title = "Save changes?"
+          msg = "You have unsaved changes to your threads post. Save as draft before closing?"
+          primaryActionLabel = "Save draft"
+          secondaryActionLabel = "Discard"
+          primaryVariant = "primary"
+          secondaryVariant = "secondary"
+        />
+        <ConfirmDialog
+          isOpen={deleteDraftOpen}
+          onClose={() => setDeleteDraftOpen(false)}
+          onPrimary={handleDiscardDraft}
+          onSecondary={() => setDeleteDraftOpen(false)}
+          title = "Delete draft?"
+          msg = "Are you sure you want to delete your draft? This action cannot be undone."
+          primaryActionLabel = "Delete draft"
+          secondaryActionLabel = "Cancel"
+          primaryVariant = "destructive"
+          secondaryVariant = "secondary"
+        />
 
         <Filters filterList={filters} onFilterChange={handleFilterChange} />
 
