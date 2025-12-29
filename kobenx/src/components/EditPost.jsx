@@ -8,7 +8,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 import Button from "./Button";
 
-export default function EditPost({ onClose, post }) {
+export default function EditPost({ onClose, post, onDeleted }) {
   const postImage = post.get("image") ? post.get("image") : null;
   const postImageUrl = postImage ? postImage.url() : null;
   const currentData = { content: post.get("postText"), photo: postImageUrl };
@@ -25,6 +25,7 @@ export default function EditPost({ onClose, post }) {
   async function handleDelete() {
     try {
       await deletePost({ postId: post.id });
+      onDeleted?.();
       onClose();
      
     } catch (error) {

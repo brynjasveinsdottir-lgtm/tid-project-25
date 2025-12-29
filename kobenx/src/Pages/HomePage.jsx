@@ -73,7 +73,7 @@ export default function Home() {
     setSavedDraft("");
     setDraftText("");
     setSaveDraftOpen(false);
-    setDeleteDraftOpen(false); 
+    setDeleteDraftOpen(false);
     setOpenDialog(false);
   }
   //end of new
@@ -148,31 +148,37 @@ export default function Home() {
           onClose={() => setSaveDraftOpen(false)}
           onPrimary={handleSaveDraft}
           onSecondary={handleDiscardDraft}
-          title = "Save changes?"
-          msg = "You have unsaved changes to your threads post. Save as draft before closing?"
-          primaryActionLabel = "Save draft"
-          secondaryActionLabel = "Discard"
-          primaryVariant = "primary"
-          secondaryVariant = "secondary"
+          title="Save changes?"
+          msg="You have unsaved changes to your threads post. Save as draft before closing?"
+          primaryActionLabel="Save draft"
+          secondaryActionLabel="Discard"
+          primaryVariant="primary"
+          secondaryVariant="secondary"
         />
         <ConfirmDialog
           isOpen={deleteDraftOpen}
           onClose={() => setDeleteDraftOpen(false)}
           onPrimary={handleDiscardDraft}
           onSecondary={() => setDeleteDraftOpen(false)}
-          title = "Delete draft?"
-          msg = "Are you sure you want to delete your draft? This action cannot be undone."
-          primaryActionLabel = "Delete draft"
-          secondaryActionLabel = "Cancel"
-          primaryVariant = "destructive"
-          secondaryVariant = "secondary"
+          title="Delete draft?"
+          msg="Are you sure you want to delete your draft? This action cannot be undone."
+          primaryActionLabel="Delete draft"
+          secondaryActionLabel="Cancel"
+          primaryVariant="destructive"
+          secondaryVariant="secondary"
         />
 
         <Filters filterList={filters} onFilterChange={handleFilterChange} />
 
         <div className="postContainer">
           {filteredPosts.map((post) => (
-            <Post key={post.id} post={post} />
+            <Post
+              key={post.id}
+              post={post}
+              onDeleted={(deletedId) => {
+                setPosts((prev) => prev.filter((post) => post.id !== deletedId));
+              }}
+            />
           ))}
         </div>
       </div>

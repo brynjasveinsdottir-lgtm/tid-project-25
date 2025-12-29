@@ -5,12 +5,12 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CardStyle.css";
 
-import MusicIcon from '@mui/icons-material/MusicNote'
-import FoodIcon from '@mui/icons-material/Restaurant'
-import SocialIcon from '@mui/icons-material/PeopleAlt'
-import SportIcon from '@mui/icons-material/DirectionsRun';
-import CultureIcon from '@mui/icons-material/TheaterComedy';
-import OtherIcon from "@mui/icons-material/Event"
+import MusicIcon from "@mui/icons-material/MusicNote";
+import FoodIcon from "@mui/icons-material/Restaurant";
+import SocialIcon from "@mui/icons-material/PeopleAlt";
+import SportIcon from "@mui/icons-material/DirectionsRun";
+import CultureIcon from "@mui/icons-material/TheaterComedy";
+import OtherIcon from "@mui/icons-material/Event";
 import UserDisplay from "./UserDisplay";
 import PostInteractions from "./PostInteractions";
 import { timeSincePost } from "./Services/timeService";
@@ -31,7 +31,7 @@ const eventIcons = {
   Other: OtherIcon,
 };
 
-export default function Post({ post }) {
+export default function Post({ post, onDeleted }) {
   //variables
 
   const postImage = post.get("image") ? post.get("image") : null;
@@ -127,6 +127,7 @@ export default function Post({ post }) {
               setOpenDialogEdit(true);
             }}
             variant="secondary"
+            size="sm"
           >
             {" "}
             <EditNoteIcon /> Edit post
@@ -168,12 +169,13 @@ export default function Post({ post }) {
         }}
       >
         <EditPost
-          post={post} //pass a post to edit
-          onClose={() => {
-            setOpenDialogEdit(false);
-            setReloadPosts(true);
+          post={post}
+          onDeleted={() => {
+            onDeleted?.(post.id); // remove from UI list
+            setOpenDialogEdit(false); // close dialog
           }}
-        ></EditPost>
+          onClose={() => setOpenDialogEdit(false)}
+        />
       </Dialog>
     </article>
   );

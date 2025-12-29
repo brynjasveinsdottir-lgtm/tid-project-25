@@ -14,8 +14,13 @@ export default function CreatePost({ onClose, draft, setDraft }) {
   const [selectedToggle, setSelectedToggle] = useState(toggleOptions[0]);
   const fileUploadRef = useRef(null);
 
+  const [isSubmitting, setIsSubmitting] = useState(false); // To prevent multiple submissions
+
   //Data objects for each post type
-  const [threadData, setThreadData] = useState({ content: draft || "", photo: null });
+  const [threadData, setThreadData] = useState({
+    content: draft || "",
+    photo: null,
+  });
   const [eventData, setEventData] = useState({
     title: "",
     category: "",
@@ -54,6 +59,9 @@ export default function CreatePost({ onClose, draft, setDraft }) {
 
   // Submit post
   async function handlePostSubmit() {
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+    setErrorMessage("");
     try {
       await createPost({
         selectedToggle,
@@ -83,7 +91,13 @@ export default function CreatePost({ onClose, draft, setDraft }) {
   const renderForm = () => {
     switch (selectedToggle) {
       case "Thread":
-        return <ThreadForm data={threadData} setData={setThreadData} onDraftChange={setDraft} />;
+        return (
+          <ThreadForm
+            data={threadData}
+            setData={setThreadData}
+            onDraftChange={setDraft}
+          />
+        );
 
       case "Event":
         return (
@@ -127,8 +141,10 @@ export default function CreatePost({ onClose, draft, setDraft }) {
             variant="primary"
             type="submit"
             isBlock
+            loading={isSubmitting}
+
           >
-            Post
+            {isSubmitting ? "Posting…" : "Post"}
           </Button>
         </div>
       </form>

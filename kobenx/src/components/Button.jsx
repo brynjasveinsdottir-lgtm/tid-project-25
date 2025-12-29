@@ -3,10 +3,12 @@ import "./Button.css";
 
 export default function Button({
   variant = "primary", //default is primary, maybe it should be secondary?
+  size = "md", //default size
   isSelected = false,
   isRounded = false,
   isBlock = false,
   disabled = false,
+  loading = false,
   onClick,
   children,
   className = '',
@@ -16,6 +18,7 @@ export default function Button({
   const classes = [
     "button",
     `button--${variant}`,
+    `button--${size}`,
     isRounded ? "button--rounded" : "",
     isBlock ? "button--isBlock" : "",
     isSelected ? `button--${variant}-selected` : "",
@@ -23,7 +26,7 @@ export default function Button({
   ].join(" ");
 
   return (
-    <button className={classes} onClick={onClick} {...props} disabled={disabled}>
+    <button className={classes} onClick={onClick} {...props} disabled={disabled || loading}>
       {children}
     </button>
   );

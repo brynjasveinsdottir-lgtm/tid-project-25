@@ -9,16 +9,39 @@
   gap: 6px;
 
   font-family: inherit;
-  font-size: 1rem;
 
   border-radius: 16px;
   border: 1px;
-  padding: 0.6em 1.2em;
+
 
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   cursor: pointer;
   margin: 0px;
+}
+.button--sm {
+  font-size: 0.8rem;
+  padding: 0.4em 0.8em;
+}
+.button--sm svg {
+  width: 16px;
+  height: 16px;
+}
+.button--md {
+  font-size: 1rem;
+  padding: 0.6em 1.2em;
+}
+.button--md svg {
+  width: 20px;
+  height: 20px;
+}
+.button--lg {
+  font-size: 1.125rem;
+  padding: 0.8em 1.6em;
+}
+.button--lg svg {
+  width: 24px;
+  height: 24px;
 }
 /* Block button (fill entire parent width) */
 .button--isBlock {
