@@ -20,6 +20,7 @@ export default function ConfirmDialog({
       title={title}
       closeOnOutsideClick={false}
       isDismissible={false}
+      role="alertdialog"
       size="sm"
     >
       <div className="dialog-content">
