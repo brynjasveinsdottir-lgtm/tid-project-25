@@ -23,31 +23,30 @@
 
 /* Threads styling */
 
-.thread-open-container, 
+.thread-open-container,
 .thread-card-container {
-    background: #fff;
-    padding: 12px 16px;
-    border-radius: 10px;
-    margin-bottom: 12px;
-    display: flex;
-    flex-direction: column;
-    width: 100%; 
-    max-width: 720px;
-    margin-left: auto;
-    margin-right: auto;
-  }
+  background: #fff;
+  padding: 12px 16px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
-
-.thread-text{
-  color: #111;  
+.thread-text {
+  color: #111;
   line-height: 1.4;
-  font-size: 1rem; 
-  margin: 0; 
+  font-size: 1rem;
+  margin: 0;
   padding: 0;
 }
 
 .thread-open-container .card:hover {
-  transform: none; 
+  transform: none;
 }
 
 .thread-header {
@@ -58,7 +57,6 @@
   align-items: start;
   gap: 8px;
 }
-
 
 /* Events styling */
 
@@ -112,15 +110,15 @@
 }
 
 .Social {
-  color: #EA8A5F;
+  color: #ea8a5f;
 }
 
 .Sport {
-  color: #93A7AB;
+  color: #93a7ab;
 }
 
 .Culture {
-  color: #B44A1B;
+  color: #b44a1b;
 }
 
 .date_time {
@@ -178,7 +176,7 @@
   display: flex;
   height: 100%;
   width: 5rem;
-  font-size: .8rem;
+  font-size: 0.8rem;
   padding: 0;
   margin: 0;
   margin-left: auto;

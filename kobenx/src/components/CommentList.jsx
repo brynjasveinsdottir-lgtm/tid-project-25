@@ -1,10 +1,13 @@
 import React from "react";
 import Comment from "./Comment";
 
-
 export default function CommentList({ comments, onCommentsUpdated }) {
   if (!comments || comments.length === 0) {
-    return <p className="comment-placeholder-text">No comments yet. Be the first to comment!</p>;
+    return (
+      <p className="comment-placeholder-text">
+        No comments yet. Be the first to comment!
+      </p>
+    );
   }
 
   return (
