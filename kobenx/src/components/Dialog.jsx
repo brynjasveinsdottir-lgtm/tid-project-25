@@ -24,6 +24,7 @@ export default function Dialog({
   isDismissible,
   children,
   divider,
+  size = "md", //default size
 }) {
   //Return statements
   if (!isOpen) {
@@ -32,7 +33,7 @@ export default function Dialog({
 
   return ReactDOM.createPortal(
     <div className="blanket" onClick={closeOnOutsideClick ? onClose : null}>
-      <div className="dialog" onClick={(e) => e.stopPropagation()}>
+      <div  className={`dialog dialog--${size}`} onClick={(e) => e.stopPropagation()}>
         <DialogHeader
           title={title}
           isDismissible={isDismissible}

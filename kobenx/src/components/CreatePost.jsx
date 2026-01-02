@@ -9,13 +9,18 @@ import PlaceForm from "./CreatePlace";
 
 import { createPost } from "./Services/postService";
 
-export default function CreatePost({ onClose }) {
+export default function CreatePost({ onClose, draft, setDraft }) {
   const toggleOptions = ["Thread", "Event", "Place"];
   const [selectedToggle, setSelectedToggle] = useState(toggleOptions[0]);
   const fileUploadRef = useRef(null);
 
+  const [isSubmitting, setIsSubmitting] = useState(false); // To prevent multiple submissions
+
   //Data objects for each post type
-  const [threadData, setThreadData] = useState({ content: "", photo: null });
+  const [threadData, setThreadData] = useState({
+    content: draft || "",
+    photo: null,
+  });
   const [eventData, setEventData] = useState({
     title: "",
     category: "",
@@ -54,6 +59,9 @@ export default function CreatePost({ onClose }) {
 
   // Submit post
   async function handlePostSubmit() {
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+    setErrorMessage("");
     try {
       await createPost({
         selectedToggle,
@@ -69,6 +77,10 @@ export default function CreatePost({ onClose }) {
         location: selectedToggle === "Event" ? eventData.location : "",
         eventTime: selectedToggle === "Event" ? eventData.time : "",
       });
+      if (selectedToggle === "Thread") {
+        setDraft("");
+        localStorage.removeItem("postDraft");
+      }
       handleClose();
     } catch (error) {
       setErrorMessage(error.message);
@@ -79,7 +91,13 @@ export default function CreatePost({ onClose }) {
   const renderForm = () => {
     switch (selectedToggle) {
       case "Thread":
-        return <ThreadForm data={threadData} setData={setThreadData} />;
+        return (
+          <ThreadForm
+            data={threadData}
+            setData={setThreadData}
+            onDraftChange={setDraft}
+          />
+        );
 
       case "Event":
         return (
@@ -123,8 +141,10 @@ export default function CreatePost({ onClose }) {
             variant="primary"
             type="submit"
             isBlock
+            loading={isSubmitting}
+
           >
-            Post
+            {isSubmitting ? "Posting…" : "Post"}
           </Button>
         </div>
       </form>
