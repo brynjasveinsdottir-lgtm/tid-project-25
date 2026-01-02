@@ -18,8 +18,8 @@ input {
 }
 input:focus {
   outline: none;
-  border-color: #28808f;
-  background-color: #f1f8f9;
+  border-color:var(--color-primary);
+  background-color: var(--color-primary-subtle);
 }
 .input-container {
   width: 100%;
@@ -60,8 +60,8 @@ select {
 }
 select:focus {
   outline: none;
-  border-color: #28808f;
-  background-color: #f1f8f9;
+  border-color:var(--color-primary);
+  background-color: var(--color-primary-subtle);
 }
 
 select:invalid,

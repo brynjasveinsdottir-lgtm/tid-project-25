@@ -37,8 +37,8 @@ textarea.naked:focus {
 }
 
 .text-box:has(textarea.naked:focus) {
-    border-color: #28808f;
-    background-color: #F1F8F9; /*this is to make the text box (including the photoicon) show the focus state, althoug it is technically the text area that has focus*/
+    border-color: var(--color-primary);
+    background-color: var(--color-primary-subtle); /*this is to make the text box (including the photoicon) show the focus state, althoug it is technically the text area that has focus*/
 }
 
 .icon-container {

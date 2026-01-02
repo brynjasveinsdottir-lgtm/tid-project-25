@@ -82,17 +82,17 @@
 
 /* Primary */
 .button--primary {
-  background-color: #28808f;
+  background-color:var(--color-primary);
   color: white;
 }
 
 .button--primary:hover {
-  background-color: #246f7c;
+  background-color: var(--color-primary-dark);
 }
 
 
 .button--primary-selected {
-  background-color: #d0480e;
+  background-color: var(--color-accent);
 }
 
 .button--primary-selected:hover {
@@ -103,7 +103,7 @@
 /* Secondary */
 .button--secondary {
   background-color: white;
-  color: #323232;
+  color: var(--color-text-default);
   border-color: #c6c6c6;
 }
 
@@ -123,18 +123,18 @@
 /* Ghost */
 .button--ghost {
   background-color: transparent;
-  color: #323232;
+  color: var(--color-text-default);
   border-color: transparent;
   box-shadow: none;
 }
 
 .button--ghost:hover {
-  background-color: #F6FBFB;
+  background-color: var(--color-primary-subtle-light);
 }
 
 .button--ghost-selected {
-  background-color: #F1F8F9; 
-  color: #28808f;
+  background-color: var(--color-primary-subtle); 
+  color: var(--color-primary);
   border-color: transparent;
   font-weight: 600;
 }

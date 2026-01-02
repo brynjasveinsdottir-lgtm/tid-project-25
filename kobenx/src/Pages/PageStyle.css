@@ -23,9 +23,9 @@
   font-size: 1rem;
   font-weight: 800;
   margin: 24px 0 12px 0;
-  border-bottom: 1.5px solid #d0480e;
+  border-bottom: 1.5px solid var(--color-accent);
   padding-bottom: 3px;
-  color: #d0480e;
+  color: var(--color-accent);
   text-align: left;
 }
 
@@ -357,7 +357,7 @@
 }
 
 .input-trigger.has-draft {
-  color: #323232; /* normal text color */
+  color: var(--color-text-default); /* normal text color */
 }
 
 .input-trigger:focus {
@@ -369,7 +369,7 @@
   outline-offset: 2px;
 }
 .input-trigger:hover {
-  background-color: #f6fbfb;
+  background-color: var(--color-primary-subtle-light);
 }
 .input-trigger-text {
   width: 100%;
@@ -418,7 +418,7 @@
 
 .info-box {
   background: #ffebe3;
-  border: 1.5px solid #d0480e;
+  border: 1.5px solid var(--color-accent);
   border-radius: 16px;
   padding: 16px;
   width: 100%;
@@ -428,6 +428,6 @@
   font-size: 20px;
   font-weight: 600;
   text-align: left;
-  color: #d0480e;
+  color: var(--color-accent);
   margin: 0;
 }
