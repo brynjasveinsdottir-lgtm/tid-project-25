@@ -3,7 +3,7 @@ import "./UserDisplay.css";
 import Avatar from "./Avatar";
 import { timeSinceMoved } from "./Services/timeService";
 import { getCountryCode } from "./utils/countryCodes";
-import Flag from "react-world-flags";
+import ReactCountryFlag from "react-country-flag";
 
 
 export default function UserDisplay({ userInfoParse, time }) {
@@ -34,9 +34,10 @@ export default function UserDisplay({ userInfoParse, time }) {
                 : "FirstName"}{" "}
               {userInfoParse ? userInfoParse.get("lastName") : "User name"}{" "}
             </p>
-            <Flag
-             code={countryCode}
+            <ReactCountryFlag
+             countryCode={countryCode}
              className="flag"
+             svg={true} 
              fallback={
                <p className="subtle">
                  {userInfoParse.get("homeCountry")
