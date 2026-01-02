@@ -388,3 +388,32 @@
   border: 1px solid #c6c6c6;
   flex-shrink: 0;
 }
+
+/* placeholder map styling */
+.places-map {
+    width: 100%;
+    max-width: 1200px;
+    height: auto;
+  
+    margin-top: 16px;
+    border-radius: 16px;
+    align-self: center;
+    opacity: 0.6;
+  
+  }
+
+.info-box {
+  background: #ffebe3;
+  border: 1.5px solid #D0480E;
+  border-radius: 16px;
+  padding: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.info-text {
+  font-size: 20px;
+  font-weight: 600;
+  text-align: left;
+  color: #D0480E;
+  margin: 0;
+}
