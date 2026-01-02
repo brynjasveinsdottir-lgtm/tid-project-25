@@ -15,9 +15,16 @@ import { getPosts } from "../components/Services/getService";
 //new dialog test
 import Dialog from "../components/Dialog";
 import ConfirmDialog from "../components/ConfirmDialog";
+import Button from "../components/Button";
+
+//icons for empty state
+import SearchOffIcon from "@mui/icons-material/SearchOff";
+import FilterListOffIcon from "@mui/icons-material/FilterListOff";
 
 export default function Home() {
   const filters = ["Event", "Thread", "Place", "Popular", "New"];
+  const [filtersResetKey, setFiltersResetKey] = useState(0);
+
   const [posts, setPosts] = useState([]);
 
   const [selectedFilters, setSelectedFilters] = useState([]);
@@ -127,48 +134,11 @@ export default function Home() {
           {savedDraft && <span className="chip">Draft</span>}
         </button>
 
-        <Dialog
-          isOpen={openDialog}
-          isDismissible
-          title="Create post"
-          onClose={requestCloseCreatePost}
-        >
-          <CreatePost
-            draft={draftText}
-            setDraft={setDraftText}
-            onClose={() => {
-              setOpenDialog(false);
-              setReloadPosts(true);
-            }}
-          ></CreatePost>
-        </Dialog>
-
-        <ConfirmDialog
-          isOpen={saveDraftOpen}
-          onClose={() => setSaveDraftOpen(false)}
-          onPrimary={handleSaveDraft}
-          onSecondary={handleDiscardDraft}
-          title="Save changes?"
-          msg="You have unsaved changes to your threads post. Save as draft before closing?"
-          primaryActionLabel="Save draft"
-          secondaryActionLabel="Discard"
-          primaryVariant="primary"
-          secondaryVariant="secondary"
+        <Filters
+          key={filtersResetKey}
+          filterList={filters}
+          onFilterChange={handleFilterChange}
         />
-        <ConfirmDialog
-          isOpen={deleteDraftOpen}
-          onClose={() => setDeleteDraftOpen(false)}
-          onPrimary={handleDiscardDraft}
-          onSecondary={() => setDeleteDraftOpen(false)}
-          title="Delete draft?"
-          msg="Are you sure you want to delete your draft? This action cannot be undone."
-          primaryActionLabel="Delete draft"
-          secondaryActionLabel="Cancel"
-          primaryVariant="destructive"
-          secondaryVariant="secondary"
-        />
-
-        <Filters filterList={filters} onFilterChange={handleFilterChange} />
 
         <div className="postContainer">
           {filteredPosts.map((post) => (
@@ -176,10 +146,28 @@ export default function Home() {
               key={post.id}
               post={post}
               onDeleted={(deletedId) => {
-                setPosts((prev) => prev.filter((post) => post.id !== deletedId));
+                setPosts((prev) =>
+                  prev.filter((post) => post.id !== deletedId)
+                );
               }}
             />
           ))}
+          {filteredPosts.length === 0 && selectedFilters.length>1 && (
+            <div className="empty-state">
+              <SearchOffIcon />
+              <p>No posts match the selected filters...</p>
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  setSelectedFilters([]);
+                  setFiltersResetKey((k) => k + 1);
+                }}
+              >
+                <FilterListOffIcon />
+                Clear filters
+              </Button>
+            </div>
+          )}
         </div>
       </div>
 
@@ -189,6 +177,48 @@ export default function Home() {
         <div className="trending-threads-spacer"></div>
         <TrendingThreads />
       </aside>
+
+      {/* CREATE POST DIALOG and CONFIRM DIALOGS */}
+      <Dialog
+        isOpen={openDialog}
+        isDismissible
+        title="Create post"
+        onClose={requestCloseCreatePost}
+      >
+        <CreatePost
+          draft={draftText}
+          setDraft={setDraftText}
+          onClose={() => {
+            setOpenDialog(false);
+            setReloadPosts(true);
+          }}
+        ></CreatePost>
+      </Dialog>
+
+      <ConfirmDialog
+        isOpen={saveDraftOpen}
+        onClose={() => setSaveDraftOpen(false)}
+        onPrimary={handleSaveDraft}
+        onSecondary={handleDiscardDraft}
+        title="Save changes?"
+        msg="You have unsaved changes to your threads post. Save as draft before closing?"
+        primaryActionLabel="Save draft"
+        secondaryActionLabel="Discard"
+        primaryVariant="primary"
+        secondaryVariant="secondary"
+      />
+      <ConfirmDialog
+        isOpen={deleteDraftOpen}
+        onClose={() => setDeleteDraftOpen(false)}
+        onPrimary={handleDiscardDraft}
+        onSecondary={() => setDeleteDraftOpen(false)}
+        title="Delete draft?"
+        msg="Are you sure you want to delete your draft? This action cannot be undone."
+        primaryActionLabel="Delete draft"
+        secondaryActionLabel="Cancel"
+        primaryVariant="destructive"
+        secondaryVariant="secondary"
+      />
     </div>
   );
 }

@@ -17,6 +17,7 @@ export default function ToggleButtonGroup({ buttonList, onToggleChange, firstSel
         <Button
           key={option.label ?? index}
           variant="ghost"
+          size="lg"
           isSelected={option.label === activeButton}
           isRounded={true}
           onClick={() => handleClick(option.label)}
