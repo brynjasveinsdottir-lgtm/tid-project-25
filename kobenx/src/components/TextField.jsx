@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./TextField.css";
 import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternateOutlined";
-import EmojiEmotionsOutlinedIcon from "@mui/icons-material/EmojiEmotionsOutlined";
-import LinkOutlinedIcon from "@mui/icons-material/LinkOutlined";
 import FileUpload from "./Services/uploadService";
 import PhotoPreview from "./photoPreview";
 
-//Updated to make the parent fully control the component, (fixing bug with input and post content not syncing properly)
 export default function TextField({
   placeholderText,
   value,
@@ -40,7 +37,7 @@ export default function TextField({
   }, [photo]);
 
   return (
-    <div className="comment-box">
+    <div className="text-box">
       <textarea
         className="naked"
         placeholder={placeholderText}
@@ -61,8 +58,6 @@ export default function TextField({
           className="icon"
           onClick={handleAddPhoto}
         />
-        <EmojiEmotionsOutlinedIcon className="icon--disabled" />
-        <LinkOutlinedIcon className="icon--disabled" />
       </div>
 
       <FileUpload
