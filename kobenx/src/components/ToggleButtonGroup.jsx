@@ -5,23 +5,24 @@ import "./ToggleButtonGroup.css";
 export default function ToggleButtonGroup({ buttonList, onToggleChange, firstSelected }) {
   const [activeButton, setActiveButton] = useState(firstSelected || null);
 
-  const handleClick = (buttonName) => {
-    const newSelection = buttonName === activeButton ? activeButton: buttonName;
+  const handleClick = (label) => {
+    const newSelection = label === activeButton ? activeButton: label;
     setActiveButton(newSelection);
     onToggleChange(newSelection);
   };
 
   return (
     <div className="toggle-button-group">
-      {buttonList.map((button, index) => (
+      {buttonList.map((option, index) => (
         <Button
-          key={index}
-          variant="secondary"
-          isSelected={button === activeButton}
+          key={option.label ?? index}
+          variant="ghost"
+          isSelected={option.label === activeButton}
           isRounded={true}
-          onClick={() => handleClick(button)}
+          onClick={() => handleClick(option.label)}
         >
-          {button}
+          {option.icon}
+          {option.label}
         </Button>
       ))}
     </div>
