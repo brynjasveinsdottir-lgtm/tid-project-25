@@ -1,10 +1,10 @@
-import React, { useState } from "react";
 import Parse from "parse";
 import TextField from "./TextField";
 import Button from "./Button";
 import { getUserPublic } from "./Services/userService.js";
 
 import "./CommentStyle.css";
+import { useState } from "react";
 
 export default function AddComment({ post, onCommentAdded }) {
   const [text, setText] = useState("");
@@ -29,29 +29,26 @@ export default function AddComment({ post, onCommentAdded }) {
       setShowInput(false);
     } catch (error) {
       console.error("Failed to save comment:", error);
-      alert(error.message);
     }
   }
 
   return (
     <div className="comment-input-wrapper">
-    <TextField
-      placeholderText="Write a comment..."
-      onChange={setText}
-      value={text}
-    />
-    <Button
-      className="submit-button"
-      type="button"
-      variant="primary"
-      isRounded
-      onClick={handleSubmit}
-      disabled={!text.trim()} 
-    >
-      Submit
-    </Button>
-  </div>
-    
-      
+      <TextField
+        placeholderText="Write a comment..."
+        onChange={setText}
+        value={text}
+      />
+      <Button
+        className="submit-button"
+        type="button"
+        variant="primary"
+        isRounded
+        onClick={handleSubmit}
+        disabled={!text.trim()}
+      >
+        Submit
+      </Button>
+    </div>
   );
 }

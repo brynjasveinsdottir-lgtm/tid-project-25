@@ -71,19 +71,7 @@
 
 button.delete-button {
   position: absolute;
-  top: 12px;
   right: 8px;
-  background-color: transparent;
-  border: 1px solid gray;
-  padding: 3px 5px;
-  font-size: 0.8rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background-color 0.2s, color 0.2s;
-}
-
-.button.delete-button:hover {
-  background-color: rgba(43, 40, 40, 0.1);
+  padding: 4px, 5px;
+  font-size: 1rem;
 }
