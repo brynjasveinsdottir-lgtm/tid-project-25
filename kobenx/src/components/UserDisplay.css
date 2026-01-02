@@ -59,3 +59,14 @@
     align-self: flex-start;
 }
 
+.flag {
+    height: 16px;
+    border-radius: 4px;
+    object-fit: cover;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 0.5px solid #C6C6C6;
+ 
+ 
+ }
+ 
