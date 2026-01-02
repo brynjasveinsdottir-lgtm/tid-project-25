@@ -52,7 +52,7 @@
 
 .inputfield:focus {
   opacity: 100%;
-  color: #323232;
+  color: var(--color-text-default);
 }
 
 .inputfield::placeholder {

@@ -104,7 +104,7 @@
 }
 
 .Music {
-  color: #d0480e;
+  color: var(--color-accent);
 }
 
 .Food {

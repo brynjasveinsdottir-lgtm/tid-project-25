@@ -2,6 +2,8 @@ import Parse from "parse";
 import { useNavigate } from "react-router";
 import "./AuthFlow.css";
 import { useState } from "react";
+import { countrySelectOptions } from "./utils/countryCodes";
+
 
 export default function Signup() {
   
@@ -99,13 +101,18 @@ export default function Signup() {
         </div>
         <div className="input-column">
           <label htmlFor="homeCountry"> What is your home country? </label>
-          <input
-            type="text"
-            placeholder="Germany"
-            name="homeCountry"
-            className="inputfield"
-            onInput={handleFilled}
-          />
+          <select
+           name="homeCountry"
+           className="inputfield"
+           onInput={handleFilled}
+         >
+           {countrySelectOptions.map((countryName) => (
+             <option key={countryName} value={countryName}>
+               {countryName}
+             </option>
+           ))}
+         </select>
+
           <p className="validation-message">test</p>
         </div>
         <div className="input-column">

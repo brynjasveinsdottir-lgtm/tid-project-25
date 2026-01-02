@@ -9,9 +9,17 @@ import PlaceForm from "./CreatePlace";
 
 import { createPost } from "./Services/postService";
 
+import ThreadIcon from '@mui/icons-material/QuestionAnswer'
+import EventIcon from '@mui/icons-material/Event'
+import PlaceIcon from '@mui/icons-material/FmdGood'
+
 export default function CreatePost({ onClose, draft, setDraft }) {
-  const toggleOptions = ["Thread", "Event", "Place"];
-  const [selectedToggle, setSelectedToggle] = useState(toggleOptions[0]);
+  const toggleOptions = [
+    { label: "Thread", icon: <ThreadIcon/> },
+    { label: "Event", icon: <EventIcon /> },
+    { label: "Place", icon: <PlaceIcon /> },
+  ];
+  const [selectedToggle, setSelectedToggle] = useState(toggleOptions[0].label);
   const fileUploadRef = useRef(null);
 
   const [isSubmitting, setIsSubmitting] = useState(false); // To prevent multiple submissions
@@ -142,7 +150,6 @@ export default function CreatePost({ onClose, draft, setDraft }) {
             type="submit"
             isBlock
             loading={isSubmitting}
-
           >
             {isSubmitting ? "Posting…" : "Post"}
           </Button>

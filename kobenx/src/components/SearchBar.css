@@ -13,7 +13,7 @@
 }
 
 .search bar:has(input.naked:focus) {
-    background-color: #F1F8F9;
+    background-color: var(--color-primary-subtle);
 }
 
 .post-container {

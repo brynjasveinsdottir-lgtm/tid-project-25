@@ -14,12 +14,13 @@ export default function PhotoPreview({ photo, handleEdit, handleDelete }) {
     <div className="photo-preview-container">
       <img className="photo-preview" src={src} alt="preview" />
       <div className="icon-overlay">
-        <Button type="Button" variant="secondary small" onClick={handleEdit}>
+        <Button type="Button" variant="secondary" size="sm" onClick={handleEdit}>
           <EditSquareIcon />
           Edit
         </Button>
-        <Button type="Button" variant="secondary small" onClick={handleDelete}>
+        <Button type="Button" variant="destructive" size="sm" onClick={handleDelete}>
           <CancelIcon />
+          Delete
         </Button>
       </div>
     </div>

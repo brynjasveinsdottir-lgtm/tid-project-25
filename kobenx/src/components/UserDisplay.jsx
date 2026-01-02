@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import "./UserDisplay.css";
 import Avatar from "./Avatar";
 import { timeSinceMoved } from "./Services/timeService";
+import { getCountryCode } from "./utils/countryCodes";
+import ReactCountryFlag from "react-country-flag";
+
 
 export default function UserDisplay({ userInfoParse, time }) {
   if (userInfoParse) {
@@ -9,6 +12,8 @@ export default function UserDisplay({ userInfoParse, time }) {
     const profilePicUrl = profilePic ? profilePic?.url?.() : null;
 
     const timeInCph = timeSinceMoved({user: userInfoParse})
+    const homeCountry = userInfoParse.get("homeCountry");
+   const countryCode = getCountryCode(homeCountry)||"UN";
 
     return (
       <div className="user_display">
@@ -29,6 +34,19 @@ export default function UserDisplay({ userInfoParse, time }) {
                 : "FirstName"}{" "}
               {userInfoParse ? userInfoParse.get("lastName") : "User name"}{" "}
             </p>
+            <ReactCountryFlag
+             countryCode={countryCode}
+             className="flag"
+             svg={true} 
+             fallback={
+               <p className="subtle">
+                 {userInfoParse.get("homeCountry")
+                   ? userInfoParse.get("homeCountry")
+                   : "unknown country"}
+               </p>
+             }
+           />
+
             <div className="tag"> {timeInCph} </div>{" "}
             {/* How long the user has lived in CPH */}
             {time && (<p className="subtle">• {time}</p>)} {/* Timestamp */}
