@@ -21,7 +21,6 @@
   transform: scale(1.02);
 }
 
-/* Threads styling */
 
 .thread-open-container, 
 .thread-card-container {
@@ -60,7 +59,6 @@
 }
 
 
-/* Events styling */
 
 .event_card {
   width: 20rem;
