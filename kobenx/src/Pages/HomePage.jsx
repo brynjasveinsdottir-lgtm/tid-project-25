@@ -1,4 +1,3 @@
-import React from "react";
 import { useState, useEffect } from "react";
 
 import CreatePost from "../components/CreatePost";
@@ -47,6 +46,7 @@ export default function Home() {
 
   const [openDialog, setOpenDialog] = useState(false);
   const [reloadPosts, setReloadPosts] = useState(true);
+  const [error, setError] = useState(null);
 
   //new (confirm dialog to save draft)
   const [draftText, setDraftText] = useState(""); //(unsaved)
@@ -85,14 +85,24 @@ export default function Home() {
   }
   //end of new
 
-  // Get all posts that have category 'Event' from class 'Posts' in database using Parse
+  // Get all posts that have category 'Event' from class 'Posts' in db
+  // Handle possible errors from getPosts (e.g. network issues) by wrapping the async call in try/catch and showing a simple fallback UI
   useEffect(() => {
     async function fetchPosts() {
-      const results = await getPosts({ type: "All" });
-      setPosts(results);
-      setReloadPosts(false); // reset reloadPosts
+      setError(null); 
+  
+      try {
+        const results = await getPosts({ type: "All" });
+        setPosts(results);
+      } catch (err) {
+        console.error("Failed to fetch posts:", err);
+        setError("Couldn’t load posts. Please try again.");
+      } finally {
+        setReloadPosts(false); 
+      }
     }
-    fetchPosts();
+  
+    if (reloadPosts) fetchPosts();
   }, [reloadPosts]);
 
   // Handle filter chip toggles
@@ -139,6 +149,15 @@ export default function Home() {
           filterList={filters}
           onFilterChange={handleFilterChange}
         />
+
+        {error && posts.length === 0 && (
+         <div className="empty-state">
+          <p>{error}</p>
+          <Button variant="secondary" onClick={() => setReloadPosts(true)}>
+           Retry
+          </Button>
+         </div>
+        )}
 
         <div className="postContainer">
           {filteredPosts.map((post) => (
