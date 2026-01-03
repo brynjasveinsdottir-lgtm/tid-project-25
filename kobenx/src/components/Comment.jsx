@@ -3,16 +3,14 @@ import Parse from "parse";
 import UserDisplay from "./UserDisplay";
 import { getUserPublic } from "./Services/userService";
 import { timeSincePost } from "./Services/timeService";
+import { deleteComment } from "./Services/commentService.js";
+
 import "./CommentStyle.css";
 import Button from "./Button";
 
 export default function Comment({ comment, onCommentsUpdated }) {
   const author = comment.get("author");
-
-  const authorId = author?.id || author?.objectId;
-  const currentUserId = getUserPublic().id;
   const [isMine, setIsMine] = useState(false);
-
   const timeComment = timeSincePost({ post: comment });
 
   useEffect(() => {
@@ -25,24 +23,12 @@ export default function Comment({ comment, onCommentsUpdated }) {
 
   const handleDelete = async () => {
     try {
-      await comment.destroy();
-      onCommentsUpdated?.(comment.id);
+      const newCount = await deleteComment(comment.id, comment.get("post")?.id);
+      onCommentsUpdated?.(comment.id, newCount);
     } catch (error) {
       console.error("Error deleting comment:", error);
     }
   };
-
-  console.log(
-    "Current user id:",
-    currentUserId,
-    "Author id:",
-    authorId,
-    "Can delete?",
-    isMine
-  );
-
-  console.log("DELETE USING ID:", comment.id);
-  console.log("REFETCHING COMMENTS...");
 
   return (
     <div className="comment">

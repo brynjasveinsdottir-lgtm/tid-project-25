@@ -2,6 +2,7 @@ import Parse from "parse";
 import TextField from "./TextField";
 import Button from "./Button";
 import { getUserPublic } from "./Services/userService.js";
+import { addComment } from "./Services/commentService.js";
 
 import "./CommentStyle.css";
 import { useState } from "react";
@@ -14,19 +15,10 @@ export default function AddComment({ post, onCommentAdded }) {
     if (!text.trim()) return;
 
     try {
-      const userPublic = await getUserPublic();
-
-      const Comment = Parse.Object.extend("Comments");
-      const comment = new Comment();
-
-      comment.set("text", text);
-      comment.set("post", post);
-      comment.set("author", userPublic);
-
-      await comment.save();
+      const { comment, count } = await addComment({ post, text });
       setText("");
-      onCommentAdded?.();
       setShowInput(false);
+      onCommentAdded?.(comment, count);
     } catch (error) {
       console.error("Failed to save comment:", error);
     }
