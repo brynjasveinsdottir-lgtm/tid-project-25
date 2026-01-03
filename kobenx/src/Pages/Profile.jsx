@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Button from "../components/Button";
 import PersonIcon from "@mui/icons-material/Person";
 import FileUpload from "../components/Services/uploadService";
@@ -8,7 +8,7 @@ import UserDisplay from "../components/UserDisplay";
 import Avatar from "../components/Avatar";
 
 export default function Profile() {
-  const [profilePhoto, setProfilePhoto] = React.useState(null);
+  const [profilePhoto, setProfilePhoto] = useState(null);
   const fileUploadRef = React.useRef(null);
   const [errorMessage, setErrorMessage] = React.useState("");
   const [successMessage, setSuccessMessage] = React.useState("");

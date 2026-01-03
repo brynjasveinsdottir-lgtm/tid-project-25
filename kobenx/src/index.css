@@ -20,7 +20,7 @@
   --color-primary-subtle: #f1f8f9;
   --color-primary-subtle-light: #F6FBFB;
   --color-accent: #d0480e;
-  --color-text-default: #323232; /* default text color */
+  --color-text-default: #323232;
 }
 
 a {
