@@ -99,7 +99,6 @@ export default function Signup() {
     newUser.set("userIdPrivate", Parse.User.current());
     await newUser.save().then(
       (newObj) => {
-        alert("Successfully created user " + newObj.get('username'));
         window.location.reload();
       },
       (error) => {
