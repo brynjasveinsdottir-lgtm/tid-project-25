@@ -1,9 +1,10 @@
 import Parse from "parse"
 import './AuthFlow.css'
-import { useState } from "react"
+import { use, useState } from "react"
 
 export default function LogIn() {
 
+    const [isLoading, setIsLoading] = useState(false)
     const [isButtonDisabled, setIsButtonDisabled] = useState(true)
     const [failedUsername, setFailedUsername] = useState(false)
     const [failedPassword, setFailedPassword] = useState(false)
@@ -40,16 +41,21 @@ export default function LogIn() {
     }
 
     async function login(formData) {
+        
+        setIsLoading(true)
+
         const username1 = formData.get('username')
         const password1 = formData.get('password')
-        const user = await Parse.User.logIn(`${username1}`, `${password1}`).then(
-            (newObj) => {
+        
+        await Parse.User.logIn(`${username1}`, `${password1}`).then(
+            () => {
                 window.location.reload()
             },
             (error) => {
                 setErrorMessage(error.message)
                 setFailedUsername(true)
                 setFailedPassword(true)
+                setIsLoading(false)
             }
         )
         
@@ -72,8 +78,8 @@ export default function LogIn() {
                     title={isButtonDisabled ? 'Enter Username & Password first' : 'Click me to log in!'}
                     type="submit" value='submit'
                     className={isButtonDisabled ? 'disabledButton' : 'enabledButton'}
-                    disabled={isButtonDisabled}>
-                    Log-In
+                    disabled={isButtonDisabled || isLoading}>
+                    {isLoading ? 'Logging in...' : 'Log in'}
                 </button>
             </form>
         </div>

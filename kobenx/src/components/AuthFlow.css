@@ -76,7 +76,7 @@
 
 .enabledButton {
     height: 3rem;
-    width: 7rem;
+    width: 9rem;
 }
 
 .enabledButton:hover {
@@ -86,7 +86,7 @@
 
 .disabledButton {
     height: 3rem;
-    width: 7rem;
+    width: 9rem;
     cursor: default;
 }
 

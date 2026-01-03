@@ -9,6 +9,7 @@ export default function Signup() {
   
   const currentDate = new Date().toLocaleString('en-CA', {year: 'numeric', month:'2-digit', day:'2-digit'})
 
+  const [isLoading, setIsLoading] = useState(false)
   const [usernameExists, setUsernameExists] = useState(false)
   const [isButtonDisabled, setIsButtonDisabled] = useState(true)
   const [isFilled, setIsFilled] = useState({
@@ -76,6 +77,9 @@ export default function Signup() {
   }
   
   async function signup(formData) {
+
+    setIsLoading(true)
+
     const username = formData.get("username");
     const password = formData.get("password");
     const user = new Parse.User();
@@ -98,11 +102,12 @@ export default function Signup() {
     newUser.set("username", formData.get("username"));
     newUser.set("userIdPrivate", Parse.User.current());
     await newUser.save().then(
-      (newObj) => {
+      () => {
         window.location.reload();
       },
       (error) => {
         alert(error.message);
+        setIsLoading(false)
       }
     );
   }
@@ -205,7 +210,14 @@ export default function Signup() {
           />
           <p className="validation-message">{isValidated.password ? '' : 'Please enter a password'}</p>
         </div>
-        <button title={isButtonDisabled ? 'Enter info first' : 'Click me to sign up!'} type="submit" value='submit' className={isButtonDisabled ? 'disabledButton' : 'enabledButton'} disabled={isButtonDisabled}>Sign up</button>
+        <button
+          title={isButtonDisabled ? 'Enter info first' : 'Click me to sign up!'}
+          type="submit"
+          value='submit'
+          className={isButtonDisabled ? 'disabledButton' : 'enabledButton'}
+          disabled={isButtonDisabled || isLoading}>
+          {isLoading ? 'Signing up...' : 'Sign up'}
+        </button>
       </form>
     </div>
   );
