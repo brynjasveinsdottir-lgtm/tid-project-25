@@ -62,5 +62,5 @@
   object-fit: cover;
   overflow: hidden;
   flex-shrink: 0;
-  border: 0.5px solid #c6c6c6;
+  border: 0.5px solid var(--color-gray-light-3);
 }

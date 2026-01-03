@@ -12,7 +12,6 @@ export const countryNameToCode = {
     "Czech Republic": "CZ",
     Denmark: "DK",
     Egypt: "EG",
-    EU: "EU",
     Finland: "FI",
     France: "FR",
     Germany: "DE",

@@ -104,7 +104,7 @@
 .button--secondary {
   background-color: white;
   color: var(--color-text-default);
-  border-color: #c6c6c6;
+  border-color: var(--color-gray-light-3);
 }
 
 .button--secondary:hover {

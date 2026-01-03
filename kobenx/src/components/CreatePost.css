@@ -9,7 +9,7 @@
 
 input {
   padding: 10px;
-  border: 1.5px solid #c6c6c6;
+  border: 1.5px solid var(--color-gray-light-3);
   border-radius: 16px;
   font-size: 16px;
   font-family: "Manrope";
@@ -38,7 +38,7 @@ input:focus {
 }
 select {
   padding: 10px;
-  border: 1.5px solid #c6c6c6;
+  border: 1.5px solid var(--color-gray-light-3);
   border-radius: 16px;
   font-size: 16px;
   font-family: "Manrope";
