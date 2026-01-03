@@ -2,7 +2,7 @@
   background-color: #fff;
   border-radius: 16px;
   padding: 16px;
-  border: 1.5px solid #c6c6c6;
+  border: 1.5px solid var(--color-gray-light-3);
   cursor: pointer;
   transition: all 0.2s;
   margin-bottom: 16px;
@@ -102,23 +102,23 @@
 }
 
 .Music {
-  color: var(--color-accent);
+  color: var(--color-accent-dark);
 }
 
 .Food {
-  color: #28818f;
+  color: var(--color-primary);
 }
 
 .Social {
-  color: #EA8A5F;
+  color: var(--color-primary-dark);
 }
 
 .Sport {
-  color: #93A7AB;
+  color: var(--color-accent-light);
 }
 
 .Culture {
-  color: #B44A1B;
+  color: var(--color-accent);
 }
 
 .date_time {
@@ -131,7 +131,7 @@
 
 .location {
   font-size: 1rem;
-  color: #5d5d5d;
+  color: var(--color-gray-light-1);
   margin: 0;
   padding: 0;
   margin-bottom: auto;
@@ -151,7 +151,8 @@
 
 .post_info {
   font-size: 0.75rem;
-  opacity: 0.5;
+  opacity: 1;
+  color: var(--color-gray-light-2);
   padding: 0;
   margin: 0;
 }
