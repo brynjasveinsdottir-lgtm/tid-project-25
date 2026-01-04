@@ -5,7 +5,7 @@ import "./SideBarStyle.css";
 
 import { getUserPublic } from "../services/userService.js";
 
-import ProfileInfo from "../profileInfo/ProfileInfo";
+import ProfileInfo from "../profileInfo/ProfileInfo.jsx";
 import Button from "../button/Button";
 import { SideBarData } from "./SideBarData";
 

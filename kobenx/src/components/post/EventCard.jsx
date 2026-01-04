@@ -48,7 +48,8 @@ export default function EventCard({ event }) {
   const eventImageUrl = eventImage ? eventImage.url() : EventPl;
 
   // Get the event icon based on which category it is
-  const EventCategoryIcon = eventCategoryIcons[event.get("eventCategory")] || OtherIcon;
+  const EventCategoryIcon =
+    eventCategoryIcons[event.get("eventCategory")] || OtherIcon;
 
   // Structuring the eventTime for the event card
   const eventTime = `${event
