@@ -1,5 +1,5 @@
 import Parse from "parse";
-import { getUserPublic } from "../services/userService.js";
+import { getUserPublic } from "./userService.js";
 
 export async function createPost({
   selectedToggle,

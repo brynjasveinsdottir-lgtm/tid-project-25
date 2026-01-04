@@ -1,6 +1,6 @@
 import Parse from "parse";
 
-import { getUserPublic } from "../services/userService.js";
+import { getUserPublic } from "./userService.js";
 
 function getPostPointer(postId) {
   const Posts = Parse.Object.extend("Posts");
