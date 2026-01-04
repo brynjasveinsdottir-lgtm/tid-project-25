@@ -1,9 +1,10 @@
 import { useState } from "react";
 import "./CommentStyle.css";
 
+import { addComment } from "../services/commentService.js";
+
 import TextField from "../textField/TextField.jsx";
 import Button from "../button/Button.jsx";
-import { addComment } from "../services/commentService.js";
 
 export default function AddComment({ post, onCommentAdded }) {
   const [text, setText] = useState("");
@@ -28,7 +29,7 @@ export default function AddComment({ post, onCommentAdded }) {
         value={text}
       />
       <Button
-        className="submit-button"
+        className="submit-button" /* absolute positioning of the button*/
         type="button"
         variant="primary"
         isRounded

@@ -1,12 +1,13 @@
 import ThreadForm from "./CreateThread.jsx";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import "./CreatePost.css";
 
 import { editPost } from "../Services/editService.js";
 import { deletePost } from "../Services/deleteService.js";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 import Button from "../button/Button.jsx";
+
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 export default function EditPost({ onClose, post, onDeleted }) {
   const postImage = post.get("image") ? post.get("image") : null;
@@ -22,6 +23,7 @@ export default function EditPost({ onClose, post, onDeleted }) {
     setThreadData({ content: currentData.content, photo: currentData.photo });
     onClose();
   }
+
   async function handleDelete() {
     try {
       await deletePost({ postId: post.id });
@@ -44,6 +46,7 @@ export default function EditPost({ onClose, post, onDeleted }) {
       setErrorMessage(error.message);
     }
   }
+
   return (
     <div className="dialog-content">
       {errorMessage && <div className="error-message">{errorMessage}</div>}
@@ -57,11 +60,7 @@ export default function EditPost({ onClose, post, onDeleted }) {
       >
         <ThreadForm data={threadData} setData={setThreadData} />
         <div className="button-dock">
-          <Button
-            variant="destructive icon-only"
-            type="button"
-            onClick={handleDelete}
-          >
+          <Button variant="destructive" type="button" onClick={handleDelete}>
             <DeleteForeverIcon />
           </Button>
 

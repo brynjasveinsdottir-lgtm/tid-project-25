@@ -37,19 +37,14 @@
   border: none;
   padding: 0;
   cursor: pointer;
-  color: rgb(36, 111, 124);
-}
-
-/* fix: like icon vertical alignment */
-.likeButton svg {
-  transform: translateY(-1px);
+  color: var(--color-primary);
 }
 
 .likeButton:hover,
 .commentButton:hover,
 .bookmarkButton:hover,
 .repostButton:hover {
-  color: rgb(208, 72, 14);
+  color: var(--color-accent-dark);
 }
 
 .likeButton:focus,
@@ -62,7 +57,7 @@
 .likesCount {
   font-size: 15px;
   font-weight: 600;
-  color: rgb(36, 111, 124);
+  color: var(--color-primary);
   line-height: 1;
   margin: 0;
   padding: 0;
@@ -71,7 +66,7 @@
 .commentsCount {
   font-size: 15px;
   font-weight: 600;
-  color: rgb(36, 111, 124);
+  color: var(--color-primary);
   line-height: 1;
   margin: 0;
   padding: 0;

@@ -37,7 +37,7 @@
 } /* default, used for create post */
 .dialog--lg {
   width: 820px;
-} /* not used currently */
+} /* for future use */
 
 /* Styling of the sub-components */
 .dialog-header {
@@ -53,7 +53,7 @@
 }
 .dialog-header.divider {
   border-width: 1px;
-  border-color: rgba(213, 213, 213, 1);
+  border-color: var(--color-gray-light-4);
   border-bottom-style: solid;
 }
 
@@ -72,7 +72,7 @@
   padding: 0;
 }
 .close-button:hover {
-  color: #888;
+  color: var(--color-gray-light-4);
 }
 
 .dialog-content {

@@ -1,9 +1,17 @@
-// using ThreadCard (and events) code as reference but creating a more generic post type that can support all types of posts
-// also testing out props for threads
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CardStyle.css";
+
+import { timeSincePost } from "../services/timeService.js";
+import { getUserPublic } from "../services/userService.js";
+
+import UserDisplay from "../userDisplay/UserDisplay.jsx";
+import PostInteractions from "../postInteractions/PostInteractions.jsx";
+import Button from "../button/Button.jsx";
+import Dialog from "../dialog/Dialog.jsx";
+import EditPost from "../createPost/EditPost.jsx";
+
+import EditNoteIcon from "@mui/icons-material/EditNote";
 
 import MusicIcon from "@mui/icons-material/MusicNote";
 import FoodIcon from "@mui/icons-material/Restaurant";
@@ -11,29 +19,18 @@ import SocialIcon from "@mui/icons-material/PeopleAlt";
 import SportIcon from "@mui/icons-material/DirectionsRun";
 import CultureIcon from "@mui/icons-material/TheaterComedy";
 import OtherIcon from "@mui/icons-material/Event";
-import UserDisplay from "../userDisplay/UserDisplay.jsx";
-import PostInteractions from "../postInteractions/PostInteractions.jsx";
-import { timeSincePost } from "../Services/timeService.js";
-
-import Button from "../button/Button.jsx";
-import EditNoteIcon from "@mui/icons-material/EditNote";
-import { getUserPublic } from "../Services/userService.js";
-import Parse, { setLocalDatastoreController } from "parse";
-import Dialog from "../dialog/Dialog.jsx";
-import EditPost from "../createPost/EditPost.jsx";
 
 const eventIcons = {
   Music: MusicIcon,
   Food: FoodIcon,
+  Other: OtherIcon,
   Social: SocialIcon,
   Sport: SportIcon,
   Culture: CultureIcon,
-  Other: OtherIcon,
 };
 
 export default function Post({ post, onDeleted }) {
   //variables
-
   const postImage = post.get("image") ? post.get("image") : null;
   const postImageUrl = postImage ? postImage.url() : null;
 
@@ -46,35 +43,21 @@ export default function Post({ post, onDeleted }) {
   const timePost = timeSincePost({ post: post });
 
   const [liked, setLiked] = useState(false);
-  const [showComment, setShowComment] = useState(false);
-  const [bookmarked, setBookmarked] = useState(false);
-  const [repostet, setRepostet] = useState(false);
-
   const handleLike = () => setLiked(!liked);
-  const handleComment = () => setShowComment(!showComment);
-  const handleBookmark = () => setBookmarked(!bookmarked);
-  const handleRepost = () => setRepostet(!repostet);
+
+  const [openDialogEdit, setOpenDialogEdit] = useState(false); // for edit dialog
 
   const navigate = useNavigate();
 
-  //Get user item (reusing same code as in comment so lets move to service maybe)
+  //check if the user is the post author
   const [isMine, setIsMine] = useState(false);
-  const [openDialogEdit, setOpenDialogEdit] = useState(false); // for testing edit dialog
-
   useEffect(() => {
-    async function getUserItem() {
-      const Post = Parse.Object.extend("Posts");
-      const publicUser = await getUserPublic();
-      const query = new Parse.Query(Post);
-      query.equalTo("author", publicUser);
-      query.equalTo("objectId", post.id);
-      const isAuthor = await query.find();
-      setIsMine(isAuthor.length > 0);
-      console.log("isMine:", isMine);
-    }
-
-    getUserItem();
-  }, []);
+    async function checkOwnership() {
+      const user = await getUserPublic();
+      setIsMine(user.id === post.get("author")?.id);
+    } //compare ID without sending a parse query
+    checkOwnership();
+  }, [post]);
 
   //return statements
   //for event posts
@@ -112,7 +95,7 @@ export default function Post({ post, onDeleted }) {
       </article>
     );
   }
-
+  //otherwise return normal post (for threads)
   return (
     <article
       className="card"
@@ -129,7 +112,6 @@ export default function Post({ post, onDeleted }) {
             variant="secondary"
             size="sm"
           >
-            {" "}
             <EditNoteIcon /> Edit post
           </Button>
         )}
@@ -141,25 +123,15 @@ export default function Post({ post, onDeleted }) {
         <PostInteractions
           postId={post.id}
           liked={liked}
-          bookmarked={bookmarked}
-          repostet={repostet}
           onLike={(e) => {
             e.stopPropagation();
             handleLike();
-          }}
-          onBookmark={(e) => {
-            e.stopPropagation();
-            handleBookmark();
-          }}
-          onRepost={(e) => {
-            e.stopPropagation();
-            handleRepost();
           }}
           onComment={() => navigate(`/threadOpen/${post.id}`)}
         />
       </div>
 
-      {/*EDIT DIALOG (should open over whole page*/}
+      {/*EDIT DIALOG*/}
       <Dialog
         isOpen={openDialogEdit}
         isDismissible

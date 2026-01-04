@@ -1,8 +1,10 @@
 import React from "react";
+import "./photoPreview.css";
+
 import Button from "../button/Button";
+
 import EditSquareIcon from "@mui/icons-material/EditSquare";
 import CancelIcon from "@mui/icons-material/Cancel";
-import "./photoPreview.css";
 
 export default function PhotoPreview({ photo, handleEdit, handleDelete }) {
   if (!photo) {

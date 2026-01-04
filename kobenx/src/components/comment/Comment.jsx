@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
-import Parse from "parse";
-import UserDisplay from "../userDisplay/UserDisplay.jsx";
+import "./CommentStyle.css";
+
 import { getUserPublic } from "../Services/userService.js";
 import { timeSincePost } from "../Services/timeService.js";
 import { deleteComment } from "../services/commentService.js";
 
-import "./CommentStyle.css";
+import UserDisplay from "../userDisplay/UserDisplay.jsx";
 import Button from "../button/Button.jsx";
+
+import CloseIcon from "@mui/icons-material/Close";
 
 export default function Comment({ comment, onCommentsUpdated }) {
   const author = comment.get("author");
@@ -38,13 +40,14 @@ export default function Comment({ comment, onCommentsUpdated }) {
 
       {isMine && (
         <Button
-          className="delete-button"
+          className="delete-button" /* absolute positioning of the button*/
           type="button"
-          variant="secondary"
+          size="sm"
+          variant="destructiveGhost"
           isRounded
           onClick={handleDelete}
         >
-          X
+          <CloseIcon />
         </Button>
       )}
     </div>

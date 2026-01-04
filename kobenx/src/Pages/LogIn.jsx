@@ -1,7 +1,5 @@
 import React from "react";
-import { useEffect, useState } from "react";
-import Parse from "parse";
-import { NavLink } from "react-router";
+import { useState } from "react";
 import LogIn from "/src/components/authentication/LoginFlow";
 import Signup from "/src/components/authentication/SignupFlow";
 import "./PageStyle.css";

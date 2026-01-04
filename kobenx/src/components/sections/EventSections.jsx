@@ -1,6 +1,4 @@
 import EventCard from "/src/components/post/EventCard.jsx";
-import "/src/assets/Manrope.ttf";
-import "/src/index.css";
 import "/src/Pages/PageStyle.css";
 
 export default function EventSection({ category, events }) {

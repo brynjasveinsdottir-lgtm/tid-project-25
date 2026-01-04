@@ -5,9 +5,9 @@ export default function FilterChip({ label, onToggle }) {
   const [active, setActive] = useState(false);
 
   const handleClick = () => {
-    const next = !active;
-    setActive(next);
-    onToggle(next); // sender kun aktiv-boolean tilbage
+    const activeState = !active;
+    setActive(activeState);
+    onToggle(activeState);
   };
 
   return (

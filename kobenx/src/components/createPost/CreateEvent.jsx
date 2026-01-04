@@ -1,11 +1,11 @@
 import React from "react";
-import Button from "../button/Button.jsx";
-
-import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
-import AddLinkIcon from "@mui/icons-material/AddLink";
 
 import FileUpload from "../services/uploadService.jsx";
+
+import Button from "../button/Button.jsx";
 import PhotoPreview from "../photoPreview/photoPreview.jsx";
+
+import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 
 export default function EventForm({ data, setData, fileUploadRef }) {
   const handleDelete = () => {
@@ -40,21 +40,16 @@ export default function EventForm({ data, setData, fileUploadRef }) {
         <option value="Sport">Sport</option>
         <option value="Other">Other</option>
       </select>
-      <select
+
+      <input
+        type="text"
+        placeholder="Event location"
         value={data.location}
         onChange={(e) =>
           setData((prev) => ({ ...prev, location: e.target.value }))
         }
         required
-      >
-        <option value="">Select location</option>
-        <option value="Tivoli">Tivoli Gardens</option>
-        <option value="Nyhavn">Nyhavn</option>
-        <option value="Refshaleøen">Refshaleøen</option>
-        <option value="Nørrebrogade">Nørrebrogade</option>
-        <option value="Nørrebro market">Nørrebro market</option>
-        <option value="Other">Other</option>
-      </select>
+      />
       <input
         type="datetime-local"
         value={data.time}
@@ -62,22 +57,17 @@ export default function EventForm({ data, setData, fileUploadRef }) {
         required
       />
 
-      <div className="button-dock">
-        <Button
-          type="button"
-          variant="secondary"
-          onClick={() => fileUploadRef.current?.triggerSelect()}
-        >
-          <AddPhotoAlternateIcon /> Add Photo
-        </Button>
-        <FileUpload
-          ref={fileUploadRef}
-          onSelect={(photo) => setData((prev) => ({ ...prev, photo }))}
-        />
-        <Button type="button" variant="secondary">
-          <AddLinkIcon /> Add Signup Link
-        </Button>
-      </div>
+      <Button
+        type="button"
+        variant="secondary"
+        onClick={() => fileUploadRef.current?.triggerSelect()}
+      >
+        <AddPhotoAlternateIcon /> Add Photo
+      </Button>
+      <FileUpload
+        ref={fileUploadRef}
+        onSelect={(photo) => setData((prev) => ({ ...prev, photo }))}
+      />
 
       {data.photo && (
         <PhotoPreview

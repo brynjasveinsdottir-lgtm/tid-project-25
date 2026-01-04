@@ -68,15 +68,15 @@
 .button:disabled,
 .button:disabled:hover,
 .button:disabled:active {
-  background-color: var(--color-gray-light-4);
-  color: var(--color-grey-light-1);
+  background-color: var(--color-gray-light-3);
+  color: var(--color-grey-light-2);
   cursor: not-allowed;
   box-shadow: none;
   transform: none;
   border-color: transparent;
 }
 .button:active {
-  transform: scale(0.98);
+  transform: scale(0.95);
 }
 /* VARIANTS */
 
@@ -143,17 +143,19 @@
 
 /* Destructive */
 .button--destructive {
-  background-color: #dc3545;
+  background-color: var(--color-negative);
   color: white;
 }
 
 .button--destructive:hover {
-  background-color: #b43441;
+  background-color: var(--color-negative-dark);
+}
+.button--destructiveGhost {
+  background-color: transparent;
+  color: var(--color-negative);
+  border: var(--color-negative) solid 1px;
 }
 
-.button--destructive:active {
-  background-color: #a71d2a;
-  transform: scale(0.98);
+.button--destructiveGhost:hover {
+  background-color: #f6cece;
 }
-
-/* add a ghost variant here and include selected state (use for toggle button instead)*/

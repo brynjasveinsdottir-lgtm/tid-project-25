@@ -1,9 +1,4 @@
 import { useState, useEffect } from "react";
-
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ModeCommentOutlinedIcon from "@mui/icons-material/ModeCommentOutlined";
-
 import "./PostInteractions.css";
 
 import {
@@ -13,9 +8,13 @@ import {
 } from "../services/likeService.js";
 import { getCommentsCount } from "../services/commentService.js";
 
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ModeCommentOutlinedIcon from "@mui/icons-material/ModeCommentOutlined";
+
 export default function PostInteractions({ postId, onComment }) {
-  const [liked, setLiked] = useState(false); // user liked?
-  const [likesCount, setLikesCount] = useState(0); // total number of likes
+  const [liked, setLiked] = useState(false);
+  const [likesCount, setLikesCount] = useState(0);
   const [commentsCount, setCommentsCount] = useState(0);
 
   useEffect(() => {

@@ -1,13 +1,13 @@
 import React, { useState, useRef } from "react";
 import "./CreatePost.css";
+import { createPost } from "../Services/postService.js";
 
 import ToggleButtonGroup from "../toggleButtonGroup/ToggleButtonGroup.jsx";
 import Button from "../button/Button.jsx";
+
 import ThreadForm from "./CreateThread";
 import EventForm from "./CreateEvent";
 import PlaceForm from "./CreatePlace";
-
-import { createPost } from "../Services/postService.js";
 
 import ThreadIcon from "@mui/icons-material/QuestionAnswer";
 import EventIcon from "@mui/icons-material/Event";
@@ -36,7 +36,7 @@ export default function CreatePost({ onClose, draft, setDraft }) {
     time: "",
     photo: null,
   });
-  const [placeData, setPlaceData] = useState({ location: "", photo: null }); //Not used currently but reserved for future use
+  const [placeData, setPlaceData] = useState({ location: "", photo: null }); //Reserved for future use
 
   // Validators
   const validators = {

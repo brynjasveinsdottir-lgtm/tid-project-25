@@ -1,7 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import "./SearchBar.css";
+
 import { getPosts } from "../Services/getService.js";
+
 import Post from "../post/PostTemplate.jsx";
 
 export default function SearchBar() {

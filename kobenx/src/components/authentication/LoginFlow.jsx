@@ -1,6 +1,6 @@
 import Parse from "parse";
 import "./AuthFlow.css";
-import { use, useState } from "react";
+import { useState } from "react";
 
 export default function LogIn() {
   const [isLoading, setIsLoading] = useState(false);
@@ -54,6 +54,8 @@ export default function LogIn() {
         setFailedUsername(true);
         setFailedPassword(true);
         setIsLoading(false);
+        setIsFilled({ username: false, password: false });
+        setIsButtonDisabled(true);
       }
     );
   }
@@ -70,7 +72,7 @@ export default function LogIn() {
             className={`inputfield ${failedUsername ? "failed" : ""}`}
             onInput={handleFilled}
           />
-          <p className="error-message"></p>
+          <p className="validation-message"></p>
         </div>
         <div className="input-column login">
           <label htmlFor="password"> Password </label>
@@ -81,7 +83,9 @@ export default function LogIn() {
             className={`inputfield ${failedPassword ? "failed" : ""}`}
             onInput={handleFilled}
           />
-          <p className="error-message">{failedUsername ? errorMessage : " "}</p>
+          <p className="validation-message">
+            {failedUsername ? errorMessage : " "}
+          </p>
         </div>
         <button
           title={

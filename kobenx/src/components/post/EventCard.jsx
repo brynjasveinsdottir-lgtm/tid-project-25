@@ -2,17 +2,20 @@ import React, { useState, useEffect } from "react";
 import "./CardStyle.css";
 import "../goingElement/GoingElement.css";
 
+import { timeSincePost } from "../Services/timeService.js";
+import { getSignups } from "../Services/getService.js";
+
+import GoingElement from "../goingElement/GoingElement.jsx";
+import EventSignupButton from "./EventSignupButton.jsx";
+
 import MusicIcon from "@mui/icons-material/MusicNote";
 import FoodIcon from "@mui/icons-material/Restaurant";
 import SocialIcon from "@mui/icons-material/PeopleAlt";
 import SportIcon from "@mui/icons-material/DirectionsRun";
 import CultureIcon from "@mui/icons-material/TheaterComedy";
 import OtherIcon from "@mui/icons-material/Event";
-import GoingElement from "../goingElement/GoingElement.jsx";
+
 import EventPl from "/src/assets/EventPl.png";
-import EventSignupButton from "./EventSignupButton.jsx";
-import { timeSincePost } from "../Services/timeService.js";
-import { getSignups } from "../Services/getService.js";
 
 const eventIcons = {
   Music: MusicIcon,

@@ -1,6 +1,4 @@
 import React from "react";
-import TextField from "../textField/TextField";
-
 export default function PlaceForm({ data, setData }) {
   return (
     <div className="input-container">

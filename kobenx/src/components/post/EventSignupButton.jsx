@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Parse from "parse";
 import "./CardStyle.css";
+
 import { getUserPublic } from "../Services/userService.js";
+
 import Button from "../button/Button.jsx";
 
 export default function EventSignupButton({ event, refreshSignups }) {
@@ -46,7 +48,7 @@ export default function EventSignupButton({ event, refreshSignups }) {
 
   return (
     <Button
-      variant={"primary"}
+      variant="primary"
       isSelected={isSignedUp}
       isRounded={true}
       className="event-signup-button"
