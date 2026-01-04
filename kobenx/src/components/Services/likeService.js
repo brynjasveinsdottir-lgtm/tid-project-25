@@ -1,5 +1,5 @@
 import Parse from "parse";
-import { getUserPublic } from "./userService.js";
+import { getUserPublic } from "../services/userService.js";
 
 // Pointer to Posts
 function getPostPointer(postId) {

@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import "./SearchBar.css";
 
-import { getPosts } from "../Services/getService.js";
+import { getPosts } from "../services/getService.js";
 
 import Post from "../post/PostTemplate.jsx";
 

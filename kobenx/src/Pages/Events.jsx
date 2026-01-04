@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import "./PageStyle.css";
 
-import { getPosts } from "../components/Services/getService.js";
+import { getPosts } from "../components/services/getService.js";
 
 import EventSection from "../components/sections/EventSections.jsx";
 

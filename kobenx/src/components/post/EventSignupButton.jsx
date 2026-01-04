@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Parse from "parse";
 import "./CardStyle.css";
 
-import { getUserPublic } from "../Services/userService.js";
+import { getUserPublic } from "../services/userService.js";
 
 import Button from "../button/Button.jsx";
 

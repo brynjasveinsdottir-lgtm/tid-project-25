@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./PageStyle.css";
 
-import { getPosts } from "../components/Services/getService.js";
+import { getPosts } from "../components/services/getService.js";
 
 import CreatePost from "../components/createPost/CreatePost.jsx";
 import Filters from "../components/filters/Filters";
