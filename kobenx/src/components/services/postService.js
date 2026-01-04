@@ -1,0 +1,47 @@
+import Parse from "parse";
+import { getUserPublic } from "./userService.js";
+
+export async function createPost({
+  selectedToggle,
+  postContent,
+  postPhoto,
+  postTitle,
+  category,
+  location,
+  eventTime,
+}) {
+  // Get the UserPublic info (via the new user service)
+  const userPublic = await getUserPublic();
+
+  // Create a new post
+  const Posts = Parse.Object.extend("Posts");
+  const newPost = new Posts();
+  newPost.set("category", selectedToggle);
+  newPost.set("postText", postContent);
+  newPost.set("author", userPublic);
+  newPost.set("postTitle", postTitle);
+
+  // Attach image if provided (now it should be a File object)
+  if (postPhoto) {
+    const parseFile = new Parse.File(postPhoto.name, postPhoto);
+    newPost.set("image", parseFile);
+  }
+
+  //if the post is an event
+  if (selectedToggle === "Event") {
+    const eventDate = eventTime
+      ? new Date(eventTime)
+      : new Date("2026-01-20T15:30:00Z"); // convert the datetime-local string to Date or uses hard coded date if none provided
+    newPost.set("eventTime", eventDate);
+    newPost.set("eventCategory", category ? category : "Other");
+    newPost.set("eventPlace", location ? location : "TBD");
+  }
+
+  // Save the post
+  try {
+    return await newPost.save();
+  } catch (error) {
+    console.error("Error saving post:", error);
+    throw error; //for frontend to catch the error
+  }
+}

@@ -1,26 +1,75 @@
-import React from "react";
-import ThreadCard from '/src/components/ThreadCard.jsx';
-import { userA } from "/src/UserInfoData";
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import Parse from "parse";
+import "./PageStyle.css";
 
-export default function Threads() {
+import { getSinglePost } from "../components/services/getService.js";
 
-    
-  
-  const threadTestA = {
-    author: userA,
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  };
+import PostTemplate from "../components/post/PostTemplate";
+import AddComment from "../components/comment/AddComment";
+import CommentList from "../components/comment/CommentList";
+import Button from "../components/button/Button";
 
+export default function ThreadOpen() {
+  const navigate = useNavigate();
+  const { id } = useParams();
 
-  const threads = [threadTestA];
+  const [post, setPost] = useState(null);
+  const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+    async function fetchPost() {
+      const result = await getSinglePost({ postId: id });
+      setPost(result);
+    }
+
+    fetchPost();
+  }, [id]);
+
+  // Fetch comments for the current post
+  async function fetchComments() {
+    if (!post) return;
+
+    const Comment = Parse.Object.extend("Comments");
+    const query = new Parse.Query(Comment);
+
+    query.equalTo("post", post);
+
+    query.include("author");
+    query.descending("createdAt"); // newest comments at the top
+
+    const results = await query.find();
+    setComments(results);
+  }
+
+  // Fetch comments whenever the post is loaded
+  useEffect(() => {
+    if (post) fetchComments();
+  }, [post]);
+
+  if (!post) {
+    return <div className="loading">Loading thread...</div>;
+  }
 
   return (
     <div className="page-structure">
-      <h1 className="page-title">Threads</h1>
-        <div className="centered">
-          {threads.map((thread, id) => (
-            <ThreadCard key={id} thread={thread} />
-          ))}
+      <h1 className="page-title">Thread</h1>
+      <Button
+        className="back-button"
+        type="button"
+        variant="secondary"
+        isRounded
+        onClick={() => {
+          navigate("/threads");
+        }}
+      >
+        Back
+      </Button>
+      <div className="thread-open-container">
+        <PostTemplate post={post} />
+        <AddComment post={post} onCommentAdded={fetchComments} />
+        <h2 className="section-title">Comments</h2>
+        <CommentList comments={comments} onCommentsUpdated={fetchComments} />
       </div>
     </div>
   );

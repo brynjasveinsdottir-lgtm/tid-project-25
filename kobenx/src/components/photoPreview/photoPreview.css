@@ -1,0 +1,23 @@
+.photo-preview-container {
+  position: relative;
+  width: 40%;
+}
+
+.photo-preview {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.icon-overlay {
+  position: absolute;
+  display: flex;
+  top: 12px;
+  right: 10px;
+  left: 10px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  justify-content: space-between;
+}
+

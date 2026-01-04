@@ -1,0 +1,41 @@
+.profiles-container {
+  margin: 0;
+  padding: 0;
+  margin-right: -12px;
+}
+
+.going-avatar {
+  padding: 0;
+  margin: 0;
+  height: 1.5rem;
+  width: 1.5rem;
+  font-size: 0.75rem;
+  border: 1.5px solid white;
+}
+
+.others-container {
+  display: flex;
+  font-size: 0.7rem;
+}
+
+.under3 {
+  margin-left: 20px;
+}
+
+.over3 {
+  margin-left: 15px;
+}
+.picture-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  line-height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.going-container {
+  display: flex;
+  margin-left: auto;
+}

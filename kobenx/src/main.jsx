@@ -1,22 +1,24 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import React from 'react'
-import {createBrowserRouter, RouterProvider, Outlet} from 'react-router-dom'
-import SideBarNav from './components/SideBarNav.jsx'
-import Home from './Pages/HomePage.jsx'
-import Threads from './Pages/Threads.jsx'
-import ThreadOpen from "./Pages/ThreadOpen.jsx"
-import Events from './Pages/Events.jsx'
-import Places from './Pages/Places.jsx'
-import Profile from './Pages/Profile.jsx'
-import LogIn from './Pages/LogIn'
-import Parse from "parse"
-import RequireAuth from './loginauth'
+import { createRoot } from "react-dom/client";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import Parse from "parse";
+import "./index.css";
 
+import RequireAuth from "./loginauth";
+import SideBarNav from "./components/sideBar/SideBarNav.jsx";
+import Home from "./Pages/HomePage.jsx";
+import Threads from "./Pages/Threads.jsx";
+import ThreadOpen from "./Pages/ThreadOpen.jsx";
+import Events from "./Pages/Events.jsx";
+import Places from "./Pages/Places.jsx";
+import Profile from "./Pages/Profile.jsx";
+import LogIn from "./Pages/LogIn";
+import Search from "./Pages/Search.jsx";
 
-Parse.initialize("NJWaTl5KAfW9YpXza0hBThItPeTOoUzjxXvmusKC", "5P6trcxyUbGHTeIpG6wvEC26LjG8eClqrh95PBmL");
-Parse.serverURL = 'https://parseapi.back4app.com'
+Parse.initialize(
+  "dOl8yBChtVctqGdJV9lQd21ix18ENNyc0c9CURYe",
+  "lZJmhhLRoZTtaWCqwY0j1CypEiUg74VNtHMKDgDA"
+);
+Parse.serverURL = "https://parseapi.back4app.com";
 
 // This defines the skeleton of the site, the things that don't change. The Outlet in this is each page's content.
 function AppLayout() {
@@ -39,11 +41,12 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "/threads", element: <Threads /> },
-      { path: "/threadOpen", element: <ThreadOpen /> },
+      { path: "/threadOpen/:id", element: <ThreadOpen /> },
       { path: "/events", element: <Events /> },
       { path: "/places", element: <Places /> },
       { path: "/profile", element: <Profile /> },
       { path: "/login", element: <LogIn /> },
+      { path: "/search", element: <Search /> },
     ],
   },
 ]);

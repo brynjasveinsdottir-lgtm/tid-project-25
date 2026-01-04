@@ -1,9 +1,9 @@
 :root {
-  font-family: 'Manrope';
+  font-family: "Manrope";
   line-height: 1.5;
   font-weight: 400;
 
-  color: #323232;
+  color: var(--color-text-default);
   background-color: transparent;
 
   font-synthesis: none;
@@ -14,12 +14,32 @@
   width: 100%;
 
   text-align: center;
+
+  --color-primary: #28808f;
+  --color-primary-dark: #246f7c;
+  --color-primary-darker: #1c5863;
+  --color-primary-subtle: #f1f8f9;
+  --color-primary-subtle-light: #f6fbfb;
+  --color-accent: #d0480e;
+  --color-accent-dark: #b44a1b;
+  --color-accent-light: #ea8a5f;
+
+  --color-text-default: #323232; /* default text color */
+  --color-gray-light-1: #5d5d5d; /* use for subtle text */
+  --color-gray-light-2: #808080;
+  --color-gray-light-3: #c6c6c6;
+  --color-gray-light-4: #d5d5d5;
+
+  --color-negative: #dc3545;
+  --color-negative-dark: #b22d3a;
+
+  --color-focus-outline: #0056b3;
 }
 
 a {
   display: flex;
   font-weight: 400;
-  color: #323232;
+  color: var(--color-text-default);
   text-decoration: inherit;
 }
 
@@ -49,15 +69,15 @@ button:focus-visible {
 }
 
 @font-face {
-  font-family: 'Manrope';
-  src: url(/src/assets/Manrope.ttf) format('truetype');
+  font-family: "Manrope";
+  src: url(/src/assets/Manrope.ttf) format("truetype");
   font-weight: 100 900;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Bricolage Grotesque';
-  src: url(/src/assets/BricolageGrotesque.ttf) format('truetype');
+  font-family: "Bricolage Grotesque";
+  src: url(/src/assets/BricolageGrotesque.ttf) format("truetype");
   font-style: normal;
 }
 
