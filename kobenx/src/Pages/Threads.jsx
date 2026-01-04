@@ -9,7 +9,7 @@ import PostTemplate from "../components/PostTemplate";
 
 export default function Threads() {
   const [posts, setPosts] = useState([]);
-  // Get all posts that have category 'Event' from class 'Posts' in database using Parse
+
   useEffect(() => {
     async function fetchPosts() {
       const results = await getPosts({ type: "Threads" });
