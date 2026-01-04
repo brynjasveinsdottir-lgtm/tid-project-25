@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./UserDisplay.css";
 import Avatar from "../avatar/Avatar.jsx";
-import { timeSinceMoved } from "../Services/timeService.js";
+import { timeSinceMoved } from "../services/timeService.js";
 import { getCountryCode } from "../utils/countryCodes.js";
 import ReactCountryFlag from "react-country-flag";
 

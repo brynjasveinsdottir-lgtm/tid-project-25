@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import Parse from "parse";
 import "./SideBarStyle.css";
 
-import { getUserPublic } from "../services/userService";
+import { getUserPublic } from "../services/userService.js";
 
 import ProfileInfo from "../profileInfo/ProfileInfo";
 import Button from "../button/Button";

@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import "./CreatePost.css";
-import { createPost } from "../Services/postService.js";
+import { createPost } from "../services/postService.js";
 
 import ToggleButtonGroup from "../toggleButtonGroup/ToggleButtonGroup.jsx";
 import Button from "../button/Button.jsx";

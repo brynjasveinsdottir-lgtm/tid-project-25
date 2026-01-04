@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getPosts } from "../components/Services/getService.js";
+import { getPosts } from "../components/services/getService.js";
 import "./PageStyle.css";
 
 import PostTemplate from "../components/post/PostTemplate";

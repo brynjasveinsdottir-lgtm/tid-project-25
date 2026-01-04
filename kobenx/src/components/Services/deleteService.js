@@ -1,5 +1,5 @@
 import { getUserPublic } from "../services/userService.js";
-import { getSinglePost } from "./getService.js";
+import { getSinglePost } from "../services/getService.js";
 
 export async function deletePost({ postId }) {
   // Get the UserPublic info (via the user service)
