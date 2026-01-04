@@ -1,5 +1,5 @@
 import ThreadForm from "./CreateThread.jsx";
-import React, { useState } from "react";
+import { useState } from "react";
 import "./CreatePost.css";
 
 import { editPost } from "../services/editService.js";

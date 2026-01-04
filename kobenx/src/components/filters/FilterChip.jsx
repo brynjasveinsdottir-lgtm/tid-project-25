@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Button from "../button/Button.jsx";
 
 export default function FilterChip({ label, onToggle }) {

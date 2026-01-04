@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import FilterChip from "./FilterChip";
 import "./Filters.css";
 

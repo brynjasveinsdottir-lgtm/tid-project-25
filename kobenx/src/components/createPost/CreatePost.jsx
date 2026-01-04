@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import "./CreatePost.css";
 import { createPost } from "../services/postService.js";
 

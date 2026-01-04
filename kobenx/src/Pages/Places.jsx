@@ -1,4 +1,3 @@
-import React from "react";
 import placesmap from "../assets/placesMap.png";
 
 export default function Places() {

@@ -1,4 +1,3 @@
-import React from "react";
 import "./Dialog.css";
 import ReactDOM from "react-dom";
 
