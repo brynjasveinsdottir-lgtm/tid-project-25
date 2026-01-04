@@ -1,5 +1,5 @@
 import "./ProfileInfo.css";
-import Avatar from "/src/components/Avatar";
+import Avatar from "/src/components/avatar/Avatar";
 
 export default function ProfileInfo({ userInfo }) {
   const profilePic = userInfo ? userInfo.get("profilePicture") : null;

@@ -4,7 +4,7 @@ import { getUserPublic } from "./userService";
 import { getSinglePost } from "./getService.js";
 
 export async function editPost({ postId, newPostContent, newPostPhoto }) {
-  // Get the UserPublic (via the user service)
+  // Get the UserPublic info (via the user service)
   const userPublic = await getUserPublic();
   const post = await getSinglePost({ postId });
   if (post.get("author").id !== userPublic.id) {
@@ -27,6 +27,6 @@ export async function editPost({ postId, newPostContent, newPostPhoto }) {
     return await post.save();
   } catch (error) {
     console.error("Error updating post:", error);
-    throw error; // important! re-throw so frontend can catch
+    throw error; //for frontend to catch the error
   }
 }

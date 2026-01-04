@@ -1,12 +1,12 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import Parse from "parse";
-import EventCard from "/src/components/EventCard.jsx";
+import EventCard from "/src/components/post/EventCard.jsx";
 import "/src/assets/Manrope.ttf";
 import "/src/index.css";
 import "./PageStyle.css";
 import { getPosts } from "../components/Services/getService.js";
-import EventSection from "../components/EventSections";
+import EventSection from "../components/sections/EventSections.jsx";
 
 export default function Events() {
   const [posts, setPosts] = useState([]);

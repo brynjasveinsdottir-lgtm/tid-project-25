@@ -14,6 +14,7 @@ export async function getPosts({ type }) {
     query.equalTo("category", "Thread");
   }
 
+  //for the upcoming events section on the homepage
   if (type === "UpcomingEvents") {
     query.limit(4);
   }

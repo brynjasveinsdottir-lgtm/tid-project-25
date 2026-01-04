@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
-import Button from "../components/Button";
+import Button from "../components/button/Button";
 import PersonIcon from "@mui/icons-material/Person";
-import FileUpload from "../components/Services/uploadService";
+import FileUpload from "../components/services/uploadService";
 import { getUserPublic } from "../components/Services/userService";
 import Parse from "parse";
-import UserDisplay from "../components/UserDisplay";
-import Avatar from "../components/Avatar";
+import UserDisplay from "../components/userDisplay/UserDisplay";
 
 export default function Profile() {
   const [profilePhoto, setProfilePhoto] = useState(null);
@@ -25,7 +24,7 @@ export default function Profile() {
     getUser();
   }, []);
 
-//function for saving the profile photo to parse backend
+  //function for saving the profile photo to parse backend
   const handleSaveChanges = async () => {
     if (!profilePhoto) {
       setErrorMessage("Please select a photo first");
@@ -51,57 +50,56 @@ export default function Profile() {
     }
   };
 
-  //page UI 
+  //page UI
   return (
     <div className="page-structure">
       <h1 className="page-title">Profile</h1>
       <div className="column-layout">
+        <UserDisplay userInfoParse={user}></UserDisplay>
 
-      <UserDisplay userInfoParse={user}></UserDisplay>
-
-      {profilePhoto && (
-        <img
-          src={URL.createObjectURL(profilePhoto)}
-          alt="preview"
-          className="profile-photo"
-        />
-      )}
-      <Button
-        variant="secondary"
-        onClick={() => {
-          fileUploadRef.current?.triggerSelect();
-        }}
-      >
-        <PersonIcon /> Change profile photo
-      </Button>
-      <FileUpload
-        ref={fileUploadRef}
-        onSelect={(file) => {
-          if (file) {
-            setProfilePhoto(file);
-            setUnsaved(true); // mark that there are unsaved changes
-          }
-        }}
-      />
-      {unsaved && (
-        <div className="row-layout">
-        <Button
-          variant="primary"
-          onClick={handleSaveChanges}
-        >
-          Save changes
-        </Button>
+        {profilePhoto && (
+          <img
+            src={URL.createObjectURL(profilePhoto)}
+            alt="preview"
+            className="profile-photo"
+          />
+        )}
         <Button
           variant="secondary"
-          onClick={() => {setProfilePhoto(null); setUnsaved(false);}} //for some reason after doing this, you cannot select the same file again and trigger onSelect (bug?)
+          onClick={() => {
+            fileUploadRef.current?.triggerSelect();
+          }}
         >
-          Cancel
+          <PersonIcon /> Change profile photo
         </Button>
-        </div>
-      )}
+        <FileUpload
+          ref={fileUploadRef}
+          onSelect={(file) => {
+            if (file) {
+              setProfilePhoto(file);
+              setUnsaved(true); // mark that there are unsaved changes
+            }
+          }}
+        />
+        {unsaved && (
+          <div className="row-layout">
+            <Button variant="primary" onClick={handleSaveChanges}>
+              Save changes
+            </Button>
+            <Button
+              variant="secondary"
+              onClick={() => {
+                setProfilePhoto(null);
+                setUnsaved(false);
+              }} //for some reason after doing this, you cannot select the same file again and trigger onSelect (bug?)
+            >
+              Cancel
+            </Button>
+          </div>
+        )}
 
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
-      {successMessage && <p className="success-message">{successMessage}</p>}
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
+        {successMessage && <p className="success-message">{successMessage}</p>}
       </div>
     </div>
   );

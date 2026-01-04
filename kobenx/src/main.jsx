@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import React from "react";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import SideBarNav from "./components/SideBarNav.jsx";
+import SideBarNav from "./components/sideBar/SideBarNav.jsx";
 import Home from "./Pages/HomePage.jsx";
 import Threads from "./Pages/Threads.jsx";
 import ThreadOpen from "./Pages/ThreadOpen.jsx";

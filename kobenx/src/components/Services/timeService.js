@@ -20,7 +20,7 @@ const timeSincePost = ({ post }) => {
   return `${value}${unit}`;
 };
 
-//time since moved function
+//time since moved function (for the tagline on profile)
 const timeSinceMoved = ({ user }) => {
   const movedDate = new Date(user.get("dateMovedToCph"));
   const now = new Date();

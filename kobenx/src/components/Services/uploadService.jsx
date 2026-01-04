@@ -1,7 +1,3 @@
-//reference: https://blog.back4app.com/how-to-upload-files-to-back4app/
-//modified to not upload directly but send the file to parent component (then it gets uploaded to parse when the post is created)
-//modified to forward ref so we can trigger the file upload from a button or an icon in another component
-
 import React, { forwardRef, useImperativeHandle, useRef } from "react";
 
 const FileUpload = forwardRef(function FileUpload({ onSelect }, ref) {
@@ -10,7 +6,7 @@ const FileUpload = forwardRef(function FileUpload({ onSelect }, ref) {
   useImperativeHandle(ref, () => ({
     triggerSelect() {
       inputRef.current.click();
-    }
+    },
   }));
 
   const handleFileUpload = (e) => {
@@ -29,5 +25,3 @@ const FileUpload = forwardRef(function FileUpload({ onSelect }, ref) {
 });
 
 export default FileUpload;
-
-

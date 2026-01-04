@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 
-import CreatePost from "../components/CreatePost";
-import Filters from "../components/Filters";
-import Post from "../components/PostTemplate";
-import TrendingEvents from "../components/TrendingEvents";
-import TrendingThreads from "../components/TrendingThreads";
+import CreatePost from "../components/createPost/CreatePost.jsx";
+import Filters from "../components/filters/Filters";
+import Post from "../components/post/PostTemplate.jsx";
+import TrendingEvents from "../components/trending/TrendingEvents.jsx";
+import TrendingThreads from "../components/trending/TrendingThreads.jsx";
 
 import "/src/assets/Manrope.ttf";
 import "/src/index.css";
@@ -12,9 +12,9 @@ import "./PageStyle.css";
 import { getPosts } from "../components/Services/getService.js";
 
 //new dialog test
-import Dialog from "../components/Dialog";
-import ConfirmDialog from "../components/ConfirmDialog";
-import Button from "../components/Button";
+import Dialog from "../components/dialog/Dialog.jsx";
+import ConfirmDialog from "../components/dialog/ConfirmDialog.jsx";
+import Button from "../components/button/Button";
 
 //icons for empty state
 import SearchOffIcon from "@mui/icons-material/SearchOff";

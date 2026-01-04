@@ -10,7 +10,7 @@ export async function createPost({
   location,
   eventTime,
 }) {
-  // Get the UserPublic (via the new user service)
+  // Get the UserPublic info (via the new user service)
   const userPublic = await getUserPublic();
 
   // Create a new post
@@ -31,18 +31,17 @@ export async function createPost({
   if (selectedToggle === "Event") {
     const eventDate = eventTime
       ? new Date(eventTime)
-      : new Date("2026-01-20T15:30:00Z"); // convert the datetime-local string to Date or uses hard coded date if none provided (But lets change this and have a fallback in the UI, but for now it will crash if we dont provide a date)
+      : new Date("2026-01-20T15:30:00Z"); // convert the datetime-local string to Date or uses hard coded date if none provided
     newPost.set("eventTime", eventDate);
     newPost.set("eventCategory", category ? category : "Other");
     newPost.set("eventPlace", location ? location : "TBD");
   }
-  //Cloud function before saving (validating input)
 
   // Save the post
   try {
     return await newPost.save();
   } catch (error) {
     console.error("Error saving post:", error);
-    throw error; // important! re-throw so frontend can catch
+    throw error; //for frontend to catch the error
   }
 }

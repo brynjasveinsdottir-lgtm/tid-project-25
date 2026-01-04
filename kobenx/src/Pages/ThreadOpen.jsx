@@ -3,12 +3,12 @@ import Parse from "parse";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-import PostTemplate from "../components/PostTemplate";
-import AddComment from "../components/AddComment";
-import CommentList from "../components/CommentList";
+import PostTemplate from "../components/post/PostTemplate";
+import AddComment from "../components/comment/AddComment";
+import CommentList from "../components/comment/CommentList";
 import "./PageStyle.css";
 import "/src/assets/Manrope.ttf";
-import Button from "../components/Button";
+import Button from "../components/button/Button";
 
 export default function ThreadOpen() {
   const navigate = useNavigate();

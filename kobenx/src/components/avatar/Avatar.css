@@ -1,0 +1,23 @@
+.avatar {
+  width: 50px;
+  aspect-ratio: 1 / 1;
+  border-radius: 999px;
+  object-fit: cover;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.fallback {
+  background-color: var(--color-primary-subtle);
+  align-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: "Manrope";
+  font-weight: 600;
+  font-size: 18px;
+  border-color: var(--color-primary);
+  border-width: 2px;
+  width: 50px;
+  aspect-ratio: 1 / 1;
+  flex-shrink: 0;
+}
