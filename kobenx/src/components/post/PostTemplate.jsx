@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CardStyle.css";
 
-import { timeSincePost } from "../services/timeService.js";
-import { getUserPublic } from "../services/userService.js";
+import { timeSincePost } from "../servicesTemp/timeService.js";
+import { getUserPublic } from "../servicesTemp/userService.js";
 
 import UserDisplay from "../userDisplay/UserDisplay.jsx";
 import PostInteractions from "../postInteractions/PostInteractions.jsx";

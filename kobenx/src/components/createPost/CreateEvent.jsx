@@ -1,4 +1,4 @@
-import FileUpload from "../services/uploadService.jsx";
+import FileUpload from "../servicesTemp/uploadService.js";
 
 import Button from "../button/Button.jsx";
 import PhotoPreview from "../photoPreview/photoPreview.jsx";

@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import "./CardStyle.css";
 import "../goingElement/GoingElement.css";
 
-import { timeSincePost } from "../services/timeService.js";
-import { getSignups } from "../services/getService.js";
+import { timeSincePost } from "../servicesTemp/timeService.js";
+import { getSignups } from "../servicesTemp/getService.js";
 
 import GoingElement from "../goingElement/GoingElement.jsx";
 import EventSignupButton from "./EventSignupButton.jsx";
@@ -48,7 +48,8 @@ export default function EventCard({ event }) {
   const eventImageUrl = eventImage ? eventImage.url() : EventPl;
 
   // Get the event icon based on which category it is
-  const EventCategoryIcon = eventCategoryIcons[event.get("eventCategory")] || OtherIcon;
+  const EventCategoryIcon =
+    eventCategoryIcons[event.get("eventCategory")] || OtherIcon;
 
   // Structuring the eventTime for the event card
   const eventTime = `${event

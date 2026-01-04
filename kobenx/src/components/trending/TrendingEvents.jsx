@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import { getPosts } from "../services/getService.js";
+import { getPosts } from "../servicesTemp/getService.js";
 
 import EventPl from "/src/assets/EventPl.png";
 

@@ -5,8 +5,8 @@ import {
   toggleLike,
   getLikesCount,
   userHasLiked,
-} from "../services/likeService.js";
-import { getCommentsCount } from "../services/commentService.js";
+} from "../servicesTemp/likeService.js";
+import { getCommentsCount } from "../servicesTemp/commentService.js";
 
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";

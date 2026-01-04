@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./SearchBar.css";
 
-import { getPosts } from "../services/getService.js";
+import { getPosts } from "../servicesTemp/getService.js";
 
 import Post from "../post/PostTemplate.jsx";
 
