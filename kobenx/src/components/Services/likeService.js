@@ -1,5 +1,5 @@
 import Parse from "parse";
-import { getUserPublic } from "./userService.js";
+import { getUserPublic } from "../services/userService.js";
 
 // Pointer to Posts
 function getPostPointer(postId) {
@@ -19,7 +19,7 @@ function getUserPublicPointer(id) {
 
 // Toggle Like
 export async function toggleLike(postId) {
-  const userPublic = await getUserPublic();     
+  const userPublic = await getUserPublic();
   if (!userPublic) throw new Error("No user logged in");
 
   const postPointer = getPostPointer(postId);
@@ -41,8 +41,8 @@ export async function toggleLike(postId) {
   }
 
   const newLike = new Likes();
-  newLike.set("user", userPointer);   
-  newLike.set("post", postPointer);   
+  newLike.set("user", userPointer);
+  newLike.set("post", postPointer);
   await newLike.save();
   await updatePostLikesCount(postId);
 
@@ -53,7 +53,7 @@ export async function toggleLike(postId) {
 export async function getLikesCount(postId) {
   const postPointer = getPostPointer(postId);
   const Likes = Parse.Object.extend("Likes");
-  
+
   const query = new Parse.Query(Likes);
   query.equalTo("post", postPointer);
 
@@ -63,7 +63,7 @@ export async function getLikesCount(postId) {
 // Update 'likes' column in Posts class
 export async function updatePostLikesCount(postId) {
   const postPointer = getPostPointer(postId);
-  
+
   const newCount = await getLikesCount(postId);
   postPointer.set("likes", newCount);
   await postPointer.save();
@@ -82,7 +82,7 @@ export async function userHasLiked(postId) {
   const Likes = Parse.Object.extend("Likes");
 
   const query = new Parse.Query(Likes);
-  query.equalTo("user", userPointer);        
+  query.equalTo("user", userPointer);
   query.equalTo("post", postPointer);
 
   const existing = await query.first();

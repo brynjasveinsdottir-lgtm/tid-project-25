@@ -1,0 +1,100 @@
+.form-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  border: 1.5px solid var(--color-gray-light-3);
+  border-radius: 16px;
+  width: 40vh;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.input-row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 2rem;
+  padding: 0;
+  margin: 0;
+}
+
+.input-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.login {
+  justify-content: center;
+  align-items: center;
+}
+
+.inputfield {
+  width: 100%;
+  height: 2rem;
+  padding: 0;
+  padding-top: 5px;
+  padding-bottom: 2px;
+  margin: 0;
+  border: 0;
+  border-radius: 0px;
+  border-bottom: var(--color-gray-light-3) solid 1.2px;
+  opacity: 0.75;
+  outline: none;
+  font-size: 1rem;
+}
+
+.inputfield:focus {
+  opacity: 100%;
+  color: var(--color-text-default);
+}
+
+.inputfield::placeholder {
+  color: var(--color-gray-light-2);
+  opacity: 1;
+}
+
+.failed {
+  border-bottom: var(--color-negative) solid 2px;
+}
+
+.inputfield.failed::placeholder {
+  color: var(--color-negative);
+  font-weight: 600;
+}
+
+.placeholder {
+  color: var(--color-gray-light-2);
+  opacity: 0.8;
+}
+
+.enabledButton {
+  height: 3rem;
+  width: 10rem;
+}
+
+.enabledButton:hover {
+  background-color: var(--color-gray-light-3);
+  transition: 0.2s;
+}
+
+.disabledButton {
+  height: 3rem;
+  width: 10rem;
+  cursor: default;
+}
+
+.validation-message {
+  align-self: flex-start;
+  height: 0.2rem;
+  color: var(--color-negative);
+  font-size: 0.8rem;
+  padding: 0;
+  margin: 0;
+}

@@ -1,11 +1,8 @@
 import { useState, useEffect } from "react";
-import { getPosts } from "../components/Services/getService";
-
-import "/src/assets/Manrope.ttf";
-import "/src/index.css";
+import { getPosts } from "../components/services/getService.js";
 import "./PageStyle.css";
 
-import PostTemplate from "../components/PostTemplate";
+import PostTemplate from "../components/post/PostTemplate";
 
 export default function Threads() {
   const [posts, setPosts] = useState([]);

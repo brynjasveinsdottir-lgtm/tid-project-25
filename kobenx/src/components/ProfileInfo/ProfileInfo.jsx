@@ -1,7 +1,5 @@
-import React from "react";
-//import Avatar from "@mui/material/Avatar";
 import "./ProfileInfo.css";
-import Avatar from "/src/components/Avatar";
+import Avatar from "/src/components/avatar/Avatar";
 
 export default function ProfileInfo({ userInfo }) {
   const profilePic = userInfo ? userInfo.get("profilePicture") : null;
@@ -10,7 +8,7 @@ export default function ProfileInfo({ userInfo }) {
   return (
     <div className="profile-info">
       <Avatar
-        alt={userInfo ? userInfo.get("firstName") : "placeholder"}
+        alt={userInfo ? userInfo.get("firstName") : "UNKNOWN"}
         src={profilePicUrl}
       />
       <div className="profile-text">

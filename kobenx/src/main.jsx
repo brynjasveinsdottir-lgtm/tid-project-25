@@ -1,9 +1,10 @@
-import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./index.css";
-import React from "react";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import SideBarNav from "./components/SideBarNav.jsx";
+import Parse from "parse";
+import "./index.css";
+
+import RequireAuth from "./loginauth";
+import SideBarNav from "./components/sideBar/SideBarNav.jsx";
 import Home from "./Pages/HomePage.jsx";
 import Threads from "./Pages/Threads.jsx";
 import ThreadOpen from "./Pages/ThreadOpen.jsx";
@@ -12,8 +13,6 @@ import Places from "./Pages/Places.jsx";
 import Profile from "./Pages/Profile.jsx";
 import LogIn from "./Pages/LogIn";
 import Search from "./Pages/Search.jsx";
-import Parse from "parse";
-import RequireAuth from "./loginauth";
 
 Parse.initialize(
   "QVyxkDZrYW9DlqPstNhA7WWGTirCEruGGW15E0Q4",

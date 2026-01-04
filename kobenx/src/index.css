@@ -19,18 +19,21 @@
   --color-primary-dark: #246f7c;
   --color-primary-darker: #1c5863;
   --color-primary-subtle: #f1f8f9;
-  --color-primary-subtle-light: #F6FBFB;
+  --color-primary-subtle-light: #f6fbfb;
   --color-accent: #d0480e;
   --color-accent-dark: #b44a1b;
   --color-accent-light: #ea8a5f;
 
-
   --color-text-default: #323232; /* default text color */
-  --color-gray-light-1: #5d5d5d;
+  --color-gray-light-1: #5d5d5d; /* use for subtle text */
   --color-gray-light-2: #808080;
   --color-gray-light-3: #c6c6c6;
   --color-gray-light-4: #d5d5d5;
-  --color-text-default: #323232;
+
+  --color-negative: #dc3545;
+  --color-negative-dark: #b22d3a;
+
+  --color-focus-outline: #0056b3;
 }
 
 a {

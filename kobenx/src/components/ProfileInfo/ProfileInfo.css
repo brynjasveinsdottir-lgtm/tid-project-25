@@ -11,9 +11,10 @@
 
 .profile-name {
   font-size: 14px;
-  color: #222;
+  color: var(--color-text-default);
   font-weight: 600;
   margin: 0;
+
   text-overflow: ellipsis;
   text-wrap: nowrap;
   max-width: 135px;
@@ -29,5 +30,4 @@
   text-wrap: nowrap;
   max-width: 135px;
   overflow-inline: hidden;
-
 }

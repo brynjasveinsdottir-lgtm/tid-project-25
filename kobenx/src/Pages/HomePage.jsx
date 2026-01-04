@@ -1,33 +1,27 @@
 import { useState, useEffect } from "react";
-
-import CreatePost from "../components/CreatePost";
-import Filters from "../components/Filters";
-import Post from "../components/PostTemplate";
-import TrendingEvents from "../components/TrendingEvents";
-import TrendingThreads from "../components/TrendingThreads";
-
-import "/src/assets/Manrope.ttf";
-import "/src/index.css";
 import "./PageStyle.css";
-import { getPosts } from "../components/Services/getService";
 
-//new dialog test
-import Dialog from "../components/Dialog";
-import ConfirmDialog from "../components/ConfirmDialog";
-import Button from "../components/Button";
+import { getPosts } from "../components/services/getService.js";
+
+import CreatePost from "../components/createPost/CreatePost.jsx";
+import Filters from "../components/filters/Filters";
+import Post from "../components/post/PostTemplate.jsx";
+import TrendingEvents from "../components/trending/TrendingEvents.jsx";
+import TrendingThreads from "../components/trending/TrendingThreads.jsx";
+import Dialog from "../components/dialog/Dialog.jsx";
+import ConfirmDialog from "../components/dialog/ConfirmDialog.jsx";
+import Button from "../components/button/Button";
 
 //icons for empty state
 import SearchOffIcon from "@mui/icons-material/SearchOff";
 import FilterListOffIcon from "@mui/icons-material/FilterListOff";
 
 export default function Home() {
-  const filters = ["Event", "Thread", "Place", "Popular", "New"];
-  const [filtersResetKey, setFiltersResetKey] = useState(0);
-
   const [posts, setPosts] = useState([]);
 
+  const filters = ["Event", "Thread", "Place", "Popular", "New"];
+  const [filtersResetKey, setFiltersResetKey] = useState(0);
   const [selectedFilters, setSelectedFilters] = useState([]);
-
   //FILTER LOGIC
   const filterLogic = {
     category: (post, value) => post.get("category") === value,
@@ -86,11 +80,11 @@ export default function Home() {
   //end of new
 
   // Get all posts that have category 'Event' from class 'Posts' in db
-  // Handle possible errors from getPosts (e.g. network issues) by wrapping the async call in try/catch and showing a simple fallback UI
+  // Handle possible errors from getPosts (e.g. network issues) and show retry button
   useEffect(() => {
     async function fetchPosts() {
-      setError(null); 
-  
+      setError(null);
+
       try {
         const results = await getPosts({ type: "All" });
         setPosts(results);
@@ -98,10 +92,10 @@ export default function Home() {
         console.error("Failed to fetch posts:", err);
         setError("Couldn’t load posts. Please try again.");
       } finally {
-        setReloadPosts(false); 
+        setReloadPosts(false);
       }
     }
-  
+
     if (reloadPosts) fetchPosts();
   }, [reloadPosts]);
 
@@ -151,12 +145,12 @@ export default function Home() {
         />
 
         {error && posts.length === 0 && (
-         <div className="empty-state">
-          <p>{error}</p>
-          <Button variant="secondary" onClick={() => setReloadPosts(true)}>
-           Retry
-          </Button>
-         </div>
+          <div className="empty-state">
+            <p>{error}</p>
+            <Button variant="secondary" onClick={() => setReloadPosts(true)}>
+              Retry
+            </Button>
+          </div>
         )}
 
         <div className="postContainer">
@@ -171,7 +165,7 @@ export default function Home() {
               }}
             />
           ))}
-          {filteredPosts.length === 0 && selectedFilters.length>1 && (
+          {filteredPosts.length === 0 && selectedFilters.length > 1 && (
             <div className="empty-state">
               <SearchOffIcon />
               <p>No posts match the selected filters...</p>

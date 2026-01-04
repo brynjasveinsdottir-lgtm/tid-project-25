@@ -1,20 +1,18 @@
-import Parse from "parse";
+import { getUserPublic } from "../services/userService.js";
+import { getSinglePost } from "../services/getService.js";
 
-import { getUserPublic } from "./userService";
-import { getSinglePost } from "./getService";
-
-export async function deletePost({ postId}) {
-  // Get the UserPublic (via the user service)
+export async function deletePost({ postId }) {
+  // Get the UserPublic info (via the user service)
   const userPublic = await getUserPublic();
   const post = await getSinglePost({ postId });
+
   if (post.get("author").id !== userPublic.id) {
     return Promise.reject(
       new Error("You do not have permission to delete this post.")
     );
   }
-   await post.destroy();
-   console.log("Post deleted successfully");
+  await post.destroy();
+  console.log("Post deleted successfully");
 
-   return;
-
+  return;
 }
