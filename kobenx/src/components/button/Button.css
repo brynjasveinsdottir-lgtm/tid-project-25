@@ -60,7 +60,7 @@
   outline: none;
 }
 .button:focus-visible {
-  outline: 3px solid #0056b3;
+  outline: 3px solid var(--color-focus-outline);
   outline-offset: 3px;
 }
 
@@ -68,8 +68,8 @@
 .button:disabled,
 .button:disabled:hover,
 .button:disabled:active {
-  background-color: #e0e0e0;
-  color: #817f7f;
+  background-color: var(--color-gray-light-4);
+  color: var(--color-grey-light-1);
   cursor: not-allowed;
   box-shadow: none;
   transform: none;
@@ -82,14 +82,13 @@
 
 /* Primary */
 .button--primary {
-  background-color:var(--color-primary);
+  background-color: var(--color-primary);
   color: white;
 }
 
 .button--primary:hover {
   background-color: var(--color-primary-dark);
 }
-
 
 .button--primary-selected {
   background-color: var(--color-accent);
@@ -98,7 +97,6 @@
 .button--primary-selected:hover {
   background-color: #b44a1b;
 }
-
 
 /* Secondary */
 .button--secondary {
@@ -133,7 +131,7 @@
 }
 
 .button--ghost-selected {
-  background-color: var(--color-primary-subtle); 
+  background-color: var(--color-primary-subtle);
   color: var(--color-primary);
   border-color: transparent;
   font-weight: 600;
@@ -142,7 +140,6 @@
 .button--ghost-selected:hover {
   background-color: #eaf7f9;
 }
-
 
 /* Destructive */
 .button--destructive {

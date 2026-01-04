@@ -2,7 +2,7 @@ import React from "react";
 import "./Button.css";
 
 export default function Button({
-  variant = "primary", //default is primary, maybe it should be secondary?
+  variant = "primary", //default is primary
   size = "md", //default size
   isSelected = false,
   isRounded = false,
