@@ -1,4 +1,4 @@
-import React, { forwardRef, useImperativeHandle, useRef } from "react";
+import { forwardRef, useImperativeHandle, useRef } from "react";
 
 const FileUpload = forwardRef(function FileUpload({ onSelect }, ref) {
   const inputRef = useRef();

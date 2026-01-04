@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./TextField.css";
 
 import FileUpload from "../services/uploadService.jsx";
@@ -13,7 +13,7 @@ export default function TextField({
   photo,
 }) {
   const [inputPhoto, setInputPhoto] = useState(photo || null);
-  const fileUploadRef = React.useRef(null);
+  const fileUploadRef = useRef(null);
 
   const handleChange = (e) => {
     const text = e.target.value;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Parse from "parse";
 
 import FileUpload from "../components/services/uploadService";
@@ -11,10 +11,10 @@ import PersonIcon from "@mui/icons-material/Person";
 
 export default function Profile() {
   const [profilePhoto, setProfilePhoto] = useState(null);
-  const fileUploadRef = React.useRef(null);
-  const [errorMessage, setErrorMessage] = React.useState("");
-  const [successMessage, setSuccessMessage] = React.useState("");
-  const [unsaved, setUnsaved] = React.useState(false);
+  const fileUploadRef = useRef(null);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [unsaved, setUnsaved] = useState(false);
 
   //getting the user info
   const [user, setUser] = useState(null);

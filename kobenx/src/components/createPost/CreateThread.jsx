@@ -1,4 +1,3 @@
-import React from "react";
 import TextField from "../textField/TextField";
 
 export default function ThreadForm({ data, setData, onDraftChange }) {

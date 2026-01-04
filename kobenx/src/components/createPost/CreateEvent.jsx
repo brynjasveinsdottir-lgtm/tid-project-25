@@ -1,5 +1,3 @@
-import React from "react";
-
 import FileUpload from "../services/uploadService.jsx";
 
 import Button from "../button/Button.jsx";

@@ -1,4 +1,3 @@
-import React from "react";
 import "./photoPreview.css";
 
 import Button from "../button/Button";
