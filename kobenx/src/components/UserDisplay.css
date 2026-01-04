@@ -1,50 +1,66 @@
 .tag {
-    border-style: solid;
-    border-width: 1px;
-    border-color: #D0480E;
-    color: rgb(255, 255, 255);
-    font-size: 12px;
-    background-color: #D0480E;
-    padding: 2px 6px;
-    border-radius: 999px;
+  display: inline-block;
+
+  border: 1px solid var(--color-accent);
+  background-color: var(--color-accent);
+  color: #fff;
+
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 999px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  min-width: 0;
 }
 
-
 .username {
-    font-size: 16px;
-    font-family: 'Manrope';
-    font-weight: 800;
-    color: #323232;
-    margin: 0px;
-
+  font-size: 16px;
+  font-family: "Manrope";
+  font-weight: 800;
+  color: var(--color-text-default);
+  margin: 0px;
 }
 
 .user_display {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 16px;
-
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
 }
 .column {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
 }
 .row {
-    display: flex;
-    flex-direction: row;
-    gap: 4px;
-    align-items: center;
-    padding: 0px;
-    margin: 0px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+  padding: 0px;
+  margin: 0px;
+  min-width: 0;
 }
 .subtle {
-    font-size: 14px;
-    font-family: 'Manrope';
-    font-weight: 500;
-    color: #5D5D5D;
-    margin: 0px;
-    align-self: flex-start;
+  font-size: 14px;
+  font-family: "Manrope";
+  font-weight: 500;
+  color: #5d5d5d;
+  margin: 0px;
+  align-self: flex-start;
 }
 
+.flag {
+  font-size: 18px;
+  border-radius: 999px;
+  object-fit: cover;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 0.5px solid var(--color-gray-light-3);
+}

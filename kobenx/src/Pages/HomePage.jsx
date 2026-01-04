@@ -1,27 +1,29 @@
-import React from "react";
 import { useState, useEffect } from "react";
-import Parse from "parse";
 
 import CreatePost from "../components/CreatePost";
 import Filters from "../components/Filters";
 import Post from "../components/PostTemplate";
-import Button from "../components/Button";
 import TrendingEvents from "../components/TrendingEvents";
 import TrendingThreads from "../components/TrendingThreads";
-import parse from "parse";
 
 import "/src/assets/Manrope.ttf";
 import "/src/index.css";
 import "./PageStyle.css";
-import { getUserPublic } from "../components/Services/userService";
 import { getPosts } from "../components/Services/getService";
 
 //new dialog test
 import Dialog from "../components/Dialog";
-import EditPost from "../components/EditPost";
+import ConfirmDialog from "../components/ConfirmDialog";
+import Button from "../components/Button";
+
+//icons for empty state
+import SearchOffIcon from "@mui/icons-material/SearchOff";
+import FilterListOffIcon from "@mui/icons-material/FilterListOff";
 
 export default function Home() {
   const filters = ["Event", "Thread", "Place", "Popular", "New"];
+  const [filtersResetKey, setFiltersResetKey] = useState(0);
+
   const [posts, setPosts] = useState([]);
 
   const [selectedFilters, setSelectedFilters] = useState([]);
@@ -42,18 +44,65 @@ export default function Home() {
     },
   };
 
-  const [openCreatePost, setOpenCreatePost] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
   const [reloadPosts, setReloadPosts] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Get all posts that have category 'Event' from class 'Posts' in database using Parse
+  //new (confirm dialog to save draft)
+  const [draftText, setDraftText] = useState(""); //(unsaved)
+  const [savedDraft, setSavedDraft] = useState(
+    localStorage.getItem("postDraft") || ""
+  );
+
+  const [saveDraftOpen, setSaveDraftOpen] = useState(false);
+  const [deleteDraftOpen, setDeleteDraftOpen] = useState(false);
+
+  function requestCloseCreatePost() {
+    if (draftText.trim().length > 0) setSaveDraftOpen(true);
+    else if (savedDraft) setDeleteDraftOpen(true);
+    else setOpenDialog(false);
+  }
+
+  function openCreatePost() {
+    setDraftText(localStorage.getItem("postDraft") || "");
+    setOpenDialog(true);
+  }
+
+  function handleSaveDraft() {
+    localStorage.setItem("postDraft", draftText);
+    setSavedDraft(draftText);
+    setSaveDraftOpen(false);
+    setOpenDialog(false);
+  }
+
+  function handleDiscardDraft() {
+    localStorage.removeItem("postDraft");
+    setSavedDraft("");
+    setDraftText("");
+    setSaveDraftOpen(false);
+    setDeleteDraftOpen(false);
+    setOpenDialog(false);
+  }
+  //end of new
+
+  // Get all posts that have category 'Event' from class 'Posts' in db
+  // Handle possible errors from getPosts (e.g. network issues) by wrapping the async call in try/catch and showing a simple fallback UI
   useEffect(() => {
     async function fetchPosts() {
-      const results = await getPosts({ type: "All" });
-      setPosts(results);
-      setReloadPosts(false); // reset reloadPosts
+      setError(null); 
+  
+      try {
+        const results = await getPosts({ type: "All" });
+        setPosts(results);
+      } catch (err) {
+        console.error("Failed to fetch posts:", err);
+        setError("Couldn’t load posts. Please try again.");
+      } finally {
+        setReloadPosts(false); 
+      }
     }
-    fetchPosts();
+  
+    if (reloadPosts) fetchPosts();
   }, [reloadPosts]);
 
   // Handle filter chip toggles
@@ -85,33 +134,59 @@ export default function Home() {
       <div className="home-left">
         <h1 className="page-title">Home</h1>
 
-        <input
-          placeholder="Create new post"
-          onClick={() => setOpenDialog(true)}
-        ></input>
-
-        <Dialog
-          isOpen={openDialog}
-          isDismissible
-          title="Create post"
-          onClose={() => {
-            setOpenDialog(false);
-          }}
+        <button
+          className={`input-trigger ${savedDraft ? "draft" : "placeholder"}`}
+          onClick={openCreatePost}
         >
-          <CreatePost
-            onClose={() => {
-              setOpenDialog(false);
-              setReloadPosts(true);
-            }}
-          ></CreatePost>
-        </Dialog>
+          <span className="input-trigger-text">
+            {savedDraft ? savedDraft : "Create new post"}
+          </span>
+          {savedDraft && <span className="chip">Draft</span>}
+        </button>
 
-        <Filters filterList={filters} onFilterChange={handleFilterChange} />
+        <Filters
+          key={filtersResetKey}
+          filterList={filters}
+          onFilterChange={handleFilterChange}
+        />
+
+        {error && posts.length === 0 && (
+         <div className="empty-state">
+          <p>{error}</p>
+          <Button variant="secondary" onClick={() => setReloadPosts(true)}>
+           Retry
+          </Button>
+         </div>
+        )}
 
         <div className="postContainer">
           {filteredPosts.map((post) => (
-            <Post key={post.id} post={post} />
+            <Post
+              key={post.id}
+              post={post}
+              onDeleted={(deletedId) => {
+                setPosts((prev) =>
+                  prev.filter((post) => post.id !== deletedId)
+                );
+              }}
+            />
           ))}
+          {filteredPosts.length === 0 && selectedFilters.length>1 && (
+            <div className="empty-state">
+              <SearchOffIcon />
+              <p>No posts match the selected filters...</p>
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  setSelectedFilters([]);
+                  setFiltersResetKey((k) => k + 1);
+                }}
+              >
+                <FilterListOffIcon />
+                Clear filters
+              </Button>
+            </div>
+          )}
         </div>
       </div>
 
@@ -121,6 +196,48 @@ export default function Home() {
         <div className="trending-threads-spacer"></div>
         <TrendingThreads />
       </aside>
+
+      {/* CREATE POST DIALOG and CONFIRM DIALOGS */}
+      <Dialog
+        isOpen={openDialog}
+        isDismissible
+        title="Create post"
+        onClose={requestCloseCreatePost}
+      >
+        <CreatePost
+          draft={draftText}
+          setDraft={setDraftText}
+          onClose={() => {
+            setOpenDialog(false);
+            setReloadPosts(true);
+          }}
+        ></CreatePost>
+      </Dialog>
+
+      <ConfirmDialog
+        isOpen={saveDraftOpen}
+        onClose={() => setSaveDraftOpen(false)}
+        onPrimary={handleSaveDraft}
+        onSecondary={handleDiscardDraft}
+        title="Save changes?"
+        msg="You have unsaved changes to your threads post. Save as draft before closing?"
+        primaryActionLabel="Save draft"
+        secondaryActionLabel="Discard"
+        primaryVariant="primary"
+        secondaryVariant="secondary"
+      />
+      <ConfirmDialog
+        isOpen={deleteDraftOpen}
+        onClose={() => setDeleteDraftOpen(false)}
+        onPrimary={handleDiscardDraft}
+        onSecondary={() => setDeleteDraftOpen(false)}
+        title="Delete draft?"
+        msg="Are you sure you want to delete your draft? This action cannot be undone."
+        primaryActionLabel="Delete draft"
+        secondaryActionLabel="Cancel"
+        primaryVariant="destructive"
+        secondaryVariant="secondary"
+      />
     </div>
   );
 }

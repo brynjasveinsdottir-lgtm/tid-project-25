@@ -22,7 +22,7 @@
 
 .profile-username {
   font-size: 12px;
-  color: #323232;
+  color: var(--color-text-default);
   margin: 0;
   float: left;
   text-overflow: ellipsis;

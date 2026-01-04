@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Parse from "parse";
 import { Link } from "react-router-dom";
 import { getPosts } from "./Services/getService";
 import EventPl from '/src/assets/EventPl.png'
@@ -7,18 +6,16 @@ import EventPl from '/src/assets/EventPl.png'
 export default function TrendingEvents() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [reloadPosts, setReloadPosts] = useState(true);
   
 
   useEffect(() => {
     async function fetchPosts() {
       const results = await getPosts({type:'UpcomingEvents'});
       setPosts(results);
-      setReloadPosts(false); // reset reloadPosts
       setLoading(false);
     }
     fetchPosts();
-  }, [reloadPosts]);
+  }, []);
 
   if (loading) {
     return <div className="trending-box">Loading events…</div>;

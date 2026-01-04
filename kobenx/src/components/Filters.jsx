@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import FilterChip from "./FilterChip";
 import "./Filters.css";
-import { getUserPublic } from "./Services/userService";
 
 //This map translates filter labels to filter objects used in filtering logic (in the HomePage component), The shown filters depend on the filterList prop though.
 const filterMap = {

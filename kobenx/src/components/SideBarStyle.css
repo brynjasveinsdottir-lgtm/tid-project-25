@@ -5,7 +5,7 @@
     justify-content: flex-start;
     flex-direction: column;
     min-width: 20vh;
-    border-right: 1px solid #C6C6C6;
+    border-right: 1px solid var(--color-gray-light-3);
     padding: 16px;
 }
 
@@ -64,16 +64,16 @@
 }
 
 .sidebar-title-list a:hover {
-    background-color: #f6fbfb;
+    background-color: var(--color-primary-subtle-light);
     border-radius: 1rem;
     transition: 0.2s;
 }
 
 .sidebar-links a.active {
     transition: 0s;
-    color: #28808F;
+    color: var(--color-primary);
     font-weight: 600;
-    background-color: #F1F8F9;
+    background-color: var(--color-primary-subtle);
     border-radius: 1rem;
 }
 
@@ -84,24 +84,24 @@
 
 .sidebar-profile:hover {
     margin-top: auto;
-    background-color: #f6fbfb;
+    background-color: var(--color-primary-subtle-light);
     border-radius: 1rem;
     transition: 0.2s;
 }
 
 .sidebar-profile a.active {
-    background-color: #F1F8F9;
+    background-color: var(--color-primary-subtle);
     border-radius: 1rem;
 }
 
 .sidebar-profile a.active .profile-name {
     font-weight: 800;
-    color: #28808F;
+    color: var(--color-primary);
 }
 
 .sidebar-profile a.active .profile-username {
     font-weight: 600;
-    color: #28808F;
+    color: var(--color-primary);
 }
 
 span {
