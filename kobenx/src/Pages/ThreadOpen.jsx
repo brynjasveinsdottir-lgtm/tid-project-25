@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import Parse from "parse";
 import "./PageStyle.css";
 
-import { getSinglePost } from "../components/Services/getService.js";
+import { getSinglePost } from "../components/services/getService.js";
 
 import PostTemplate from "../components/post/PostTemplate";
 import AddComment from "../components/comment/AddComment";
