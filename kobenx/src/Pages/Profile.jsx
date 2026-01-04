@@ -35,13 +35,11 @@ export default function Profile() {
     }
 
     try {
-      const userPublic = await getUserPublic();
-
       // Create a Parse File from the photo
       const parseFile = new Parse.File(profilePhoto.name, profilePhoto);
 
-      userPublic.set("profilePicture", parseFile);
-      await userPublic.save();
+      user.set("profilePicture", parseFile);
+      await user.save();
 
       setErrorMessage("");
       setSuccessMessage("Profile photo updated successfully!");
