@@ -1,6 +1,6 @@
 import Parse from "parse";
 
-import { getUserPublic } from "./userService";
+import { getUserPublic } from "../services/userService.js";
 import { getSinglePost } from "./getService.js";
 
 export async function editPost({ postId, newPostContent, newPostPhoto }) {

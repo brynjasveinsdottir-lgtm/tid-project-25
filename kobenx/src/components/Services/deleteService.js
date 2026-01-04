@@ -1,4 +1,4 @@
-import { getUserPublic } from "./userService";
+import { getUserPublic } from "../services/userService.js";
 import { getSinglePost } from "./getService.js";
 
 export async function deletePost({ postId }) {

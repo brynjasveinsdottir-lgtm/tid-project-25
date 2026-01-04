@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./CommentStyle.css";
 
-import { getUserPublic } from "../Services/userService.js";
-import { timeSincePost } from "../Services/timeService.js";
+import { getUserPublic } from "../services/userService.js";
+import { timeSincePost } from "../services/timeService.js";
 import { deleteComment } from "../services/commentService.js";
 
 import UserDisplay from "../userDisplay/UserDisplay.jsx";
