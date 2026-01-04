@@ -3,6 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import Parse from "parse";
 import "./PageStyle.css";
 
+import { getSinglePost } from "../components/Services/getService.js";
+
 import PostTemplate from "../components/post/PostTemplate";
 import AddComment from "../components/comment/AddComment";
 import CommentList from "../components/comment/CommentList";
@@ -11,22 +13,17 @@ import Button from "../components/button/Button";
 export default function ThreadOpen() {
   const navigate = useNavigate();
   const { id } = useParams();
+
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState([]);
 
-  //Fetches the post
   useEffect(() => {
-    async function getPost() {
-      const Posts = Parse.Object.extend("Posts");
-      const query = new Parse.Query(Posts);
-      query.equalTo("objectId", id);
-      query.include("author");
-
-      const results = await query.first();
-      setPost(results);
+    async function fetchPost() {
+      const result = await getSinglePost({ postId: id });
+      setPost(result);
     }
 
-    getPost();
+    fetchPost();
   }, [id]);
 
   // Fetch comments for the current post
