@@ -9,7 +9,6 @@ Parse.Cloud.beforeSave("Posts", (request) => {
 
   //file name validation
   let name = file.name();
-  name = name.replace(/\s+/g, "-"); //replace space with dashes
 
   //only support jpg or png filetypes
   if (!name.endsWith(".jpg") && !name.endsWith(".png")) {
