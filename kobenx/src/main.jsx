@@ -1,23 +1,25 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import React from 'react'
-import {createBrowserRouter, RouterProvider, Outlet} from 'react-router-dom'
-import SideBarNav from './components/SideBarNav.jsx'
-import Home from './Pages/HomePage.jsx'
-import Threads from './Pages/Threads.jsx'
-import ThreadOpen from "./Pages/ThreadOpen.jsx"
-import Events from './Pages/Events.jsx'
-import Places from './Pages/Places.jsx'
-import Profile from './Pages/Profile.jsx'
-import LogIn from './Pages/LogIn'
-import Search from './Pages/Search.jsx'
-import Parse from "parse"
-import RequireAuth from './loginauth'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import React from "react";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import SideBarNav from "./components/SideBarNav.jsx";
+import Home from "./Pages/HomePage.jsx";
+import Threads from "./Pages/Threads.jsx";
+import ThreadOpen from "./Pages/ThreadOpen.jsx";
+import Events from "./Pages/Events.jsx";
+import Places from "./Pages/Places.jsx";
+import Profile from "./Pages/Profile.jsx";
+import LogIn from "./Pages/LogIn";
+import Search from "./Pages/Search.jsx";
+import Parse from "parse";
+import RequireAuth from "./loginauth";
 
-
-Parse.initialize("QVyxkDZrYW9DlqPstNhA7WWGTirCEruGGW15E0Q4", "VAVuK8i6la493GatcTcwWwico4tDfM9d66FsdCDb");
-Parse.serverURL = 'https://parseapi.back4app.com'
+Parse.initialize(
+  "QVyxkDZrYW9DlqPstNhA7WWGTirCEruGGW15E0Q4",
+  "VAVuK8i6la493GatcTcwWwico4tDfM9d66FsdCDb"
+);
+Parse.serverURL = "https://parseapi.back4app.com";
 
 // This defines the skeleton of the site, the things that don't change. The Outlet in this is each page's content.
 function AppLayout() {

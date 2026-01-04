@@ -1,79 +1,78 @@
 import { useState, useEffect } from "react";
 
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ModeCommentOutlinedIcon from "@mui/icons-material/ModeCommentOutlined";
 
-import './PostInteractions.css';
+import "./PostInteractions.css";
 
-import { toggleLike, getLikesCount, userHasLiked } 
-  from "./Services/likeService.js";
+import {
+  toggleLike,
+  getLikesCount,
+  userHasLiked,
+} from "./Services/likeService.js";
+import { getCommentsCount } from "./Services/commentService.js";
 
-export default function PostInteractions ({
+export default function PostInteractions({ postId, onComment }) {
+  const [liked, setLiked] = useState(false); // user liked?
+  const [likesCount, setLikesCount] = useState(0); // total number of likes
+  const [commentsCount, setCommentsCount] = useState(0);
 
-postId,
-onComment,
+  useEffect(() => {
+    async function loadCounts() {
+      if (!postId) return;
 
-}) {
+      const hasLiked = await userHasLiked(postId);
+      const likeCount = await getLikesCount(postId);
+      const commentCount = await getCommentsCount(postId);
 
-const [liked, setLiked] = useState(false);      // user liked?
-const [likesCount, setLikesCount] = useState(0); // total number of likes
+      setLiked(hasLiked);
+      setLikesCount(likeCount);
+      setCommentsCount(commentCount);
+    }
 
-useEffect(() => {
-  async function loadLikes() {
-    if (!postId) return;
+    loadCounts();
+  }, [postId]);
 
-    const hasLiked = await userHasLiked(postId);
-    const count = await getLikesCount(postId);
+  async function handleLike() {
+    // UI update without waiting DB
+    setLiked((prev) => !prev);
 
-    setLiked(hasLiked);
-    setLikesCount(count);
+    setLikesCount((prev) => (liked ? prev - 1 : prev + 1));
+
+    await toggleLike(postId);
   }
 
-  loadLikes();
-}, [postId]);
+  return (
+    <div className="PostInteractions">
+      {/* wrapper icon + number */}
+      <span className="likeWrapper">
+        <button
+          onClick={(e) => {
+            e.stopPropagation(); // prevents redirect to ThreadsOpen page
+            handleLike();
+          }}
+          className="likeButton"
+        >
+          {liked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+        </button>
 
-async function handleLike() {
-  
-  // UI update without waiting DB
-  setLiked((prev) => !prev);
-
-  setLikesCount((prev) => (liked ? prev - 1 : prev + 1));
-
-  await toggleLike(postId);
-}
-
-return (
-  <div className="PostInteractions">
-
-    {/* wrapper icon + number */}
-    <span className="likeWrapper">
-      <button
-        onClick={(e) => {
-          e.stopPropagation(); // prevents redirect to ThreadsOpen page
-          handleLike();
-        }}
-        className="likeButton"
-      >
-        {liked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-      </button>
-
-      {likesCount > 0 && (
-        <span className="likesCount">{likesCount}</span>
-      )}
-    </span>
-
-    <button
-      onClick={(e) => {
-        e.stopPropagation();
-        onComment();
-      }}
-      className="commentButton"
-    >
-      <ModeCommentOutlinedIcon />
-    </button>
- 
-  </div>
-);
-
+        {likesCount > 0 && <span className="likesCount">{likesCount}</span>}
+      </span>
+      <span className="commentWrapper">
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            onComment();
+          }}
+          className="commentButton"
+        >
+          <ModeCommentOutlinedIcon />
+        </button>
+        {commentsCount > 0 && (
+          <span className="commentsCount">{commentsCount}</span>
+        )}
+      </span>
+    </div>
+  );
 }

@@ -2,46 +2,33 @@ import React, { useState, useEffect } from "react";
 import Parse from "parse";
 import UserDisplay from "./UserDisplay";
 import { getUserPublic } from "./Services/userService";
-import { timeSincePost } from "./Services/timeService"
+import { timeSincePost } from "./Services/timeService";
+import { deleteComment } from "./Services/commentService.js";
+
 import "./CommentStyle.css";
 import Button from "./Button";
 
-
 export default function Comment({ comment, onCommentsUpdated }) {
   const author = comment.get("author");
+  const [isMine, setIsMine] = useState(false);
+  const timeComment = timeSincePost({ post: comment });
 
-  const authorId = author?.id || author?.objectId;
-  const currentUserId = getUserPublic().id;
-  const [isMine, setIsMine] = useState(false) 
-
-  const timeComment = timeSincePost({post: comment})
- 
   useEffect(() => {
     async function checkOwnership() {
       const user = await getUserPublic();
-      setIsMine(user.id === comment.get("author")?.id); 
+      setIsMine(user.id === comment.get("author")?.id);
     } //compare ID without sending a parse query
-    checkOwnership(); 
+    checkOwnership();
   }, [comment]);
-  
 
   const handleDelete = async () => {
     try {
-      await comment.destroy();
-      onCommentsUpdated?.(comment.id); 
+      const newCount = await deleteComment(comment.id, comment.get("post")?.id);
+      onCommentsUpdated?.(comment.id, newCount);
     } catch (error) {
       console.error("Error deleting comment:", error);
-      
     }
   };
-
-
-  console.log("Current user id:", currentUserId, "Author id:", authorId, "Can delete?", isMine);
-
-  console.log("DELETE USING ID:", comment.id,)
-  console.log("REFETCHING COMMENTS...");
-
-  
 
   return (
     <div className="comment">
@@ -49,19 +36,17 @@ export default function Comment({ comment, onCommentsUpdated }) {
 
       <p className="comment-text">{comment.get("text")}</p>
 
-      {isMine &&  (
+      {isMine && (
         <Button
           className="delete-button"
           type="button"
-          variant="secondary"  
+          variant="secondary"
           isRounded
           onClick={handleDelete}
         >
-          Delete
+          X
         </Button>
       )}
     </div>
-
-    
   );
 }
