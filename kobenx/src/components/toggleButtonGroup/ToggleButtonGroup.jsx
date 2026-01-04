@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Button from "../button/Button.jsx";
 import "./ToggleButtonGroup.css";
+import Button from "../button/Button.jsx";
 
 export default function ToggleButtonGroup({
   buttonList,

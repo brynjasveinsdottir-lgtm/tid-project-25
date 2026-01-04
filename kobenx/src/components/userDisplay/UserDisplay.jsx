@@ -22,7 +22,7 @@ export default function UserDisplay({ userInfoParse, time }) {
           alt={
             userInfoParse.get("firstName")
               ? userInfoParse.get("firstName")
-              : "XX"
+              : "UNKNOWN"
           }
           src={profilePicUrl}
         />

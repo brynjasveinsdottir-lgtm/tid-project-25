@@ -1,8 +1,8 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
+import "./PageStyle.css";
+
 import LogIn from "/src/components/authentication/LoginFlow";
 import Signup from "/src/components/authentication/SignupFlow";
-import "./PageStyle.css";
 
 export default function Authentication() {
   const [loggingIn, setLoggingIn] = useState(true);

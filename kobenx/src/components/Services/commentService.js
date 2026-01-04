@@ -1,4 +1,5 @@
 import Parse from "parse";
+
 import { getUserPublic } from "./userService.js";
 
 function getPostPointer(postId) {

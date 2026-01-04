@@ -1,13 +1,15 @@
-import { NavLink } from "react-router-dom";
-import { SideBarData } from "./SideBarData";
-import "./SideBarStyle.css";
-import "../profileInfo/ProfileInfo.css";
-import ProfileInfo from "../profileInfo/ProfileInfo";
-import Parse from "parse";
 import { useEffect, useState } from "react";
-import Button from "../button/Button";
-import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import { NavLink } from "react-router-dom";
+import Parse from "parse";
+import "./SideBarStyle.css";
+
 import { getUserPublic } from "../Services/userService";
+
+import ProfileInfo from "../profileInfo/ProfileInfo";
+import Button from "../button/Button";
+import { SideBarData } from "./SideBarData";
+
+import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 
 export default function SideBarNav() {
   async function logOutUser() {

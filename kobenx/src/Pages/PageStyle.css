@@ -138,6 +138,14 @@
   text-align: start;
 }
 
+.loading {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--color-text-default);
+  text-align: center;
+  margin-top: 32px;
+}
+
 /* TWO-COLUMN LAYOUT */
 .home-layout {
   display: flex;
@@ -417,8 +425,8 @@
 }
 
 .info-box {
-  background: #ffebe3;
-  border: 1.5px solid var(--color-accent);
+  background: var(--color-primary-subtle-light);
+  border: 1.5px solid var(--color-gray-light-3);
   border-radius: 16px;
   padding: 16px;
   width: 100%;
@@ -428,6 +436,6 @@
   font-size: 20px;
   font-weight: 600;
   text-align: left;
-  color: var(--color-accent);
+  color: var(--color-gray-light-1);
   margin: 0;
 }

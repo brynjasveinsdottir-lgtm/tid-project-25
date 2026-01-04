@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { getTrendingThreads } from "../Services/trendingService.js";
 import { Link } from "react-router-dom";
+
+import { getTrendingThreads } from "../Services/trendingService.js";
 
 export default function TrendingThreads() {
   const [threads, setThreads] = useState([]);
@@ -30,7 +31,7 @@ export default function TrendingThreads() {
       <h2 className="trending-title">Trending threads</h2>
 
       <div className="trending-box">
-        {/* LISTA THREAD */}
+        {/* LIST THREAD */}
         <ul className="trending-events-list">
           {threads.length === 0 && (
             <p className="no-events">No trending threads</p>

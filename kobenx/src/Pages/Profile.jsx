@@ -1,10 +1,13 @@
-import { useState, useEffect } from "react";
-import Button from "../components/button/Button";
-import PersonIcon from "@mui/icons-material/Person";
+import React, { useState, useEffect } from "react";
+import Parse from "parse";
+
 import FileUpload from "../components/services/uploadService";
 import { getUserPublic } from "../components/Services/userService";
-import Parse from "parse";
+
+import Button from "../components/button/Button";
 import UserDisplay from "../components/userDisplay/UserDisplay";
+
+import PersonIcon from "@mui/icons-material/Person";
 
 export default function Profile() {
   const [profilePhoto, setProfilePhoto] = useState(null);
@@ -49,8 +52,6 @@ export default function Profile() {
       setSuccessMessage("");
     }
   };
-
-  //page UI
   return (
     <div className="page-structure">
       <h1 className="page-title">Profile</h1>
@@ -91,7 +92,7 @@ export default function Profile() {
               onClick={() => {
                 setProfilePhoto(null);
                 setUnsaved(false);
-              }} //for some reason after doing this, you cannot select the same file again and trigger onSelect (bug?)
+              }}
             >
               Cancel
             </Button>

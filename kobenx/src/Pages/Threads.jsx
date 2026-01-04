@@ -1,8 +1,5 @@
 import { useState, useEffect } from "react";
 import { getPosts } from "../components/Services/getService.js";
-
-import "/src/assets/Manrope.ttf";
-import "/src/index.css";
 import "./PageStyle.css";
 
 import PostTemplate from "../components/post/PostTemplate";

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./TextField.css";
-import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternateOutlined";
+
 import FileUpload from "../services/uploadService.jsx";
 import PhotoPreview from "../photoPreview/photoPreview.jsx";
+import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternateOutlined";
 
 export default function TextField({
   placeholderText,

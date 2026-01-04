@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import Parse from "parse";
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import "./PageStyle.css";
 
 import PostTemplate from "../components/post/PostTemplate";
 import AddComment from "../components/comment/AddComment";
 import CommentList from "../components/comment/CommentList";
-import "./PageStyle.css";
-import "/src/assets/Manrope.ttf";
 import Button from "../components/button/Button";
 
 export default function ThreadOpen() {
@@ -41,7 +39,7 @@ export default function ThreadOpen() {
     query.equalTo("post", post);
 
     query.include("author");
-    query.descending("createdAt"); // descending: newest comments appear first
+    query.descending("createdAt"); // newest comments at the top
 
     const results = await query.find();
     setComments(results);
@@ -53,7 +51,7 @@ export default function ThreadOpen() {
   }, [post]);
 
   if (!post) {
-    return <div className="page-structure">Loading thread...</div>;
+    return <div className="loading">Loading thread...</div>;
   }
 
   return (

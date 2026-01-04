@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
 import { getPosts } from "../Services/getService.js";
+
 import EventPl from "/src/assets/EventPl.png";
 
 export default function TrendingEvents() {

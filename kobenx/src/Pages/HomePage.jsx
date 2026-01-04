@@ -1,17 +1,13 @@
 import { useState, useEffect } from "react";
+import "./PageStyle.css";
+
+import { getPosts } from "../components/Services/getService.js";
 
 import CreatePost from "../components/createPost/CreatePost.jsx";
 import Filters from "../components/filters/Filters";
 import Post from "../components/post/PostTemplate.jsx";
 import TrendingEvents from "../components/trending/TrendingEvents.jsx";
 import TrendingThreads from "../components/trending/TrendingThreads.jsx";
-
-import "/src/assets/Manrope.ttf";
-import "/src/index.css";
-import "./PageStyle.css";
-import { getPosts } from "../components/Services/getService.js";
-
-//new dialog test
 import Dialog from "../components/dialog/Dialog.jsx";
 import ConfirmDialog from "../components/dialog/ConfirmDialog.jsx";
 import Button from "../components/button/Button";
@@ -21,13 +17,11 @@ import SearchOffIcon from "@mui/icons-material/SearchOff";
 import FilterListOffIcon from "@mui/icons-material/FilterListOff";
 
 export default function Home() {
-  const filters = ["Event", "Thread", "Place", "Popular", "New"];
-  const [filtersResetKey, setFiltersResetKey] = useState(0);
-
   const [posts, setPosts] = useState([]);
 
+  const filters = ["Event", "Thread", "Place", "Popular", "New"];
+  const [filtersResetKey, setFiltersResetKey] = useState(0);
   const [selectedFilters, setSelectedFilters] = useState([]);
-
   //FILTER LOGIC
   const filterLogic = {
     category: (post, value) => post.get("category") === value,
@@ -86,7 +80,7 @@ export default function Home() {
   //end of new
 
   // Get all posts that have category 'Event' from class 'Posts' in db
-  // Handle possible errors from getPosts (e.g. network issues) by wrapping the async call in try/catch and showing a simple fallback UI
+  // Handle possible errors from getPosts (e.g. network issues) and show retry button
   useEffect(() => {
     async function fetchPosts() {
       setError(null);
