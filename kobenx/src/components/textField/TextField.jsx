@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import "./TextField.css";
 
-import FileUpload from "../servicesTemp/uploadService.js";
+import FileUpload from "../services/uploadService.js";
 import PhotoPreview from "../photoPreview/photoPreview.jsx";
 import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternateOutlined";
 

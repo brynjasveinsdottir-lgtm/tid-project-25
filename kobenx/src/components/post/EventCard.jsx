@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import "./CardStyle.css";
 import "../goingElement/GoingElement.css";
 
-import { timeSincePost } from "../servicesTemp/timeService.js";
-import { getSignups } from "../servicesTemp/getService.js";
+import { timeSincePost } from "../services/timeService.js";
+import { getSignups } from "../services/getService.js";
 
 import GoingElement from "../goingElement/GoingElement.jsx";
 import EventSignupButton from "./EventSignupButton.jsx";

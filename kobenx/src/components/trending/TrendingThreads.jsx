@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import { getTrendingThreads } from "../servicesTemp/trendingService.js";
+import { getTrendingThreads } from "../services/trendingService.js";
 
 export default function TrendingThreads() {
   const [threads, setThreads] = useState([]);

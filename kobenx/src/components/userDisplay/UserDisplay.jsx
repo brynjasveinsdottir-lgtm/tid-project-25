@@ -1,6 +1,6 @@
 import "./UserDisplay.css";
 import Avatar from "../avatar/Avatar.jsx";
-import { timeSinceMoved } from "../servicesTemp/timeService.js";
+import { timeSinceMoved } from "../services/timeService.js";
 import { getCountryCode } from "../utils/countryCodes.js";
 import ReactCountryFlag from "react-country-flag";
 

@@ -3,9 +3,9 @@ import { NavLink } from "react-router-dom";
 import Parse from "parse";
 import "./SideBarStyle.css";
 
-import { getUserPublic } from "../servicesTemp/userService.js";
+import { getUserPublic } from "../services/userService.js";
 
-import ProfileInfo from "../profileInfo/ProfileInfo";
+import ProfileInfo from "../profileInfo/ProfileInfo.js";
 import Button from "../button/Button";
 import { SideBarData } from "./SideBarData";
 

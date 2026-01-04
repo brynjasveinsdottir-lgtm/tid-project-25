@@ -2,8 +2,8 @@ import ThreadForm from "./CreateThread.jsx";
 import { useState } from "react";
 import "./CreatePost.css";
 
-import { editPost } from "../servicesTemp/editService.js";
-import { deletePost } from "../servicesTemp/deleteService.js";
+import { editPost } from "../services/editService.js";
+import { deletePost } from "../services/deleteService.js";
 
 import Button from "../button/Button.jsx";
 

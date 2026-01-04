@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import Parse from "parse";
 
-import FileUpload from "../components/servicesTemp/uploadService";
-import { getUserPublic } from "../components/servicesTemp/userService";
+import FileUpload from "../components/services/uploadService";
+import { getUserPublic } from "../components/services/userService";
 
 import Button from "../components/button/Button";
 import UserDisplay from "../components/userDisplay/UserDisplay";
