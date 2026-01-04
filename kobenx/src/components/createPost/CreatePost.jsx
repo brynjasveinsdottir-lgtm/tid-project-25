@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import "./CreatePost.css";
 import { createPost } from "../services/postService.js";
 
@@ -49,6 +49,10 @@ export default function CreatePost({ onClose, draft, setDraft }) {
     Place: () => false,
   };
   const [errorMessage, setErrorMessage] = useState("");
+  useEffect(() => {
+    setErrorMessage("");
+    setIsSubmitting(false);
+  }, [selectedToggle]);
 
   // Close dialog and reset all state
   function handleClose() {
@@ -92,6 +96,7 @@ export default function CreatePost({ onClose, draft, setDraft }) {
       handleClose();
     } catch (error) {
       setErrorMessage(error.message);
+      setIsSubmitting(false);
     }
   }
 
