@@ -10,13 +10,13 @@ import EventForm from "./CreateEvent";
 import PlaceForm from "./CreatePlace";
 
 import ThreadIcon from "@mui/icons-material/QuestionAnswer";
-import EventIcon from "@mui/icons-material/Event";
+import EventCategoryIcon from "@mui/icons-material/Event";
 import PlaceIcon from "@mui/icons-material/FmdGood";
 
 export default function CreatePost({ onClose, draft, setDraft }) {
   const toggleOptions = [
     { label: "Thread", icon: <ThreadIcon /> },
-    { label: "Event", icon: <EventIcon /> },
+    { label: "Event", icon: <EventCategoryIcon /> },
     { label: "Place", icon: <PlaceIcon /> },
   ];
   const [selectedToggle, setSelectedToggle] = useState(toggleOptions[0].label);

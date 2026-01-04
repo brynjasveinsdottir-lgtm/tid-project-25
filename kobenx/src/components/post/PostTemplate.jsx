@@ -20,7 +20,7 @@ import SportIcon from "@mui/icons-material/DirectionsRun";
 import CultureIcon from "@mui/icons-material/TheaterComedy";
 import OtherIcon from "@mui/icons-material/Event";
 
-const eventIcons = {
+const eventCategoryIcons = {
   Music: MusicIcon,
   Food: FoodIcon,
   Other: OtherIcon,
@@ -34,9 +34,9 @@ export default function Post({ post, onDeleted }) {
   const postImage = post.get("image") ? post.get("image") : null;
   const postImageUrl = postImage ? postImage.url() : null;
 
-  const EventIcon = eventIcons[post.get("eventCategory")]
-    ? eventIcons[post.get("eventCategory")]
-    : eventIcons["Other"];
+  const EventCategoryIcon = eventCategoryIcons[post.get("eventCategory")]
+    ? eventCategoryIcons[post.get("eventCategory")]
+    : eventCategoryIcons["Other"];
 
   const text = post.get("postText") ? post.get("postText") : "sorry no text";
 
@@ -77,7 +77,7 @@ export default function Post({ post, onDeleted }) {
     return (
       <article className="card">
         <header className="event_card_header">
-          <EventIcon
+          <EventCategoryIcon
             fontSize="large"
             className={`event-icon ${post.get("eventCategory")}`}
           />

@@ -1,6 +1,6 @@
 import HomeIcon from "@mui/icons-material/HomeFilled";
 import ThreadIcon from "@mui/icons-material/QuestionAnswer";
-import EventIcon from "@mui/icons-material/Event";
+import EventCategoryIcon from "@mui/icons-material/Event";
 import PlaceIcon from "@mui/icons-material/FmdGood";
 import SearchIcon from "@mui/icons-material/Search";
 
@@ -18,7 +18,7 @@ export const SideBarData = [
   {
     title: "Events",
     path: "/events",
-    icon: EventIcon,
+    icon: EventCategoryIcon,
   },
   {
     title: "Places",
