@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import "./UserDisplay.css";
 import Avatar from "./Avatar";
-import { timeSinceMoved } from "./Services/timeService";
+import { timeSinceMoved } from "./Services/timeService.js";
 import { getCountryCode } from "./utils/countryCodes";
 import ReactCountryFlag from "react-country-flag";
 
-
 export default function UserDisplay({ userInfoParse, time }) {
   if (userInfoParse) {
-    const profilePic = userInfoParse ? userInfoParse.get("profilePicture") : null;
+    const profilePic = userInfoParse
+      ? userInfoParse.get("profilePicture")
+      : null;
     const profilePicUrl = profilePic ? profilePic?.url?.() : null;
 
-    const timeInCph = timeSinceMoved({user: userInfoParse})
+    const timeInCph = timeSinceMoved({ user: userInfoParse });
     const homeCountry = userInfoParse.get("homeCountry");
-   const countryCode = getCountryCode(homeCountry)||"UN";
+    const countryCode = getCountryCode(homeCountry) || "UN";
 
     return (
       <div className="user_display">
@@ -35,21 +36,20 @@ export default function UserDisplay({ userInfoParse, time }) {
               {userInfoParse ? userInfoParse.get("lastName") : "User name"}{" "}
             </p>
             <ReactCountryFlag
-             countryCode={countryCode}
-             className="flag"
-             svg={true} 
-             fallback={
-               <p className="subtle">
-                 {userInfoParse.get("homeCountry")
-                   ? userInfoParse.get("homeCountry")
-                   : "unknown country"}
-               </p>
-             }
-           />
-
+              countryCode={countryCode}
+              className="flag"
+              svg={true}
+              fallback={
+                <p className="subtle">
+                  {userInfoParse.get("homeCountry")
+                    ? userInfoParse.get("homeCountry")
+                    : "unknown country"}
+                </p>
+              }
+            />
             <div className="tag"> {timeInCph} </div>{" "}
             {/* How long the user has lived in CPH */}
-            {time && (<p className="subtle">• {time}</p>)} {/* Timestamp */}
+            {time && <p className="subtle">• {time}</p>} {/* Timestamp */}
           </div>
 
           <p className="subtle">
@@ -60,5 +60,5 @@ export default function UserDisplay({ userInfoParse, time }) {
         </div>
       </div>
     );
-  } 
+  }
 }

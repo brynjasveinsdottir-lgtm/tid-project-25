@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Parse from "parse";
 import UserDisplay from "./UserDisplay";
 import { getUserPublic } from "./Services/userService";
-import { timeSincePost } from "./Services/timeService";
+import { timeSincePost } from "./Services/timeService.js";
 import { deleteComment } from "./Services/commentService.js";
 
 import "./CommentStyle.css";

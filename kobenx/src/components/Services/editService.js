@@ -1,7 +1,7 @@
 import Parse from "parse";
 
 import { getUserPublic } from "./userService";
-import { getSinglePost } from "./getService";
+import { getSinglePost } from "./getService.js";
 
 export async function editPost({ postId, newPostContent, newPostPhoto }) {
   // Get the UserPublic (via the user service)

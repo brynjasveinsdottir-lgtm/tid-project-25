@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getPosts } from "./Services/getService";
-import EventPl from '/src/assets/EventPl.png'
+import { getPosts } from "./Services/getService.js";
+import EventPl from "/src/assets/EventPl.png";
 
 export default function TrendingEvents() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
-  
 
   useEffect(() => {
     async function fetchPosts() {
-      const results = await getPosts({type:'UpcomingEvents'});
+      const results = await getPosts({ type: "UpcomingEvents" });
       setPosts(results);
       setLoading(false);
     }
@@ -28,7 +27,7 @@ export default function TrendingEvents() {
   return (
     <div className="trending-wrapper">
       <h2 className="trending-title">Upcoming events</h2>
-  
+
       <div className="trending-box">
         <ul className="trending-events-list">
           {posts.map((event) => {
@@ -37,7 +36,7 @@ export default function TrendingEvents() {
             const time = event.get("eventTime");
             const imageFile = event.get("image");
             const imageUrl = imageFile ? imageFile.url() : EventPl;
-  
+
             let dateLabel = "";
             if (time) {
               dateLabel = time.toLocaleDateString("en-GB", {
@@ -45,7 +44,7 @@ export default function TrendingEvents() {
                 month: "short",
               });
             }
-  
+
             return (
               <li key={event.id} className="trending-event-item">
                 <div className="trending-event-thumb">
@@ -59,7 +58,7 @@ export default function TrendingEvents() {
                     <span className="trending-event-thumb-placeholder">E</span>
                   )}
                 </div>
-  
+
                 <div className="trending-event-text">
                   <span className="trending-event-date">{dateLabel}</span>
                   <p className="trending-event-title">{title}</p>
@@ -69,7 +68,7 @@ export default function TrendingEvents() {
             );
           })}
         </ul>
-  
+
         <Link to="/events" className="trending-show-more">
           Show more
         </Link>

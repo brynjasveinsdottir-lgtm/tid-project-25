@@ -9,7 +9,7 @@ import TrendingThreads from "../components/TrendingThreads";
 import "/src/assets/Manrope.ttf";
 import "/src/index.css";
 import "./PageStyle.css";
-import { getPosts } from "../components/Services/getService";
+import { getPosts } from "../components/Services/getService.js";
 
 //new dialog test
 import Dialog from "../components/Dialog";
@@ -89,8 +89,8 @@ export default function Home() {
   // Handle possible errors from getPosts (e.g. network issues) by wrapping the async call in try/catch and showing a simple fallback UI
   useEffect(() => {
     async function fetchPosts() {
-      setError(null); 
-  
+      setError(null);
+
       try {
         const results = await getPosts({ type: "All" });
         setPosts(results);
@@ -98,10 +98,10 @@ export default function Home() {
         console.error("Failed to fetch posts:", err);
         setError("Couldn’t load posts. Please try again.");
       } finally {
-        setReloadPosts(false); 
+        setReloadPosts(false);
       }
     }
-  
+
     if (reloadPosts) fetchPosts();
   }, [reloadPosts]);
 
@@ -151,12 +151,12 @@ export default function Home() {
         />
 
         {error && posts.length === 0 && (
-         <div className="empty-state">
-          <p>{error}</p>
-          <Button variant="secondary" onClick={() => setReloadPosts(true)}>
-           Retry
-          </Button>
-         </div>
+          <div className="empty-state">
+            <p>{error}</p>
+            <Button variant="secondary" onClick={() => setReloadPosts(true)}>
+              Retry
+            </Button>
+          </div>
         )}
 
         <div className="postContainer">
@@ -171,7 +171,7 @@ export default function Home() {
               }}
             />
           ))}
-          {filteredPosts.length === 0 && selectedFilters.length>1 && (
+          {filteredPosts.length === 0 && selectedFilters.length > 1 && (
             <div className="empty-state">
               <SearchOffIcon />
               <p>No posts match the selected filters...</p>

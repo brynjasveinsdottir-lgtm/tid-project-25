@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import "./CommentStyle.css";
 import "./SearchBar.css";
 import Parse from "parse";
-import { getPosts } from "../components/Services/getService";
+import { getPosts } from "../components/Services/getService.js";
 import Post from "../components/PostTemplate";
 
 export default function SearchBar() {
@@ -28,25 +28,24 @@ export default function SearchBar() {
           onInput={(e) => setSearchInput(e.target.value)}
         />
       </div>
-     
-        <div className="posts">
-            {searchInput.length >= 2 &&
-            posts
-                .filter((post) =>
-                [
-                    post.get("postText"),
-                    post.get("postTitle"),
-                    post.get("eventCategory"),
-                    post.get("eventTime"),
-                    post.get("eventPlace"),
-                ]
-                    .join(" ")
-                    .toLowerCase()
-                    .includes(searchInput.toLowerCase())
-                )
-                .map((post) => <Post key={post.id} post={post} />)}
-        </div>
-      
+
+      <div className="posts">
+        {searchInput.length >= 2 &&
+          posts
+            .filter((post) =>
+              [
+                post.get("postText"),
+                post.get("postTitle"),
+                post.get("eventCategory"),
+                post.get("eventTime"),
+                post.get("eventPlace"),
+              ]
+                .join(" ")
+                .toLowerCase()
+                .includes(searchInput.toLowerCase())
+            )
+            .map((post) => <Post key={post.id} post={post} />)}
+      </div>
     </div>
   );
 }

@@ -11,7 +11,7 @@ export default function Button({
   loading = false,
   onClick,
   children,
-  className = '',
+  className = "",
   ...props
 }) {
   // Define button classes based on variant and selection state e.g. [button, button--primary, button--primary--selected]
@@ -26,7 +26,12 @@ export default function Button({
   ].join(" ");
 
   return (
-    <button className={classes} onClick={onClick} {...props} disabled={disabled || loading}>
+    <button
+      className={classes}
+      onClick={onClick}
+      {...props}
+      disabled={disabled || loading}
+    >
       {children}
     </button>
   );

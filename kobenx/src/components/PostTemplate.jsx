@@ -13,7 +13,7 @@ import CultureIcon from "@mui/icons-material/TheaterComedy";
 import OtherIcon from "@mui/icons-material/Event";
 import UserDisplay from "./UserDisplay";
 import PostInteractions from "./PostInteractions";
-import { timeSincePost } from "./Services/timeService";
+import { timeSincePost } from "./Services/timeService.js";
 
 import Button from "./Button";
 import EditNoteIcon from "@mui/icons-material/EditNote";
