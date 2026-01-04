@@ -96,21 +96,21 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  background-color: rgba(198, 198, 198, 0.5);
+  background-color: var(--color-gray-light-2);
   margin: 16px;
   border-radius: 16px;
-  border: rgba(198, 198, 198, 1) solid 1.5px;
+  border: var(--color-gray-light-3) solid 1.5px;
 }
 
 .backgroundBox {
-  background-color: rgba(198, 198, 198, 1);
+  background-color: var(--color-gray-light-3);
   width: 50%;
   height: 3rem;
   position: absolute;
   margin: 0;
   border-radius: 16px;
   left: 49%;
-  border: rgba(198, 198, 198, 1) solid 1.5px;
+  border: var(--color-gray-light-3) solid 1.5px;
   transition: 0.5s;
 }
 
@@ -134,7 +134,7 @@
 
 .dev-description {
   font: 16px sans-serif;
-  color: gray;
+  color: var(--color-gray-light-2);
   text-align: start;
 }
 
@@ -194,9 +194,9 @@
 
 /* Event box */
 .trending-box {
-  background: #fff;
+  background: white;
   font-size: large;
-  border: 1.5px solid rgba(198, 198, 198, 1);
+  border: 1.5px solid var(--color-gray-light-3);
   border-radius: 16px;
   padding: 16px;
   width: 379px;
@@ -218,7 +218,7 @@
   flex-direction: row;
   align-items: flex-start;
   padding: 12px 0;
-  border-bottom: 1px solid rgba(198, 198, 198, 1);
+  border-bottom: 1px solid var(--color-gray-light-3);
 }
 
 .trending-event-item:last-child {
@@ -229,7 +229,7 @@
   width: 64px;
   height: 64px;
   border-radius: 8px;
-  background: rgba(198, 198, 198, 1); /* placeholder */
+  background: var(--color-gray-light-3); /* placeholder */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -247,7 +247,7 @@
 
 .trending-event-thumb-placeholder {
   font-weight: 600;
-  color: rgba(16, 16, 16, 0.8);
+  color: var(--color-text-default);
 }
 
 .trending-event-text {
@@ -259,7 +259,7 @@
 
 .trending-event-date {
   font-size: 13px;
-  color: rgba(16, 16, 16, 0.6);
+  color: var(--color-text-default);
   margin-bottom: 2px;
 }
 
@@ -272,7 +272,7 @@
 
 .trending-event-place {
   font-size: 14px;
-  color: rgba(16, 16, 16, 0.8);
+  color: var(--color-text-default);
   margin-top: 2px;
 }
 
@@ -288,7 +288,7 @@
 .trending-show-more {
   border: none;
   background: none;
-  color: rgba(49, 158, 175, 1);
+  color: var(--color-primary);
   font-size: 14px;
   margin-top: 12px;
   display: block;
@@ -307,7 +307,7 @@
   object-fit: cover;
 }
 .error-message {
-  color: red;
+  color: var(--color-negative);
   font-size: 0.875rem;
   margin-top: 0px;
   margin-bottom: 2px;
@@ -350,7 +350,7 @@
   width: 100%;
 
   padding: 10px;
-  background: #fff;
+  background: white;
   border: 1.5px solid var(--color-gray-light-3);
   border-radius: 16px;
 
@@ -402,14 +402,14 @@
   flex-direction: column;
   font-size: 18px;
   font-weight: 500;
-  color: #5d5d5d;
+  color: var(--color-gray-light-1);
   text-align: center;
   margin-top: 32px;
   align-items: center;
 }
 .empty-state svg {
   font-size: 100px;
-  color: #5d5d5d;
+  color: var(--color-gray-light-1);
 }
 
 /* placeholder map styling */
