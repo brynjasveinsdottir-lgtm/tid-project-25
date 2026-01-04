@@ -47,8 +47,7 @@ export default function UserDisplay({ userInfoParse, time }) {
               }
             />
             <div className="tag"> {timeInCph} </div>{" "}
-            {/* How long the user has lived in CPH */}
-            {time && <p className="subtle">• {time}</p>} {/* Timestamp */}
+            {time && <p className="subtle">• {time}</p>}
           </div>
 
           <p className="subtle">
