@@ -6,6 +6,8 @@ Use npm install before running npm run dev
 
 Use branch: Main
 
+Note: The website is optimized for desktop, not mobile.
+
 ## Access through live website
 The project is also live on kobenx.com 
 
