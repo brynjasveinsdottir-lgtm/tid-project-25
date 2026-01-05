@@ -165,7 +165,7 @@ export default function Home() {
               }}
             />
           ))}
-          {filteredPosts.length === 0 && selectedFilters.length > 1 && (
+          {filteredPosts.length === 0 && selectedFilters.length > 0 && (
             <div className="empty-state">
               <SearchOffIcon />
               <p>No posts match the selected filters...</p>
