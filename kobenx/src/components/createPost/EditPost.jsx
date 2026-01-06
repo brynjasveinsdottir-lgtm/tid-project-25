@@ -39,7 +39,9 @@ export default function EditPost({ onClose, post, onDeleted }) {
       await editPost({
         postId: post.id,
         newPostContent: threadData.content,
-        newPostPhoto: threadData.photo,
+        ...(threadData.photo !== currentData.photo && {
+          newPostPhoto: threadData.photo,
+        }),
       });
       handleClose();
     } catch (error) {

@@ -55,10 +55,12 @@ export default function TextField({
       )}
 
       <div className="icon-container">
-        <AddPhotoAlternateOutlinedIcon
-          className="icon"
-          onClick={handleAddPhoto}
-        />
+        {photo == null && (
+          <AddPhotoAlternateOutlinedIcon
+            className="icon"
+            onClick={handleAddPhoto}
+          />
+        )}
       </div>
 
       <FileUpload

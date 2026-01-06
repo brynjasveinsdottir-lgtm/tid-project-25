@@ -10,6 +10,15 @@ export async function getPosts({ type }) {
     query.equalTo("category", "Event");
     query.greaterThanOrEqualTo("eventTime", new Date());
     query.ascending("eventTime");
+    query.exclude(
+      'author.profilePicture',
+      'author.firstName',
+      'author.lastName',
+      'author.homeCountry',
+      'author.occupation',
+      'author.userIdPrivate',
+      'author.dateMovedToCph'
+    )
   } else if (type === "Threads") {
     query.equalTo("category", "Thread");
   }
@@ -28,6 +37,14 @@ export async function getSignups({ post }) {
   const query = new Parse.Query(Signups);
   query.equalTo("post", post);
   query.include("user");
+  query.exclude(
+      'user.lastName',
+      'user.username',
+      'user.homeCountry',
+      'user.occupation',
+      'user.userIdPrivate',
+      'user.dateMovedToCph'
+    )
   const results = await query.find();
   return results;
 }
