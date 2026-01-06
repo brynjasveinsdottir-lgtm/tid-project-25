@@ -17,6 +17,7 @@ export async function getTrendingThreads() {
 
   query.descending("likes");
   query.limit(5);
+  query.include('author')
 
   const results = await query.find();
 
