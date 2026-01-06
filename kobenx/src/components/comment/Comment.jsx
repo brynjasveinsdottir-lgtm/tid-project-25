@@ -10,17 +10,13 @@ import Button from "../button/Button.jsx";
 
 import CloseIcon from "@mui/icons-material/Close";
 
-export default function Comment({ comment, onCommentsUpdated }) {
+export default function Comment({ comment, onCommentsUpdated, currentUser }) {
   const author = comment.get("author");
   const [isMine, setIsMine] = useState(false);
   const timeComment = timeSincePost({ post: comment });
 
   useEffect(() => {
-    async function checkOwnership() {
-      const user = await getUserPublic();
-      setIsMine(user.id === comment.get("author")?.id);
-    } //compare ID without sending a parse query
-    checkOwnership();
+    setIsMine(currentUser === comment.get("author")?.id);
   }, [comment]);
 
   const handleDelete = async () => {
