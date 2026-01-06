@@ -8,6 +8,7 @@ Parse.Cloud.beforeSave("Posts", (request) => {
   }
 
   //file name validation
+  if (!file) return;
   let name = file.name();
 
   //only support jpg or png filetypes

@@ -54,14 +54,16 @@ export default function EventForm({ data, setData, fileUploadRef }) {
         onChange={(e) => setData((prev) => ({ ...prev, time: e.target.value }))}
         required
       />
+      {data.photo == null && (
+        <Button
+          type="button"
+          variant="secondary"
+          onClick={() => fileUploadRef.current?.triggerSelect()}
+        >
+          <AddPhotoAlternateIcon /> Add Photo
+        </Button>
+      )}
 
-      <Button
-        type="button"
-        variant="secondary"
-        onClick={() => fileUploadRef.current?.triggerSelect()}
-      >
-        <AddPhotoAlternateIcon /> Add Photo
-      </Button>
       <FileUpload
         ref={fileUploadRef}
         onSelect={(photo) => setData((prev) => ({ ...prev, photo }))}
