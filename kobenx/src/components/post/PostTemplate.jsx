@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import "./CardStyle.css";
 
 import { timeSincePost } from "../services/timeService.js";
-import { getUserPublic } from "../services/userService.js";
 
 import UserDisplay from "../userDisplay/UserDisplay.jsx";
 import PostInteractions from "../postInteractions/PostInteractions.jsx";
@@ -29,7 +28,7 @@ const eventCategoryIcons = {
   Culture: CultureIcon,
 };
 
-export default function Post({ post, onDeleted }) {
+export default function Post({ post, onDeleted, currentUser }) {
   //variables
   const postImage = post.get("image") ? post.get("image") : null;
   const postImageUrl = postImage ? postImage.url() : null;
@@ -52,11 +51,7 @@ export default function Post({ post, onDeleted }) {
   //check if the user is the post author
   const [isMine, setIsMine] = useState(false);
   useEffect(() => {
-    async function checkOwnership() {
-      const user = await getUserPublic();
-      setIsMine(user.id === post.get("author")?.id);
-    } //compare ID without sending a parse query
-    checkOwnership();
+    setIsMine(currentUser === post.get("author")?.id);
   }, [post]);
 
   //return statements

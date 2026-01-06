@@ -4,6 +4,7 @@ import Parse from "parse";
 import "./PageStyle.css";
 
 import { getSinglePost } from "../components/services/getService.js";
+import { getUserPublic } from "../components/services/userService.js";
 
 import PostTemplate from "../components/post/PostTemplate";
 import AddComment from "../components/comment/AddComment";
@@ -25,6 +26,16 @@ export default function ThreadOpen() {
 
     fetchPost();
   }, [id]);
+
+  //Get user (once)
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    async function getUser() {
+      const userPublic = await getUserPublic();
+      setUser(userPublic);
+    }
+    getUser();
+  }, []);
 
   // Fetch comments for the current post
   async function fetchComments() {
@@ -69,7 +80,11 @@ export default function ThreadOpen() {
         <PostTemplate post={post} />
         <AddComment post={post} onCommentAdded={fetchComments} />
         <h2 className="section-title">Comments</h2>
-        <CommentList comments={comments} onCommentsUpdated={fetchComments} />
+        <CommentList
+          comments={comments}
+          onCommentsUpdated={fetchComments}
+          currentUser={user?.id}
+        />
       </div>
     </div>
   );
