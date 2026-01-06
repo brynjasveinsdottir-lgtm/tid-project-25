@@ -15,8 +15,8 @@ import LogIn from "./Pages/LogIn";
 import Search from "./Pages/Search.jsx";
 
 Parse.initialize(
-  "dOl8yBChtVctqGdJV9lQd21ix18ENNyc0c9CURYe",
-  "lZJmhhLRoZTtaWCqwY0j1CypEiUg74VNtHMKDgDA"
+  "x3ce58LMkfZDdTkNrBVQ4PvlYX4uHPkx4A4i8S8U",
+  "j6YEP0IKyvroB5SaRBMNNKzGQPoKqzEHgpwpJNfn"
 );
 Parse.serverURL = "https://parseapi.back4app.com";
 
