@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "./PageStyle.css";
 
 import { getPosts } from "../components/services/getService.js";
+import { getUserPublic } from "../components/services/userService.js";
 
 import CreatePost from "../components/createPost/CreatePost.jsx";
 import Filters from "../components/filters/Filters";
@@ -99,6 +100,17 @@ export default function Home() {
     if (reloadPosts) fetchPosts();
   }, [reloadPosts]);
 
+  //Get user (once)
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    async function getUser() {
+      const userPublic = await getUserPublic();
+      setUser(userPublic);
+    }
+    getUser();
+  }, []);
+
   // Handle filter chip toggles
   function handleFilterChange(filterObj, isActive) {
     setSelectedFilters((prev) => {
@@ -158,6 +170,7 @@ export default function Home() {
             <Post
               key={post.id}
               post={post}
+              currentUser={user?.id}
               onDeleted={(deletedId) => {
                 setPosts((prev) =>
                   prev.filter((post) => post.id !== deletedId)
