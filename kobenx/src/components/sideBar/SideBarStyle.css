@@ -4,9 +4,13 @@
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
-  min-width: 20vh;
+  max-width: 200px;
+
   border-right: 1px solid var(--color-gray-light-3);
   padding: 16px;
+  flex: 0 0;
+
+  transition: 0.2s;
 }
 
 .sidebar-logo {
@@ -19,7 +23,7 @@
   color: var(--color-text-default);
   float: left;
   margin: 0px;
-  margin-bottom: 5vh;
+  margin-bottom: 40px;
   padding: 0px;
   height: auto;
 }
@@ -32,7 +36,7 @@
   justify-content: flex-start;
   padding: 0;
   margin: 0;
-  gap: 0.5vh;
+  gap: 5px;
 }
 
 .sidebar-links {
@@ -60,7 +64,7 @@
 
 .sidebar-title-list a {
   width: 100%;
-  padding: 1.5vh;
+  padding: 15px;
 }
 
 .sidebar-title-list a:hover {
@@ -104,6 +108,75 @@
   color: var(--color-primary);
 }
 
-span {
-  margin-left: 16px;
+.logout-button {
+  white-space: nowrap;
+  height: 43px;
 }
+
+.logo-full {
+  display: flex;
+}
+
+.logo-collapsed {
+  display: none;
+}
+
+@media (width < 1000px) {
+  .sidebar {
+    max-width: 50px;
+    transition: 0.2s;
+  }
+
+  .sidebar-title-list {
+    padding: 0;
+    margin: 0;
+  }
+
+  .sidebar-links {
+    padding: 0;
+    margin: 0;
+    height: 56px;
+  }
+
+  .sidebar-item-text {
+    display: none;
+  }
+
+  .sidebar-icons {
+    align-items: center;
+    padding: 0;
+    margin: 0;
+  }
+
+  .longtext {
+    display: none;
+  }
+
+  .sidebar-profile .profile-text {
+    display: none;
+  }
+
+  .sidebar-profile .profile-info{
+    padding-left: 0;
+  }
+  
+  .sidebar-logo {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .logo-full {
+    display: none;
+  }
+
+  .logo-collapsed {
+    display: flex;
+  }
+
+  .logout-button .button {
+    width: 100%;
+    min-width: 0;
+    height: 43px;
+  }
+}
+

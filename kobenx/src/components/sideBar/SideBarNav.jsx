@@ -33,7 +33,10 @@ export default function SideBarNav() {
     <aside className="sidebar">
       <div className="sidebar-logo">
         <NavLink to="/">
-          <h1 className="logo"> købenx </h1>
+          <h1 className="logo">
+            <span className="logo-full"> købenx </span>
+            <span className="logo-collapsed"> ø </span>
+          </h1>
         </NavLink>
       </div>
 
@@ -58,11 +61,11 @@ export default function SideBarNav() {
         </NavLink>
       </div>
 
-      <div>
+      <div className="logout-button">
         <Button variant="secondary" onClick={logOutUser}>
           {" "}
-          <LogoutOutlinedIcon fontSize="20" />
-          Log out
+          <LogoutOutlinedIcon fontSize="20"/>
+          <span className="longtext"> Log Out </span>
         </Button>
       </div>
     </aside>

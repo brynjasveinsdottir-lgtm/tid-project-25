@@ -3,10 +3,12 @@
   align-items: center;
   gap: 10px;
   padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .profile-text {
-  max-width: 100%;
+  min-width: 0;
 }
 
 .profile-name {
@@ -17,7 +19,7 @@
 
   text-overflow: ellipsis;
   text-wrap: nowrap;
-  max-width: 135px;
+  max-width: 100%;
   overflow-inline: hidden;
 }
 
@@ -28,6 +30,6 @@
   float: left;
   text-overflow: ellipsis;
   text-wrap: nowrap;
-  max-width: 135px;
+  max-width: 100%;
   overflow-inline: hidden;
 }
