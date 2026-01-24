@@ -121,7 +121,7 @@
   display: none;
 }
 
-@media (width < 1000px) {
+@media (width < 1200px) {
   .sidebar {
     max-width: 50px;
     transition: 0.2s;
