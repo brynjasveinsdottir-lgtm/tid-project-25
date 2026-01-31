@@ -1,15 +1,15 @@
 .search-section {
   width: 100%;
-  max-width: 100vh;
+  max-width: 1000px;
+  min-width: 170px;
   margin-inline: auto;
-  height: 79.5vh;
+  height: 76.7dvh;
 }
 
 .search-bar {
   border-radius: 16px;
-  font-size: 1vh;
   box-sizing: border-box;
-  padding: 1vh;
+  padding: 10px;
 }
 
 .search bar:has(input.naked:focus) {
@@ -22,7 +22,7 @@
 
 .posts {
   height: 100%;
-  padding: 1vh;
+  padding: 10px;
   overflow-y: scroll;
   scrollbar-width: none;
 }

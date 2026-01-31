@@ -70,7 +70,7 @@ export default function Post({ post, onDeleted, currentUser }) {
       })}`;
 
     return (
-      <article className="card">
+      <article className="card home">
         <header className="event_card_header">
           <EventCategoryIcon
             fontSize="large"
@@ -93,7 +93,7 @@ export default function Post({ post, onDeleted, currentUser }) {
   //otherwise return normal post (for threads)
   return (
     <article
-      className="card"
+      className="card home"
       onClick={() => navigate(`/threadOpen/${post.id}`)}
     >
       <div className="thread-header">
