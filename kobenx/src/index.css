@@ -104,3 +104,21 @@ button:focus-visible {
   padding-bottom: 0;
   overflow-y: auto;
 }
+
+.sidebar-nav {
+  display: flex;
+}
+
+.bottom-bar {
+  display: none;
+}
+
+@media (width < 700px) {
+  .sidebar-nav {
+    display: none;
+  }
+  
+  .bottom-bar {
+    display: flex
+  }
+}

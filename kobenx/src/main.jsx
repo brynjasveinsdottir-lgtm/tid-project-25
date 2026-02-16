@@ -13,6 +13,7 @@ import Places from "./Pages/Places.jsx";
 import Profile from "./Pages/Profile.jsx";
 import LogIn from "./Pages/LogIn";
 import Search from "./Pages/Search.jsx";
+import BottomBar from "./components/sideBar/bottomBar.jsx";
 
 Parse.initialize(
   "x3ce58LMkfZDdTkNrBVQ4PvlYX4uHPkx4A4i8S8U",
@@ -25,10 +26,11 @@ function AppLayout() {
   return (
     <RequireAuth>
       <div className="app-shell">
-        <SideBarNav />
+        <SideBarNav classname="sidebar-nav"/>
         <main className="main-content-area">
           <Outlet />
         </main>
+        <BottomBar className="bottom-bar"/>
       </div>
     </RequireAuth>
   );
