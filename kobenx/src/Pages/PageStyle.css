@@ -41,6 +41,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .centered {
@@ -122,6 +123,7 @@
   transition: 0.2s;
   background-color: rgba(0, 0, 0, 0);
   z-index: 0;
+  color: var(--color-gray-light-1);
 }
 
 .loginSelected {
@@ -130,6 +132,11 @@
 
 .signupSelected {
   left: 49%;
+}
+
+.authentication-box {
+  background-color: white;
+  width: 403px;
 }
 
 .dev-description {

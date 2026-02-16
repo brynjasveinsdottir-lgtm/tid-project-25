@@ -29,7 +29,7 @@ export default function Authentication() {
           Sign up
         </button>
       </div>
-      <div>{loggingIn ? <LogIn /> : <Signup />}</div>
+      <div className="authentication-box">{loggingIn ? <LogIn /> : <Signup />}</div>
     </div>
   );
 }

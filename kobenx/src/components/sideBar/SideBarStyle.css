@@ -236,8 +236,16 @@
     flex-direction: row;
   }
 
+  .sidebar-title-list a {
+    padding: 0 5px;
+  }
+
   .sidebar-profile {
     margin: 0;
+  }
+
+  .profile-info img {
+    width: 30px;
   }
 
   .sidebar-profile .profile-info{
@@ -276,6 +284,15 @@
 
   .button--md.small-button {
     padding: 10px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .logout-button {
+    height: auto;
+    width: 31px;;
+
   }
 }
 
