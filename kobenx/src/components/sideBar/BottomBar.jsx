@@ -55,18 +55,20 @@ export default function BottomBar() {
         })}
       </ul>
 
-      <div className="sidebar-profile">
-        <NavLink to="/profile">
-          <ProfileInfo userInfo={user} />
-        </NavLink>
-      </div>
+      <div className="right-side">
+        <div className="sidebar-profile">
+          <NavLink to="/profile">
+            <ProfileInfo userInfo={user} />
+          </NavLink>
+        </div>
 
-      <div className="logout-button">
-        <Button variant="secondary" className="small-button" onClick={logOutUser}>
-          {" "}
-          <LogoutOutlinedIcon fontSize="20"/>
-          <span className="longtext"> Log Out </span>
-        </Button>
+        <div className="logout-button">
+          <Button variant="secondary" className="small-button" onClick={logOutUser}>
+            {" "}
+            <LogoutOutlinedIcon fontSize="20"/>
+            <span className="longtext"> Log Out </span>
+          </Button>
+        </div>
       </div>
     </aside>
   );

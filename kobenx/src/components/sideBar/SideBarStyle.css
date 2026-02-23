@@ -223,13 +223,25 @@
     height: 60px;
     background: white;
     border-top: 1px solid #ddd;
-    justify-content: space-around;
     align-items: center;
     z-index: 1000;
   }
 
+  .sidebar-logo {
+    padding-left: 30px;
+    margin-right: auto;
+  }
+
   .logo {
     margin: 0 0 3px 0;
+    justify-content: flex-start;
+  }
+
+  .right-side {
+    display: flex;
+    padding-right: 30px;
+    margin-left: auto;
+    gap: 10px;
   }
 
   .sidebar-title-list {
@@ -237,7 +249,7 @@
   }
 
   .sidebar-title-list a {
-    padding: 0 5px;
+    padding: 5px 5px;
   }
 
   .sidebar-profile {
@@ -250,8 +262,8 @@
 
   .sidebar-profile .profile-info{
     padding: 0;
-    height: 50px;
-    width: 50px;
+    height: 30px;
+    width: 30px;
   }
 
   .sidebar-profile:hover {
@@ -280,6 +292,12 @@
     margin-top: -4px;
     padding-bottom: 4px;
     margin-bottom: -4px;
+  }
+
+  .avatar.fallback {
+    height: 31px;
+    width: 31px;
+    font-size: 14px;
   }
 
   .button--md.small-button {
